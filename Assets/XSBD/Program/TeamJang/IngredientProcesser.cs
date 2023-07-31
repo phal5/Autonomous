@@ -28,7 +28,7 @@ public class IngredientProcesser : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogError("No Rigidbody attached to instanced object!");
+                    Debug.LogError("No rigidbody attached to instanced object!");
                     Destroy(gameObject);
                 }
             }
