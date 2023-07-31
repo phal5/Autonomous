@@ -21,9 +21,16 @@ public class IngredientProcesser : MonoBehaviour
             if (collision.transform.CompareTag(dict.tag))
             {
                 GameObject newObject = Instantiate(dict.prefab, this.transform.position, this.transform.rotation);
-                newObject.TryGetComponent<Rigidbody>(out Rigidbody rigidbody);
-                rigidbody.velocity = thisRigidbody.velocity;
-                Destroy(gameObject);
+                if(newObject.TryGetComponent<Rigidbody>(out Rigidbody rigidbody))
+                {
+                    rigidbody.velocity = thisRigidbody.velocity;
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    Debug.LogError("No Rigidbody attached to instanced object!");
+                    Destroy(gameObject);
+                }
             }
         }
     }
