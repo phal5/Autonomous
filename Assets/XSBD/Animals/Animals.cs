@@ -58,6 +58,8 @@ public class Animals : MonoBehaviour
         ManageMoveSpeed();
     }
 
+    
+
     void ManageGimmicks()
     {
         foreach (Gimmick gimmick in _gimmicks)
