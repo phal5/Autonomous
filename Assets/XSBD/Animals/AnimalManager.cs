@@ -19,8 +19,7 @@ public class AnimalManager : MonoBehaviour
     public class AnimalPrefabs
     {
         [SerializeField] GameObject _prefab;
-        [Tooltip("0 means herbivorous, 1 means small predators and so on. Maximum is 3.")]
-        [SerializeField] byte _threatLevel;
+        [SerializeField][Tooltip("0 means herbivorous, 1 means small predators and so on. Maximum is 3.")] byte _threatLevel;
 
         AnimalPrefabs(GameObject prefab, byte threatLevel)
         {
@@ -72,10 +71,13 @@ public class AnimalManager : MonoBehaviour
         }
     }
 
-    public static Vector3[] _herbivoresPos = new Vector3[1024];
-    public static Vector3[] _predators1Pos = new Vector3[1024];
-    public static Vector3[] _predators2Pos = new Vector3[1024];
-    public static Vector3[] _predators3Pos = new Vector3[1024];
+    public static List<Vector3> _herbivoresPos = new List<Vector3>();
+    public static List<Vector3> _predators1Pos = new List<Vector3>();
+    public static List<Vector3> _predators2Pos = new List<Vector3>();
+    public static List<Vector3> _predators3Pos = new List<Vector3>();
+
+    //Test Variables
+    [SerializeField] bool _init = false;
 
     public static byte _frameCounter = 0;
 
@@ -84,7 +86,7 @@ public class AnimalManager : MonoBehaviour
 
 
     //========================================================================================================================
-    // Functions in this class are called at -2
+    // Functions in this class are called before others (-2)
     //========================================================================================================================
     // Start is called before the first frame update
     void Start()
@@ -103,72 +105,83 @@ public class AnimalManager : MonoBehaviour
         {
             case 0:
                 {
-                    TransformToPosition(_herbivores, _herbivoresPos);
+                    TransformToPosition(_herbivores, ref _herbivoresPos);
                     _frameCounter++;
+                    Debug.Log("M0");
                     break;
                 }
             case 1:
                 {
-                    TransformToPosition(_predators1, _predators1Pos);
+                    TransformToPosition(_predators1, ref _predators1Pos);
                     _frameCounter++;
                     break;
                 }
             case 2:
                 {
-                    TransformToPosition(_predators2, _predators2Pos);
+                    TransformToPosition(_predators2, ref _predators2Pos);
                     _frameCounter++;
                     break;
                 }
             case 3:
                 {
-                    TransformToPosition(_predators3, _predators3Pos);
+                    TransformToPosition(_predators3, ref _predators3Pos);
                     _frameCounter++;
                     break;
                 }
             case 4:
                 {
                     _frameCounter = 0;
+                    Debug.Log("M4");
                     break;
                 }
             default:
                 {
-                    Debug.LogError("Frame count module error: _frameCounter value is outside bounds");
-                    Debug.Log(_frameCounter);
+                    Debug.LogError("Frame count module error: _frameCounter value is outside bounds. _framecounter: " + _frameCounter.ToString());
                     break;
                 }
         }
-    }
 
-    void TransformToPosition(Transform parent, Vector3[] positions)
-    {
-        int i = 0;
-        foreach(Transform child in parent)
+        //Test functions
+        if (_init)
         {
-            positions[i++] = child.position;
+            _init = false;
+            foreach(AnimalPrefabs animalPrefabs in _animalPrefabs)
+            {
+                animalPrefabs.InstantiateAnimal(Random.onUnitSphere, 1);
+            }
         }
     }
 
-    public static Vector3[] Search(Vector3 position, float distance, byte threatThreshold)
+    void TransformToPosition(Transform parent, ref List<Vector3> positions)
+    {
+        positions.Clear();
+        foreach(Transform child in parent)
+        {
+            positions.Add(child.position);
+        }
+    }
+
+    public static List<Vector3> Search(Vector3 position, float distance, byte threatThreshold)
     {
         float Abs(float f)
         {
             return (f > 0) ? f : -f;
         }
-        List<Vector3> Search(Vector3[] Positions)
+        List<Vector3> Search(List<Vector3> Positions)
         {
-            List<Vector3> Result = null;
+            List<Vector3> result = new List<Vector3>();
             foreach(Vector3 Position in Positions)
             {
                 Vector3 v = (position - Position);
                 if (Abs(v.x) + Abs(v.y) + Abs(v.z) <= distance * 3 && v.sqrMagnitude <= distance)
                 {
-                    Result.Add(Position);
+                    result.Add(Position);
                 }
             }
-            return Result;
+            return result;
         }
 
-        List<Vector3> Result = null;
+        List<Vector3> Result = new List<Vector3>();
         switch (threatThreshold)
         {
             case 1:
@@ -187,6 +200,6 @@ public class AnimalManager : MonoBehaviour
                 Debug.LogError("threatThreshold maximum is 3, minimum being 1.");
                 break;
         }
-        return Result.ToArray();
+        return Result;
     }
 }

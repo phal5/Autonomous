@@ -27,10 +27,16 @@ public class Animals : MonoBehaviour
         }
     }
 
-    [SerializeField] int _finalState;
-    [SerializeField] Vector3 _finalTarget;
     [SerializeField] Gimmick[] _gimmicks;
     [SerializeField] NavMeshAgent _agent;
+    [SerializeField][Tooltip("small: 0 ~ big: 3, cow is 2")] byte _levelOfSize;
+
+    //Serialized for Calibration
+    [SerializeField] float _cognitiveDistance;
+
+    //Serialized for test purposes
+    [SerializeField] int _finalState;
+    [SerializeField] Vector3 _finalTarget;
 
     [SerializeField] float _animalHP;
     [SerializeField] float _satiety; // 포만감. 처음 포만감은 최대값이라고 가정.
@@ -55,6 +61,10 @@ public class Animals : MonoBehaviour
 
         ManageMoveSpeed();
         ManageGimmicks();
+        if(AnimalManager._frameCounter == 0)//
+        {
+            CognitiveManager(_levelOfSize);
+        }
     }
 
     
@@ -98,5 +108,11 @@ public class Animals : MonoBehaviour
             _agent.speed = StateMoveSpeedManager(_finalState) * 0.3f;
         else 
             StateMoveSpeedManager(_finalState);
+    }
+
+    void CognitiveManager(byte animalSize)
+    {
+        
+        Debug.Log(AnimalManager.Search(transform.position, _cognitiveDistance, ++animalSize).Count);
     }
 }
