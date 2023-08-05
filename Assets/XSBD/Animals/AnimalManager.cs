@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AnimalManager : MonoBehaviour
@@ -83,6 +84,8 @@ public class AnimalManager : MonoBehaviour
 
 
     //========================================================================================================================
+    // Functions in this class are called at -2
+    //========================================================================================================================
     // Start is called before the first frame update
     void Start()
     {
@@ -124,7 +127,6 @@ public class AnimalManager : MonoBehaviour
                 }
             case 4:
                 {
-
                     _frameCounter = 0;
                     break;
                 }
@@ -146,28 +148,45 @@ public class AnimalManager : MonoBehaviour
         }
     }
 
-    public static Vector3[] Search(Vector3 position, byte threatThreshold)
+    public static Vector3[] Search(Vector3 position, float distance, byte threatThreshold)
     {
-        void Search(Transform parent)
+        float Abs(float f)
         {
-
+            return (f > 0) ? f : -f;
         }
-        Vector3[] Result = new Vector3[1024];
+        List<Vector3> Search(Vector3[] Positions)
+        {
+            List<Vector3> Result = null;
+            foreach(Vector3 Position in Positions)
+            {
+                Vector3 v = (position - Position);
+                if (Abs(v.x) + Abs(v.y) + Abs(v.z) <= distance * 3 && v.sqrMagnitude <= distance)
+                {
+                    Result.Add(Position);
+                }
+            }
+            return Result;
+        }
+
+        List<Vector3> Result = null;
         switch (threatThreshold)
         {
-            case 0:
-
             case 1:
-
+                Result.AddRange(Search(_predators1Pos));
+                Result.AddRange(Search(_predators2Pos));
+                Result.AddRange(Search(_predators3Pos));
+                break;
             case 2:
-
+                Result.AddRange(Search(_predators2Pos));
+                Result.AddRange(Search(_predators3Pos));
+                break;
             case 3:
-
+                Result.AddRange(Search(_predators3Pos));
                 break;
             default:
-                Debug.LogError("threatThreshold maximum is 3");
+                Debug.LogError("threatThreshold maximum is 3, minimum being 1.");
                 break;
         }
-        return Result;
+        return Result.ToArray();
     }
 }
