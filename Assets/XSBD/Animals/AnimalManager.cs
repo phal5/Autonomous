@@ -15,7 +15,7 @@ public class AnimalManager : MonoBehaviour
     static Transform _predators3;
 
     [System.Serializable]
-    class AnimalPrefabs
+    public class AnimalPrefabs
     {
         [SerializeField] GameObject _prefab;
         [Tooltip("0 means herbivorous, 1 means small predators and so on. Maximum is 3.")]
@@ -79,7 +79,10 @@ public class AnimalManager : MonoBehaviour
     public static byte _frameCounter = 0;
 
     [SerializeField] AnimalPrefabs[] _animalPrefabs;
+    public static AnimalPrefabs[] _AnimalPrefabs;
 
+
+    //========================================================================================================================
     // Start is called before the first frame update
     void Start()
     {
@@ -87,6 +90,7 @@ public class AnimalManager : MonoBehaviour
         _predators1 = __predators1;
         _predators2 = __predators2;
         _predators3 = __predators3;
+        _AnimalPrefabs = _animalPrefabs;
     }
 
     // Update is called once per frame
@@ -140,5 +144,30 @@ public class AnimalManager : MonoBehaviour
         {
             positions[i++] = child.position;
         }
+    }
+
+    public static Vector3[] Search(Vector3 position, byte threatThreshold)
+    {
+        void Search(Transform parent)
+        {
+
+        }
+        Vector3[] Result = new Vector3[1024];
+        switch (threatThreshold)
+        {
+            case 0:
+
+            case 1:
+
+            case 2:
+
+            case 3:
+
+                break;
+            default:
+                Debug.LogError("threatThreshold maximum is 3");
+                break;
+        }
+        return Result;
     }
 }

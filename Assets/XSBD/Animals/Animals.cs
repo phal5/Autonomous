@@ -6,7 +6,7 @@ using UnityEngine.Rendering.Universal;
 
 public class Animals : MonoBehaviour
 {
-    enum STATE { NORMAL, CHASE, RUN, HUNGRY};
+    enum STATE { NORMAL, CHASE, RUN, HUNGRY };
 
     [System.Serializable]
     class Gimmick
@@ -14,16 +14,14 @@ public class Animals : MonoBehaviour
         [SerializeField] Behaviour _behaviour;
         [SerializeField] STATE _state;
 
-        public void ManageInability(int state)
+        public void ManageBehaviour(int state)
         {
             if((int)_state == state)
             {
-                Debug.Log("Yep");
                 _behaviour.enabled = true;
             }
             else
             {
-                Debug.Log("Nup");
                 _behaviour.enabled = false;
             }
         }
@@ -56,6 +54,7 @@ public class Animals : MonoBehaviour
         _agent.SetDestination(_finalTarget);
 
         ManageMoveSpeed();
+        ManageGimmicks();
     }
 
     
@@ -64,7 +63,7 @@ public class Animals : MonoBehaviour
     {
         foreach (Gimmick gimmick in _gimmicks)
         {
-            gimmick.ManageInability(_finalState);
+            gimmick.ManageBehaviour(_finalState);
         }
     }
 
@@ -99,8 +98,5 @@ public class Animals : MonoBehaviour
             _agent.speed = StateMoveSpeedManager(_finalState) * 0.3f;
         else 
             StateMoveSpeedManager(_finalState);
-
-    
     }
-
 }
