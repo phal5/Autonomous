@@ -107,7 +107,6 @@ public class AnimalManager : MonoBehaviour
                 {
                     TransformToPosition(_herbivores, ref _herbivoresPos);
                     _frameCounter++;
-                    Debug.Log("M0");
                     break;
                 }
             case 1:
@@ -131,7 +130,6 @@ public class AnimalManager : MonoBehaviour
             case 4:
                 {
                     _frameCounter = 0;
-                    Debug.Log("M4");
                     break;
                 }
             default:
