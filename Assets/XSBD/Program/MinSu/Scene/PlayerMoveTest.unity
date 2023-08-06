@@ -167,6 +167,9 @@ MonoBehaviour:
   smoothRotationTime: 0.08
   smoothMoveTime: 0.08
   moveSpeed: 8
+  viewMode: 0
+  jumpspeed: 10
+  maxjumpcount: 1
 --- !u!4 &279726472 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 38cc204893964534ea0741e97d370147,
@@ -214,7 +217,7 @@ GameObject:
   - component: {fileID: 433698870}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -437,7 +440,7 @@ GameObject:
   - component: {fileID: 909935914}
   - component: {fileID: 909935913}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: 3rdPersonView
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -531,7 +534,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Yaxis: 2
   Xaxis: 0
-  offset: {x: 0, y: 1.8, z: 0}
+  personViewOffset: {x: 0, y: 2, z: 0}
+  IsometricViewOffset: {x: 0, y: 2, z: 0}
   target: {fileID: 279726472}
 --- !u!114 &909935914
 MonoBehaviour:
