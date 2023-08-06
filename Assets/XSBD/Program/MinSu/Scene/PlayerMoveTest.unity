@@ -167,9 +167,6 @@ MonoBehaviour:
   smoothRotationTime: 0.08
   smoothMoveTime: 0.08
   moveSpeed: 8
-  viewMode: 0
-  jumpspeed: 10
-  maxjumpcount: 1
 --- !u!4 &279726472 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 38cc204893964534ea0741e97d370147,
@@ -215,9 +212,10 @@ GameObject:
   - component: {fileID: 433698872}
   - component: {fileID: 433698871}
   - component: {fileID: 433698870}
+  - component: {fileID: 433698874}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Floor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -308,6 +306,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &433698874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433698869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d38c22c665d0008498c5fae1c2e9d480, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smoothRotationTime: 0
+  smoothMoveTime: 0
+  moveSpeed: 0
 --- !u!1 &545128472
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,7 +453,7 @@ GameObject:
   - component: {fileID: 909935914}
   - component: {fileID: 909935913}
   m_Layer: 0
-  m_Name: 3rdPersonView
+  m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -534,8 +547,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Yaxis: 2
   Xaxis: 0
-  personViewOffset: {x: 0, y: 2, z: 0}
-  IsometricViewOffset: {x: 0, y: 2, z: 0}
+  offset: {x: 0, y: 1.8, z: 0}
   target: {fileID: 279726472}
 --- !u!114 &909935914
 MonoBehaviour:
