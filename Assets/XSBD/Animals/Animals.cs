@@ -6,7 +6,7 @@ using UnityEngine.Rendering.Universal;
 
 public class Animals : MonoBehaviour
 {
-    enum STATE { NORMAL, CHASE, RUN, HUNGRY };
+    enum STATE { NORMAL, CHASE, RUN};
 
     [System.Serializable]
     class Gimmick
@@ -14,9 +14,9 @@ public class Animals : MonoBehaviour
         [SerializeField] Behaviour _behaviour;
         [SerializeField] STATE _state;
 
-        public void ManageBehaviour(int state)
+        public void ManageBehaviour(STATE state)
         {
-            if((int)_state == state)
+            if(_state == state)
             {
                 _behaviour.enabled = true;
             }
@@ -29,21 +29,24 @@ public class Animals : MonoBehaviour
 
     [SerializeField] Gimmick[] _gimmicks;
     [SerializeField] NavMeshAgent _agent;
+    [SerializeField] float _cognitiveDistance;
     [SerializeField][Tooltip("small: 0 ~ big: 3, cow is 2")] byte _levelOfSize;
 
-    //Serialized for Calibration
-    [SerializeField] float _cognitiveDistance;
-
     //Serialized for test purposes
-    [SerializeField] int _finalState;
+    [SerializeField] STATE _finalState;
     [SerializeField] Vector3 _finalTarget;
 
+    float _originalHP;
     [SerializeField] float _animalHP;
+
+    float _originalSatiety;
     [SerializeField] float _satiety; // 포만감. 처음 포만감은 최대값이라고 가정.
 
     float _originalSpeed; // 기존 동물 속도 저장용
-    float _originalSatiety;
-    float _originalHP;
+
+    //CognitiveManager values
+    STATE _cognitiveState = STATE.NORMAL;
+    [SerializeField] Vector3 _cognitiveTarget; //Serialized for test
 
     // Start is called before the first frame update
     void Start()
@@ -77,16 +80,16 @@ public class Animals : MonoBehaviour
         }
     }
 
-    float StateMoveSpeedManager(int finalState) // 상태에 따른 이동속도 조절
+    float StateMoveSpeedManager(STATE finalState) // 상태에 따른 이동속도 조절
     {
         // chase run normal hungry
         float runRatio = 1.3f; // 달리기 시 속도 비율 
       
-        if(finalState == (int)STATE.CHASE || finalState == (int)STATE.RUN)
+        if(finalState == STATE.CHASE || finalState == STATE.RUN)
         {
             _agent.speed = _originalSpeed * runRatio;
         }
-        else if (finalState == (int)STATE.NORMAL)
+        else if (finalState == STATE.NORMAL)
         {
             _agent.speed = _originalSpeed;
         }
@@ -112,7 +115,30 @@ public class Animals : MonoBehaviour
 
     void CognitiveManager(byte animalSize)
     {
-        
-        Debug.Log(AnimalManager.Search(transform.position, _cognitiveDistance, ++animalSize).Count);
+        ++animalSize;
+        /*
+        List<Vector3> SensePredator()
+        {
+            List<Vector3> result = new List<Vector3>();
+            List<Vector3> predators = AnimalManager.Search(transform.position, _cognitiveDistance, ++animalSize);
+            
+            return result;
+        }
+        */
+        _cognitiveTarget = AnimalManager.CrudeFlee(transform.position, _cognitiveDistance, animalSize);
+        if(_cognitiveTarget == Vector3.zero)
+        {
+            _cognitiveState = STATE.NORMAL;
+        }
+        else
+        {
+            _cognitiveState = STATE.RUN;
+        }
+        //Debug.Log(AnimalManager.Search(transform.position, _cognitiveDistance, animalSize).Count);
+    }
+
+    public void DecreaseSatiety(float amount)
+    {
+        _satiety -= amount;
     }
 }

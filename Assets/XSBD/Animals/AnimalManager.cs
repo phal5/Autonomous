@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class AnimalManager : MonoBehaviour
 {
@@ -134,7 +136,11 @@ public class AnimalManager : MonoBehaviour
                 }
             default:
                 {
-                    Debug.LogError("Frame count module error: _frameCounter value is outside bounds. _framecounter: " + _frameCounter.ToString());
+                    Debug.LogError
+                        (
+                        "Frame count module error: _frameCounter value is outside bounds. _framecounter: "
+                        + _frameCounter.ToString()
+                        );
                     break;
                 }
         }
@@ -171,9 +177,9 @@ public class AnimalManager : MonoBehaviour
             foreach(Vector3 Position in Positions)
             {
                 Vector3 v = (position - Position);
-                if (Abs(v.x) + Abs(v.y) + Abs(v.z) <= distance * 3 && v.sqrMagnitude <= distance)
+                if (Abs(v.x) < distance && Abs(v.y) < distance && Abs(v.z) < distance && v.sqrMagnitude < distance * distance)
                 {
-                    result.Add(Position);
+                    result.Add(Position - position);
                 }
             }
             return result;
@@ -199,5 +205,46 @@ public class AnimalManager : MonoBehaviour
                 break;
         }
         return Result;
+    }
+
+    public static Vector3 CrudeFlee(Vector3 position, float distance, byte threatThreshold)
+    {
+        Vector3 Result = Vector3.zero;
+        float Abs(float f)
+        {
+            return (f > 0) ? f : -f;
+        }
+        Vector3 SearchSum(List<Vector3> Positions)
+        {
+            Vector3 result = Vector3.zero;
+            foreach (Vector3 Position in Positions)
+            {
+                Vector3 v = (position - Position);
+                if (Abs(v.x) < distance && Abs(v.z) < distance && Abs(v.y) < distance && v.sqrMagnitude < distance * distance)
+                {
+                    result += (distance * distance - v.sqrMagnitude) * v;
+                }
+            }
+            return result;
+        }
+        switch (threatThreshold)
+        {
+            case 1:
+                Result += SearchSum(_predators1Pos);
+                Result += SearchSum(_predators2Pos);
+                Result += SearchSum(_predators3Pos);
+                break;
+            case 2:
+                Result += SearchSum(_predators2Pos);
+                Result += SearchSum(_predators3Pos);
+                break;
+            case 3:
+                Result += SearchSum(_predators3Pos);
+                break;
+            default:
+                Debug.LogError("threatThreshold maximum is 3, minimum being 1.");
+                break;
+        }
+        return Result + position;
     }
 }
