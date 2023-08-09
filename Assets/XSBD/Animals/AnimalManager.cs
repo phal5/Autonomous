@@ -18,12 +18,13 @@ public class AnimalManager : MonoBehaviour
     static Transform _predators3;
 
     [System.Serializable]
-    public class AnimalPrefabs
+    public class AnimalPrefab
     {
         [SerializeField] GameObject _prefab;
-        [SerializeField][Tooltip("0 means herbivorous, 1 means small predators and so on. Maximum is 3.")] byte _threatLevel;
+        [SerializeField][Tooltip("0 means herbivorous, 1 means small predators and so on. Maximum is 3.")] byte _threatLevel = 0;
+        [SerializeField] bool _isPredator = false;
 
-        AnimalPrefabs(GameObject prefab, byte threatLevel)
+        AnimalPrefab(GameObject prefab, byte threatLevel)
         {
             _prefab = prefab;
             _threatLevel = threatLevel;
@@ -83,8 +84,8 @@ public class AnimalManager : MonoBehaviour
 
     public static byte _frameCounter = 0;
 
-    [SerializeField] AnimalPrefabs[] _animalPrefabs;
-    public static AnimalPrefabs[] _AnimalPrefabs;
+    [SerializeField] AnimalPrefab[] _animalPrefabs;
+    public static AnimalPrefab[] _AnimalPrefabs;
 
 
     //========================================================================================================================
@@ -146,14 +147,7 @@ public class AnimalManager : MonoBehaviour
         }
 
         //Test functions
-        if (_init)
-        {
-            _init = false;
-            foreach(AnimalPrefabs animalPrefabs in _animalPrefabs)
-            {
-                animalPrefabs.InstantiateAnimal(Random.onUnitSphere, 1);
-            }
-        }
+        Init();
     }
 
     void TransformToPosition(Transform parent, ref List<Vector3> positions)
@@ -246,5 +240,18 @@ public class AnimalManager : MonoBehaviour
                 break;
         }
         return Result + position;
+    }
+
+    //Test Functions======================================================================================================================
+    void Init()
+    {
+        if (_init)
+        {
+            _init = false;
+            foreach (AnimalPrefab animalPrefab in _animalPrefabs)
+            {
+                animalPrefab.InstantiateAnimal(Random.onUnitSphere, 1);
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Rendering.Universal;
@@ -27,20 +28,28 @@ public class Animals : MonoBehaviour
         }
     }
 
-    [SerializeField] Gimmick[] _gimmicks;
+    [Header("NavMesh and Speed")]
     [SerializeField] NavMeshAgent _agent;
+    [SerializeField] Gimmick[] _gimmicks;
+    [SerializeField] Transform _mouth;
     [SerializeField] float _cognitiveDistance;
-    [SerializeField][Tooltip("small: 0 ~ big: 3, cow is 2")] byte _levelOfSize;
+    [SerializeField] [Tooltip("small: 0 ~ big: 3, cow is 2")] byte _levelOfSize;
 
     //Serialized for test purposes
     [SerializeField] STATE _finalState;
     [SerializeField] Vector3 _finalTarget;
 
+    //HpManager Values
     float _originalHP;
     [SerializeField] float _animalHP;
 
-    float _originalSatiety;
-    [SerializeField] float _satiety; // 포만감. 처음 포만감은 최대값이라고 가정.
+    //HungerManager Values
+    [SerializeField] Transform[] _foodParents;
+    [SerializeField] Transform[] _foodTargetNominees;
+    [SerializeField] Transform _hungerTaget;
+    [SerializeField] float _originalSatiety;
+    [SerializeField] float _satiety; // 포만감. 처음 포만감은 최대값이라고 가정
+    [SerializeField] byte _hungerState;
 
     float _originalSpeed; // 기존 동물 속도 저장용
 
@@ -52,6 +61,7 @@ public class Animals : MonoBehaviour
     void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
+        _foodTargetNominees = new Transform[_foodParents.Length];
         _originalSpeed = _agent.speed;
         _originalSatiety = _satiety;
         _originalHP = _animalHP;
@@ -60,17 +70,97 @@ public class Animals : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _agent.SetDestination(_finalTarget);
-
         ManageMoveSpeed();
         ManageGimmicks();
-        if(AnimalManager._frameCounter == 0)//
+        switch (AnimalManager._frameCounter)
         {
-            CognitiveManager(_levelOfSize);
+            case 0:
+                {
+                    CognitiveManager(_levelOfSize);
+                    break;
+                }
+            case 1:
+                {
+                    HungerManager();
+                    break;
+                }
+            case 2:
+                {
+                    break;
+                }
+            case 3:
+                {
+                    break;
+                }
+            case 4:
+                {
+                    break;
+                }
         }
+        _agent.SetDestination(_finalTarget);
     }
 
-    
+    void CognitiveManager(byte animalSize)
+    {
+        ++animalSize;
+        /*
+        List<Vector3> SensePredator()
+        {
+            List<Vector3> result = new List<Vector3>();
+            List<Vector3> predators = AnimalManager.Search(transform.position, _cognitiveDistance, ++animalSize);
+            
+            return result;
+        }
+        */
+        _cognitiveTarget = AnimalManager.CrudeFlee(transform.position, _cognitiveDistance, animalSize) * _agent.speed * 10;
+        if (_cognitiveTarget == Vector3.zero)
+        {
+            _cognitiveState = STATE.NORMAL;
+        }
+        else
+        {
+            _cognitiveState = STATE.RUN;
+        }
+        //Debug.Log(AnimalManager.Search(transform.position, _cognitiveDistance, animalSize).Count);
+    }
+
+    void HungerManager()
+    {
+        void SetTarget()
+        {
+            float resSqrDist = 0;
+            foreach (Transform foodParent in _foodParents)
+            {
+                Transform nominee = FoodManager.SearchUnder(foodParent, transform.position, _cognitiveDistance, transform);
+                float sqrDistance = (nominee.position - transform.position).sqrMagnitude;
+                if (sqrDistance > 0 && (sqrDistance < resSqrDist || resSqrDist == 0))
+                {
+                    resSqrDist = sqrDistance;
+                    _hungerTaget = nominee;
+                }
+            }
+        }
+        if (_satiety < _originalSatiety * 0.125f)
+        {
+            _hungerState = 0;
+            if(_hungerTaget is null)
+            {
+                SetTarget();
+            }
+        }
+        else if(_satiety < _originalSatiety * 0.125f * 7)
+        {
+            _hungerState = 1;
+            if (_hungerTaget is null)
+            {
+                SetTarget();
+            }
+        }
+        else
+        {
+            _hungerState = 2;
+        }
+    }
 
     void ManageGimmicks()
     {
@@ -113,32 +203,14 @@ public class Animals : MonoBehaviour
             StateMoveSpeedManager(_finalState);
     }
 
-    void CognitiveManager(byte animalSize)
-    {
-        ++animalSize;
-        /*
-        List<Vector3> SensePredator()
-        {
-            List<Vector3> result = new List<Vector3>();
-            List<Vector3> predators = AnimalManager.Search(transform.position, _cognitiveDistance, ++animalSize);
-            
-            return result;
-        }
-        */
-        _cognitiveTarget = AnimalManager.CrudeFlee(transform.position, _cognitiveDistance, animalSize);
-        if(_cognitiveTarget == Vector3.zero)
-        {
-            _cognitiveState = STATE.NORMAL;
-        }
-        else
-        {
-            _cognitiveState = STATE.RUN;
-        }
-        //Debug.Log(AnimalManager.Search(transform.position, _cognitiveDistance, animalSize).Count);
-    }
-
+    //Public Methods=======================================================================================================================
     public void DecreaseSatiety(float amount)
     {
         _satiety -= amount;
+    }
+
+    public float GetSatiety()
+    {
+        return _satiety;
     }
 }
