@@ -74,10 +74,10 @@ public class AnimalManager : MonoBehaviour
         }
     }
 
-    public static List<Vector3> _herbivoresPos = new List<Vector3>();
-    public static List<Vector3> _predators1Pos = new List<Vector3>();
-    public static List<Vector3> _predators2Pos = new List<Vector3>();
-    public static List<Vector3> _predators3Pos = new List<Vector3>();
+    public static Vector3[] _herbivoresPos;
+    public static Vector3[] _predators1Pos;
+    public static Vector3[] _predators2Pos;
+    public static Vector3[] _predators3Pos;
 
     //Test Variables
     [SerializeField] bool _init = false;
@@ -150,22 +150,24 @@ public class AnimalManager : MonoBehaviour
         Init();
     }
 
-    void TransformToPosition(Transform parent, ref List<Vector3> positions)
+    void TransformToPosition(Transform parent, ref Vector3[] positions)
     {
-        positions.Clear();
+        List<Vector3> tempList = new List<Vector3>();
         foreach(Transform child in parent)
         {
-            positions.Add(child.position);
+            tempList.Add(child.position);
         }
+        positions = tempList.ToArray();
+
     }
 
-    public static List<Vector3> Search(Vector3 position, float distance, byte threatThreshold)
+    public static Vector3[] Search(Vector3 position, float distance, byte threatThreshold)
     {
         float Abs(float f)
         {
             return (f > 0) ? f : -f;
         }
-        List<Vector3> Search(List<Vector3> Positions)
+        List<Vector3> Search(Vector3[] Positions)
         {
             List<Vector3> result = new List<Vector3>();
             foreach(Vector3 Position in Positions)
@@ -198,7 +200,7 @@ public class AnimalManager : MonoBehaviour
                 Debug.LogError("threatThreshold maximum is 3, minimum being 1.");
                 break;
         }
-        return Result;
+        return Result.ToArray();
     }
 
     public static Vector3 CrudeFlee(Vector3 position, float distance, byte threatThreshold)
