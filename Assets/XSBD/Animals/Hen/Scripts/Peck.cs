@@ -10,11 +10,12 @@ public class Peck : MonoBehaviour
     
     float _timer;
     bool _peck;
+    Animals _animals;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        TryGetComponent<Animals>(out _animals);
     }
 
     private void OnEnable()

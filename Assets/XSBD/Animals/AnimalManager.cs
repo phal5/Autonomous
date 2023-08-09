@@ -208,7 +208,7 @@ public class AnimalManager : MonoBehaviour
         {
             return (f > 0) ? f : -f;
         }
-        Vector3 SearchSum(List<Vector3> Positions)
+        Vector3 SearchSum(Vector3[] Positions)
         {
             Vector3 result = Vector3.zero;
             foreach (Vector3 Position in Positions)
@@ -224,16 +224,16 @@ public class AnimalManager : MonoBehaviour
         switch (threatThreshold)
         {
             case 1:
-                Result += SearchSum(_predators1Pos);
-                Result += SearchSum(_predators2Pos);
-                Result += SearchSum(_predators3Pos);
+                Result += SearchSum(_predators1Pos.ToArray());
+                Result += SearchSum(_predators2Pos.ToArray());
+                Result += SearchSum(_predators3Pos.ToArray());
                 break;
             case 2:
-                Result += SearchSum(_predators2Pos);
-                Result += SearchSum(_predators3Pos);
+                Result += SearchSum(_predators2Pos.ToArray());
+                Result += SearchSum(_predators3Pos.ToArray());
                 break;
             case 3:
-                Result += SearchSum(_predators3Pos);
+                Result += SearchSum(_predators3Pos.ToArray());
                 break;
             default:
                 Debug.LogError("threatThreshold maximum is 3, minimum being 1.");

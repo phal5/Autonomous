@@ -940,24 +940,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agent: {fileID: 4600215332168384808}
-  _gimmicks:
-  - _behaviour: {fileID: 6733657355043052707}
-    _state: 0
   _mouth: {fileID: 0}
   _cognitiveDistance: 10
+  _satiety: Infinity
+  _animalHP: 0.7
   _levelOfSize: 0
-  _finalState: 0
-  _finalTarget: {x: 0, y: 0, z: 0}
-  _animalHP: 100
   _dropsWhenDead: []
   _foodParents:
   - {fileID: 0}
-  _foodTargetNominees: []
-  _foodTaget: {fileID: 0}
-  _originalSatiety: 0
-  _satiety: 100
-  _hungerState: 0
-  _cognitiveTarget: {x: 0, y: 0, z: 0}
+  _gimmicks:
+  - _behaviour: {fileID: 6733657355043052707}
+    _state: 0
 --- !u!195 &4600215332168384808
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -8,7 +8,6 @@ using UnityEngine.Rendering.Universal;
 public class Animals : MonoBehaviour
 {
     enum STATE { NORMAL, CHASE, RUN};
-
     [System.Serializable] class Gimmick
     {
         [SerializeField] Behaviour _behaviour;
@@ -26,7 +25,6 @@ public class Animals : MonoBehaviour
             }
         }
     }
-
     [System.Serializable] class Drop
     {
         [SerializeField] GameObject _prefab;
@@ -42,37 +40,26 @@ public class Animals : MonoBehaviour
         }
     }
 
-    [Header("NavMesh and Speed")]
     [SerializeField] NavMeshAgent _agent;
-    float _originalSpeed; // 기존 동물 속도 저장용
-
-    [SerializeField] Gimmick[] _gimmicks;
-
-    [Header("Perception Variables")]
     [SerializeField] Transform _mouth;
     [SerializeField] float _cognitiveDistance;
-    [SerializeField] [Tooltip("small: 0 ~ big: 3, cow is 2")] byte _levelOfSize;
-
-    //Serialized for test purposes
-    [SerializeField] STATE _finalState;
-    [SerializeField] Vector3 _finalTarget;
-
-    //HpManager Values
-    float _originalHP;
-    [SerializeField] float _animalHP;
-    [SerializeField] Drop[] _dropsWhenDead;
-
-    //HungerManager Values
-    [SerializeField] Transform[] _foodParents;
-    [SerializeField] List<Transform> _foodTargetNominees = new List<Transform>();
-    [SerializeField] Transform _foodTaget; //T
-    [SerializeField] float _originalSatiety; //T
     [SerializeField] float _satiety; // 포만감. 처음 포만감은 최대값이라고 가정
-    [SerializeField] byte _hungerState; //T
+    [SerializeField] float _animalHP;
+    [SerializeField][Tooltip("small: 0 ~ big: 3, cow is 2")] byte _levelOfSize;
 
-    //CognitiveManager values
+    [SerializeField] Drop[] _dropsWhenDead;
+    [SerializeField] Transform[] _foodParents;
+    [SerializeField] Gimmick[] _gimmicks;
+    
+    STATE _finalState;
     STATE _cognitiveState = STATE.NORMAL; //T
-    [SerializeField] Vector3 _cognitiveTarget; //Serialized for test
+    Vector3 _cognitiveTarget; //Serialized for test
+    List<Transform> _foodTargetNominees = new List<Transform>();
+    Transform _foodTaget; //T
+    float _originalSpeed; // 기존 동물 속도 저장용
+    float _originalHP;
+    float _originalSatiety; //T
+    byte _hungerState; //T
 
     // Start is called before the first frame update
     void Start()
@@ -86,9 +73,6 @@ public class Animals : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ManageMoveSpeed();
-        ManageGimmicks();
-        StaminaManager();
         switch (AnimalManager._frameCounter)
         {
             case 0:
@@ -103,6 +87,9 @@ public class Animals : MonoBehaviour
                 }
             case 2:
                 {
+                    ManageGimmicks();
+                    ManageMoveSpeed();
+                    StaminaManager();
                     break;
                 }
             case 3:
@@ -114,9 +101,13 @@ public class Animals : MonoBehaviour
                     break;
                 }
         }
-        _satiety -= Time.deltaTime;
         MasterManager();
+        SetManagedValues();
     }
+
+    //=====================================================================================================================================
+    //[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
+    //MANAGERS MANAGERS MANAGERS MANAGERS MANAGERS MANAGERS MANAGERS MANAGERS MANAGERS MANAGERS MANAGERS MANAGERS MANAGERS MANAGERS MANAGER
 
     //Heavy
     void CognitiveManager(byte animalSize)
@@ -152,7 +143,7 @@ public class Animals : MonoBehaviour
     //Heavy
     void HungerManager()
     {
-        void SetTarget()
+        void SetFoodTarget()
         {
             _foodTargetNominees = new List<Transform>();
             foreach (Transform foodParent in _foodParents)
@@ -170,26 +161,22 @@ public class Animals : MonoBehaviour
                 }
             }
         }
+
         if (_satiety < _originalSatiety * 0.125f)
         {
             _hungerState = 0;
-            if(!_foodTaget)
-            {
-                SetTarget();
-            }
         }
         else if(_satiety < _originalSatiety * 0.125f * 7)
         {
             _hungerState = 1;
-            if (!_foodTaget)
-            {
-                SetTarget();
-            }
         }
         else
         {
             _hungerState = 2;
-            SetTarget();
+        }
+        if (!_foodTaget)
+        {
+            SetFoodTarget();
         }
     }
 
@@ -225,6 +212,23 @@ public class Animals : MonoBehaviour
         }
     }
 
+    //DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO
+    //[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
+    //=====================================================================================================================================
+
+    void SetManagedValues()
+    {
+        _satiety -= Time.deltaTime;
+        if( _satiety < 0)
+        {
+            _satiety = 0;
+        }
+        if (_satiety == 0)
+        {
+            _animalHP -= Time.deltaTime * 0.0167f;
+        }
+    }
+
     //light
     void ManageGimmicks()
     {
@@ -234,7 +238,17 @@ public class Animals : MonoBehaviour
         }
     }
 
-    //light
+    void DropItems(Drop[] drops)
+    {
+        foreach (Drop item in drops)
+        {
+            item.InstantiateDrop(transform.position);
+        }
+    }
+
+
+
+    //=====================================================================================================================================
     float StateMoveSpeedManager(STATE finalState) // 상태에 따른 이동속도 조절
     {
         // chase run normal hungry
@@ -267,21 +281,13 @@ public class Animals : MonoBehaviour
         else 
             StateMoveSpeedManager(_finalState);
     }
+    //=====================================================================================================================================
 
-    void DropItems(Drop[] drops)
-    {
-        foreach(Drop item in drops)
-        {
-            item.InstantiateDrop(transform.position);
-        }
-    }
 
-    void Move()
-    {
-        _agent.SetDestination(_finalTarget);
-    }
 
-    //Public Methods=======================================================================================================================
+    //[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
+    //PUBLIC PUBLIC PUBLIC PUBLIC PUBLIC PUBLIC PUBLIC PUBLIC PUBLIC PUBLIC PUBLIC PUBLIC PUBLIC PUBLIC PUBLIC PUBLIC PUBLIC PUBLIC PUBLIC
+
     public void DecreaseSatiety(float amount)
     {
         _satiety -= amount;
@@ -296,4 +302,7 @@ public class Animals : MonoBehaviour
     {
         return _agent.speed;
     }
+
+    //DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO
+    //[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
 }
