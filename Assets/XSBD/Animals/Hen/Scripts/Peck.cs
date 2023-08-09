@@ -10,7 +10,6 @@ public class Peck : MonoBehaviour
     
     float _timer;
     bool _peck;
-    bool _disabled = false;
     
     // Start is called before the first frame update
     void Start()
@@ -20,7 +19,6 @@ public class Peck : MonoBehaviour
 
     private void OnEnable()
     {
-        _disabled = false;
         _timer = 0;
         _peck = false;
     }
@@ -52,7 +50,7 @@ public class Peck : MonoBehaviour
         {
             if (_timer > 0.5f)
             {
-                _timer = 0;
+                _timer = 0.5f - (int)(Random.value * 3) * 0.25f;
                 _peck = true;
             }
         }

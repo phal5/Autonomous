@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FoodManager : MonoBehaviour
 {
+    [System.Serializable]
     public class FoodPrefab
     {
         [SerializeField] GameObject _prefab;
@@ -21,6 +22,11 @@ public class FoodManager : MonoBehaviour
             Instantiate(_prefab, pos, Random.rotation, _prefabParent);
         }
     }
+
+    [SerializeField] FoodPrefab[] _food;
+
+    [SerializeField] bool _init = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,12 +36,16 @@ public class FoodManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (_init)
+        {
+            InitiateAll();
+            _init = false;
+        }
     }
 
     public static Transform SearchUnder(Transform foodParent, Vector3 position, float distance, Transform Result)
     {
-        float ResultDist = distance;
+        float ResultDist = distance * distance;
         float Sqr(float f)
         {
             return f * f;
@@ -50,5 +60,13 @@ public class FoodManager : MonoBehaviour
             }
         }
         return Result;
+    }
+
+    void InitiateAll()
+    {
+        foreach(FoodPrefab foodPrefab in _food)
+        {
+            foodPrefab.InstantiateFood(Vector3.zero);
+        }
     }
 }

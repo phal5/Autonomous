@@ -239,7 +239,7 @@ public class AnimalManager : MonoBehaviour
                 Debug.LogError("threatThreshold maximum is 3, minimum being 1.");
                 break;
         }
-        return Result + position;
+        return Result;
     }
 
     //Test Functions======================================================================================================================

@@ -9,8 +9,7 @@ public class Animals : MonoBehaviour
 {
     enum STATE { NORMAL, CHASE, RUN};
 
-    [System.Serializable]
-    class Gimmick
+    [System.Serializable] class Gimmick
     {
         [SerializeField] Behaviour _behaviour;
         [SerializeField] STATE _state;
@@ -27,7 +26,8 @@ public class Animals : MonoBehaviour
             }
         }
     }
-    class Drop
+
+    [System.Serializable] class Drop
     {
         [SerializeField] GameObject _prefab;
         [SerializeField] Transform _parent;
@@ -64,7 +64,7 @@ public class Animals : MonoBehaviour
 
     //HungerManager Values
     [SerializeField] Transform[] _foodParents;
-    [SerializeField] Transform[] _foodTargetNominees; //T
+    [SerializeField] List<Transform> _foodTargetNominees = new List<Transform>();
     [SerializeField] Transform _foodTaget; //T
     [SerializeField] float _originalSatiety; //T
     [SerializeField] float _satiety; // 포만감. 처음 포만감은 최대값이라고 가정
@@ -78,7 +78,6 @@ public class Animals : MonoBehaviour
     void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
-        _foodTargetNominees = new Transform[_foodParents.Length];
         _originalSpeed = _agent.speed;
         _originalSatiety = _satiety;
         _originalHP = _animalHP;
@@ -95,7 +94,6 @@ public class Animals : MonoBehaviour
             case 0:
                 {
                     CognitiveManager(_levelOfSize);
-                    
                     break;
                 }
             case 1:
@@ -105,7 +103,6 @@ public class Animals : MonoBehaviour
                 }
             case 2:
                 {
-                    
                     break;
                 }
             case 3:
@@ -117,8 +114,8 @@ public class Animals : MonoBehaviour
                     break;
                 }
         }
+        _satiety -= Time.deltaTime;
         MasterManager();
-        Move();
     }
 
     //Heavy
@@ -126,7 +123,7 @@ public class Animals : MonoBehaviour
     {
         ++animalSize;
         
-        _cognitiveTarget = AnimalManager.CrudeFlee(transform.position, _cognitiveDistance, animalSize) * _agent.speed * 10;
+        _cognitiveTarget = AnimalManager.CrudeFlee(transform.position, _cognitiveDistance, animalSize).normalized * _agent.speed * 10;
         if (_cognitiveTarget == Vector3.zero)
         {
             //Search for Chase target
@@ -157,10 +154,14 @@ public class Animals : MonoBehaviour
     {
         void SetTarget()
         {
-            float resSqrDist = 0;
+            _foodTargetNominees = new List<Transform>();
             foreach (Transform foodParent in _foodParents)
             {
-                Transform nominee = FoodManager.SearchUnder(foodParent, transform.position, _cognitiveDistance, transform);
+                _foodTargetNominees.Add(FoodManager.SearchUnder(foodParent, transform.position, _cognitiveDistance, transform));
+            }
+            float resSqrDist = 0;
+            foreach (Transform nominee in _foodTargetNominees)
+            {
                 float sqrDistance = (nominee.position - transform.position).sqrMagnitude;
                 if (sqrDistance > 0 && (sqrDistance < resSqrDist || resSqrDist == 0))
                 {
@@ -172,7 +173,7 @@ public class Animals : MonoBehaviour
         if (_satiety < _originalSatiety * 0.125f)
         {
             _hungerState = 0;
-            if(_foodTaget is null)
+            if(!_foodTaget)
             {
                 SetTarget();
             }
@@ -180,7 +181,7 @@ public class Animals : MonoBehaviour
         else if(_satiety < _originalSatiety * 0.125f * 7)
         {
             _hungerState = 1;
-            if (_foodTaget is null)
+            if (!_foodTaget)
             {
                 SetTarget();
             }
@@ -188,6 +189,7 @@ public class Animals : MonoBehaviour
         else
         {
             _hungerState = 2;
+            SetTarget();
         }
     }
 
@@ -204,41 +206,22 @@ public class Animals : MonoBehaviour
     //light
     void MasterManager()
     {
-        switch (_cognitiveState)
+        if((int)_cognitiveState < 2 - _hungerState)
         {
-            case STATE.NORMAL:
-                {
-                    if(_hungerState < 2)
-                    {
-                        _finalTarget = _foodTaget.position;
-                    }
-                    else
-                    {
-                        _finalTarget = _cognitiveTarget;
-                    }
-                    _finalState = _cognitiveState;
-                    break;
-                }
-            case STATE.CHASE:
-                {
-                    if (_hungerState == 0)
-                    {
-                        _finalTarget = _foodTaget.position;
-                        _finalState = STATE.NORMAL;
-                    }
-                    else
-                    {
-                        _finalTarget = _cognitiveTarget;
-                        _finalState = _cognitiveState;
-                    }
-                    break;
-                }
-            case STATE.RUN:
-                {
-                    _finalTarget = _cognitiveTarget;
-                    _finalState = _cognitiveState;
-                    break;
-                }
+            _finalState = STATE.NORMAL;
+            if(!_foodTaget)
+            {
+                _agent.SetDestination(transform.position);
+            }
+            else
+            {
+                _agent.SetDestination(_foodTaget.position);
+            }
+        }
+        else
+        {
+            _finalState = _cognitiveState;
+            _agent.SetDestination(_cognitiveTarget);
         }
     }
 
