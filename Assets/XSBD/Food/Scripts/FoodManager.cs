@@ -27,6 +27,9 @@ public class FoodManager : MonoBehaviour
 
     [SerializeField] bool _init = false;
 
+    [SerializeField] float foodHP;
+    [SerializeField] float foodEfficiency;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +44,8 @@ public class FoodManager : MonoBehaviour
             InitiateAll();
             _init = false;
         }
+
+        if(foodHP <= 0) Destroy(gameObject);
     }
 
     public static Transform SearchUnder(Transform foodParent, Vector3 position, float distance, Transform Result)
@@ -67,6 +72,20 @@ public class FoodManager : MonoBehaviour
         foreach(FoodPrefab foodPrefab in _food)
         {
             foodPrefab.InstantiateFood(Vector3.zero);
+        }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.transform.tag == "Animal")
+        {
+            Animals animalCode = other.gameObject.GetComponent<Animals>();
+
+            if (animalCode != null)
+            {
+                foodHP -= animalCode._eatAmount * Time.deltaTime;
+                animalCode._satiety += foodEfficiency * Time.deltaTime;
+            }
         }
     }
 }

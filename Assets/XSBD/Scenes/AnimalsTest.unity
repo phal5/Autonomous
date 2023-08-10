@@ -983,6 +983,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3024415247797132728, guid: 8541351f9edc69340ab869bf22703ba0,
         type: 3}
+      propertyPath: _RunningSpeed
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 3024415247797132728, guid: 8541351f9edc69340ab869bf22703ba0,
+        type: 3}
+      propertyPath: _walkingSpeed
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3024415247797132728, guid: 8541351f9edc69340ab869bf22703ba0,
+        type: 3}
       propertyPath: _foodParents.Array.size
       value: 1
       objectReference: {fileID: 0}

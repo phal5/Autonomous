@@ -43,7 +43,7 @@ public class Animals : MonoBehaviour
     [SerializeField] NavMeshAgent _agent;
     [SerializeField] Transform _mouth;
     [SerializeField] float _cognitiveDistance;
-    [SerializeField] float _satiety; // 포만감. 처음 포만감은 최대값이라고 가정
+    [SerializeField] public float _satiety; // 포만감. 처음 포만감은 최대값이라고 가정
     [SerializeField] float _animalHP;
     [SerializeField][Tooltip("small: 0 ~ big: 3, cow is 2")] byte _levelOfSize;
 
@@ -55,8 +55,10 @@ public class Animals : MonoBehaviour
     STATE _cognitiveState = STATE.NORMAL; //T
     Vector3 _cognitiveTarget; //Serialized for test
     List<Transform> _foodTargetNominees = new List<Transform>();
-    Transform _foodTaget; //T
-    float _originalSpeed; // 기존 동물 속도 저장용
+    Transform _foodTaget; //
+    public float _eatAmount;
+    public float _walkingSpeed; // 기존 동물 속도 저장용
+    public float _RunningSpeed;
     float _originalHP;
     float _originalSatiety; //T
     byte _hungerState; //T
@@ -65,7 +67,7 @@ public class Animals : MonoBehaviour
     void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
-        _originalSpeed = _agent.speed;
+        _walkingSpeed = _agent.speed;
         _originalSatiety = _satiety;
         _originalHP = _animalHP;
     }
@@ -252,15 +254,14 @@ public class Animals : MonoBehaviour
     float StateMoveSpeedManager(STATE finalState) // 상태에 따른 이동속도 조절
     {
         // chase run normal hungry
-        float runRatio = 1.3f; // 달리기 시 속도 비율 
       
         if(finalState == STATE.CHASE || finalState == STATE.RUN)
         {
-            _agent.speed = _originalSpeed * runRatio;
+            _agent.speed = _walkingSpeed;
         }
         else if (finalState == STATE.NORMAL)
         {
-            _agent.speed = _originalSpeed;
+            _agent.speed = _RunningSpeed;
         }
 
         // 아직 테스트 X
