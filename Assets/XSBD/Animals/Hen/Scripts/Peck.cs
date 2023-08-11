@@ -7,6 +7,8 @@ public class Peck : MonoBehaviour
 {
     [SerializeField] Rig _chainIK;
     [SerializeField] Behaviour _wrapUp;
+
+    [SerializeField] float _foodDistance;
     
     float _timer;
     bool _peck;
@@ -34,6 +36,7 @@ public class Peck : MonoBehaviour
     {
         SetMovement();
         Feed();
+        
     }
 
     void SetMovement()

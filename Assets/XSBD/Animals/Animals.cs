@@ -43,22 +43,27 @@ public class Animals : MonoBehaviour
     [SerializeField] NavMeshAgent _agent;
     [SerializeField] Transform _mouth;
     [SerializeField] float _cognitiveDistance;
-    [SerializeField] public float _satiety; // 포만감. 처음 포만감은 최대값이라고 가정
+
+    [SerializeField] float _satiety; // 포만감. 처음 포만감은 최대값이라고 가정
+    [SerializeField] float _eatAmount;
+
     [SerializeField] float _animalHP;
+    
+    [SerializeField] float _walkingSpeed; // 기존 동물 속도 저장용
+    [SerializeField] float _RunningSpeed;
     [SerializeField][Tooltip("small: 0 ~ big: 3, cow is 2")] byte _levelOfSize;
 
+    //Arrays
     [SerializeField] Drop[] _dropsWhenDead;
-    [SerializeField] Transform[] _foodParents;
+    [SerializeField] byte[] _foodTypeIndex;
     [SerializeField] Gimmick[] _gimmicks;
     
     STATE _finalState;
     STATE _cognitiveState = STATE.NORMAL; //T
     Vector3 _cognitiveTarget; //Serialized for test
-    List<Transform> _foodTargetNominees = new List<Transform>();
+    Transform[] _foodParents;
+    Transform[] _foodTargetNominees;
     Transform _foodTaget; //
-    public float _eatAmount;
-    public float _walkingSpeed; // 기존 동물 속도 저장용
-    public float _RunningSpeed;
     float _originalHP;
     float _originalSatiety; //T
     byte _hungerState; //T
@@ -67,6 +72,8 @@ public class Animals : MonoBehaviour
     void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
+        SetFoodParents();
+        _foodTargetNominees = new Transform[_foodTypeIndex.Length];
         _walkingSpeed = _agent.speed;
         _originalSatiety = _satiety;
         _originalHP = _animalHP;
@@ -130,16 +137,6 @@ public class Animals : MonoBehaviour
             _cognitiveState = STATE.RUN;
             _cognitiveTarget += transform.position;
         }
-        /*
-        List<Vector3> SensePredator()
-        {
-            List<Vector3> result = new List<Vector3>();
-            List<Vector3> predators = AnimalManager.Search(transform.position, _cognitiveDistance, ++animalSize);
-            
-            return result;
-        }
-        */
-        //Debug.Log(AnimalManager.Search(transform.position, _cognitiveDistance, animalSize).Count);
     }
 
     //Heavy
@@ -147,10 +144,11 @@ public class Animals : MonoBehaviour
     {
         void SetFoodTarget()
         {
-            _foodTargetNominees = new List<Transform>();
+            byte index = 0;
             foreach (Transform foodParent in _foodParents)
             {
-                _foodTargetNominees.Add(FoodManager.SearchUnder(foodParent, transform.position, _cognitiveDistance, transform));
+                _foodTargetNominees[index] = (FoodManager.SearchUnder(foodParent, transform.position, _cognitiveDistance, transform));
+                ++index;
             }
             float resSqrDist = 0;
             foreach (Transform nominee in _foodTargetNominees)
@@ -163,7 +161,10 @@ public class Animals : MonoBehaviour
                 }
             }
         }
-
+        if(_foodTaget && (transform.position - _foodTaget.position).sqrMagnitude > _cognitiveDistance * _cognitiveDistance)
+        {
+            _foodTaget = null;
+        }
         if (_satiety < _originalSatiety * 0.125f)
         {
             _hungerState = 0;
@@ -248,7 +249,10 @@ public class Animals : MonoBehaviour
         }
     }
 
-
+    void SetFoodParents()
+    {
+        _foodParents = FoodManager.GetFoodParents(_foodTypeIndex);
+    }
 
     //=====================================================================================================================================
     float StateMoveSpeedManager(STATE finalState) // 상태에 따른 이동속도 조절
@@ -299,9 +303,19 @@ public class Animals : MonoBehaviour
         return _satiety;
     }
 
+    public byte GetHungerState()
+    {
+        return _hungerState;
+    }
+
     public float GetSpeed()
     {
         return _agent.speed;
+    }
+
+    public Vector3 GetFoodTarget()
+    {
+        return _foodTaget.position;
     }
 
     //DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO

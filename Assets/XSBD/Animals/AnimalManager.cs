@@ -158,7 +158,6 @@ public class AnimalManager : MonoBehaviour
             tempList.Add(child.position);
         }
         positions = tempList.ToArray();
-
     }
 
     public static Vector3[] Search(Vector3 position, float distance, byte threatThreshold)
