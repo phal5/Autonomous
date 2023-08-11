@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Machine : MonoBehaviour
 {
-    [Serializable
+    
     // Start is called before the first frame update
     void Start()
     {
