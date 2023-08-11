@@ -942,7 +942,7 @@ MonoBehaviour:
   _mouth: {fileID: 5055654453543731947}
   _cognitiveDistance: 10
   _satiety: 100
-  _eatAmount: 0
+  _eatAmount: 0.2
   _animalHP: 0.7
   _walkingSpeed: 3.5
   _RunningSpeed: 6
@@ -987,8 +987,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _chainIK: {fileID: 8868191292846923942}
+  _peckRange: 2
+  _target: {fileID: 947260290427507014}
   _wrapUp: {fileID: 4003202395070858989}
-  _foodDistance: 0
 --- !u!114 &4003202395070858989
 MonoBehaviour:
   m_ObjectHideFlags: 0

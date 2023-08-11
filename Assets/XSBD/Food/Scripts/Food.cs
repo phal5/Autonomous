@@ -12,7 +12,7 @@ public class Food : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        _HP = _MaxHP;
     }
 
     // Update is called once per frame
@@ -24,6 +24,8 @@ public class Food : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    //-------------------------------------------------------------------------------------------------------------------------------------
 
     void Drop()
     {

@@ -25,6 +25,7 @@ public class FoodManager : MonoBehaviour
     [SerializeField] FoodPrefab[] _food;
     [SerializeField] bool _init = false;//Delete after test
 
+
     static Transform[] _foodTypes;
 
     // Start is called before the first frame update

@@ -6,10 +6,10 @@ using UnityEngine.Animations.Rigging;
 public class Peck : MonoBehaviour
 {
     [SerializeField] Rig _chainIK;
+    [SerializeField] float _peckRange;
+    [SerializeField] Transform _target;
     [SerializeField] Behaviour _wrapUp;
 
-    [SerializeField] float _foodDistance;
-    
     float _timer;
     bool _peck;
     Animals _animals;
@@ -24,6 +24,7 @@ public class Peck : MonoBehaviour
     {
         _timer = 0;
         _peck = false;
+        _active = false;
     }
 
     private void OnDisable()
@@ -34,12 +35,19 @@ public class Peck : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SetMovement();
-        Feed();
-        
+        if (_animals.GetIsEating())
+        {
+            SetTarget();
+            MovementTimer();
+            Feed();
+        }
+        else
+        {
+            WrapUp();
+        }
     }
 
-    void SetMovement()
+    void MovementTimer()
     {
         _timer += Time.deltaTime;
         if (_peck)
@@ -84,5 +92,20 @@ public class Peck : MonoBehaviour
     float Abs(float _float)
     {
         return (_float > 0) ? _float : -_float;
+    }
+
+    void SetTarget()
+    {
+        _target.position = _animals.GetFoodTarget();
+    }
+
+    void WrapUp()
+    {
+        if (_chainIK.weight > 0)
+        {
+            _chainIK.weight -= Time.deltaTime * 8;
+            _timer = 0;
+            _peck = false;
+        }
     }
 }
