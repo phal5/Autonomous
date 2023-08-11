@@ -362,12 +362,12 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8d2a71284c203e9489e28388a8d79e95, type: 2}
+  - {fileID: 2100000, guid: 794e517f52a4cf84291509fa90da29db, type: 2}
+  - {fileID: 2100000, guid: d50c60deee7a0394190bac29afd11fc5, type: 2}
   - {fileID: 2100000, guid: 90f4bd3d53809a14c82bbbf1f66d9aaa, type: 2}
-  - {fileID: 2100000, guid: 90f4bd3d53809a14c82bbbf1f66d9aaa, type: 2}
-  - {fileID: 2100000, guid: 7a1b15c0531574a43b4a5c78f6c6fbeb, type: 2}
-  - {fileID: 2100000, guid: f0824c7c01118f4478a3a02717fdebb8, type: 2}
-  - {fileID: 2100000, guid: 27d27857ff5c74247a917664ac967a06, type: 2}
+  - {fileID: 2100000, guid: 45ce8b6d20db1ee469dffa4cc2771e21, type: 2}
+  - {fileID: 2100000, guid: 60bbf5116b0fbbe47b13ce1a48167648, type: 2}
+  - {fileID: 2100000, guid: 8a6a581164efe3243a127ede127ec6f6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -941,8 +941,9 @@ MonoBehaviour:
   _agent: {fileID: 4600215332168384808}
   _mouth: {fileID: 5055654453543731947}
   _cognitiveDistance: 10
+  _eatRange: 1
   _satiety: 100
-  _eatAmount: 0.2
+  _eatAmount: 1
   _animalHP: 0.7
   _walkingSpeed: 3.5
   _RunningSpeed: 6

@@ -98,6 +98,7 @@ public class Animals : MonoBehaviour
                     if (!_foodTaget)
                     {
                         SetFoodTarget1();
+                        SetFoodTarget2();
                     }
                     break;
                 }
@@ -119,7 +120,7 @@ public class Animals : MonoBehaviour
                 {
                     if (!_foodTaget)
                     {
-                        SetFoodTarget2();
+                        
                     }
                     break;
                 }
