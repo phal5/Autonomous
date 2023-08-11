@@ -24,7 +24,6 @@ public class Peck : MonoBehaviour
     {
         _timer = 0;
         _peck = false;
-        _active = false;
     }
 
     private void OnDisable()
