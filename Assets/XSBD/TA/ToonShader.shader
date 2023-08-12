@@ -16,6 +16,8 @@ Shader"Unlit/ToonShader"
 
             Pass
             {
+
+                Cull Back
                 CGPROGRAM
                 #pragma vertex vert
                 #pragma fragment frag
