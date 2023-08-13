@@ -78,7 +78,7 @@ public class Walk : MonoBehaviour
 
     bool Cast(Transform hip, Vector3 paceData)
     {
-        return Physics.Raycast(new Ray(hip.position + paceData.sqrMagnitude * _paceDivisor * transform.forward, Vector3.down), out _hit, 2);
+        return Physics.Raycast(new Ray(hip.position - Vector3.Dot(paceData, transform.forward) * transform.forward, Vector3.down), out _hit, 2);
     }
 
     void Fall()
