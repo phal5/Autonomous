@@ -22,18 +22,16 @@ public class FoodManager : MonoBehaviour
             Instantiate(_prefab, pos, Random.rotation, _prefabParent);
         }
     }
-
     [SerializeField] FoodPrefab[] _food;
+    [SerializeField] bool _init = false;//Delete after test
 
-    [SerializeField] bool _init = false;
 
-    [SerializeField] float foodHP;
-    [SerializeField] float foodEfficiency;
+    static Transform[] _foodTypes;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        GetFoodParents();
     }
 
     // Update is called once per frame
@@ -44,8 +42,6 @@ public class FoodManager : MonoBehaviour
             InitiateAll();
             _init = false;
         }
-
-        if(foodHP <= 0) Destroy(gameObject);
     }
 
     public static Transform SearchUnder(Transform foodParent, Vector3 position, float distance, Transform Result)
@@ -75,17 +71,31 @@ public class FoodManager : MonoBehaviour
         }
     }
 
-    void OnTriggerStay(Collider other)
+    void GetFoodParents()
     {
-        if (other.transform.tag == "Animal")
+        _foodTypes = new Transform[transform.childCount];
+        byte index = 0;
+        foreach (Transform child in transform)
         {
-            Animals animalCode = other.gameObject.GetComponent<Animals>();
-
-            if (animalCode != null)
-            {
-                foodHP -= animalCode._eatAmount * Time.deltaTime;
-                animalCode._satiety += foodEfficiency * Time.deltaTime;
-            }
+            _foodTypes[index] = child;
+            ++index;
         }
+    }
+
+    public static Transform[] GetFoodParents(byte[] indexes)
+    {
+        Transform[] result = new Transform[indexes.Length];
+        byte index = 0;
+        foreach(byte id in indexes)
+        {
+            result[index] = _foodTypes[id];
+            ++index;
+        }
+        return result;
+    }
+
+    public static Transform GetFoodParent(byte index)
+    {
+        return _foodTypes[index];
     }
 }

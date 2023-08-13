@@ -43,30 +43,41 @@ public class Animals : MonoBehaviour
     [SerializeField] NavMeshAgent _agent;
     [SerializeField] Transform _mouth;
     [SerializeField] float _cognitiveDistance;
-    [SerializeField] public float _satiety; // 포만감. 처음 포만감은 최대값이라고 가정
+
+    [SerializeField] float _eatRange = 1;
+    [SerializeField] float _satiety; // 포만감. 처음 포만감은 최대값이라고 가정
+    [SerializeField] float _eatAmount;
+
     [SerializeField] float _animalHP;
+    
+    [SerializeField] float _walkingSpeed; // 기존 동물 속도 저장용
+    [SerializeField] float _RunningSpeed;
     [SerializeField][Tooltip("small: 0 ~ big: 3, cow is 2")] byte _levelOfSize;
 
+    //Arrays
     [SerializeField] Drop[] _dropsWhenDead;
-    [SerializeField] Transform[] _foodParents;
+    [SerializeField] byte[] _foodTypeIndex;
     [SerializeField] Gimmick[] _gimmicks;
     
     STATE _finalState;
     STATE _cognitiveState = STATE.NORMAL; //T
     Vector3 _cognitiveTarget; //Serialized for test
-    List<Transform> _foodTargetNominees = new List<Transform>();
+    Transform[] _foodParents;
+    Transform[] _foodTargetNominees;
     Transform _foodTaget; //
-    public float _eatAmount;
-    public float _walkingSpeed; // 기존 동물 속도 저장용
-    public float _RunningSpeed;
+    Food _food;
     float _originalHP;
     float _originalSatiety; //T
     byte _hungerState; //T
+    bool _isEating;
+    bool _eatSwitch;
 
     // Start is called before the first frame update
     void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
+        SetFoodParents();
+        _foodTargetNominees = new Transform[_foodTypeIndex.Length];
         _walkingSpeed = _agent.speed;
         _originalSatiety = _satiety;
         _originalHP = _animalHP;
@@ -84,7 +95,11 @@ public class Animals : MonoBehaviour
                 }
             case 1:
                 {
-                    HungerManager();
+                    if (!_foodTaget)
+                    {
+                        SetFoodTarget1();
+                        SetFoodTarget2();
+                    }
                     break;
                 }
             case 2:
@@ -96,15 +111,24 @@ public class Animals : MonoBehaviour
                 }
             case 3:
                 {
+                    HungerManager();
+                    ManageEat();
+                    SetFood();
                     break;
                 }
             case 4:
                 {
+                    if (!_foodTaget)
+                    {
+                        
+                    }
                     break;
                 }
         }
         MasterManager();
         SetManagedValues();
+        Heal();
+        Eat();
     }
 
     //=====================================================================================================================================
@@ -130,40 +154,15 @@ public class Animals : MonoBehaviour
             _cognitiveState = STATE.RUN;
             _cognitiveTarget += transform.position;
         }
-        /*
-        List<Vector3> SensePredator()
-        {
-            List<Vector3> result = new List<Vector3>();
-            List<Vector3> predators = AnimalManager.Search(transform.position, _cognitiveDistance, ++animalSize);
-            
-            return result;
-        }
-        */
-        //Debug.Log(AnimalManager.Search(transform.position, _cognitiveDistance, animalSize).Count);
     }
 
     //Heavy
     void HungerManager()
     {
-        void SetFoodTarget()
+        if(_foodTaget && (transform.position - _foodTaget.position).sqrMagnitude > _cognitiveDistance * _cognitiveDistance)
         {
-            _foodTargetNominees = new List<Transform>();
-            foreach (Transform foodParent in _foodParents)
-            {
-                _foodTargetNominees.Add(FoodManager.SearchUnder(foodParent, transform.position, _cognitiveDistance, transform));
-            }
-            float resSqrDist = 0;
-            foreach (Transform nominee in _foodTargetNominees)
-            {
-                float sqrDistance = (nominee.position - transform.position).sqrMagnitude;
-                if (sqrDistance > 0 && (sqrDistance < resSqrDist || resSqrDist == 0))
-                {
-                    resSqrDist = sqrDistance;
-                    _foodTaget = nominee;
-                }
-            }
+            _foodTaget = null;
         }
-
         if (_satiety < _originalSatiety * 0.125f)
         {
             _hungerState = 0;
@@ -175,10 +174,6 @@ public class Animals : MonoBehaviour
         else
         {
             _hungerState = 2;
-        }
-        if (!_foodTaget)
-        {
-            SetFoodTarget();
         }
     }
 
@@ -214,14 +209,74 @@ public class Animals : MonoBehaviour
         }
     }
 
+    //정해지는 것: 상태, 목적지, 음식 타겟 
+
     //DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO
     //[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
     //=====================================================================================================================================
 
+    //Start Functions
+    void SetFoodParents()
+    {
+        _foodParents = FoodManager.GetFoodParents(_foodTypeIndex);
+    }
+
+    //Called once in a while
+    void ManageGimmicks()
+    {
+        foreach (Gimmick gimmick in _gimmicks)
+        {
+            gimmick.ManageBehaviour(_finalState);
+        }
+    }
+
+    void SetFoodTarget1()
+    {
+        byte index = 0;
+        foreach (Transform foodParent in _foodParents)
+        {
+            _foodTargetNominees[index] = (FoodManager.SearchUnder(foodParent, transform.position, _cognitiveDistance, transform));
+            ++index;
+        }
+    }
+
+    void SetFoodTarget2()
+    {
+        float resSqrDist = 0;
+        foreach (Transform nominee in _foodTargetNominees)
+        {
+            float sqrDistance = (nominee.position - transform.position).sqrMagnitude;
+            if (sqrDistance > 0 && (sqrDistance < resSqrDist || resSqrDist == 0))
+            {
+                resSqrDist = sqrDistance;
+                _foodTaget = nominee;
+            }
+        }
+    }
+
+    void SetFood()
+    {
+        if (_foodTaget)
+        {
+            _foodTaget.TryGetComponent<Food>(out _food);
+        }
+    }
+
+    //Called By Managers
+    //Stamina Manager
+    void DropItems(Drop[] drops)
+    {
+        foreach (Drop item in drops)
+        {
+            item.InstantiateDrop(transform.position);
+        }
+    }
+
+    //Called Every Frame
     void SetManagedValues()
     {
         _satiety -= Time.deltaTime;
-        if( _satiety < 0)
+        if (_satiety < 0)
         {
             _satiety = 0;
         }
@@ -231,24 +286,45 @@ public class Animals : MonoBehaviour
         }
     }
 
-    //light
-    void ManageGimmicks()
+    void ManageEat()
     {
-        foreach (Gimmick gimmick in _gimmicks)
+        if(_hungerState < 2)
         {
-            gimmick.ManageBehaviour(_finalState);
+            _eatSwitch = true;
+        }
+        else if(_satiety > _originalSatiety)
+        {
+            _eatSwitch = false;
+        }
+
+        if (_finalState == STATE.NORMAL && _eatSwitch && _foodTaget
+            && Vector3.SqrMagnitude(transform.position - _foodTaget.position) < _eatRange * _eatRange)
+        {
+            _isEating = true;
+        }
+        else
+        {
+            _isEating = false;
         }
     }
 
-    void DropItems(Drop[] drops)
+    void Eat()
     {
-        foreach (Drop item in drops)
+        if (_isEating)
         {
-            item.InstantiateDrop(transform.position);
+            _food.DecreaseHP(_eatAmount * Time.deltaTime);
+            _satiety += _food.GetEfficiency() * _eatAmount * Time.deltaTime;
         }
     }
 
-
+    void Heal()
+    {
+        if(_animalHP < _originalHP && _satiety > 0)
+        {
+            _satiety -= Time.deltaTime;
+            _animalHP += Time.deltaTime * 0.03125f;
+        }
+    }
 
     //=====================================================================================================================================
     float StateMoveSpeedManager(STATE finalState) // 상태에 따른 이동속도 조절
@@ -299,9 +375,29 @@ public class Animals : MonoBehaviour
         return _satiety;
     }
 
-    public float GetSpeed()
+    public bool GetFullness()
     {
-        return _agent.speed;
+        return _satiety - _originalSatiety > 0;
+    }
+
+    public byte GetSize()
+    {
+        return _levelOfSize;
+    }
+
+    public byte GetHungerState()
+    {
+        return _hungerState;
+    }
+
+    public Vector3 GetFoodTarget()
+    {
+        return _foodTaget.position;
+    }
+
+    public bool GetIsEating()
+    {
+        return _isEating;
     }
 
     //DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO
