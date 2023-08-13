@@ -5,7 +5,7 @@ using UnityEngine;
 public class Food : MonoBehaviour
 {
     [SerializeField] float _MaxHP;
-    [SerializeField] float _HP;
+    float _HP;
     [SerializeField] float Efficiency;
     [SerializeField] GameObject[] Drops;
 
