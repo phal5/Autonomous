@@ -23,18 +23,15 @@ public abstract class Machine : MonoBehaviour
     [SerializeField]
     protected float offset = 2f;
 
-
     protected abstract void Active(); //ActivationField의 tag를 변경함으로써 작업을 실행함
-
 
     protected void CurrentAngleUpdate()
     {
         currentAngle = moveDetection.transform.rotation.eulerAngles.y;
         return;
-    }
+    } 
 
-
-    private void LoadChildren()
+    private void LoadChildren() //Serialize Field로 변환 추천 -> Find 비용큼.
     {
         controlBoard = transform.Find("ControlBoard");
         activationField = transform.Find("ActivationField");
