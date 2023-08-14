@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static FoodManager;
 
 public class FoodManager : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class FoodManager : MonoBehaviour
         }
     }
     [SerializeField] FoodPrefab[] _food;
+    static FoodPrefab[] __food;
     [SerializeField] bool _init = false;//Delete after test
 
 
@@ -32,6 +34,7 @@ public class FoodManager : MonoBehaviour
     void Start()
     {
         GetFoodParents();
+        __food = _food;
     }
 
     // Update is called once per frame
@@ -97,5 +100,10 @@ public class FoodManager : MonoBehaviour
     public static Transform GetFoodParent(byte index)
     {
         return _foodTypes[index];
+    }
+
+    public static void InstantiateFood(byte index, Vector3 position)
+    {
+        __food[index].InstantiateFood(position);
     }
 }
