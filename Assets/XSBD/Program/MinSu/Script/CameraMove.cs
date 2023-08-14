@@ -23,7 +23,6 @@ public class CameraMove: MonoBehaviour
 
     void ChangeTargetRotation()
     {
-        Yaxis = 45f;
         Xaxis -= Input.GetAxis("Mouse Y") * rotSensitive;
         if(mode == 0)
         {
