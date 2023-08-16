@@ -243,6 +243,11 @@ public class AnimalManager : MonoBehaviour
         return Result;
     }
 
+    public static void InstantiateAnimal(byte index, Vector3 position)
+    {
+        _AnimalPrefabs[index].InstantiateAnimal(position, 1);
+    }
+
     //Test Functions======================================================================================================================
     void Init()
     {

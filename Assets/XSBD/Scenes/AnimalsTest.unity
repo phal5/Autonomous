@@ -522,6 +522,7 @@ GameObject:
   m_Component:
   - component: {fileID: 538427900}
   - component: {fileID: 538427899}
+  - component: {fileID: 538427901}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -557,6 +558,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &538427901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538427898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b11e1cfeb99ee8449c43cf4a69a60ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: 0
 --- !u!1 &572393074
 GameObject:
   m_ObjectHideFlags: 0
@@ -1425,6 +1439,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1059869621092636621, guid: ec298d50e405e39428d13a9ff3394620,
+        type: 3}
+      propertyPath: _foodTypeIndex.Array.data[2]
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1187763769244337466, guid: ec298d50e405e39428d13a9ff3394620,
         type: 3}
       propertyPath: m_LocalPosition.x

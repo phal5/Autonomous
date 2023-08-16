@@ -383,12 +383,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73d5ef9bf74f9fe40a6b2e463f491e1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _agent: {fileID: 4600215332168384808}
+  _runSpeed: 6
   _pace: 0.3
+  _minPace: 0.02
   _height: 0.2
   _LFoot: {fileID: 6146725068908209025}
   _LHip: {fileID: 2905582110550762272}
   _RFoot: {fileID: 1870098285079801618}
   _RHip: {fileID: 611956583709411468}
+  _LR: 0
 --- !u!114 &5470798768471556889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1136,7 +1140,7 @@ Transform:
   m_GameObject: {fileID: 5605127604356286759}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.13808727, y: 0.00000023841858, z: -4.9866257}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1157,7 +1161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent: {fileID: 4600215332168384808}
   _mouth: {fileID: 5055654453543731947}
-  _cognitiveDistance: 10
+  _cognitiveDistance: 6
   _eatRange: 1
   _satiety: 100
   _eatAmount: 1
