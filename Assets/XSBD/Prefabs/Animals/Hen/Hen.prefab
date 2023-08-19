@@ -387,7 +387,7 @@ MonoBehaviour:
   _runSpeed: 6
   _pace: 0.3
   _minPace: 0.02
-  _height: 0.2
+  _height: 0.5
   _LFoot: {fileID: 6146725068908209025}
   _LHip: {fileID: 2905582110550762272}
   _RFoot: {fileID: 1870098285079801618}
@@ -728,7 +728,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3429162258148302347}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2d8418b0b9634b1892b0268dd9c2743, type: 3}
   m_Name: 
@@ -1124,6 +1124,7 @@ GameObject:
   - component: {fileID: 6733657355043052707}
   - component: {fileID: 4003202395070858989}
   - component: {fileID: 3767091325703915022}
+  - component: {fileID: 9218108940901992634}
   m_Layer: 0
   m_Name: Hen
   m_TagString: Untagged
@@ -1193,7 +1194,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1.2
-  m_BaseOffset: 0
+  m_BaseOffset: -0.1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &6733657355043052707
@@ -1246,6 +1247,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.34, y: 1.1, z: 0.63}
   m_Center: {x: 0, y: 0.55, z: -0.04}
+--- !u!54 &9218108940901992634
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5605127604356286759}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &6315786377556690248
 GameObject:
   m_ObjectHideFlags: 0

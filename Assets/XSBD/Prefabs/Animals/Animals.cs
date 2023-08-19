@@ -390,9 +390,16 @@ public class Animals : MonoBehaviour
         return _hungerState;
     }
 
-    public Vector3 GetFoodTarget()
+    public Vector3 GetFoodTarget(Vector3 position)
     {
-        return _foodTaget.position;
+        if (_foodTaget)
+        {
+            return _foodTaget.position;
+        }
+        else
+        {
+            return position;
+        }
     }
 
     public bool GetIsEating()

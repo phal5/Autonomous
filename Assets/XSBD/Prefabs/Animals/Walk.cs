@@ -49,34 +49,38 @@ public class Walk : MonoBehaviour
         
         if (_LR)
         {
-            _RFoot.position = _stepPosition;
-            Step(_LFoot, _LHip, _RHip, PaceMultiplier());
+            Step(_LFoot, _LHip, _RFoot, _RHip, PaceMultiplier());
         }
         else
         {
-            _LFoot.position = _stepPosition;
-            Step(_RFoot, _RHip, _LHip, PaceMultiplier());
+            Step(_RFoot, _RHip, _LFoot, _LHip, PaceMultiplier());
         }
     }
 
-    void Step(Transform foot, Transform hip, Transform otherHip, float paceMultiplier)
+    void Step(Transform foot, Transform hip, Transform otherfoot, Transform otherHip, float paceMultiplier)
     {
         Vector3 paceData = Vector3.Scale(_stepPosition - otherHip.position, new Vector3(1, 0, 1));
         if (Cast(hip, paceData))
         {
-            if (Vector3.SqrMagnitude(paceData) < _pace * _pace * paceMultiplier)
+            if (Vector3.SqrMagnitude(paceData) <= _pace * _pace * paceMultiplier)
             {
                 foot.position = _hit.point;
                 foot.position += Vector3.up
                     * (_pace * _pace - Vector3.SqrMagnitude(paceData))
                     * _paceDivisor * _paceDivisor * _height
                     * paceMultiplier;
+                otherfoot.position = _stepPosition;
             }
             else
             {
                 foot.position = _hit.point;
                 SwitchFoot();
                 _stepPosition = foot.position;
+                if(_stepPosition.sqrMagnitude > _pace * _pace * paceMultiplier)
+                {
+                    Physics.Raycast(hip.position, Vector3.down, out _hit);
+                    _stepPosition = _hit.point;
+                }
             }
         }
         else

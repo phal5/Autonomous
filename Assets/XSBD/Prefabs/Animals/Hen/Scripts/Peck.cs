@@ -95,7 +95,7 @@ public class Peck : MonoBehaviour
 
     void SetTarget()
     {
-        _target.position = _animals.GetFoodTarget();
+        _target.position = _animals.GetFoodTarget(transform.position);
     }
 
     void WrapUp()
