@@ -69,6 +69,7 @@ using UnityEngine;
     private void OnMouseEnter()
     {
         _pull = true;
+        InventoryManager.SetStale(false);
     }
 
     private void OnMouseExit()

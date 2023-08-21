@@ -26,7 +26,7 @@ public class InventoryManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(_stale);
+        Debug.Log(_Move);
         if (_Move)
         {
             if (_stale)
@@ -74,6 +74,13 @@ public class InventoryManager : MonoBehaviour
     {
         _Move = move;
     }
+
+    public static void SetStale(bool stale)
+    {
+        _stale = stale;
+    }
+
+    //---
 
     public static GameObject GetItem()
     {
