@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class DayNightClock : MonoBehaviour
 {
-    public int dayNightLength; //Length of a game day in seconds.
-    public bool doDayNightCycle; //whether or not if the dayNightCycle runs.
-    public byte dayNightTime = 72; //In-game time. The unit is 10 minutes. 0 equals midnight. (72 equals noon)
-    public byte dayCount = 1; //The in-game day.
-    public byte monthCount = 1; //The in-game month. Actual month rules apply. (Except for leap years!)
-    public List<byte> _31dayMonths = new List<byte>();
-    public List<byte> _30dayMonths = new List<byte>();
+    [SerializeField] int dayNightLength; //Length of a game day in seconds.
+    [SerializeField] bool doDayNightCycle; //whether or not if the dayNightCycle runs.
+    [SerializeField] byte dayNightTime = 72; //In-game time. The unit is 10 minutes. 0 equals midnight. (72 equals noon)
+    [SerializeField] byte dayCount = 1; //The in-game day.
+    [SerializeField] byte monthCount = 1; //The in-game month. Actual month rules apply. (Except for leap years!)
+    [SerializeField] List<byte> _31dayMonths = new List<byte>();
+    [SerializeField] List<byte> _30dayMonths = new List<byte>();
     private float tenMinuteTimer = 0;
     // Start is called before the first frame update
     void Start()
