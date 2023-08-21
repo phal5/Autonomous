@@ -5,17 +5,20 @@ using static FoodManager;
 
 public class FoodManager : MonoBehaviour
 {
-    [System.Serializable]
-    public class FoodPrefab
+    [System.Serializable] public class FoodPrefab
     {
         [SerializeField] GameObject _prefab;
         [SerializeField] Transform _prefabParent;
+
         public void InstantiateFoodWithVelocity(Vector3 pos, Vector3 velocity)
         {
             Rigidbody rb;
             Transform transform = Instantiate(_prefab, pos, Random.rotation, _prefabParent).transform;
-            transform.TryGetComponent<Rigidbody>(out rb);
-            rb.velocity = velocity;
+            if (transform.TryGetComponent<Rigidbody>(out rb))
+            {
+                rb.velocity = velocity;
+            }
+            
         }
 
         public void InstantiateFood(Vector3 pos)
@@ -105,5 +108,10 @@ public class FoodManager : MonoBehaviour
     public static void InstantiateFood(byte index, Vector3 position)
     {
         __food[index].InstantiateFood(position);
+    }
+
+    public static void InstantiateFoodWithVelocity(byte index, Vector3 position, Vector3 velocity)
+    {
+        __food[index].InstantiateFoodWithVelocity(position, velocity);
     }
 }

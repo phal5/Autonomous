@@ -76,7 +76,7 @@ public class Walk : MonoBehaviour
                 foot.position = _hit.point;
                 SwitchFoot();
                 _stepPosition = foot.position;
-                if(_stepPosition.sqrMagnitude > _pace * _pace * paceMultiplier)
+                if(Vector3.SqrMagnitude(_stepPosition - transform.position) > _pace * _pace * paceMultiplier)
                 {
                     Physics.Raycast(hip.position, Vector3.down, out _hit);
                     _stepPosition = _hit.point;

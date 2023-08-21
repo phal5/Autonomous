@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryInstance : MonoBehaviour
+public class InstanceFromInventory : MonoBehaviour
 {
-    [SerializeField] InventorySlot[] _slots;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,12 +15,5 @@ public class InventoryInstance : MonoBehaviour
     void Update()
     {
         
-    }
-
-    public bool MoveToEmptySlot()
-    {
-        bool successful = false;
-        //dummy
-        return successful;
     }
 }
