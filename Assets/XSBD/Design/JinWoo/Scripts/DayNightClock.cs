@@ -4,75 +4,77 @@ using UnityEngine;
 
 public class DayNightClock : MonoBehaviour
 {
-    [SerializeField] int dayNightLength; //Length of a game day in seconds.
-    [SerializeField] bool doDayNightCycle; //whether or not if the dayNightCycle runs.
-    [SerializeField] byte dayNightTime = 72; //In-game time. The unit is 10 minutes. 0 equals midnight. (72 equals noon)
-    [SerializeField] byte dayCount = 1; //The in-game day.
-    [SerializeField] byte monthCount = 1; //The in-game month. Actual month rules apply. (Except for leap years!)
-    [SerializeField] List<byte> _31dayMonths = new List<byte>();
-    [SerializeField] List<byte> _30dayMonths = new List<byte>();
-    private float tenMinuteTimer = 0;
+    [Tooltip("Length of day in seconds.")] [SerializeField] float dayNightLength;
+    [SerializeField] byte day = 1;
+    [SerializeField] byte month = 1;
+    [SerializeField] List<byte> _lengthPerMonths = new List<byte>();
+    float _dayNightDivisor;
+    float _timer = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
-        //rotate the sun to noon
-        transform.eulerAngles = new Vector3 (34, 0, 0);
+        _dayNightDivisor = 1 / dayNightLength;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //clock module. Adds 10 minutes to the dayNightTime whenever the specified time has passed.
-        if (doDayNightCycle)
+        DayLengthUpdater();
+        Timer();
+        UpdateSun();
+        Calendar();
+    }
+
+    void DayLengthUpdater()
+    {
+        float dayNightOne = _dayNightDivisor * dayNightLength;
+        if (dayNightOne < 0.999f || dayNightOne > 1.001f)
         {
-            tenMinuteTimer += Time.deltaTime;
-            transform.Rotate(new Vector3 (0, 360f*Time.deltaTime / dayNightLength, 0), Space.Self);
-            if (tenMinuteTimer >= dayNightLength/144f)
+            _dayNightDivisor = 1 / dayNightLength;
+            Debug.Log("Changed");
+        }
+    }
+
+    void Timer()
+    {
+        _timer += Time.deltaTime * _dayNightDivisor;
+    }
+
+    void UpdateSun()
+    {
+        transform.eulerAngles = new Vector3(360f * _timer - 90, -90, 0);
+    }
+
+    void Calendar()
+    {
+        if (_timer >= 1)
+        {
+            _timer = 0;
+            ++day;
+            if (day > _lengthPerMonths[month])
             {
-                tenMinuteTimer = 0;
-                dayNightTime++; 
-            }
-            if(dayNightTime >=  144)
-            {
-                dayNightTime = 0;
-                dayCount++;
-                //rotate the sun to sync it with dayNightTime
-                transform.eulerAngles = new Vector3(-34, -180, 0);
-            }
-            //months.
-            if(dayCount == 29 && monthCount == 2)
-            {
-                dayCount = 1;
-                monthCount++;
-            }
-            if (dayCount == 31)
-            {
-                foreach (byte b in _30dayMonths)
+                ++month;
+                day = 1;
+                if (month >= _lengthPerMonths.Count)
                 {
-                    if (monthCount == b)
-                    {
-                        dayCount = 1;
-                        monthCount++;
-                        break;
-                    }
+                    month = 1;
                 }
-            }
-            if (dayCount == 32)
-            {
-                foreach (byte b in _31dayMonths)
-                {
-                    if (monthCount == b)
-                    {
-                        dayCount = 1;
-                        monthCount++;
-                        break;
-                    }
-                }
-            }
-            if(monthCount > 12)
-            {
-                monthCount = 1;
             }
         }
+    }
+
+    public float GetTimer()
+    {
+        return _timer;
+    }
+
+    public byte GetDay()
+    {
+        return day;
+    }
+
+    public byte GetMonth()
+    {
+        return month;
     }
 }

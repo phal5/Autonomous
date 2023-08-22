@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 [System.Serializable] public class InventorySlot : MonoBehaviour
 {
@@ -50,9 +53,9 @@ using UnityEngine;
         }
     }
 
-    private void OnMouseUp()
+    public void MouseUpEvent()
     {
-        if(_quantity != 0)
+        if (_quantity != 0)
         {
             InventoryManager.SetItem(_item);
             InventoryManager.SetItemParent(_parent);
@@ -66,14 +69,31 @@ using UnityEngine;
         }
     }
 
-    private void OnMouseEnter()
+    public void MouseEnterEvent()
     {
+        Debug.Log("Yup");
         _pull = true;
         InventoryManager.SetStale(false);
     }
 
-    private void OnMouseExit()
+    public void MouseExitEvent()
     {
         _pull = false;
     }
+    
+    private void OnMouseUp()
+    {
+        MouseUpEvent();
+    }
+
+    private void OnMouseEnter()
+    {
+        MouseEnterEvent();
+    }
+
+    private void OnMouseExit()
+    {
+        MouseExitEvent();
+    }
+
 }

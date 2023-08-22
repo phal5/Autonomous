@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using static UnityEditor.Progress;
 
 public class InventoryManager : MonoBehaviour
@@ -26,7 +25,6 @@ public class InventoryManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(_Move);
         if (_Move)
         {
             if (_stale)
@@ -42,7 +40,10 @@ public class InventoryManager : MonoBehaviour
 
     private void InstantiateItem()
     {
-        Instantiate(_Item, _player.position + Vector3.up, Random.rotation, _Parent);
+        for(int i = 0; i < _Quantity; i++)
+        {
+            Instantiate(_Item, _player.position + Vector3.up, Random.rotation, _Parent);
+        }
         _Move = false;
         _stale = false;
     }
