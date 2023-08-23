@@ -257,6 +257,16 @@ using UnityEngine.UIElements;
 
     //---
 
+    public GameObject GetSlotItem()
+    {
+        return _item;
+    }
+
+    public Transform GetSlotParent()
+    {
+        return _parent;
+    }
+
     public void SetSlotData(GameObject item, Transform parent, byte quantity, bool stackable)
     {
         _item = item;
