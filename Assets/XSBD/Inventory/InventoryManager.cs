@@ -8,8 +8,12 @@ public class InventoryManager : MonoBehaviour
 {
     [SerializeField] Transform _player;
 
+    [SerializeField] Camera uiCamera;
+    static Camera _uiCamera;
+
     static GameObject _Item;
     static Transform _Parent;
+    static InventorySlot _Slot;
 
     static byte _Quantity;
     static bool _stale = false;
@@ -19,7 +23,7 @@ public class InventoryManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        _uiCamera = uiCamera;
     }
 
     // Update is called once per frame
@@ -48,26 +52,11 @@ public class InventoryManager : MonoBehaviour
         _stale = false;
     }
 
-    public static void SetItem(GameObject Item)
+    public static void SetManagerData(GameObject Item, Transform Parent, byte Quantity, bool stackability)
     {
         _Item = Item;
-    }
-
-    public static void SetItemParent(Transform parent)
-    {
-        if (parent)
-        {
-            _Parent = parent;
-        }
-    }
-
-    public static void SetQuantity(byte quantity)
-    {
-        _Quantity = quantity;
-    }
-
-    public static void SetStackability(bool stackability)
-    {
+        _Parent = Parent;
+        _Quantity = Quantity;
         _Stackable = stackability;
     }
 
@@ -81,7 +70,28 @@ public class InventoryManager : MonoBehaviour
         _stale = stale;
     }
 
+    public static void SetSlot(InventorySlot slot)
+    {
+        _Slot = slot;
+    }
+
     //---
+
+    public static void Clear()
+    {
+        _Item = null;
+        _Parent = null;
+        _Slot = null;
+        _Quantity = 0;
+        _Stackable = false;
+    }
+
+    //---
+
+    public static Camera GetCamera()
+    {
+        return _uiCamera;
+    }
 
     public static GameObject GetItem()
     {
@@ -106,5 +116,10 @@ public class InventoryManager : MonoBehaviour
     public static bool GetMove()
     {
         return _Move;
+    }
+
+    public static InventorySlot GetSlot()
+    {
+        return _Slot;
     }
 }
