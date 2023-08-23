@@ -11,20 +11,17 @@ using UnityEngine.UIElements;
 
 [System.Serializable] public class InventorySlot : MonoBehaviour
 {
-    [SerializeField] InventoryInstance _inventory;
     [SerializeField] GameObject _item;
     [SerializeField] Transform _parent;
     [SerializeField] byte _quantity = 0;
     [SerializeField] bool _stackable;
 
-    [SerializeField] Transform _itemInstance;
-
-    [SerializeField] Vector3 _scaleDivisor;
-
+    InventoryInstance _inventory;
+    Transform _itemInstance;
+    Vector3 _scaleDivisor;
+    static bool _interacting = false;
     bool _pull = false;
     bool _dragging = false;
-
-    static bool _interacting = false;
     bool _interactingWthis = false;
 
     // Start is called before the first frame update
@@ -274,5 +271,10 @@ using UnityEngine.UIElements;
         _quantity = quantity;
         _stackable = stackable;
         InstanceItem();
+    }
+
+    public void SetInventoryInstance(InventoryInstance inventoryInstance)
+    {
+        _inventory = inventoryInstance;
     }
 }
