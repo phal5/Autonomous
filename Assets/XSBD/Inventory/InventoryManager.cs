@@ -50,6 +50,7 @@ public class InventoryManager : MonoBehaviour
         }
         _Move = false;
         _stale = false;
+        Clear();
     }
 
     public static void SetManagerData(GameObject Item, Transform Parent, byte Quantity, bool stackability)

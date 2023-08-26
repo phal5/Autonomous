@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -16,22 +17,32 @@ using UnityEngine.UIElements;
     [SerializeField] byte _quantity = 0;
     [SerializeField] bool _stackable;
 
+    TextMeshProUGUI _textMeshProUGUI;
     InventoryInstance _inventory;
     Transform _itemInstance;
+
     Vector3 _scaleDivisor;
-    static bool _interacting = false;
     bool _pull = false;
     bool _dragging = false;
-    bool _interactingWthis = false;
+
+    private void Awake()
+    {
+        if (transform.parent)
+        {
+            SetLayerInChildren(transform, transform.parent.gameObject.layer);
+        }
+        _textMeshProUGUI = GetComponentInChildren<TextMeshProUGUI>();
+        SetText();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        if(_quantity != 0)
+        _scaleDivisor.x = 1f / transform.lossyScale.x;
+        _scaleDivisor.y = 1f / transform.lossyScale.y;
+        _scaleDivisor.z = 1f / transform.lossyScale.z;
+        if (_quantity != 0)
         {
-            _scaleDivisor.x = 1f / transform.lossyScale.x;
-            _scaleDivisor.y = 1f / transform.lossyScale.y;
-            _scaleDivisor.z = 1f / transform.lossyScale.z;
             InstanceItem();
         }
     }
@@ -42,10 +53,11 @@ using UnityEngine.UIElements;
         if(_pull && InventoryManager.GetMove())
         {
             Pull();
+            InventoryManager.Clear();
         }
         if (_dragging)
         {
-            _itemInstance.position = InventoryManager.GetCamera().ScreenToWorldPoint(Input.mousePosition + Vector3.forward);
+            _itemInstance.position = InventoryManager.GetCamera().ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 2);
         }
     }
 
@@ -79,37 +91,34 @@ using UnityEngine.UIElements;
             InventoryManager.Clear();
         }
         InventoryManager.SetSlot(null);
+        SetText();
         InstanceItem();
     }
 
     public void MouseDownEvent()
     {
-        if(_quantity != 0 && !_interacting)
+        if(_quantity != 0)
         {
-            _interacting = true;
-            _interactingWthis = true;
             InventoryManager.SetManagerData(_item, _parent, _quantity, _stackable);
             Clear();
             InventoryManager.SetSlot(this);
             _dragging = true;
+            SetLayerInChildren(_itemInstance, 7);
         }
     }
 
     public void MouseUpEvent()
     {
-        if (_interactingWthis)
+        _dragging = false;
+        SetText();
+        InventoryManager.SetStale(false);
+        if (InventoryManager.GetQuantity() != 0)
         {
-            _interacting = false;
-            _interactingWthis = false;
-            _dragging = false;
-            if (InventoryManager.GetQuantity() != 0)
-            {
-                InventoryManager.SetMove(true);
-            }
-            if (_itemInstance)
-            {
-                Destroy(_itemInstance.gameObject);
-            }
+            InventoryManager.SetMove(true);
+        }
+        if (_itemInstance)
+        {
+            Destroy(_itemInstance.gameObject);
         }
     }
 
@@ -139,7 +148,7 @@ using UnityEngine.UIElements;
         }
     }
 
-    private void OnMouseEnter()
+    private void OnMouseOver()
     {
         if (!EventSystem.current.IsPointerOverGameObject())
         {
@@ -177,7 +186,7 @@ using UnityEngine.UIElements;
             Destroy(_itemInstance.gameObject);
         }
 
-        _itemInstance = Instantiate(_item, transform.position - Vector3.forward * 10, Quaternion.Euler(Vector3.up * 180), transform).transform;
+        _itemInstance = Instantiate(_item, transform).transform;
 
         if (_scaleDivisor == Vector3.zero)
         {
@@ -186,13 +195,15 @@ using UnityEngine.UIElements;
             _scaleDivisor.z = 1f / transform.lossyScale.z;
         }
 
-        _itemInstance.localScale = _scaleDivisor * 0.7f;
-
-        SetLayerInChildren(_itemInstance, 7);
+        SetLayerInChildren(_itemInstance, gameObject.layer);
         ClearColliders(_itemInstance);
         ClearBehaviours(_itemInstance);
         ClearNavAgents(_itemInstance);
         ClearRigidBody(_itemInstance);
+
+        _itemInstance.localScale = _scaleDivisor * 0.7f;
+        _itemInstance.position = transform.position - transform.forward * 0.5f;
+        _itemInstance.rotation = transform.rotation * Quaternion.Euler(Vector3.up * 180);
     }
 
     private void SetLayerInChildren(Transform transform, int layer)
@@ -252,6 +263,21 @@ using UnityEngine.UIElements;
         }
     }
 
+    void SetText()
+    {
+        if(_textMeshProUGUI != null)
+        {
+            if (_quantity > 0)
+            {
+                _textMeshProUGUI.text = _quantity.ToString();
+            }
+            else
+            {
+                _textMeshProUGUI.text = "";
+            }
+        }
+    }
+
     //---
 
     public GameObject GetSlotItem()
@@ -270,6 +296,7 @@ using UnityEngine.UIElements;
         _parent = parent;
         _quantity = quantity;
         _stackable = stackable;
+        SetText();
         InstanceItem();
     }
 
