@@ -6,7 +6,8 @@ using static UnityEditor.Progress;
 
 public class InventoryManager : MonoBehaviour
 {
-    [SerializeField] Transform _player;
+    [SerializeField] Transform __player;
+    static Transform _player;
 
     [SerializeField] Camera uiCamera;
     static Camera _uiCamera;
@@ -15,6 +16,7 @@ public class InventoryManager : MonoBehaviour
     static Transform _Parent;
     static InventorySlot _Slot;
 
+    static byte _MaxQuantity = 64;
     static byte _Quantity;
     static bool _stale = false;
     static bool _Move;
@@ -23,6 +25,7 @@ public class InventoryManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _player = __player;
         _uiCamera = uiCamera;
     }
 
@@ -42,7 +45,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    private void InstantiateItem()
+    private static void InstantiateItem()
     {
         for(int i = 0; i < _Quantity; i++)
         {
@@ -87,6 +90,11 @@ public class InventoryManager : MonoBehaviour
         _Stackable = false;
     }
 
+    public static void ForceInstantiate()
+    {
+        InstantiateItem();
+    }
+
     //---
 
     public static Camera GetCamera()
@@ -102,6 +110,11 @@ public class InventoryManager : MonoBehaviour
     public static Transform GetItemParent()
     {
         return _Parent;
+    }
+
+    public static byte GetMaxQuantity()
+    {
+        return _MaxQuantity;
     }
 
     public static byte GetQuantity()

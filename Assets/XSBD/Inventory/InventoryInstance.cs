@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class InventoryInstance : MonoBehaviour
 {
@@ -28,10 +29,67 @@ public class InventoryInstance : MonoBehaviour
         
     }
 
-    public bool MoveToEmptySlot()
+    public void MoveToEmptySlot(Transform parent, GameObject item, byte quantity)
     {
-        bool successful = false;
-        //dummy
-        return successful;
+        byte max = InventoryManager.GetMaxQuantity();
+        InventorySlot slot = SearchSlot(parent, item);
+        if(slot != null)
+        {
+            byte sum = (byte)(slot.GetSlotQuantity() + quantity);
+            if (sum > max)
+            {
+                slot.SetQuantity(max);
+                MoveToEmptySlot(parent, item, (byte)(sum - max));
+            }
+            else
+            {
+                slot.SetQuantity(sum);
+            }
+        }
+        else
+        {
+            slot = SearchEmptySlot();
+            if (slot != null)
+            {
+                if (quantity > max)
+                {
+                    slot.SetQuantity((byte)(quantity));
+                    MoveToEmptySlot(parent, item, (byte)(quantity - max));
+                }
+                else
+                {
+                    slot.SetSlotData(item, parent, quantity, true);
+                }
+            }
+            else
+            {
+                InventoryManager.SetManagerData(item, parent, quantity, true);
+                InventoryManager.ForceInstantiate();
+            }
+        }
+    }
+
+    InventorySlot SearchSlot(Transform parent, GameObject item)
+    {
+        foreach(InventorySlot slot in _slots)
+        {
+            if(slot.GetSlotParent() == parent && slot.GetSlotItem() == item && slot.GetSlotStackable())
+            {
+                return slot;
+            }
+        }
+        return null;
+    }
+
+    InventorySlot SearchEmptySlot()
+    {
+        foreach (InventorySlot slot in _slots)
+        {
+            if (slot.GetSlotQuantity() == 0)
+            {
+                return slot;
+            }
+        }
+        return null;
     }
 }

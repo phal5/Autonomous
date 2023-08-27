@@ -71,18 +71,12 @@ using UnityEngine.UIElements;
         if (_quantity == 0)
         {
             GetManagerData();
+            SolveOverload();
         }
-        else if (_stackable && InventoryManager.GetStackability() && _parent == InventoryManager.GetItemParent())
+        else if (_stackable && InventoryManager.GetStackability() && _parent == InventoryManager.GetItemParent() && _item == InventoryManager.GetItem())
         {
             _quantity += InventoryManager.GetQuantity();
-            if (_quantity > 64)
-            {
-                if (!_inventory.MoveToEmptySlot())
-                {
-
-                }
-            }
-            
+            SolveOverload();
         }
         else
         {
@@ -177,6 +171,16 @@ using UnityEngine.UIElements;
         _parent = null;
         _quantity = 0;
         _stackable = true;
+    }
+
+    private void SolveOverload()
+    {
+        byte maxQuantity = InventoryManager.GetMaxQuantity();
+        if (_quantity > maxQuantity)
+        {
+            _inventory.MoveToEmptySlot(_parent, _item, (byte)(_quantity - maxQuantity));
+            _quantity = maxQuantity;
+        }
     }
 
     private void InstanceItem()
@@ -290,6 +294,23 @@ using UnityEngine.UIElements;
         return _parent;
     }
 
+    public bool GetSlotStackable()
+    {
+        if(_stackable && _quantity < 64)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public byte GetSlotQuantity()
+    {
+        return _quantity;
+    }
+
     public void SetSlotData(GameObject item, Transform parent, byte quantity, bool stackable)
     {
         _item = item;
@@ -298,6 +319,12 @@ using UnityEngine.UIElements;
         _stackable = stackable;
         SetText();
         InstanceItem();
+    }
+
+    public void SetQuantity(byte quantity)
+    {
+        _quantity = quantity;
+        SetText();
     }
 
     public void SetInventoryInstance(InventoryInstance inventoryInstance)

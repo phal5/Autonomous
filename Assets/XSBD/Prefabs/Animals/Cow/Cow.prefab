@@ -186,7 +186,7 @@ Transform:
   m_GameObject: {fileID: 1959092735077195648}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.04, y: 0.00000023841858, z: -5.471147}
+  m_LocalPosition: {x: -4.6, y: -0.21, z: -3.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -238,7 +238,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: -0.1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!1 &2517747440328962895
@@ -325,10 +325,10 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1e79a10ad90e97844b9f0ec01b27498b, type: 2}
+  - {fileID: 2100000, guid: 67c52a28642dd7446a6ecfba7ab79e08, type: 2}
   - {fileID: 2100000, guid: 8a6a581164efe3243a127ede127ec6f6, type: 2}
   - {fileID: 2100000, guid: 61d05ab00da5eac47847e98b2fc3abf6, type: 2}
-  - {fileID: 2100000, guid: 76f81740836e871439f05838a14ebae5, type: 2}
+  - {fileID: 2100000, guid: eaae387f28a895b499b9068918db284c, type: 2}
   - {fileID: 2100000, guid: 8a6a581164efe3243a127ede127ec6f6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
