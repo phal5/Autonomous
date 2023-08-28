@@ -71,7 +71,10 @@ public class Animals : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _agent = GetComponent<NavMeshAgent>();
+        if(_agent == null)
+        {
+            _agent = GetComponent<NavMeshAgent>();
+        }
         SetFoodParents();
         _foodTargetNominees = new Transform[_foodTypeIndex.Length];
         _walkingSpeed = _agent.speed;
@@ -364,6 +367,11 @@ public class Animals : MonoBehaviour
     public void DecreaseSatiety(float amount)
     {
         _satiety -= amount;
+    }
+
+    public void DecreaseHP(float amount)
+    {
+        _animalHP -= amount;
     }
 
     public float GetSatiety()
