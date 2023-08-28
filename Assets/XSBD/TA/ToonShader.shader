@@ -8,6 +8,7 @@ Shader"Unlit/ToonShader"
         _Brightness("Brightness", Range(0,1)) = 0.3
         _Strength("Strength", Range(0,1)) = 0.5
         _Detail("Detail", Range(0,1)) = 0.3
+        _ShadowMap("ShadowMap", 2D) = "black" {}
     }
         SubShader
         {
@@ -48,12 +49,27 @@ Shader"Unlit/ToonShader"
                 float4 _Color;
                 float4 _AColor;
                 float _Detail;
+                sampler2D _shadowMap;
+
+                float SampleShadowMap(sampler2D shadowMap, float3 lightDir)
+                {
+                    // Get the shadow map coordinates.
+                    float2 shadowMapUV = lightDir.xy * 0.5 + 0.5;
+
+                    // Sample the shadow map.
+                    float shadow = tex2D(shadowMap, shadowMapUV);
+
+                    // Return the shadow value.
+                    return shadow;
+                }
 
                 float Toon(float3 normal, float3 lightDir)
                 {
                     float NdotL = max(0.0, dot(normalize(normal), normalize(lightDir)));
 
-                    return floor(NdotL / _Detail);
+                    float shadowTerm = 1 - SampleShadowMap(_shadowMap, lightDir);
+    
+                    return floor(NdotL / _Detail) * shadowTerm;
                     //return NdotL;
                 }
 
@@ -76,5 +92,37 @@ Shader"Unlit/ToonShader"
                 }
                 ENDCG
             }
+            
+            //Pass for Casting Shadows 
+            Pass 
+            {
+                Name "CastShadow"
+                Tags { "LightMode" = "ShadowCaster" }
+    
+                CGPROGRAM
+                #pragma vertex vert
+                #pragma fragment frag
+                #pragma multi_compile_shadowcaster
+                #include "UnityCG.cginc"
+    
+                struct v2f 
+                { 
+                    V2F_SHADOW_CASTER;
+                };
+    
+                v2f vert( appdata_base v )
+                {
+                    v2f o;
+                    TRANSFER_SHADOW_CASTER(o)
+                    return o;
+                }
+    
+                float4 frag( v2f i ) : COLOR
+                {
+                    SHADOW_CASTER_FRAGMENT(i)
+                }
+                ENDCG
+            }
+
         }
 }

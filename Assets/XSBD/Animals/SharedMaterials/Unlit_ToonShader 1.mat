@@ -27,12 +27,16 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _ShadowMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Brightness: 0.403
+    - _Brightness: 0.3
     - _Detail: 0.3
-    - _Strength: 0.452
+    - _Strength: 0.5
     m_Colors:
-    - _AColor: {r: 0.06121609, g: 0, b: 0.6886792, a: 1}
+    - _AColor: {r: 0, g: 0, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
