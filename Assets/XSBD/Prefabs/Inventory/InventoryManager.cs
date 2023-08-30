@@ -13,7 +13,7 @@ public class InventoryManager : MonoBehaviour
     static Transform _Parent;
     static InventorySlot _Slot;
 
-    static byte _MaxQuantity = 100;
+    static byte _MaxQuantity = 64;
     static byte _Quantity;
     static bool _stale = false;
     static bool _Move;
