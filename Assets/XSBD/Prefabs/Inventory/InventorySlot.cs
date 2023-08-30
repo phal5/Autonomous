@@ -20,7 +20,7 @@ using UnityEngine.UIElements;
     TextMeshProUGUI _textMeshProUGUI;
     InventoryInstance _inventory;
     Transform _itemInstance;
-
+    
     Vector3 _scaleDivisor;
     bool _pull = false;
     bool _dragging = false;
@@ -57,7 +57,7 @@ using UnityEngine.UIElements;
         }
         if (_dragging)
         {
-            _itemInstance.position = InventoryManager.GetCamera().ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 2);
+            _itemInstance.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 2);
         }
     }
 
@@ -296,7 +296,7 @@ using UnityEngine.UIElements;
 
     public bool GetSlotStackable()
     {
-        if(_stackable && _quantity < 64)
+        if(_stackable && _quantity < InventoryManager.GetMaxQuantity())
         {
             return true;
         }

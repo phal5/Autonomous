@@ -9,14 +9,11 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] Transform __player;
     static Transform _player;
 
-    [SerializeField] Camera uiCamera;
-    static Camera _uiCamera;
-
     static GameObject _Item;
     static Transform _Parent;
     static InventorySlot _Slot;
 
-    static byte _MaxQuantity = 64;
+    static byte _MaxQuantity = 100;
     static byte _Quantity;
     static bool _stale = false;
     static bool _Move;
@@ -26,7 +23,6 @@ public class InventoryManager : MonoBehaviour
     void Start()
     {
         _player = __player;
-        _uiCamera = uiCamera;
     }
 
     // Update is called once per frame
@@ -96,11 +92,6 @@ public class InventoryManager : MonoBehaviour
     }
 
     //---
-
-    public static Camera GetCamera()
-    {
-        return _uiCamera;
-    }
 
     public static GameObject GetItem()
     {

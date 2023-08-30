@@ -7,9 +7,11 @@ using static UnityEditor.Progress;
 public class InventoryInstance : MonoBehaviour
 {
     [SerializeField] InventorySlot[] _slots;
+    Camera _camera;
     // Start is called before the first frame update
     void Start()
     {
+        _camera = Camera.current;
         List<InventorySlot> slots = new List<InventorySlot>();
         InventorySlot slot;
         foreach (Transform child in transform)
