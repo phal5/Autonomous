@@ -8,11 +8,13 @@ public class DayNightClock : MonoBehaviour
     [SerializeField] byte day = 1;
     [SerializeField] byte month = 1;
     [SerializeField] List<byte> _lengthPerMonths = new List<byte>();
+    Light _mainLight;
     float _dayNightDivisor;
     float _timer = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
+        _mainLight = GetComponent<Light>();
         _dayNightDivisor = 1 / dayNightLength;
     }
 
@@ -43,6 +45,7 @@ public class DayNightClock : MonoBehaviour
     void UpdateSun()
     {
         transform.eulerAngles = new Vector3(360f * _timer - 90, -90, 0);
+        _mainLight.intensity = Vector3.Dot(-transform.forward, Vector3.up);
     }
 
     void Calendar()
