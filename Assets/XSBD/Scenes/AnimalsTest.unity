@@ -760,7 +760,7 @@ GameObject:
   - component: {fileID: 211222219}
   - component: {fileID: 211222220}
   m_Layer: 5
-  m_Name: Slots
+  m_Name: InventoryInstance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1205,12 +1205,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 466630439}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.65, y: 0.293, z: -7.09}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1504155330}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &466630444
 MonoBehaviour:
@@ -3011,12 +3011,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1217744766}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.97, y: 0.269, z: -8.52}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.62, y: -0.024000019, z: -1.4300003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1504155330}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1217744771
 MonoBehaviour:
@@ -3214,6 +3214,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ec067ab93de6b24d8cd83bbc02b69e9, type: 3}
+--- !u!1 &1221419188 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1959092735077195648, guid: 799b3d5b1c0a9b345945286e023c8d13,
+    type: 3}
+  m_PrefabInstance: {fileID: 63390671448898752}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1258057522 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 265282970061658541, guid: 8ec067ab93de6b24d8cd83bbc02b69e9,
@@ -3333,6 +3339,53 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 129097662}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1504155328
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1504155330}
+  - component: {fileID: 1504155329}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1504155329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504155328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7a191ab0b195e044be388e0ef124b5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _slots: []
+--- !u!4 &1504155330
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504155328}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.65, y: 0.293, z: -7.09}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1217744770}
+  - {fileID: 466630443}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1618290026
 GameObject:
   m_ObjectHideFlags: 0
@@ -4236,6 +4289,31 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1823502238823181149, guid: 8541351f9edc69340ab869bf22703ba0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1837799961775594676, guid: 8541351f9edc69340ab869bf22703ba0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3024415247797132728, guid: 8541351f9edc69340ab869bf22703ba0,
+        type: 3}
+      propertyPath: _dropsWhenDead.Array.data[0]._parent
+      value: 
+      objectReference: {fileID: 923439541}
+    - target: {fileID: 3024415247797132728, guid: 8541351f9edc69340ab869bf22703ba0,
+        type: 3}
+      propertyPath: _dropsWhenDead.Array.data[0]._prefab
+      value: 
+      objectReference: {fileID: 1221419188}
+    - target: {fileID: 3024415247797132728, guid: 8541351f9edc69340ab869bf22703ba0,
+        type: 3}
+      propertyPath: _dropsWhenDead.Array.data[0]._probability
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5605127604356286759, guid: 8541351f9edc69340ab869bf22703ba0,
         type: 3}
       propertyPath: m_Name
@@ -4290,6 +4368,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6502970099422063243, guid: 8541351f9edc69340ab869bf22703ba0,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 85
+      objectReference: {fileID: 0}
+    - target: {fileID: 8793621061152476919, guid: 8541351f9edc69340ab869bf22703ba0,
+        type: 3}
+      propertyPath: _pace
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8793621061152476919, guid: 8541351f9edc69340ab869bf22703ba0,
+        type: 3}
+      propertyPath: _minPaceTime
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4420,8 +4513,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1059869621092636621, guid: 799b3d5b1c0a9b345945286e023c8d13,
         type: 3}
-      propertyPath: _dropsWhenDead.Array.size
-      value: 0
+      propertyPath: _MaxSatiety
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 1187763769244337466, guid: 799b3d5b1c0a9b345945286e023c8d13,
         type: 3}
@@ -4541,17 +4634,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62bef85489af072499207d020aefbfac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _MaxHP: 12
+  _HP: 12
+  _dropsWhenDead: []
   _agent: {fileID: 6652585922451279668}
   _mouth: {fileID: 2249662240337898698}
   _cognitiveDistance: 10
   _eatRange: 1
+  _MaxSatiety: 300
   _satiety: 300
   _eatAmount: 5
-  _animalHP: 12
   _walkingSpeed: 2
   _RunningSpeed: 7
   _levelOfSize: 2
-  _dropsWhenDead: []
   _foodTypeIndex: 000103
   _gimmicks: []
 --- !u!4 &1187763768162553245
@@ -5911,8 +6006,7 @@ SceneRoots:
   - {fileID: 1268426549}
   - {fileID: 1700397783}
   - {fileID: 2111125254}
-  - {fileID: 1217744770}
-  - {fileID: 466630443}
+  - {fileID: 1504155330}
   - {fileID: 63390671448898752}
   - {fileID: 538427900}
   - {fileID: 5568074469969911591}

@@ -206,13 +206,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62bef85489af072499207d020aefbfac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _MaxHP: 12
+  _HP: 12
   _agent: {fileID: 5393669726408093750}
   _mouth: {fileID: 2249662239256142957}
   _cognitiveDistance: 10
   _eatRange: 1
   _satiety: 300
   _eatAmount: 5
-  _animalHP: 12
   _walkingSpeed: 2
   _RunningSpeed: 7
   _levelOfSize: 2

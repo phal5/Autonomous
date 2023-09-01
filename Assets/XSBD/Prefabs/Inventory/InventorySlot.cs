@@ -178,7 +178,7 @@ using UnityEngine.UIElements;
         byte maxQuantity = InventoryManager.GetMaxQuantity();
         if (_quantity > maxQuantity)
         {
-            _inventory.MoveToEmptySlot(_parent, _item, (byte)(_quantity - maxQuantity));
+            _inventory.MoveToEmptySlot(_item, _parent, (byte)(_quantity - maxQuantity));
             _quantity = maxQuantity;
         }
     }

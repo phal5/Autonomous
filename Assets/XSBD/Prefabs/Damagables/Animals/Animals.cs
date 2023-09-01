@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Animals : MonoBehaviour
+public class Animals : Damagable
 {
     enum STATE { NORMAL, CHASE, RUN};
     [System.Serializable] class Gimmick
@@ -21,37 +21,25 @@ public class Animals : MonoBehaviour
             }
         }
     }
-    [System.Serializable] class Drop
-    {
-        [SerializeField] GameObject _prefab;
-        [SerializeField] Transform _parent;
-        [SerializeField] float _probability;
 
-        public void InstantiateDrop(Vector3 position)
-        {
-            if(Random.value < _probability)
-            {
-                Instantiate(_prefab, position, Random.rotation, _parent);
-            }
-        }
-    }
-
+    [Space(10f)]
     [SerializeField] NavMeshAgent _agent;
     [SerializeField] Transform _mouth;
     [SerializeField] float _cognitiveDistance;
 
+    [Space(10f)]
     [SerializeField] float _eatRange = 1;
-    [SerializeField] float _satiety; // 포만감. 처음 포만감은 최대값이라고 가정
+    [SerializeField] float _MaxSatiety; // 포만감. 처음 포만감은 최대값이라고 가정
+    [SerializeField] float _satiety;
     [SerializeField] float _eatAmount;
 
-    [SerializeField] float _animalHP;
-    
+    [Space(10f)]
     [SerializeField] float _walkingSpeed; // 기존 동물 속도 저장용
     [SerializeField] float _RunningSpeed;
     [SerializeField][Tooltip("small: 0 ~ big: 3, cow is 2")] byte _levelOfSize;
 
     //Arrays
-    [SerializeField] Drop[] _dropsWhenDead;
+    [Space(10f)]
     [SerializeField] byte[] _foodTypeIndex;
     [SerializeField] Gimmick[] _gimmicks;
     
@@ -62,8 +50,6 @@ public class Animals : MonoBehaviour
     Transform[] _foodTargetNominees;
     Transform _foodTaget; //
     Food _food;
-    float _originalHP;
-    float _originalSatiety; //T
     byte _hungerState; //T
     bool _isEating;
     bool _eatSwitch;
@@ -78,8 +64,6 @@ public class Animals : MonoBehaviour
         SetFoodParents();
         _foodTargetNominees = new Transform[_foodTypeIndex.Length];
         _walkingSpeed = _agent.speed;
-        _originalSatiety = _satiety;
-        _originalHP = _animalHP;
     }
 
     // Update is called once per frame
@@ -105,13 +89,13 @@ public class Animals : MonoBehaviour
                 {
                     ManageGimmicks();
                     ManageMoveSpeed();
-                    StaminaManager();
                     break;
                 }
             case 3:
                 {
                     HungerManager();
                     ManageEat();
+                    HPManager();
                     SetFood();
                     break;
                 }
@@ -162,27 +146,17 @@ public class Animals : MonoBehaviour
         {
             _foodTaget = null;
         }
-        if (_satiety < _originalSatiety * 0.125f)
+        if (_satiety < _MaxSatiety * 0.125f)
         {
             _hungerState = 0;
         }
-        else if(_satiety < _originalSatiety * 0.125f * 7)
+        else if(_satiety < _MaxSatiety * 0.125f * 7)
         {
             _hungerState = 1;
         }
         else
         {
             _hungerState = 2;
-        }
-    }
-
-    //Very light
-    void StaminaManager()
-    {
-        if(_animalHP <= 0)
-        {
-            DropItems(_dropsWhenDead);
-            Destroy(gameObject);
         }
     }
 
@@ -263,13 +237,7 @@ public class Animals : MonoBehaviour
 
     //Called By Managers
     //Stamina Manager
-    void DropItems(Drop[] drops)
-    {
-        foreach (Drop item in drops)
-        {
-            item.InstantiateDrop(transform.position);
-        }
-    }
+    
 
     //Called Every Frame
     void SetManagedValues()
@@ -281,7 +249,7 @@ public class Animals : MonoBehaviour
         }
         if (_satiety == 0)
         {
-            _animalHP -= Time.deltaTime * 0.0167f;
+            _HP -= Time.deltaTime * 0.0167f;
         }
     }
 
@@ -291,7 +259,7 @@ public class Animals : MonoBehaviour
         {
             _eatSwitch = true;
         }
-        else if(_satiety > _originalSatiety)
+        else if(_satiety > _MaxSatiety)
         {
             _eatSwitch = false;
         }
@@ -318,10 +286,10 @@ public class Animals : MonoBehaviour
 
     void Heal()
     {
-        if(_animalHP < _originalHP && _satiety > 0)
+        if(_HP < _MaxHP && _satiety > 0)
         {
             _satiety -= Time.deltaTime;
-            _animalHP += Time.deltaTime * 0.03125f;
+            _HP += Time.deltaTime * 0.03125f;
         }
     }
 
@@ -340,7 +308,7 @@ public class Animals : MonoBehaviour
         }
 
         // 아직 테스트 X
-        float hungerRatio = 1 + 0.3f * (1 - _satiety / _originalSatiety); // 0~1까지의 비율 
+        float hungerRatio = 1 + 0.3f * (1 - _satiety / _MaxSatiety); // 0~1까지의 비율 
         _agent.speed *= hungerRatio; // 포만감 고려. 일단 최대로 배고플 시 기존 속도의 1.3만큼 곱해지기로 만듬
 
         return _agent.speed;
@@ -350,9 +318,9 @@ public class Animals : MonoBehaviour
     {
 
         // 평상시 걷기, 달리기 | 지쳤을 때 걷기, 달리기 속도 다름.
-        float hp_Threshold = _originalHP * 0.3f; // 임계점은 동물 체력의 30%
+        float hp_Threshold = _MaxHP * 0.3f; // 임계점은 동물 체력의 30%
 
-        if (_animalHP <= hp_Threshold) // 임계점 이상의 체력일 때 이동속도는 빠르다.
+        if (_HP <= hp_Threshold) // 임계점 이상의 체력일 때 이동속도는 빠르다.
             _agent.speed = StateMoveSpeedManager(_finalState) * 0.3f;
         else 
             StateMoveSpeedManager(_finalState);
@@ -369,11 +337,6 @@ public class Animals : MonoBehaviour
         _satiety -= amount;
     }
 
-    public void DecreaseHP(float amount)
-    {
-        _animalHP -= amount;
-    }
-
     public float GetSatiety()
     {
         return _satiety;
@@ -381,7 +344,7 @@ public class Animals : MonoBehaviour
 
     public bool GetFullness()
     {
-        return _satiety - _originalSatiety > 0;
+        return _satiety - _MaxSatiety > 0;
     }
 
     public byte GetSize()
