@@ -6,7 +6,7 @@ using static UnityEditor.Progress;
 
 public class InventoryInstance : MonoBehaviour
 {
-    [SerializeField] InventorySlot[] _slots;
+    InventorySlot[] _slots;
     Camera _camera;
     // Start is called before the first frame update
     void Start()
@@ -75,11 +75,11 @@ public class InventoryInstance : MonoBehaviour
         }
     }
 
-    InventorySlot SearchSlot(Transform parent, GameObject item)
+    protected InventorySlot SearchSlot(Transform parent, GameObject item, byte quantity = 1)
     {
         foreach(InventorySlot slot in _slots)
         {
-            if(slot.GetSlotParent() == parent && slot.GetSlotItem() == item && slot.GetSlotStackable())
+            if(slot.GetSlotQuantity() >= quantity && slot.GetSlotParent() == parent && slot.GetSlotItem() == item && slot.GetSlotStackable())
             {
                 return slot;
             }
