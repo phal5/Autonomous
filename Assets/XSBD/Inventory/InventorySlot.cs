@@ -325,10 +325,19 @@ using UnityEngine.UIElements;
     {
         _quantity = quantity;
         SetText();
+        if (_quantity <= 0 && _itemInstance)
+        {
+            Destroy(_itemInstance.gameObject);
+        }
     }
 
     public void SetInventoryInstance(InventoryInstance inventoryInstance)
     {
         _inventory = inventoryInstance;
+    }
+
+    public void SetDisplay()
+    {
+
     }
 }

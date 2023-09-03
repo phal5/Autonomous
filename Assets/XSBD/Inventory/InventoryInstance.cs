@@ -37,7 +37,7 @@ public class InventoryInstance : MonoBehaviour
         InventorySlot slot = null;
         if (stackable)
         {
-            slot = SearchSlot(parent, item);
+            slot = SearchStackableSlot(parent, item);
         }
         if(slot != null)
         {
@@ -76,6 +76,18 @@ public class InventoryInstance : MonoBehaviour
     }
 
     protected InventorySlot SearchSlot(Transform parent, GameObject item, byte quantity = 1)
+    {
+        foreach (InventorySlot slot in _slots)
+        {
+            if (slot.GetSlotQuantity() >= quantity && slot.GetSlotParent() == parent && slot.GetSlotItem() == item)
+            {
+                return slot;
+            }
+        }
+        return null;
+    }
+
+    protected InventorySlot SearchStackableSlot(Transform parent, GameObject item, byte quantity = 1)
     {
         foreach(InventorySlot slot in _slots)
         {

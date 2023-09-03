@@ -9,13 +9,14 @@ public class TradeInventoryInstance : InventoryInstance
 {
     [System.Serializable] public class Recipe
     {
+        [SerializeField] string _name;
         [System.Serializable] public class ItemPair
         {
-            [SerializeField] public Transform _parent;
-            [SerializeField] public GameObject _item;
-            [SerializeField] public byte _quantity;
+            public Transform _parent;
+            public GameObject _item;
+            public byte _quantity;
         }
-        public ItemPair[] _items;
+        public ItemPair[] _ingredients;
         public ItemPair _result;
         public bool _stackable;
     }
@@ -25,13 +26,13 @@ public class TradeInventoryInstance : InventoryInstance
     bool _trade;
 
     // Start is called before the first frame update
-    public bool Trade(byte _recipeIndex)
+    public bool Trade(byte recipeIndex)
     {
-        Recipe recipe = _recipes[_recipeIndex];
-        InventorySlot[] slots = new InventorySlot[recipe._items.Length];
-        for(int i = 0; i < recipe._items.Length; ++i)
+        Recipe recipe = _recipes[recipeIndex];
+        InventorySlot[] slots = new InventorySlot[recipe._ingredients.Length];
+        for(int i = 0; i < recipe._ingredients.Length; ++i)
         {
-            InventorySlot slot = _ingredientInventory.SearchSlot(recipe._items[i]._parent, recipe._items[i]._item, recipe._items[i]._quantity);
+            InventorySlot slot = _ingredientInventory.SearchSlot(recipe._ingredients[i]._parent, recipe._ingredients[i]._item, recipe._ingredients[i]._quantity);
             if (slot != null)
             {
                 slots[i] = slot;
@@ -41,11 +42,16 @@ public class TradeInventoryInstance : InventoryInstance
                 return false;
             }
         }
-        for (int i = 0; i < recipe._items.Length; ++i)
+        for (int i = 0; i < recipe._ingredients.Length; ++i)
         {
-            slots[i].SetQuantity((byte)(slots[i].GetSlotQuantity() - recipe._items[i]._quantity));
+            slots[i].SetQuantity((byte)(slots[i].GetSlotQuantity() - recipe._ingredients[i]._quantity));
         }
         _returnInventory.MoveToEmptySlot(recipe._result._item, recipe._result._parent, recipe._result._quantity, recipe._stackable);
         return true;
+    }
+
+    public void TestTrade()
+    {
+        Debug.Log(Trade(0));
     }
 }
