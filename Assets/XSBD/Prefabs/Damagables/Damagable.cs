@@ -28,18 +28,13 @@ public class Damagable : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        _HP = _MaxHP;
     }
 
     // Update is called once per frame
     void Update()
     {
         HPManager();
-    }
-
-    void GetMaxHP()
-    {
-
     }
 
     public void DecreaseHP(float amount = 1)

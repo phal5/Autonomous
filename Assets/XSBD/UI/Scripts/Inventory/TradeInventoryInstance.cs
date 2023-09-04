@@ -20,15 +20,25 @@ public class TradeInventoryInstance : InventoryInstance
         public ItemPair _result;
         public bool _stackable;
     }
-    [SerializeField] Recipe[] _recipes;
+    [SerializeField] Recipe _recipe;
     [SerializeField] TradeInventoryInstance _ingredientInventory;
-    [SerializeField] InventoryInstance _returnInventory;
-    bool _trade;
+    [SerializeField] TakeOnlySlot _returnSlot;
+    [SerializeField] TradeSlot _preview;
 
-    // Start is called before the first frame update
-    public bool Trade(byte recipeIndex)
+    private void Start()
     {
-        Recipe recipe = _recipes[recipeIndex];
+        SetupTradeSlot();
+        SetupInventorySlots();
+    }
+
+    void SetupTradeSlot()
+    {
+        _preview.SetSlotData(_recipe._result._item, _recipe._result._parent, _recipe._result._quantity, _recipe._stackable);
+    }
+
+    public bool Trade(byte index)
+    {
+        Recipe recipe = _recipe;
         InventorySlot[] slots = new InventorySlot[recipe._ingredients.Length];
         for(int i = 0; i < recipe._ingredients.Length; ++i)
         {
@@ -46,7 +56,14 @@ public class TradeInventoryInstance : InventoryInstance
         {
             slots[i].SetQuantity((byte)(slots[i].GetSlotQuantity() - recipe._ingredients[i]._quantity));
         }
-        _returnInventory.MoveToEmptySlot(recipe._result._item, recipe._result._parent, recipe._result._quantity, recipe._stackable);
+        if(_returnSlot.GetSlotQuantity() == 0)
+        {
+            _returnSlot.SetSlotData(recipe._result._item, recipe._result._parent, recipe._result._quantity, recipe._stackable);
+        }
+        else
+        {
+            _returnSlot.SetQuantity((byte)(_returnSlot.GetSlotQuantity() + recipe._result._quantity));
+        }
         return true;
     }
 

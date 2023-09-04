@@ -11,7 +11,7 @@ public class InventoryManager : MonoBehaviour
 
     static GameObject _Item;
     static Transform _Parent;
-    static InventorySlot _Slot;
+    static TakeOnlySlot _Slot;
 
     static byte _MaxQuantity = 64;
     static byte _Quantity;
@@ -41,7 +41,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    private static void InstantiateItem()
+    protected static void InstantiateItem()
     {
         for(int i = 0; i < _Quantity; i++)
         {
@@ -70,7 +70,7 @@ public class InventoryManager : MonoBehaviour
         _stale = stale;
     }
 
-    public static void SetSlot(InventorySlot slot)
+    public static void SetSlot(TakeOnlySlot slot)
     {
         _Slot = slot;
     }
@@ -123,7 +123,7 @@ public class InventoryManager : MonoBehaviour
         return _Move;
     }
 
-    public static InventorySlot GetSlot()
+    public static TakeOnlySlot GetSlot()
     {
         return _Slot;
     }

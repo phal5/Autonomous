@@ -44,13 +44,13 @@ public class Animals : Damagable
     [SerializeField] Gimmick[] _gimmicks;
     
     STATE _finalState;
-    STATE _cognitiveState = STATE.NORMAL; //T
-    Vector3 _cognitiveTarget; //Serialized for test
+    STATE _cognitiveState = STATE.NORMAL;
+    Vector3 _cognitiveTarget;
     Transform[] _foodParents;
     Transform[] _foodTargetNominees;
-    Transform _foodTaget; //
+    Transform _foodTaget;
     Food _food;
-    byte _hungerState; //T
+    byte _hungerState;
     bool _isEating;
     bool _eatSwitch;
 

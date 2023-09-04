@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,29 +7,27 @@ using static UnityEditor.Progress;
 
 public class InventoryInstance : MonoBehaviour
 {
-    InventorySlot[] _slots;
-    Camera _camera;
+    [SerializeField] InventorySlot[] _slots;
+    
     // Start is called before the first frame update
     void Start()
     {
-        _camera = Camera.current;
+        SetupInventorySlots();
+    }
+
+    protected void SetupInventorySlots()
+    {
         List<InventorySlot> slots = new List<InventorySlot>();
         InventorySlot slot;
         foreach (Transform child in transform)
         {
-            if(child.TryGetComponent<InventorySlot>(out slot))
+            if (child.TryGetComponent<InventorySlot>(out slot))
             {
                 slots.Add(slot);
                 slot.SetInventoryInstance(this);
             }
         }
         _slots = slots.ToArray();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void MoveToEmptySlot(GameObject item, Transform parent, byte quantity, bool stackable = true)
@@ -39,7 +38,7 @@ public class InventoryInstance : MonoBehaviour
         {
             slot = SearchStackableSlot(parent, item);
         }
-        if(slot != null)
+        if (slot != null)
         {
             byte sum = (byte)(slot.GetSlotQuantity() + quantity);
             if (sum > max)
@@ -59,12 +58,12 @@ public class InventoryInstance : MonoBehaviour
             {
                 if (quantity > max)
                 {
-                    slot.SetQuantity((byte)(quantity));
+                    slot.SetSlotData(item, parent, max, stackable);
                     MoveToEmptySlot(item, parent, (byte)(quantity - max));
                 }
                 else
                 {
-                    slot.SetSlotData(item, parent, quantity, true);
+                    slot.SetSlotData(item, parent, quantity, stackable);
                 }
             }
             else
@@ -87,11 +86,11 @@ public class InventoryInstance : MonoBehaviour
         return null;
     }
 
-    protected InventorySlot SearchStackableSlot(Transform parent, GameObject item, byte quantity = 1)
+    InventorySlot SearchStackableSlot(Transform parent, GameObject item, byte quantity = 1)
     {
-        foreach(InventorySlot slot in _slots)
+        foreach (InventorySlot slot in _slots)
         {
-            if(slot.GetSlotQuantity() >= quantity && slot.GetSlotParent() == parent && slot.GetSlotItem() == item && slot.GetSlotStackable())
+            if (slot.GetSlotQuantity() >= quantity && slot.GetSlotParent() == parent && slot.GetSlotItem() == item && slot.GetSlotStackable())
             {
                 return slot;
             }
