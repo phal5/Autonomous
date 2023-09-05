@@ -6,8 +6,8 @@ public class CameraMover : MonoBehaviour
 {
     public float mouseSpeed;
     public float upDownSpeed;
-    public float frontBackSpeed;
-    private float cameraY;
+    public float horizontalSpeed;
+    private float cameraYdelta;
     private float cameraX;
     // Start is called before the first frame update
     void Start()
@@ -19,12 +19,12 @@ public class CameraMover : MonoBehaviour
     void Update()
     {
         // get the mouse inputs
-        cameraY = Input.GetAxis("Mouse X") * mouseSpeed;
+        cameraYdelta = Input.GetAxis("Mouse X") * mouseSpeed;
         cameraX += Input.GetAxis("Mouse Y") * mouseSpeed;
         // clamp the vertical rotation
         cameraX = Mathf.Clamp(cameraX, -90f, 90f);
         // rotate the camera
-        transform.eulerAngles = new Vector3(-cameraX, transform.eulerAngles.y + cameraY, 0);
+        transform.eulerAngles = new Vector3(-cameraX, transform.eulerAngles.y + cameraYdelta, 0);
 
         //wasd for moving
         if (Input.GetKey(KeyCode.Space))
@@ -36,6 +36,6 @@ public class CameraMover : MonoBehaviour
             transform.position += Vector3.down * upDownSpeed * Time.deltaTime;
         }
         transform.position += (Vector3.Normalize(Vector3.ProjectOnPlane(transform.right, Vector3.up)) * Input.GetAxisRaw("Horizontal") + 
-            Vector3.Normalize(Vector3.ProjectOnPlane(transform.forward, Vector3.up)) * Input.GetAxisRaw("Vertical")) * frontBackSpeed * Time.deltaTime;
+            Vector3.Normalize(Vector3.ProjectOnPlane(transform.forward, Vector3.up)) * Input.GetAxisRaw("Vertical")) * horizontalSpeed * Time.deltaTime;
     }
 }
