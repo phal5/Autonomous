@@ -7,15 +7,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Cliff
+  m_Name: Crest
   m_Shader: {fileID: -6465566751694194690, guid: b3df9b3fb8f70e044b8a6899f33e7ffd,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - ADDITIONAL_LIGHT_CALCULATE_SHADOWS
-  - _MAIN_LIGHT_SHADOWS_CASCADE
-  - _SHADOWS_SOFT
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -48,22 +46,22 @@ Material:
     - ADDITIONAL_LIGHT_CALCULATE_SHADOWS: 1
     - _DarkLine: 0
     - _Indirect: 0.1
-    - _Line1: 0.72
-    - _Line2: 0.13
+    - _Line1: 0
+    - _Line2: 0.36
     - _MAIN_LIGHT_CALCULATE_SHADOWS: 0
-    - _MAIN_LIGHT_SHADOWS_CASCADE: 1
+    - _MAIN_LIGHT_SHADOWS_CASCADE: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _SHADOWS_SOFT: 1
+    - _SHADOWS_SOFT: 0
     - _SPECULAR: 0
     - _Smoothness: 0.5
-    - _Strength1: 0.2
-    - _Strength2: 0.01
+    - _Strength1: 0.1
+    - _Strength2: 0.1
     m_Colors:
-    - _AmbientColor: {r: 0.6320754, g: 0.17447221, b: 0.117271826, a: 1}
-    - _Base_Color: {r: 0.99215686, g: 0.7731232, b: 0.39999995, a: 1}
+    - _AmbientColor: {r: 0.5377358, g: 0.15569386, b: 0.13527942, a: 0}
+    - _Base_Color: {r: 0.8396226, g: 0.25539392, b: 0.22706768, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &6514826049982099917
+--- !u!114 &8830534651096584769
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

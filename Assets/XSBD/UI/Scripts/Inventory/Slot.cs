@@ -18,24 +18,14 @@ public class Slot : MonoBehaviour
 
     private void Awake()
     {
-        if (transform.parent)
-        {
-            SetLayerInChildren(transform, transform.parent.gameObject.layer);
-        }
-        _textMeshProUGUI = GetComponentInChildren<TextMeshProUGUI>();
         SetText();
+        SetLayer();
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        _scaleDivisor.x = 1f / transform.lossyScale.x;
-        _scaleDivisor.y = 1f / transform.lossyScale.y;
-        _scaleDivisor.z = 1f / transform.lossyScale.z;
-        if (_quantity != 0)
-        {
-            InstanceItem();
-        }
+        SetScale();
     }
 
     public void SetSlotData(GameObject item, Transform parent, byte quantity, bool stackable)
@@ -46,6 +36,26 @@ public class Slot : MonoBehaviour
         _stackable = stackable;
         SetText();
         InstanceItem();
+    }
+
+    protected void SetScale()
+    {
+        _scaleDivisor.x = 1f / transform.lossyScale.x;
+        _scaleDivisor.y = 1f / transform.lossyScale.y;
+        _scaleDivisor.z = 1f / transform.lossyScale.z;
+        if (_quantity != 0)
+        {
+            InstanceItem();
+        }
+    }
+
+    protected void SetLayer()
+    {
+        if (transform.parent)
+        {
+            SetLayerInChildren(transform, transform.parent.gameObject.layer);
+        }
+        _textMeshProUGUI = GetComponentInChildren<TextMeshProUGUI>();
     }
 
     protected void SetText()

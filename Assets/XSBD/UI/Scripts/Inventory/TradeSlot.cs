@@ -17,7 +17,6 @@ using UnityEngine.UIElements;
     private void Start()
     {
         SetTradeInventoryInstance();
-        
     }
 
     public void PointerDownEvent()
