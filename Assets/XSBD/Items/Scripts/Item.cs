@@ -4,21 +4,23 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    Transform _parent;
-    byte _quantity;
-    bool _isStackable;
+    [SerializeField] GameObject _item;
+    [SerializeField] Transform _parent;
+    [SerializeField] byte _quantity;
+    [SerializeField] bool _stackable;
 
-    public void GetItemData(ref GameObject itemtype, ref Transform parent, ref byte stacksize, ref bool isStackable)
+    public void GetItemData(ref GameObject item, ref Transform parent, ref byte quantity, ref bool stackable)
     {
-        itemtype = gameObject;
+        item = gameObject;
         parent = _parent;
-        stacksize = _quantity;
-        isStackable = _isStackable;
+        quantity = _quantity;
+        stackable = _stackable;
+        Destroy(gameObject);
     }
 
     public GameObject GetItem()
     {
-        return gameObject;
+        return _item;
     }
     public Transform GetParent()
     {
@@ -30,6 +32,12 @@ public class Item : MonoBehaviour
     }
     public bool GetStackable()
     {
-        return _isStackable;
+        return _stackable;
+    }
+
+    public void DisableStackable()
+    {
+        _stackable = false;
+        _item = gameObject;
     }
 }
