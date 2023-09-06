@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,19 +8,46 @@ using UnityEngine.Experimental.GlobalIllumination;
 
 public class AdvancedWalk : MonoBehaviour
 {
+    [System.Serializable] class FootPair
+    {
+        [SerializeField] Transform _foot1;
+        [SerializeField] Transform _hip1;
+        [Space(10f)]
+        [SerializeField] Transform _foot2;
+        [SerializeField] Transform _hip2;
+        Vector3 _footPosition;
+        bool _12;
+
+        bool Cast(Transform foot, Transform hip, Vector3 offset, float distance, out RaycastHit hit)
+        {
+            return Physics.Raycast(hip.position + offset, Vector3.down, out hit, distance);
+        }
+
+        float SqrFlatVector(Vector3 a, Vector3 b)
+        {
+            return Vector3.Scale(Vector3.up + Vector3.right, a - b).sqrMagnitude;
+        }
+
+        bool Step(Transform foot, Transform hip, Transform fixedFoot, Transform fixedHip, float pace)
+        {
+            if (SqrFlatVector(foot.position, hip.position) <= pace)
+            {
+                //go
+                return true;
+            }
+            else
+            {
+                //switch foot
+                return false;
+            }
+        }
+    }
     [SerializeField] NavMeshAgent _agent;
     [SerializeField] float _runSpeed;
     [SerializeField] float _pace;
     [SerializeField] float _minPaceTime = 0.2f;
     [SerializeField] float _height;
-    [SerializeField] Transform _LFoot1;
-    [SerializeField] Transform _LHip1;
-    [SerializeField] Transform _RFoot1;
-    [SerializeField] Transform _RHip1;
-    [SerializeField] Transform _LFoot2;
-    [SerializeField] Transform _LHip2;
-    [SerializeField] Transform _RFoot2;
-    [SerializeField] Transform _RHip2;
+    [SerializeField] FootPair[] _footPairs;
 
     RaycastHit _hit;
     Vector3 _stepPosition1;
@@ -28,7 +56,7 @@ public class AdvancedWalk : MonoBehaviour
     float _speedDivisor;
     float _paceTimer;
     bool _switchFoot;
-    bool _LR;
+    [SerializeField] bool _LR;
     Rig _rig;
     // Start is called before the first frame update
     void Start()
@@ -37,102 +65,17 @@ public class AdvancedWalk : MonoBehaviour
         _speedDivisor = 1 / _runSpeed;
         TryGetComponent<Rig>(out _rig);
         _rig.weight = 0;
-        _stepPosition1 = _LFoot1.position;
-        _stepPosition2 = _RFoot2.position;
         _rig.weight = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        _switchFoot = SwitchFoot();
-        WalkRun(_LFoot1, _LHip1, _RFoot1, _RHip1, _stepPosition1);
-        WalkRun(_LFoot2, _LHip2, _RFoot2, _RHip2, _stepPosition2);
-        _paceTimer += Time.deltaTime;
-    }
-
-    bool SwitchFoot()
-    {
-        if(_paceTimer > _minPaceTime)
-        {
-            _LR ^= true;
-            _paceTimer = 0;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    void WalkRun(Transform LFoot, Transform LHip, Transform RFoot, Transform RHip, Vector3 stepPosition)
-    {
         
-        if (_LR)
-        {
-            Step(LFoot, LHip, RFoot, RHip, SqrPaceMultiplier(), ref stepPosition);
-        }
-        else
-        {
-            Step(RFoot, RHip, LFoot, LHip, SqrPaceMultiplier(), ref stepPosition);
-        }
-    }
-
-    void Step(Transform foot, Transform hip, Transform otherfoot, Transform otherHip, float paceMultiplier, ref Vector3 stepPosition)
-    {
-        Vector3 paceData = Vector3.Scale(stepPosition - otherHip.position, new Vector3(1, 0, 1));
-        
-        if (Vector3.SqrMagnitude(paceData) <= _pace * _pace * paceMultiplier)
-        {
-            if (Cast(hip, paceData))
-            {
-                foot.position = _hit.point;
-                foot.position += Vector3.up
-                    * (_pace * _pace - Vector3.SqrMagnitude(paceData))
-                    * _paceDivisor * _paceDivisor * _height
-                    * paceMultiplier;
-                otherfoot.position = stepPosition;
-            }
-            else
-            {
-                Fall();
-            }
-        }
-        else
-        {
-            if (_switchFoot)
-            {
-                Cast(hip, -transform.forward * _pace * PaceMultiplier());
-                foot.position = _hit.point;
-
-                stepPosition = foot.position;
-                if (Vector3.SqrMagnitude(stepPosition - transform.position) > _pace * _pace * paceMultiplier)
-                {
-                    Physics.Raycast(hip.position, Vector3.down, out _hit);
-                    stepPosition = _hit.point;
-                }
-            }
-        }
-    }
-
-    bool Cast(Transform hip, Vector3 paceData)
-    {
-        return Physics.Raycast(new Ray(hip.position - Vector3.Dot(paceData, transform.forward) * transform.forward, Vector3.down), out _hit, 10);
     }
 
     float SqrPaceMultiplier()
     {
         return _agent.velocity.sqrMagnitude * _speedDivisor * _speedDivisor;
-    }
-
-    //heavy, minimize use
-    float PaceMultiplier()
-    {
-        return _agent.velocity.magnitude * _speedDivisor;
-    }
-
-    void Fall()
-    {
-        
     }
 }
