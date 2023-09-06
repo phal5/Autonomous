@@ -18,8 +18,8 @@ public class Slot : MonoBehaviour
 
     private void Awake()
     {
-        SetText();
         SetLayer();
+        SetText();
     }
 
     // Start is called before the first frame update

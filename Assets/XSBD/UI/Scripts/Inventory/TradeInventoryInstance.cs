@@ -42,7 +42,10 @@ public class TradeInventoryInstance : InventoryInstance
         InventorySlot[] slots = new InventorySlot[recipe._ingredients.Length];
         for(int i = 0; i < recipe._ingredients.Length; ++i)
         {
-            InventorySlot slot = _ingredientInventory.SearchSlot(recipe._ingredients[i]._parent, recipe._ingredients[i]._item, recipe._ingredients[i]._quantity);
+            InventorySlot slot = _ingredientInventory.SearchSlot(
+                recipe._ingredients[i]._parent,
+                recipe._ingredients[i]._item,
+                recipe._ingredients[i]._quantity);
             if (slot != null)
             {
                 slots[i] = slot;

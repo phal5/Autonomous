@@ -16,6 +16,11 @@ using UnityEngine.UIElements;
 
     bool _pull = false;
 
+    private void Start()
+    {
+        SetText();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -46,9 +51,20 @@ using UnityEngine.UIElements;
         }
         else
         {
-            InventoryManager.GetSlot().SetSlotData(_item, _parent, _quantity, _stackable);
-            GetManagerData();
-            InventoryManager.Clear();
+            if (InventoryManager.GetSlot() != null)
+            {
+                InventoryManager.GetSlot().SetSlotData(_item, _parent, _quantity, _stackable);
+                GetManagerData();
+                InventoryManager.Clear();
+            }
+            else
+            {
+                _inventory.MoveToEmptySlot(
+                    InventoryManager.GetItem(),
+                    InventoryManager.GetItemParent(),
+                    InventoryManager.GetQuantity(),
+                    InventoryManager.GetStackability());
+            }
         }
         InventoryManager.SetSlot(null);
         SetText();

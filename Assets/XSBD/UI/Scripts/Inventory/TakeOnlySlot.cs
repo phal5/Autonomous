@@ -7,6 +7,11 @@ public class TakeOnlySlot : Slot
 {
     bool _dragging = false;
 
+    private void Start()
+    {
+        SetText();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -28,7 +33,6 @@ public class TakeOnlySlot : Slot
             _dragging = true;
             InventoryManager.SetManagerData(_item, _parent, _quantity, _stackable);
             Clear();
-            InventoryManager.SetSlot(this);
             if (_itemInstance)
             {
                 SetLayerInChildren(_itemInstance, 7);
