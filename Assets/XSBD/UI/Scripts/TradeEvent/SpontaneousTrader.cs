@@ -18,9 +18,10 @@ public class SpontaneousTrader : MonoBehaviour
     {
         
     }
-
-    void ResetRecipe()
+    /*
+    public void ResetRecipe(out TradeInventoryInstance.Recipe Recipe)
     {
-
+        
     }
+    */
 }
