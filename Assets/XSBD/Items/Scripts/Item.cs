@@ -9,9 +9,9 @@ public class Item : MonoBehaviour
     [SerializeField] byte _quantity;
     [SerializeField] bool _stackable;
 
-    public void GetItemData(ref GameObject item, ref Transform parent, ref byte quantity, ref bool stackable)
+    public void GetItemData(out GameObject item, out Transform parent, out byte quantity, out bool stackable)
     {
-        item = gameObject;
+        item = _item;
         parent = _parent;
         quantity = _quantity;
         stackable = _stackable;
