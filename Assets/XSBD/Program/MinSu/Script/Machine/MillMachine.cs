@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MillMachine : Machine
+public class MillMachine : RotationMachine
 {
     [SerializeField]
     private float rotationSpeedMultiplier;
