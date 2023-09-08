@@ -5,7 +5,7 @@ using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
-public abstract class Machine : MonoBehaviour
+public abstract class RotationMachine : MonoBehaviour
 {
     //«œ¿ß ∞¥√º
     protected Transform controlBoard;
