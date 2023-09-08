@@ -303,8 +303,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 57398254}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.502, y: 0.507, z: -1.136}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5.8080006, y: 1.3764696, z: 3.0639997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -321,7 +321,7 @@ Transform:
   - {fileID: 594807075}
   - {fileID: 1165193117}
   - {fileID: 1134961450}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 824179484337590321}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &137577410 stripped
 GameObject:
@@ -3352,11 +3352,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: CutterMachine
       objectReference: {fileID: 0}
+    - target: {fileID: 6064062088025044687, guid: 0409816e77b04f84abcfe82b6068f510,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.66
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 531578528392730514, guid: 0409816e77b04f84abcfe82b6068f510,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 57398255}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0409816e77b04f84abcfe82b6068f510, type: 3}
+--- !u!4 &824179484337590321 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 531578528392730514, guid: 0409816e77b04f84abcfe82b6068f510,
+    type: 3}
+  m_PrefabInstance: {fileID: 824179484337590320}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -3369,5 +3384,4 @@ SceneRoots:
   - {fileID: 364208323}
   - {fileID: 2047314658}
   - {fileID: 886722184}
-  - {fileID: 57398255}
   - {fileID: 824179484337590320}
