@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Animations.Rigging;
@@ -17,18 +18,14 @@ public class AdvancedWalk1 : MonoBehaviour
         [SerializeField] Transform _foot2;
         [SerializeField] Transform _hip2;
         RaycastHit _hit;
-        static float _paceDivisor;
-        static float _height;
-        static bool _12;
+        Vector3 _stepPosition;
+        float _paceDivisor;
+        bool _12;
         
         //Settings-----------------------------------------------------------------------------------------------------
-        public static void SetPaceDivisor(float paceDivisor)
+        public void SetPaceDivisor(float paceDivisor)
         {
             _paceDivisor = paceDivisor;
-        }
-        public static void SetBaseHeight(float height)
-        {
-            _height = height;
         }
 
         //Calculators--------------------------------------------------------------------------------------------------
@@ -37,25 +34,60 @@ public class AdvancedWalk1 : MonoBehaviour
             return Vector3.Scale(Vector3.up + Vector3.right, vector3);
         }
 
-        private float SetHeight(float sqrPace, float sqrDist)
-        {
-            return (sqrPace - sqrDist) * _paceDivisor * _paceDivisor * _height;
-        }
-
         //Actors-------------------------------------------------------------------------------------------------------
-        private bool Cast(Transform hip, Vector3 offset, out RaycastHit hit)
+        private bool Cast(Transform hip, Vector3 offset)
         {
-            return Physics.Raycast(hip.position + offset, Vector3.down, out hit, 2);
+            return Physics.Raycast(hip.position + offset, Vector3.down, out _hit, 2);
         }
 
-        private void SwitchFeet()
+        private void Step(Transform foot, Transform hip, Transform fixedFoot, Vector3 fixedHip, Vector3 forward, bool timeUp, float doubleSqrPace, float height, ref bool switchFeet)
         {
+            Vector3 horizontal = Horizontal(fixedHip - fixedFoot.position);
+            float sqrMagnitude = horizontal.sqrMagnitude;
+            if(Cast(hip, Vector3.Dot(horizontal, forward) * forward))
+            {
+                if (timeUp && sqrMagnitude * sqrMagnitude > doubleSqrPace)
+                {
+                    switchFeet = true;
+                }
+                else
+                {
+                    foot.position = _hit.point;
+                    foot.position += Vector3.up
+                    * (doubleSqrPace - sqrMagnitude * sqrMagnitude)
+                    * height;
+                    fixedFoot.position = _stepPosition;
+                }
+            }
+            else
+            {
+                //fall
+            }
+        }
+
+        public void Walk(Vector3 forward, bool timeUp, float doubleSqrPace, float height, ref bool switchFeet)
+        {
+            if (_12)
+            {
+                Step(_foot1, _hip1, _foot2, _hip2.position, forward, timeUp, doubleSqrPace, height, ref switchFeet);
+            }
+            else
+            {
+                Step(_foot2, _hip2, _foot1, _hip1.position, forward, timeUp, doubleSqrPace, height, ref switchFeet);
+            }
+        }
+
+        public void SwitchFeet()
+        {
+            if (_12)
+            {
+                _stepPosition = _foot1.position;
+            }
+            else
+            {
+                _stepPosition = _foot2.position;
+            }
             _12 ^= true;
-        }
-
-        private void Step(Transform foot, Transform hip, Vector3 fixedFoot, Vector3 fixedHip, bool timeUp, float pace)
-        {
-            
         }
     }
 
@@ -63,26 +95,53 @@ public class AdvancedWalk1 : MonoBehaviour
     [SerializeField] FootPair[] _footPairs;
 
     [Tooltip("Pace when Speed = 1")]
+    [SerializeField] float _minimumPace;
     [SerializeField] float _standardPace;
     [SerializeField] float _minPaceTime = 0.2f;
     [SerializeField] float _height;
-    float _timer;
-    float _pace;
-    [SerializeField] bool _switchFoot;
+    Vector3 _prevPos;
+    [SerializeField] float _timer;
+    float _doubleSqrPace;
+    [SerializeField] bool _switchFeet;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        float _paceDivisor = 1 / _standardPace;
+        foreach(FootPair footPair in _footPairs)
+        {
+            footPair.SetPaceDivisor(_paceDivisor);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        SetDoubleSqrPace();
+        _timer += Time.deltaTime;
+        foreach (FootPair footPair in _footPairs)
+        {
+            footPair.Walk(
+                transform.forward,
+                _timer > _minPaceTime && Vector3.SqrMagnitude(_prevPos - transform.position) > _minimumPace * _minimumPace
+                , _doubleSqrPace, _height,
+                ref _switchFeet
+            );
+        }
+        if (_switchFeet)
+        {
+            foreach (FootPair footPair in _footPairs)
+            {
+                footPair.SwitchFeet();
+            }
+            _prevPos = transform.position;
+            _timer = 0;
+            _switchFeet = false;
+        }
     }
 
-    void SetPace()
+    void SetDoubleSqrPace()
     {
-        _pace = _agent.velocity.sqrMagnitude * _pace;
+        _doubleSqrPace = _agent.velocity.sqrMagnitude * _standardPace * _standardPace * _standardPace * _standardPace;
     }
 }

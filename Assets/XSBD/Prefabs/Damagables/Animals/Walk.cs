@@ -78,7 +78,7 @@ public class Walk : MonoBehaviour
             {
                 foot.position = _hit.point;
                 foot.position += Vector3.up
-                    * (_pace * _pace - Vector3.SqrMagnitude(paceData))
+                    * (_pace * _pace * paceMultiplier - Vector3.SqrMagnitude(paceData))
                     * _paceDivisor * _paceDivisor * _height
                     * paceMultiplier;
                 otherfoot.position = _stepPosition;
