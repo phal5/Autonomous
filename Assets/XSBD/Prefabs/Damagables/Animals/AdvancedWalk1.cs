@@ -21,29 +21,41 @@ public class AdvancedWalk1 : MonoBehaviour
         static float _height;
         static bool _12;
         
+        //Settings-----------------------------------------------------------------------------------------------------
         public static void SetPaceDivisor(float paceDivisor)
         {
             _paceDivisor = paceDivisor;
         }
-
         public static void SetBaseHeight(float height)
         {
             _height = height;
         }
 
-        private float SetHeight(float sqrPace, float sqrDist)
+        //Calculators--------------------------------------------------------------------------------------------------
+        Vector3 Horizontal(Vector3 vector3)
         {
-            return (sqrPace - sqrDist) * _paceDivisor * _paceDivisor;
+            return Vector3.Scale(Vector3.up + Vector3.right, vector3);
         }
 
+        private float SetHeight(float sqrPace, float sqrDist)
+        {
+            return (sqrPace - sqrDist) * _paceDivisor * _paceDivisor * _height;
+        }
+
+        //Actors-------------------------------------------------------------------------------------------------------
         private bool Cast(Transform hip, Vector3 offset, out RaycastHit hit)
         {
             return Physics.Raycast(hip.position + offset, Vector3.down, out hit, 2);
         }
 
-        private void Step(Transform foot, Transform hip, Vector3 fixedFoot, Vector3 fixedHip)
+        private void SwitchFeet()
         {
+            _12 ^= true;
+        }
 
+        private void Step(Transform foot, Transform hip, Vector3 fixedFoot, Vector3 fixedHip, bool timeUp, float pace)
+        {
+            
         }
     }
 
@@ -54,7 +66,7 @@ public class AdvancedWalk1 : MonoBehaviour
     [SerializeField] float _standardPace;
     [SerializeField] float _minPaceTime = 0.2f;
     [SerializeField] float _height;
-
+    float _timer;
     float _pace;
     [SerializeField] bool _switchFoot;
     // Start is called before the first frame update
