@@ -3,25 +3,45 @@ using System.Collections.Generic;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
-public class SpontaneousTrader : MonoBehaviour
+public class SpontaneousTrader : TradeInventoryInstance
 {
-    [SerializeField] TradeInventoryInstance.Recipe[] _recipes;
-    [SerializeField] TradeInventoryInstance _tradeInventoryInstance;
+    [System.Serializable] class RecipeList
+    {
+        public Recipe _recipe;
+        public byte _probability;
+    }
+    [SerializeField] RecipeList[] _recipes;
+    float _divisor = 0;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        foreach(RecipeList recipe in _recipes)
+        {
+            _divisor += recipe._probability;
+        }
+        _divisor = 1 / _divisor;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ResetRecipe()
     {
-        
+        float index = Random.value;
+        Recipe _Recipe = null;
+        foreach(RecipeList recipe in _recipes)
+        {
+            if(recipe._probability * _divisor > index)
+            {
+                _Recipe = recipe._recipe;
+            }
+            else
+            {
+                index -= _divisor * recipe._probability;
+            }
+        }
+        if (_Recipe == null)
+        {
+            _Recipe = _recipes[^1]._recipe;
+        }
+        _recipe = _Recipe;
     }
-    /*
-    public void ResetRecipe(out TradeInventoryInstance.Recipe Recipe)
-    {
-        
-    }
-    */
 }

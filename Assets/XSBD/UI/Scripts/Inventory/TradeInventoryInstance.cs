@@ -20,7 +20,7 @@ public class TradeInventoryInstance : InventoryInstance
         public ItemPair _result;
         public bool _stackable;
     }
-    [SerializeField] Recipe _recipe;
+    [SerializeField] protected Recipe _recipe;
     [SerializeField] TradeInventoryInstance _ingredientInventory;
     [SerializeField] TakeOnlySlot _returnSlot;
     [SerializeField] TradeSlot _preview;
