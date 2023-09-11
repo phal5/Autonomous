@@ -31,13 +31,13 @@ public class AdvancedWalk1 : MonoBehaviour
         //Calculators--------------------------------------------------------------------------------------------------
         Vector3 Horizontal(Vector3 vector3)
         {
-            return Vector3.Scale(Vector3.up + Vector3.right, vector3);
+            return Vector3.Scale(Vector3.forward + Vector3.right, vector3);
         }
 
         //Actors-------------------------------------------------------------------------------------------------------
         private bool Cast(Transform hip, Vector3 offset)
         {
-            return Physics.Raycast(hip.position + offset, Vector3.down, out _hit, 2);
+            return Physics.Raycast(hip.position + offset, Vector3.down, out _hit, 10);
         }
 
         private void Step(Transform foot, Transform hip, Transform fixedFoot, Vector3 fixedHip, Vector3 forward, bool timeUp, float doubleSqrPace, float height, ref bool switchFeet)
@@ -46,7 +46,8 @@ public class AdvancedWalk1 : MonoBehaviour
             float sqrMagnitude = horizontal.sqrMagnitude;
             if(Cast(hip, Vector3.Dot(horizontal, forward) * forward))
             {
-                if (timeUp && sqrMagnitude * sqrMagnitude > doubleSqrPace)
+                float f = (sqrMagnitude * sqrMagnitude < doubleSqrPace) ? doubleSqrPace - sqrMagnitude * sqrMagnitude : 0;
+                if (timeUp && f == 0)
                 {
                     switchFeet = true;
                 }
@@ -54,9 +55,9 @@ public class AdvancedWalk1 : MonoBehaviour
                 {
                     foot.position = _hit.point;
                     foot.position += Vector3.up
-                    * (doubleSqrPace - sqrMagnitude * sqrMagnitude)
-                    * height;
+                    * f * height * _paceDivisor * _paceDivisor * _paceDivisor;
                     fixedFoot.position = _stepPosition;
+                    Debug.Log(_hit.point.y);
                 }
             }
             else
@@ -108,6 +109,7 @@ public class AdvancedWalk1 : MonoBehaviour
     void Start()
     {
         float _paceDivisor = 1 / _standardPace;
+        Debug.Log(_paceDivisor);
         foreach(FootPair footPair in _footPairs)
         {
             footPair.SetPaceDivisor(_paceDivisor);
