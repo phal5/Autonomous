@@ -1,11 +1,6 @@
-using JetBrains.Annotations;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
+using System;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Animations.Rigging;
-using UnityEngine.Experimental.GlobalIllumination;
 
 public class AdvancedWalk1 : MonoBehaviour
 {
@@ -66,6 +61,7 @@ public class AdvancedWalk1 : MonoBehaviour
             }
         }
 
+        //Public-------------------------------------------------------------------------------------------------------
         public void Walk(Vector3 forward, bool timeUp, float doubleSqrPace, float height, ref bool switchFeet)
         {
             if (_12)
@@ -78,15 +74,17 @@ public class AdvancedWalk1 : MonoBehaviour
             }
         }
 
-        public void SwitchFeet()
+        public void SwitchFeet(Vector3 offset)
         {
             if (_12)
             {
-                _stepPosition = _foot1.position;
+                Cast(_hip1, offset);
+                _stepPosition = _hit.point;
             }
             else
             {
-                _stepPosition = _foot2.position;
+                Cast(_hip2, offset);
+                _stepPosition = _hit.point;
             }
             _12 ^= true;
         }
@@ -101,9 +99,9 @@ public class AdvancedWalk1 : MonoBehaviour
     [SerializeField] float _minPaceTime = 0.2f;
     [SerializeField] float _height;
     Vector3 _prevPos;
-    [SerializeField] float _timer;
+    float _timer;
     float _doubleSqrPace;
-    [SerializeField] bool _switchFeet;
+    bool _switchFeet;
     
     // Start is called before the first frame update
     void Start()
@@ -134,7 +132,14 @@ public class AdvancedWalk1 : MonoBehaviour
         {
             foreach (FootPair footPair in _footPairs)
             {
-                footPair.SwitchFeet();
+                if(_agent.velocity != Vector3.zero)
+                {
+                    footPair.SwitchFeet(_agent.velocity / MathF.Sqrt(_agent.velocity.magnitude) * _standardPace);
+                }
+                else
+                {
+                    footPair.SwitchFeet(Vector3.zero);
+                }
             }
             _prevPos = transform.position;
             _timer = 0;
