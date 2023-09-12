@@ -1,16 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class DayNightClock : MonoBehaviour
+public class Calendar : MonoBehaviour
 {
+    [System.Serializable] class ToDo
+    {
+        [SerializeField] UnityEvent _toDo = new UnityEvent();
+        [SerializeField] byte[] _onTheseDays;
+
+        public void Invoke(byte date)
+        {
+            foreach (byte day in _onTheseDays)
+            {
+                if (day == date)
+                {
+                    _toDo.Invoke();
+                    break;
+                }
+            }
+        }
+    }
+
+    [SerializeField] UnityEvent _toDoEveryDay = new UnityEvent();
+    [SerializeField] ToDo[] _toDoList;
+    [Space(10f)]
     [Tooltip("Length of day in seconds.")] [SerializeField] float dayNightLength;
-    [SerializeField] byte day = 1;
-    [SerializeField] byte month = 1;
     [SerializeField] List<byte> _lengthPerMonths = new List<byte>();
-    Light _mainLight;
-    float _dayNightDivisor;
-    float _timer = 0.5f;
+
+    static Light _mainLight;
+    static float _dayNightDivisor;
+    static float _timer = 0.5f;
+    static byte day = 1;
+    static byte month = 1;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -22,9 +46,8 @@ public class DayNightClock : MonoBehaviour
     void Update()
     {
         DayLengthUpdater();
-        Timer();
         UpdateSun();
-        Calendar();
+        SetDay();
     }
 
     void DayLengthUpdater()
@@ -33,13 +56,7 @@ public class DayNightClock : MonoBehaviour
         if (dayNightOne < 0.999f || dayNightOne > 1.001f)
         {
             _dayNightDivisor = 1 / dayNightLength;
-            Debug.Log("Changed");
         }
-    }
-
-    void Timer()
-    {
-        _timer += Time.deltaTime * _dayNightDivisor;
     }
 
     void UpdateSun()
@@ -48,12 +65,15 @@ public class DayNightClock : MonoBehaviour
         _mainLight.intensity = Vector3.Dot(-transform.forward, Vector3.up);
     }
 
-    void Calendar()
+    void SetDay()
     {
+        _timer += Time.deltaTime * _dayNightDivisor;
         if (_timer >= 1)
         {
             _timer = 0;
             ++day;
+            CheckToDoList();
+
             if (day > _lengthPerMonths[month])
             {
                 ++month;
@@ -66,17 +86,27 @@ public class DayNightClock : MonoBehaviour
         }
     }
 
-    public float GetTimer()
+    void CheckToDoList()
+    {
+        _toDoEveryDay.Invoke();
+        foreach (ToDo toDo in _toDoList)
+        {
+            toDo.Invoke(day);
+        }
+    }
+
+    /* public float GetTimer()
     {
         return _timer;
     }
+    */
 
-    public byte GetDay()
+    public static byte GetDay()
     {
         return day;
     }
 
-    public byte GetMonth()
+    public static byte GetMonth()
     {
         return month;
     }
