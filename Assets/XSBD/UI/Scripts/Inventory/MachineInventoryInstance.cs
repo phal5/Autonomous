@@ -16,9 +16,9 @@ public class MachineInventoryInstance : InventoryInstance
         
     }
 
-    public void Feed(byte amount, Vector3 position)
+    public bool Feed(byte amount, Vector3 position)
     {
-        RawInstantiate(SearchGivenFoodSlot(), amount, position, true);
+        return RawInstantiate(SearchGivenFoodSlot(), amount, position, true);
     }
 
     /*

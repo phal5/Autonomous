@@ -7,8 +7,8 @@ public class Feeder : MonoBehaviour
     [SerializeField] MachineInventoryInstance _inventory;
     [SerializeField] byte _amount = 3;
 
-    public void Feed()
+    public bool Feed()
     {
-        _inventory.Feed(_amount, transform.position);
+        return _inventory.Feed(_amount, transform.position);
     }
 }
