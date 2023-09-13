@@ -7,7 +7,7 @@ using static UnityEditor.Progress;
 
 public class InventoryInstance : MonoBehaviour
 {
-    [SerializeField] InventorySlot[] _slots;
+    [SerializeField] protected InventorySlot[] _slots;
     
     // Start is called before the first frame update
     void Start()

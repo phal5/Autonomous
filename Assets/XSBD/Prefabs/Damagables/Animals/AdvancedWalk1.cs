@@ -52,7 +52,6 @@ public class AdvancedWalk1 : MonoBehaviour
                     foot.position += Vector3.up
                     * f * height * _paceDivisor * _paceDivisor * _paceDivisor;
                     fixedFoot.position = _stepPosition;
-                    Debug.Log(_hit.point.y);
                 }
             }
             else
@@ -107,7 +106,6 @@ public class AdvancedWalk1 : MonoBehaviour
     void Start()
     {
         float _paceDivisor = 1 / _standardPace;
-        Debug.Log(_paceDivisor);
         foreach(FootPair footPair in _footPairs)
         {
             footPair.SetPaceDivisor(_paceDivisor);

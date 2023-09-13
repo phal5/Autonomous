@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Rotation : Power
 {
-    [SerializeField] Transform _seeSaw;
     enum Axis { X, Y, Z };
-    Axis _axis;
-    float _angle;
+    [SerializeField] protected Transform _seeSaw;
+    [SerializeField] Axis _axis;
+    protected float _angle;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,28 +25,28 @@ public class Rotation : Power
         GetRotationDelta();
     }
 
-    void GetRotationDelta()
+    protected void GetRotationDelta()
     {
         switch (_axis)
         {
             case Axis.X:
-                _Speed = Abs(_seeSaw.rotation.x - _angle);
-                _angle = _seeSaw.rotation.x;
+                _Speed = Abs(_seeSaw.eulerAngles.x - _angle);
+                _angle = _seeSaw.eulerAngles.x;
                 break;
             
             case Axis.Y:
-                _Speed = Abs(_seeSaw.rotation.y - _angle);
-                _angle = _seeSaw.rotation.y;
+                _Speed = Abs(_seeSaw.eulerAngles.y - _angle);
+                _angle = _seeSaw.eulerAngles.y;
                 break;
             
             case Axis.Z:
-                _Speed = Abs(_seeSaw.rotation.z - _angle);
-                _angle = _seeSaw.rotation.z;
+                _Speed = Abs(_seeSaw.eulerAngles.z - _angle);
+                _angle = _seeSaw.eulerAngles.z;
                 break;
         }
     }
 
-    void SetRotation()
+    protected void SetRotation()
     {
         switch (_axis)
         {
