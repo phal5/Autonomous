@@ -9,6 +9,7 @@ public class SpontaneousTrader : TradeInventoryInstance
     {
         public Recipe _recipe;
         public byte _probability;
+        public byte _count;
     }
     [SerializeField] RecipeList[] _recipes;
     float _divisor = 0;

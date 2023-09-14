@@ -96,16 +96,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _slots: []
   _recipe:
-    _name: 
-    _ingredients: []
+    _name: Cow
+    _ingredients:
+    - _parent: {fileID: 0}
+      _item: {fileID: 5605127604356286759, guid: 8541351f9edc69340ab869bf22703ba0,
+        type: 3}
+      _quantity: 10
     _result:
       _parent: {fileID: 0}
-      _item: {fileID: 0}
-      _quantity: 0
-    _stackable: 0
+      _item: {fileID: 7498814772168529416, guid: dece0e250e77cb1419bc4b114b390f45,
+        type: 3}
+      _quantity: 10
+    _stackable: 1
   _ingredientInventory: {fileID: 4632160993957645268}
-  _returnSlot: {fileID: 0}
-  _preview: {fileID: 0}
+  _returnSlot: {fileID: 367446623800946294}
+  _preview: {fileID: 156720453791186156}
 --- !u!1 &2296024010390059624
 GameObject:
   m_ObjectHideFlags: 0
@@ -1400,6 +1405,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b7dd98deeb59864597054e3163e6b72, type: 3}
+--- !u!114 &367446623800946294 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9032139872022080902, guid: 7b7dd98deeb59864597054e3163e6b72,
+    type: 3}
+  m_PrefabInstance: {fileID: 8665477200148349936}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b3eaf7b6c8e1c34781459e583d1211e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1827775949969119674 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6997579044564736586, guid: 7b7dd98deeb59864597054e3163e6b72,
