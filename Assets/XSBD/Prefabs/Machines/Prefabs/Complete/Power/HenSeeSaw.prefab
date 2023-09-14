@@ -1797,7 +1797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e23062d9b8cdee24098877619614b3fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _item: {fileID: 5605127604356286759, guid: 8541351f9edc69340ab869bf22703ba0, type: 3}
+  _item: {fileID: 0}
   _parent: {fileID: 0}
   _quantity: 0
   _stackable: 0
@@ -5063,14 +5063,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5605127604356286759}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0.17287636, y: 1.6300001, z: -2.0306692}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3617454983481784776}
   m_Father: {fileID: 7828723738679244907}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &3024415247797132728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5083,15 +5083,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62bef85489af072499207d020aefbfac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _MaxHP: 0.7
-  _HP: 0.7
+  _MaxHP: Infinity
+  _HP: Infinity
   _dropsWhenDead: []
   _agent: {fileID: 4600215332168384808}
   _mouth: {fileID: 5055654453543731947}
   _cognitiveDistance: 6
   _eatRange: 1
-  _MaxSatiety: 100
-  _satiety: 100
+  _MaxSatiety: Infinity
+  _satiety: 0
   _eatAmount: 1
   _walkingSpeed: 3.5
   _RunningSpeed: 6

@@ -19,6 +19,7 @@ using UnityEngine.UIElements;
     private void Start()
     {
         SetText();
+        SetScale();
     }
 
     // Update is called once per frame
