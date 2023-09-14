@@ -8,48 +8,14 @@ public class MachineInventoryInstance : InventoryInstance
     // Start is called before the first frame update
     void Start()
     {
+        SetCamera();
         SetupInventorySlots();
-    }
-
-    public void FindAndInstantiate()
-    {
-        
     }
 
     public bool Feed(byte amount, Vector3 position)
     {
         return RawInstantiate(SearchGivenFoodSlot(), amount, position, true);
     }
-
-    /*
-    public bool RawInstantiate(GameObject item, Transform parent, ref byte originalQuantity, byte createAmount, Vector3 position, bool decrement = true)
-    {
-        if (decrement)
-        {
-            for (int i = 0; i < createAmount && originalQuantity > 0; ++i)
-            {
-                Instantiate(item, position, Random.rotation, parent);
-                --originalQuantity;
-            }
-        }
-        else
-        {
-            for (int i = 0; i < createAmount && originalQuantity > 0; ++i)
-            {
-                Instantiate(item, position, Random.rotation, parent);
-            }
-        }
-        Debug.Log(createAmount);
-        if(originalQuantity > 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    */
 
     bool RawInstantiate(InventorySlot slot, byte createAmount, Vector3 position, bool decrement = true)
     {

@@ -6,9 +6,11 @@ using static UnityEditor.Progress;
 
 public class InventoryManager : MonoBehaviour
 {
-    [SerializeField] Transform __player;
+    [SerializeField] Transform player;
     static Transform _player;
 
+    [SerializeField] Camera camera_;
+    static Camera _camera;
     static GameObject _Item;
     static Transform _Parent;
     static InventorySlot _Slot;
@@ -22,7 +24,9 @@ public class InventoryManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _player = __player;
+        _player = player;
+        _camera = camera_;
+
     }
 
     // Update is called once per frame
@@ -92,6 +96,11 @@ public class InventoryManager : MonoBehaviour
     }
 
     //---
+
+    public static Camera GetCamera()
+    {
+        return _camera;
+    }
 
     public static GameObject GetItem()
     {

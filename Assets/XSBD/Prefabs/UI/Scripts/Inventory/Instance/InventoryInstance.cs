@@ -15,6 +15,30 @@ public class InventoryInstance : MonoBehaviour
         SetupInventorySlots();
     }
 
+    protected void SetCamera()
+    {
+        SearchForCanvasInParents(transform).worldCamera = Camera.main;
+    }
+
+    Canvas SearchForCanvasInParents(Transform transform)
+    {
+        if(transform.parent)
+        {
+            if (transform.parent.TryGetComponent<Canvas>(out Canvas canvas))
+            {
+                return canvas;
+            }
+            else
+            {
+                return SearchForCanvasInParents(transform.parent);
+            }
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     protected void SetupInventorySlots()
     {
         List<InventorySlot> slots = new List<InventorySlot>();

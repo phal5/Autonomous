@@ -16,9 +16,10 @@ public class HenSeeSawPower : Rotation
             angle = (angle < 180) ? angle : angle - 360;
             if (_set && greaterLesser == angle > _threshold)
             {
-                _set = false;
-                Debug.Log("Yup");
-                _feeder.Feed();
+                if (_feeder.Feed())
+                {
+                    _set = false;
+                }
             }
             else if(!_set && greaterLesser == angle < _threshold)
             {

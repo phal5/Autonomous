@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 7780327019404861656}
   - component: {fileID: 3526893804447265297}
   - component: {fileID: 4454852157315914301}
-  - component: {fileID: 8817371120972714504}
+  - component: {fileID: 7878712525174546060}
   m_Layer: 0
   m_Name: InventoryInstance
   m_TagString: Untagged
@@ -181,7 +181,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8817371120972714504
+--- !u!114 &7878712525174546060
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -190,10 +190,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1109103883080667949}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7a191ab0b195e044be388e0ef124b5b, type: 3}
+  m_Script: {fileID: 11500000, guid: 43bfdc302123a5242b207796ca5e6cee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _slots: []
+  _foodIndexes: 
 --- !u!1 &8588359322309524231
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,7 +22,7 @@ public class TakeOnlySlot : Slot
     {
         if (_dragging && _itemInstance)
         {
-            _itemInstance.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 2);
+            _itemInstance.position = InventoryManager.GetCamera().ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 2);
         }
     }
 
