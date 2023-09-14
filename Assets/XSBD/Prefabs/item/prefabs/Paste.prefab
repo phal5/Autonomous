@@ -13,9 +13,8 @@ GameObject:
   - component: {fileID: 8762834201549749549}
   - component: {fileID: 2266904252274071175}
   - component: {fileID: 3613617571418569739}
-  - component: {fileID: 5949961311697419428}
   m_Layer: 0
-  m_Name: Bread
+  m_Name: Paste
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.46003067, y: 1.2023903, z: 1.0411463}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.61558, z: 1.8524}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -134,16 +133,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5949961311697419428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5608243555414241271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45a3b926e94832c489df574c2ce1d463, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Process: []
