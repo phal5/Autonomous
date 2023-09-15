@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class SeeSaw : Power
 {
     [SerializeField] Rigidbody _rigidbody1;
     [SerializeField] Rigidbody _rigidbody2;
+    [SerializeField] Transform _bowl;
     [SerializeField] float _friction = 0;
+    [SerializeField] Feeder _feeder;
     float _1;
     float _2;
+    bool _12;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +26,11 @@ public class SeeSaw : Power
         DecidePosition(out _Speed);
         DecideVelocity();
         SavePosition();
+        Feed();
+        if (_bowl)
+        {
+            _bowl.transform.position = ReturnHorizontal(_bowl.position) + Vector3.up * ((_1 > _2) ? _1 : _2);
+        }
     }
 
     void DecidePosition(out float speed)
@@ -69,6 +78,17 @@ public class SeeSaw : Power
     {
         _1 = _rigidbody1.transform.position.y;
         _2 = _rigidbody2.transform.position.y;
+    }
+
+    void Feed()
+    {
+        if(_12 != _1 > _2)
+        {
+            if (_feeder.Feed())
+            {
+                _12 ^= true;
+            }
+        }
     }
 
     Vector3 ReturnHorizontal(Vector3 vector3)

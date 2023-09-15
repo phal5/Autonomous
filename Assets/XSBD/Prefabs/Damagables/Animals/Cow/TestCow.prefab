@@ -492,7 +492,7 @@ MonoBehaviour:
   _agent: {fileID: 6212010673593697723}
   _mouth: {fileID: 3776352831789892675}
   _cognitiveDistance: 100
-  _eatRange: 1
+  _eatRange: 1.5
   _MaxSatiety: 300
   _satiety: 0
   _eatAmount: 5
@@ -1481,8 +1481,6 @@ MonoBehaviour:
   _standardPace: 0.15
   _minPaceTime: 0.2
   _height: 0.1
-  _timer: 0
-  _switchFeet: 0
 --- !u!1 &7149404226691478518
 GameObject:
   m_ObjectHideFlags: 0
