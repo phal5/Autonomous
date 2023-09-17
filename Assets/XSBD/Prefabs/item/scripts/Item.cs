@@ -4,10 +4,32 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+    enum Parent { ANIMAL, FOOD, NONE }
     [SerializeField] GameObject _item;
-    [SerializeField] Transform _parent;
     [SerializeField] byte _quantity;
     [SerializeField] bool _stackable;
+    [Space(10f)]
+    [SerializeField] Transform _parent;
+    [SerializeField] Parent _type;
+    [SerializeField] byte _parentIndex;
+
+    private void Start()
+    {
+        switch (_type)
+        {
+            case Parent.ANIMAL:
+                _parent = AnimalManager.GetAnimalParent(_parentIndex);
+                break;
+
+            case Parent.FOOD:
+                _parent = FoodManager.GetFoodParent(_parentIndex);
+                break;
+
+            default:
+                _parent = null;
+                break;
+        }
+    }
 
     public void GetItemData(out GameObject item, out Transform parent, out byte quantity, out bool stackable)
     {

@@ -7,11 +7,15 @@ using UnityEngine;
 public class AnimalManager : MonoBehaviour
 {
     [SerializeField] Transform __herbivores;
+    [SerializeField] Transform __herbivores2;
+    [SerializeField] Transform __herbivores3;
     [SerializeField] Transform __predators1;
     [SerializeField] Transform __predators2;
     [SerializeField] Transform __predators3;
 
     static Transform _herbivores;
+    static Transform _herbivores2;
+    static Transform _herbivores3;
     static Transform _predators1;
     static Transform _predators2;
     static Transform _predators3;
@@ -245,6 +249,23 @@ public class AnimalManager : MonoBehaviour
     public static void InstantiateAnimal(byte index, Vector3 position)
     {
         _AnimalPrefabs[index].InstantiateAnimal(position, 1);
+    }
+
+    //Test Functions======================================================================================================================
+
+    public static Transform GetAnimalParent(byte index)
+    {
+        switch (index)
+        {
+            case 0: return _herbivores;
+
+            case 1: return _predators1;
+
+            case 2: return _predators2;
+
+            case 3: return _predators3;
+        }
+        return null;
     }
 
     //Test Functions======================================================================================================================

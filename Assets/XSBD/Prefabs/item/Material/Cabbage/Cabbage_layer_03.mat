@@ -27,6 +27,9 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - ADDITIONAL_LIGHT_CALCULATE_SHADOWS
+  - _MAIN_LIGHT_CALCULATE_SHADOWS
+  - _MAIN_LIGHT_SHADOWS_CASCADE
+  - _SHADOWS_SOFT
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -40,7 +43,8 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _DarkLine: -0.05
+    - _DarkLine: 0
     m_Colors:
-    - _Base_Color: {r: 0.1364008, g: 0.745283, b: 0.15840854, a: 0}
+    - _AmbientColor: {r: 0.12275463, g: 0.3018868, b: 0.07025037, a: 0}
+    - _Base_Color: {r: 0.28657883, g: 0.6509434, b: 0.29773283, a: 0}
   m_BuildTextureStacks: []
