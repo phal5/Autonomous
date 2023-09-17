@@ -21,9 +21,9 @@ public class TradeInventoryInstance : InventoryInstance
         public bool _stackable;
     }
     [SerializeField] protected Recipe _recipe;
-    [SerializeField] TradeInventoryInstance _ingredientInventory;
     [SerializeField] TakeOnlySlot _returnSlot;
-    [SerializeField] TradeSlot _preview;
+    [SerializeField] TradeSlot _result;
+    [SerializeField] Slot[] _ingredientPreview;
 
     private void Start()
     {
@@ -32,9 +32,21 @@ public class TradeInventoryInstance : InventoryInstance
         SetupInventorySlots();
     }
 
-    void SetupTradeSlot()
+    protected void SetupTradeSlot()
     {
-        _preview.SetSlotData(_recipe._result._item, _recipe._result._parent, _recipe._result._quantity, _recipe._stackable);
+        _result.SetSlotData(_recipe._result._item, _recipe._result._parent, _recipe._result._quantity, _recipe._stackable);
+        for (int i = 0; i < _ingredientPreview.Length; ++i)
+        {
+            if(i < _recipe._ingredients.Length)
+            {
+                Recipe.ItemPair ingredient = _recipe._ingredients[i];
+                _ingredientPreview[i].SetSlotData(ingredient._item, ingredient._parent, ingredient._quantity, true);
+            }
+            else
+            {
+                _ingredientPreview[i].SetSlotData(null, null, 0, true);
+            }
+        }
     }
 
     public bool Trade(byte index)
@@ -43,7 +55,7 @@ public class TradeInventoryInstance : InventoryInstance
         InventorySlot[] slots = new InventorySlot[recipe._ingredients.Length];
         for(int i = 0; i < recipe._ingredients.Length; ++i)
         {
-            InventorySlot slot = _ingredientInventory.SearchSlot(
+            InventorySlot slot = SearchSlot(
                 recipe._ingredients[i]._parent,
                 recipe._ingredients[i]._item,
                 recipe._ingredients[i]._quantity);

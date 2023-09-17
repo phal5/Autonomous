@@ -80,24 +80,27 @@ public class Slot : MonoBehaviour
             Destroy(_itemInstance.gameObject);
         }
 
-        _itemInstance = Instantiate(_item, transform).transform;
-
-        if (_scaleDivisor == Vector3.zero)
+        if(_quantity > 0)
         {
-            _scaleDivisor.x = 1f / transform.lossyScale.x;
-            _scaleDivisor.y = 1f / transform.lossyScale.y;
-            _scaleDivisor.z = 1f / transform.lossyScale.z;
+            _itemInstance = Instantiate(_item, transform).transform;
+
+            if (_scaleDivisor == Vector3.zero)
+            {
+                _scaleDivisor.x = 1f / transform.lossyScale.x;
+                _scaleDivisor.y = 1f / transform.lossyScale.y;
+                _scaleDivisor.z = 1f / transform.lossyScale.z;
+            }
+
+            SetLayerInChildren(_itemInstance, gameObject.layer);
+            ClearColliders(_itemInstance);
+            ClearBehaviours(_itemInstance);
+            ClearNavAgents(_itemInstance);
+            ClearRigidBody(_itemInstance);
+
+            _itemInstance.localScale = _scaleDivisor * 0.7f;
+            _itemInstance.position = transform.position - transform.forward * 0.5f;
+            _itemInstance.rotation = transform.rotation * Quaternion.Euler(Vector3.up * 180);
         }
-
-        SetLayerInChildren(_itemInstance, gameObject.layer);
-        ClearColliders(_itemInstance);
-        ClearBehaviours(_itemInstance);
-        ClearNavAgents(_itemInstance);
-        ClearRigidBody(_itemInstance);
-
-        _itemInstance.localScale = _scaleDivisor * 0.7f;
-        _itemInstance.position = transform.position - transform.forward * 0.5f;
-        _itemInstance.rotation = transform.rotation * Quaternion.Euler(Vector3.up * 180);
     }
 
     protected void SetLayerInChildren(Transform transform, int layer)

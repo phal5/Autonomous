@@ -21,6 +21,7 @@ public class SpontaneousTrader : TradeInventoryInstance
             _divisor += recipe._probability;
         }
         _divisor = 1 / _divisor;
+        Debug.Log(_divisor);
     }
 
     public void ResetRecipe()
@@ -32,16 +33,19 @@ public class SpontaneousTrader : TradeInventoryInstance
             if(recipe._probability * _divisor > index)
             {
                 _Recipe = recipe._recipe;
+                break;
             }
             else
             {
                 index -= _divisor * recipe._probability;
             }
+            Debug.Log(index);
         }
         if (_Recipe == null)
         {
             _Recipe = _recipes[^1]._recipe;
         }
         _recipe = _Recipe;
+        SetupTradeSlot();
     }
 }
