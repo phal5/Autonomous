@@ -14,9 +14,10 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - ADDITIONAL_LIGHT_CALCULATE_SHADOWS
+  - _MAIN_LIGHT_SHADOWS_CASCADE
   m_InvalidKeywords: []
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -107,10 +108,10 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Indirect: 0.1
-    - _Line1: 0.45
-    - _Line2: 0.01
+    - _Line1: 0.26
+    - _Line2: 0.2
     - _MAIN_LIGHT_CALCULATE_SHADOWS: 0
-    - _MAIN_LIGHT_SHADOWS_CASCADE: 0
+    - _MAIN_LIGHT_SHADOWS_CASCADE: 1
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -125,12 +126,12 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Strength1: 0.54
-    - _Strength2: 0.3
+    - _Strength2: 0.2
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _AmbientColor: {r: 0, g: 0, b: 0, a: 0}
+    - _AmbientColor: {r: 0.3490566, g: 0.013415209, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Base_Color: {r: 1, g: 0.87834525, b: 0.36477983, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}

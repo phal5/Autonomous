@@ -27,10 +27,13 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - ADDITIONAL_LIGHT_CALCULATE_SHADOWS
+  - _MAIN_LIGHT_CALCULATE_SHADOWS
+  - _MAIN_LIGHT_SHADOWS_CASCADE
+  - _SHADOWS_SOFT
   - _SPECULAR
   m_InvalidKeywords: []
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -120,18 +123,18 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Indirect: 0
+    - _Indirect: 0.1
     - _Line1: 0.45
-    - _Line2: -0.4
-    - _MAIN_LIGHT_CALCULATE_SHADOWS: 0
-    - _MAIN_LIGHT_SHADOWS_CASCADE: 0
+    - _Line2: 0.1
+    - _MAIN_LIGHT_CALCULATE_SHADOWS: 1
+    - _MAIN_LIGHT_SHADOWS_CASCADE: 1
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _SHADOWS_SOFT: 0
+    - _SHADOWS_SOFT: 1
     - _SPECULAR: 1
     - _Smoothness: 0.4
     - _SmoothnessTextureChannel: 0
@@ -144,7 +147,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _AmbientColor: {r: 0, g: 0, b: 0, a: 0}
+    - _AmbientColor: {r: 0.1981132, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Base_Color: {r: 0.6509804, g: 0.06666665, b: 0.21159856, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}

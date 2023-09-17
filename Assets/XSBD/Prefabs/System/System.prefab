@@ -53,6 +53,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   __herbivores: {fileID: 7450039556554769179}
+  __herbivores2: {fileID: 0}
+  __herbivores3: {fileID: 0}
   __predators1: {fileID: 6637921741715241634}
   __predators2: {fileID: 2230760068396787941}
   __predators3: {fileID: 19407521266478244}
@@ -137,7 +139,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89b2f73505697284aa08e73f9755829f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __player: {fileID: 0}
+  player: {fileID: 0}
+  camera_: {fileID: 0}
 --- !u!1 &4205493317899110213
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,6 +206,7 @@ Transform:
   - {fileID: 4239047591166324843}
   - {fileID: 7661338787588729121}
   - {fileID: 6281106130285331673}
+  - {fileID: 5313233952377628367}
   m_Father: {fileID: 1795568613713932230}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4756868795359292943
@@ -246,6 +250,37 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4703876480675500171}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4577157696704818068}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5116097527929465767
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5313233952377628367}
+  m_Layer: 0
+  m_Name: Cabbage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5313233952377628367
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5116097527929465767}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
