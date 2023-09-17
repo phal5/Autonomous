@@ -55,6 +55,7 @@ public class MillMachine : RotationMachine
     }
     protected override void Feed()
     {
+        Debug.Log("feed");
         //FoodManager.instantiate(byte foodCode , new Vector.zero); 방식으로 생성 가능.
     }
 
