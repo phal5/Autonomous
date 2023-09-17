@@ -13,9 +13,16 @@ public class Deployer : MonoBehaviour
         Deploy(transform.position, Random.rotation);
     }
 
-    protected void Deploy(Vector3 position, Quaternion rotation)
+    protected bool Deploy(Vector3 position, Quaternion rotation)
     {
-        Instantiate(_deployObject, position, rotation, transform.parent);
-        Destroy(gameObject);
+        if(Instantiate(_deployObject, position, rotation, transform.parent) != null)
+        {
+            Destroy(gameObject);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

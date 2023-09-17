@@ -6,11 +6,14 @@ using UnityEngine.UIElements;
 
 public class MachineDeployer : Deployer
 {
-    [SerializeField] KeyCode _xRotatePlus = KeyCode.W;
-    [SerializeField] KeyCode _xRotateMinus = KeyCode.S;
-    [SerializeField] KeyCode _yRotatePlus = KeyCode.A;
-    [SerializeField] KeyCode _yRotateMinus = KeyCode.D;
+    [SerializeField] GameObject _pointer;
     [SerializeField] bool _xRotatable;
+    [SerializeField] bool _liftable;
+    [SerializeField] KeyCode _xRotatePlus = KeyCode.I;
+    [SerializeField] KeyCode _xRotateMinus = KeyCode.K;
+    [SerializeField] KeyCode _yRotatePlus = KeyCode.J;
+    [SerializeField] KeyCode _yRotateMinus = KeyCode.L;
+
     RaycastHit hit;
     float _heightOffset;
     
@@ -18,16 +21,20 @@ public class MachineDeployer : Deployer
     void Start()
     {
         gameObject.layer = 2;
+        
+        PlayerMovementManager.Enable(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Scroll();
+        SetHeight();
+        SetRotation();
+        SetPosition();
         Place();
     }
 
-    void Place()
+    void SetPosition()
     {
         if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
         {
@@ -35,13 +42,23 @@ public class MachineDeployer : Deployer
         }
     }
 
-    void Scroll()
+    void SetHeight()
     {
-        Rotate(_xRotatePlus, Vector3.right * 5);
-        Rotate(_xRotateMinus, Vector3.right * -5);
+        if (_liftable)
+        {
+            _heightOffset -= Input.mouseScrollDelta.y;
+        }
+    }
+
+    void SetRotation()
+    {
+        if (_xRotatable)
+        {
+            Rotate(_xRotatePlus, Vector3.right * 5);
+            Rotate(_xRotateMinus, Vector3.right * -5);
+        }
         Rotate(_yRotatePlus, Vector3.up * 5);
         Rotate(_yRotateMinus, Vector3.up * -5);
-        _heightOffset -= Input.mouseScrollDelta.y;
     }
 
     void Rotate(KeyCode key, Vector3 rotation)
@@ -49,6 +66,17 @@ public class MachineDeployer : Deployer
         if (Input.GetKeyDown(key))
         {
             transform.eulerAngles += rotation;
+        }
+    }
+
+    void Place()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            if (Deploy(transform.position, transform.rotation))
+            {
+                PlayerMovementManager.Enable(true);
+            }
         }
     }
 }
