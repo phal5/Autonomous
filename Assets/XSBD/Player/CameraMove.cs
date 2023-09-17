@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class CameraMove: MonoBehaviour
 {
-    [SerializeField] private float Yaxis;
-    [SerializeField] private float Xaxis;
+    [SerializeField] KeyCode _shiftView;
     [SerializeField] private Vector3 personViewOffset;
     [SerializeField] private Vector3 IsometricViewOffset;
     [SerializeField] private Transform target; //player
+
+    float Yaxis;
+    float Xaxis;
 
     private readonly float rotSensitive = 3f;
     private float distance = 2f;
@@ -23,9 +25,9 @@ public class CameraMove: MonoBehaviour
 
     void ChangeTargetRotation()
     {
-        Xaxis -= Input.GetAxis("Mouse Y") * rotSensitive;
-        if(mode == 0)
+        if (!Input.GetKey(KeyCode.Mouse0))
         {
+            Xaxis -= Input.GetAxis("Mouse Y") * rotSensitive;
             Yaxis += Input.GetAxis("Mouse X") * rotSensitive;
         }
         //마우스의 입력을 감도에 맞게 변환
@@ -42,23 +44,21 @@ public class CameraMove: MonoBehaviour
     }
     void ChangeView()
     {
-        if (Input.GetKeyDown(KeyCode.U)) //키 설정 Input API로 변경해야함
+        if (Input.GetKeyDown(_shiftView)) //키 설정 Input API로 변경해야함
         {
             switch (mode)
             {
                 case 0: // isometric view
-                    Camera.main.orthographic = true;
+                    Camera.main.orthographic = false;
                     distance = 20f;
                     RotationMin = 15f;
                     RotationMax = 60f;
-                    mode = 1;
                     break;
                 case 1: // person view
                     Camera.main.orthographic = false;
                     distance = 2f;
                     RotationMin = -30f;
                     RotationMax = 85f;
-                    mode = 0;
                     break;
             }
             

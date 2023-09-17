@@ -10,7 +10,10 @@ public class PlayerItemPickUp : MonoBehaviour
     [SerializeField] KeyCode pickUpKey;
     void Start()
     {
-
+        if(player == null)
+        {
+            player = gameObject;
+        }
     }
     // Update is called once per frame
     void Update()
