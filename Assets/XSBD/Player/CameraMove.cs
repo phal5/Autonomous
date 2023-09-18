@@ -53,12 +53,14 @@ public class CameraMove: MonoBehaviour
                     distance = 20f;
                     RotationMin = 15f;
                     RotationMax = 60f;
+                    mode = 1;
                     break;
                 case 1: // person view
                     Camera.main.orthographic = false;
                     distance = 2f;
                     RotationMin = -30f;
                     RotationMax = 85f;
+                    mode = 0;
                     break;
             }
             

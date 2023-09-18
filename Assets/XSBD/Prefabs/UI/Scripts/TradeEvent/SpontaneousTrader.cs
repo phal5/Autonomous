@@ -21,7 +21,6 @@ public class SpontaneousTrader : TradeInventoryInstance
             _divisor += recipe._probability;
         }
         _divisor = 1 / _divisor;
-        Debug.Log(_divisor);
     }
 
     public void ResetRecipe()

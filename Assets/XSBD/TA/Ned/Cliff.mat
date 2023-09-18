@@ -14,6 +14,7 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - ADDITIONAL_LIGHT_CALCULATE_SHADOWS
+  - _MAIN_LIGHT_CALCULATE_SHADOWS
   - _MAIN_LIGHT_SHADOWS_CASCADE
   - _SHADOWS_SOFT
   m_InvalidKeywords: []
@@ -50,17 +51,17 @@ Material:
     - _Indirect: 0.1
     - _Line1: 0.42
     - _Line2: 0.34
-    - _MAIN_LIGHT_CALCULATE_SHADOWS: 0
+    - _MAIN_LIGHT_CALCULATE_SHADOWS: 1
     - _MAIN_LIGHT_SHADOWS_CASCADE: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SHADOWS_SOFT: 1
     - _SPECULAR: 0
     - _Smoothness: 0.5
-    - _Strength1: 0.2
-    - _Strength2: 0.01
+    - _Strength1: 0.5
+    - _Strength2: 0.2
     m_Colors:
-    - _AmbientColor: {r: 0.6320754, g: 0.17447221, b: 0.117271826, a: 1}
+    - _AmbientColor: {r: 0.6132076, g: 0.063040026, b: 0, a: 1}
     - _Base_Color: {r: 0.99215686, g: 0.7731232, b: 0.39999995, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &6514826049982099917
