@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 public class MachineDeployer : Deployer
 {
-    [SerializeField] GameObject _pointer;
+    [SerializeField] GameObject _pointerPrefab;
     [SerializeField] bool _xRotatable;
     [SerializeField] bool _liftable;
     [SerializeField] KeyCode _xRotatePlus = KeyCode.I;
@@ -14,6 +14,7 @@ public class MachineDeployer : Deployer
     [SerializeField] KeyCode _yRotatePlus = KeyCode.J;
     [SerializeField] KeyCode _yRotateMinus = KeyCode.L;
 
+    GameObject _pointer;
     RaycastHit hit;
     float _heightOffset;
     
@@ -21,7 +22,8 @@ public class MachineDeployer : Deployer
     void Start()
     {
         gameObject.layer = 2;
-        
+        _pointer = Instantiate(_pointerPrefab);
+        _pointer.layer = 2;
         PlayerMovementManager.Enable(false);
     }
 
@@ -39,6 +41,7 @@ public class MachineDeployer : Deployer
         if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
         {
             transform.position = hit.point + Vector3.up * _heightOffset;
+            _pointer.transform.position = hit.point;
         }
     }
 
@@ -75,6 +78,7 @@ public class MachineDeployer : Deployer
         {
             if (Deploy(transform.position, transform.rotation))
             {
+                Destroy(_pointer);
                 PlayerMovementManager.Enable(true);
             }
         }

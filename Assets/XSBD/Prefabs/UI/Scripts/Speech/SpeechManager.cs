@@ -5,5 +5,10 @@ using UnityEngine;
 
 public class SpeechManager : MonoBehaviour
 {
-    static TextMeshProUGUI textMeshProUGUI;
+    [SerializeField] TextMeshProUGUI _speakerBox;
+    [SerializeField] TextMeshProUGUI _speechBox;
+    [Space(10f)]
+    [SerializeField] SpeechCard[] _speechCards;
+
+
 }

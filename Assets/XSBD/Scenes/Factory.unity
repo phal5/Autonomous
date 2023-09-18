@@ -466,8 +466,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _deployObject: {fileID: 554919499}
-  _pointer: {fileID: 0}
-  _xRotatable: 0
+  _pointerPrefab: {fileID: 6626793928493649590, guid: e484d654a5f66a44d81f6f7e583903a9,
+    type: 3}
+  _xRotatable: 1
+  _liftable: 1
   _xRotatePlus: 119
   _xRotateMinus: 115
   _yRotatePlus: 97
