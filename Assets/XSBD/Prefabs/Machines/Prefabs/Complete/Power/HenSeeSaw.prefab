@@ -1779,7 +1779,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent: {fileID: 4600215332168384808}
   _runSpeed: 6
-  _pace: 0.5
+  _pace: 0.7
   _minPaceTime: 0.1
   _height: 0.5
   _LFoot: {fileID: 6146725068908209025}
@@ -5293,7 +5293,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1.2
-  m_BaseOffset: 0
+  m_BaseOffset: -0.05
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &6733657355043052707
@@ -5420,7 +5420,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.1
-  m_Center: {x: 0, y: 0.07, z: 0}
+  m_Center: {x: 0, y: 0.12, z: 0}
 --- !u!1 &5806803427621033894
 GameObject:
   m_ObjectHideFlags: 0
