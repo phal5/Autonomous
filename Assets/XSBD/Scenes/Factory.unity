@@ -304,7 +304,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &344223986
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -627,7 +627,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 1397521075}
   _runSpeed: 10
-  _pace: 0.5
+  _pace: 1.5
   _minPaceTime: 0.2
   _height: 0.3
   _LFoot: {fileID: 870947745}
