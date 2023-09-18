@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 20776331}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -301,7 +301,7 @@ MonoBehaviour:
   smoothMoveTime: 0.08
   moveSpeed: 6
   viewMode: 0
-  jumpspeed: 0
+  jumpspeed: 600
   maxjumpcount: 1
 --- !u!4 &137577412 stripped
 Transform:
@@ -342,7 +342,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 100
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -1212,8 +1212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a913db2bacd6ce547910cf8d3bf215ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Yaxis: 2
-  Xaxis: 0
+  _shiftView: 0
   personViewOffset: {x: 0, y: 2, z: 0}
   IsometricViewOffset: {x: 0, y: 0, z: 0}
   target: {fileID: 137577412}
@@ -1451,8 +1450,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2449806991647707056, guid: e33e3de417bf2de44a40deee288e0695,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 2449806991647707056, guid: e33e3de417bf2de44a40deee288e0695,
+        type: 3}
       propertyPath: m_LocalScale.y
-      value: 8.16316
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2449806991647707056, guid: e33e3de417bf2de44a40deee288e0695,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 2449806991647707056, guid: e33e3de417bf2de44a40deee288e0695,
         type: 3}
@@ -1467,7 +1476,7 @@ PrefabInstance:
     - target: {fileID: 2449806991647707056, guid: e33e3de417bf2de44a40deee288e0695,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.341
+      value: -2.28
       objectReference: {fileID: 0}
     - target: {fileID: 2449806991647707056, guid: e33e3de417bf2de44a40deee288e0695,
         type: 3}
@@ -2230,8 +2239,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2449806991647707056, guid: e33e3de417bf2de44a40deee288e0695,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 2449806991647707056, guid: e33e3de417bf2de44a40deee288e0695,
+        type: 3}
       propertyPath: m_LocalScale.y
-      value: 8.16316
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2449806991647707056, guid: e33e3de417bf2de44a40deee288e0695,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 2449806991647707056, guid: e33e3de417bf2de44a40deee288e0695,
         type: 3}
@@ -2873,7 +2892,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 38cc204893964534ea0741e97d370147,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.38
+      value: 1.716
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 38cc204893964534ea0741e97d370147,
         type: 3}
@@ -2883,7 +2902,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 38cc204893964534ea0741e97d370147,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.83
+      value: -6.064
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 38cc204893964534ea0741e97d370147,
         type: 3}
@@ -3038,6 +3057,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CutterMachine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2084627728078160170, guid: a13e3d7d74c6b8342b5b04dd0c69efe0,
+        type: 3}
+      propertyPath: m_TagString
+      value: Floor
       objectReference: {fileID: 0}
     - target: {fileID: 4642881029349886587, guid: a13e3d7d74c6b8342b5b04dd0c69efe0,
         type: 3}

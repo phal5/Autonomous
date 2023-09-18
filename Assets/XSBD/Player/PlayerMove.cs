@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -11,6 +12,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private int viewMode; // 1 일때 아이소메트릭 뷰
     [SerializeField] private int jumpspeed;
     [SerializeField] private int maxjumpcount;
+    private new Rigidbody rigidbody;
     private int jumpcount;
     private float rotationVelocity;
     private float speedVelocity;
@@ -20,6 +22,7 @@ public class PlayerMove : MonoBehaviour
     private Transform cameraTransform;
     void Start()
     {
+        rigidbody = GetComponent<Rigidbody>();
         cameraTransform = Camera.main.transform;
         jumpcount = maxjumpcount;
     }
@@ -52,12 +55,19 @@ public class PlayerMove : MonoBehaviour
             RotateSmoothly(rotationAngle);
         }
         ChangeCurrentSpeedBasedOnTargetSpeed(inputDir);
-        this.transform.Translate(this.transform.forward * currentSpeed * Time.deltaTime, Space.World);
+        float fallSpeed = rigidbody.velocity.y;
+        Debug.Log(cameraTransform.forward);
+        //Vector3 velocity = new Vector3(cameraTransform.forward.x * inputDir.x * currentSpeed, 0, currentSpeed * inputDir.y * cameraTransform.forward.z); // 앞방향으로
+        Vector3 velocity = (cameraTransform.forward*inputDir.y + cameraTransform.right*inputDir.x)*currentSpeed;
+        velocity.y = fallSpeed;
+        rigidbody.velocity = velocity;
+        //this.transform.Translate(this.transform.forward * currentSpeed * Time.deltaTime, Space.World);
     }
     void PersonMoveModeJump()
     {
-        if (Input.GetButtonDown("Jump") && jumpcount>0)
+        if (Input.GetKeyDown(KeyCode.Space) && (jumpcount>0))
         {
+            Debug.Log("jump");
             GetComponent<Rigidbody>().AddForce(Vector3.up * jumpspeed, ForceMode.Impulse);
             jumpcount--;
         }
@@ -73,16 +83,7 @@ public class PlayerMove : MonoBehaviour
     }
     void Update()
     {
-        switch (viewMode)
-        {
-            case 1:
-                IsometricMoveMode();
-                break;
-            default:
-                PersonMoveMode();
-                break;
-
-        }
+        PersonMoveMode();
     }
     private void OnCollisionEnter(Collision collision)
     {
