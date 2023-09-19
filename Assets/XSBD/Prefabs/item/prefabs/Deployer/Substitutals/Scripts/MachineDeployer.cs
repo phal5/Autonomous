@@ -17,13 +17,17 @@ public class MachineDeployer : Deployer
     // Start is called before the first frame update
     void Start()
     {
-        _pointer = Instantiate(MachineDeployManager.GetPointer());
+        if(MachineDeployManager.GetPointer() != null)
+        {
+            _pointer = Instantiate(MachineDeployManager.GetPointer());
+            SetLayersInChildren(_pointer.transform, 2);
+        }
         if(!TryGetComponent<Rigidbody>(out _))
         {
             transform.AddComponent<Rigidbody>();
         }
         SetLayersInChildren(transform, 2);
-        SetLayersInChildren(_pointer.transform, 2);
+        ClearBehaviours(transform);
         TriggerizeColliders(transform);
         PlayerMovementManager.Enable(false);
     }
@@ -46,6 +50,18 @@ public class MachineDeployer : Deployer
         }
     }
 
+    void ClearBehaviours(Transform transform)
+    {
+        foreach (MonoBehaviour behaviour in transform.GetComponents<MonoBehaviour>())
+        {
+            behaviour.enabled = false;
+        }
+        foreach (Transform child in transform)
+        {
+            ClearBehaviours(child);
+        }
+    }
+
     void TriggerizeColliders(Transform transform)
     {
         Collider collider;
@@ -61,19 +77,13 @@ public class MachineDeployer : Deployer
 
     void ChangeMaterialInChildren(Transform transform, Material material)
     {
-        SkinnedMeshRenderer skinnedMR;
-        if(transform.TryGetComponent<SkinnedMeshRenderer>(out skinnedMR))
+        Renderer renderer;
+        if(transform.TryGetComponent<Renderer>(out renderer))
         {
-            for(int i = 0; i < skinnedMR.materials.Length; ++i)
+            for(int i = 0; i < renderer.materials.Length; ++i)
             {
-                skinnedMR.materials[i] = material;
+                renderer.materials[i] = material;
             }
-        }
-
-        MeshRenderer mr;
-        if (transform.TryGetComponent<MeshRenderer>(out mr))
-        {
-            mr.material = material;
         }
 
         foreach (Transform child in transform)

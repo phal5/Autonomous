@@ -56,7 +56,6 @@ public class PlayerMove : MonoBehaviour
         }
         ChangeCurrentSpeedBasedOnTargetSpeed(inputDir);
         float fallSpeed = rigidbody.velocity.y;
-        Debug.Log(cameraTransform.forward);
         //Vector3 velocity = new Vector3(cameraTransform.forward.x * inputDir.x * currentSpeed, 0, currentSpeed * inputDir.y * cameraTransform.forward.z); // 앞방향으로
         Vector3 velocity = (cameraTransform.forward*inputDir.y + cameraTransform.right*inputDir.x)*currentSpeed;
         velocity.y = fallSpeed;
