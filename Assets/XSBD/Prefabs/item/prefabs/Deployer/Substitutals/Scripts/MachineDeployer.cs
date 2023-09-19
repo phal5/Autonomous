@@ -27,7 +27,7 @@ public class MachineDeployer : Deployer
             transform.AddComponent<Rigidbody>();
         }
         SetLayersInChildren(transform, 2);
-        ClearBehaviours(transform);
+        ChangeMaterialInChildren(transform, MachineDeployManager.GetMaterial(true));
         TriggerizeColliders(transform);
         PlayerMovementManager.Enable(false);
     }
