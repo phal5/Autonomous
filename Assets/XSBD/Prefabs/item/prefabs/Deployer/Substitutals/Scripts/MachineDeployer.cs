@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -20,15 +21,15 @@ public class MachineDeployer : Deployer
         if(MachineDeployManager.GetPointer() != null)
         {
             _pointer = Instantiate(MachineDeployManager.GetPointer());
-            SetLayersInChildren(_pointer.transform, 2);
+            _pointer.layer = 2;
         }
         if(!TryGetComponent<Rigidbody>(out _))
         {
             transform.AddComponent<Rigidbody>();
         }
-        SetLayersInChildren(transform, 2);
         ChangeMaterialInChildren(transform, MachineDeployManager.GetMaterial(true));
         TriggerizeColliders(transform);
+        SetLayersInChildren(transform, 2);
         PlayerMovementManager.Enable(false);
     }
 
@@ -46,7 +47,7 @@ public class MachineDeployer : Deployer
         transform.gameObject.layer = index;
         foreach(Transform child in transform)
         {
-            child.gameObject.layer = index;
+            SetLayersInChildren(child, index);
         }
     }
 
@@ -80,9 +81,10 @@ public class MachineDeployer : Deployer
         Renderer renderer;
         if(transform.TryGetComponent<Renderer>(out renderer))
         {
+            Debug.Log("Yep");
             for(int i = 0; i < renderer.materials.Length; ++i)
             {
-                renderer.materials[i] = material;
+                renderer.SetMaterials(new List<Material>(Enumerable.Repeat<Material>(material, renderer.materials.Length)));
             }
         }
 
@@ -97,7 +99,10 @@ public class MachineDeployer : Deployer
         if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out _hit, 100))
         {
             transform.position = _hit.point + Vector3.up * _heightOffset;
-            _pointer.transform.position = _hit.point;
+            if(_pointer != null)
+            {
+                _pointer.transform.position = _hit.point;
+            }
         }
     }
 

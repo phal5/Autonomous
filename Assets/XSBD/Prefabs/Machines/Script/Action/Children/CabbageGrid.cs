@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CabbageGrid : Action
 {
-    float _angle = 0;
     Collider _collider;
 
     // Start is called before the first frame update

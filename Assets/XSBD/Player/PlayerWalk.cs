@@ -15,6 +15,8 @@ public class PlayerWalk : MonoBehaviour
     [SerializeField] Transform _LHip;
     [SerializeField] Transform _RFoot;
     [SerializeField] Transform _RHip;
+
+    [SerializeField] Transform _root;
     RaycastHit _hit;
     Vector3 _stepPosition;
     float _paceDivisor;
