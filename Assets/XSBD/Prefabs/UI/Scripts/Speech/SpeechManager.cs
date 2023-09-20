@@ -8,11 +8,16 @@ public class SpeechManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI _speakerBox;
     [SerializeField] TextMeshProUGUI _speechBox;
     [SerializeField] GameObject _speechUI;
-    [SerializeField] KeyCode _flipKey;
+    [SerializeField] KeyCode _flipKey = KeyCode.Return;
     [Space(10f)]
     [SerializeField] SpeechCard[] _speechCards;
 
     byte _index = 0;
+
+    private void Start()
+    {
+        Flip();
+    }
 
     private void Update()
     {
@@ -28,12 +33,14 @@ public class SpeechManager : MonoBehaviour
         {
             _speechCards[_index].PrintSpeech(_speakerBox, _speechBox);
             ++_index;
+            PlayerMovementManager.Enable(false);
         }
         else
         {
             _speakerBox.text = "";
             _speechBox.text = "";
             _speechUI.SetActive(false);
+            PlayerMovementManager.Enable(true);
         }
     }
 

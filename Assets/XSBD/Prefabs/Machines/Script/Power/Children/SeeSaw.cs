@@ -7,7 +7,6 @@ public class SeeSaw : Power
 {
     [SerializeField] Rigidbody _rigidbody1;
     [SerializeField] Rigidbody _rigidbody2;
-    [SerializeField] Transform _bowl;
     [SerializeField] float _friction = 0;
     [SerializeField] Feeder _feeder;
     float _1;
@@ -27,10 +26,6 @@ public class SeeSaw : Power
         DecideVelocity();
         SavePosition();
         Feed();
-        if (_bowl)
-        {
-            _bowl.transform.position = ReturnHorizontal(_bowl.position) + Vector3.up * ((_1 > _2) ? _1 : _2);
-        }
     }
 
     void DecidePosition(out float speed)

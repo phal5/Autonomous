@@ -75,7 +75,7 @@ public class PlayerWalk : MonoBehaviour
 
         if (Vector3.SqrMagnitude(paceData) <= _pace * _pace * paceMultiplier)
         {
-            if (Cast(hip, paceData))
+            if (Cast(hip, paceData + Vector3.up * 0.5f))
             {
                 foot.position = _hit.point;
                 foot.position += Vector3.up

@@ -19,24 +19,31 @@ public class MachineInventoryInstance : InventoryInstance
 
     bool RawInstantiate(InventorySlot slot, byte createAmount, Vector3 position, bool decrement = true)
     {
-        if (decrement)
+        if(slot != null)
         {
-            for (int i = 0; i < createAmount && slot.GetSlotQuantity() > 0; ++i)
+            if (decrement)
             {
-                Instantiate(slot.GetSlotItem(), position, Random.rotation, slot.GetSlotParent());
-                slot.SetQuantity((byte)(slot.GetSlotQuantity() - 1));
+                for (int i = 0; i < createAmount && slot.GetSlotQuantity() > 0; ++i)
+                {
+                    Instantiate(slot.GetSlotItem(), position, Random.rotation, slot.GetSlotParent());
+                    slot.SetQuantity((byte)(slot.GetSlotQuantity() - 1));
+                }
             }
-        }
-        else
-        {
-            for (int i = 0; i < createAmount && slot.GetSlotQuantity() > 0; ++i)
+            else
             {
-                Instantiate(slot.GetSlotItem(), position, Random.rotation, slot.GetSlotParent());
+                for (int i = 0; i < createAmount && slot.GetSlotQuantity() > 0; ++i)
+                {
+                    Instantiate(slot.GetSlotItem(), position, Random.rotation, slot.GetSlotParent());
+                }
             }
-        }
-        if (slot.GetSlotQuantity() > 0)
-        {
-            return true;
+            if (slot.GetSlotQuantity() > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         else
         {
