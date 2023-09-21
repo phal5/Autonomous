@@ -27,7 +27,7 @@ public class TradeInventoryInstance : InventoryInstance
 
     private void Start()
     {
-        SetCamera();
+        //SetCamera();
         SetupTradeSlot();
         SetupInventorySlots();
     }

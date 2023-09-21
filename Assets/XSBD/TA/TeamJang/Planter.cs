@@ -12,6 +12,14 @@ public class Planter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        foreach(Transform planter in planters)
+        {
+            Plant(planter);
+        }
+    }
+
+    void Plant(Transform from)
+    {
+        Physics.Raycast(from.position, Vector3.down, out _hit);
     }
 }
