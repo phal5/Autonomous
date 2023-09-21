@@ -15,7 +15,10 @@ public class PlayerWalk : MonoBehaviour
     [SerializeField] Transform _LHip;
     [SerializeField] Transform _RFoot;
     [SerializeField] Transform _RHip;
+    [Space(10f)]
     [SerializeField] Transform _root;
+    [SerializeField] Transform _RealLFoot;
+    [SerializeField] Transform _RealRFoot;
 
     RaycastHit _hit;
     Vector3 _stepPosition;
@@ -63,15 +66,15 @@ public class PlayerWalk : MonoBehaviour
 
         if (_LR)
         {
-            Step(_LFoot, _LHip, _RFoot, _RHip, SqrPaceMultiplier());
+            Step(_LFoot, _LHip, _RFoot, _RHip, _RealRFoot, SqrPaceMultiplier());
         }
         else
         {
-            Step(_RFoot, _RHip, _LFoot, _LHip, SqrPaceMultiplier());
+            Step(_RFoot, _RHip, _LFoot, _LHip, _RealLFoot, SqrPaceMultiplier());
         }
     }
 
-    void Step(Transform foot, Transform hip, Transform otherfoot, Transform otherHip, float paceMultiplier)
+    void Step(Transform foot, Transform hip, Transform otherfoot, Transform otherHip, Transform realOtherFoot, float paceMultiplier)
     {
         Vector3 paceData = Vector3.Scale(_stepPosition - otherHip.position, new Vector3(1, 0, 1));
 
@@ -80,13 +83,13 @@ public class PlayerWalk : MonoBehaviour
             if (Cast(hip, paceData + Vector3.up * 0.5f))
             {
                 foot.position = _hit.point;
-                Vector3 bump = Vector3.up
-                    * (_pace * _pace * paceMultiplier - Vector3.SqrMagnitude(paceData))
+                float bump = (_pace * _pace * paceMultiplier - Vector3.SqrMagnitude(paceData))
                     * _paceDivisor * _paceDivisor * _height
                     * paceMultiplier;
-                foot.position += bump;
+                    
+                foot.position += bump * Vector3.up;
                 otherfoot.position = _stepPosition;
-                _root.localPosition = _initialRootPosition + bump * 0.1f;
+                _root.localPosition = _initialRootPosition + bump * Vector3.up * 0.1f;
             }
             else
             {
