@@ -2899,7 +2899,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &801456218
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9497,7 +9497,7 @@ PrefabInstance:
     - target: {fileID: 4537777383395488545, guid: 17435075e05771d4784598f7a6e6da02,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4632160993957645268, guid: 17435075e05771d4784598f7a6e6da02,
         type: 3}
@@ -10049,7 +10049,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6990908048029945144}
   m_Layer: 0
-  m_Name: SpontaneousTraderInventory
+  m_Name: Trader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
