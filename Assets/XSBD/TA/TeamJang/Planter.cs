@@ -2,24 +2,53 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class Planter : MonoBehaviour
 {
     [SerializeField] Transform[] planters;
-    [SerializeField] GameObject plant;
+    [SerializeField] Transform _parent;
+    [SerializeField] GameObject _plantPrefab;
     [SerializeField] byte _layer;
-    RaycastHit _hit;
+    [Space(10)]
+    [SerializeField] bool _plant;
+    [SerializeField] bool _undo;
 
-    // Update is called once per frame
+    RaycastHit _hit;
+    List<GameObject> gameObjects;
+
     void Update()
     {
-        foreach(Transform planter in planters)
+        if (_plant)
         {
-            Plant(planter);
+            gameObjects.Clear();
+            foreach (Transform planter in planters)
+            {
+                gameObjects.Add(Plant(planter, _parent));
+            }
+            _plant = false;
+        }
+        if (_undo)
+        {
+            foreach(GameObject plant in gameObjects)
+            {
+                DestroyImmediate(plant);
+            }
+            gameObjects.Clear();
+            _undo = false;
         }
     }
 
-    void Plant(Transform from)
+    GameObject Plant(Transform from, Transform parent)
     {
-        Physics.Raycast(from.position, Vector3.down, out _hit);
+        if(Physics.Raycast(from.position, Vector3.down, out _hit) && _hit.transform.gameObject.layer == _layer)
+        {
+            Quaternion rotation =
+                Quaternion.LookRotation(_hit.normal, Vector3.back)
+                * Quaternion.Euler(Vector3.right * 90)
+                * Quaternion.Euler(Vector3.up * Random.value * 360);
+
+            return Instantiate(_plantPrefab, _hit.point, rotation, parent);
+        }
+        return null;
     }
 }

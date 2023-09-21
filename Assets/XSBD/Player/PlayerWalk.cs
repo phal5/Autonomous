@@ -15,10 +15,11 @@ public class PlayerWalk : MonoBehaviour
     [SerializeField] Transform _LHip;
     [SerializeField] Transform _RFoot;
     [SerializeField] Transform _RHip;
-
     [SerializeField] Transform _root;
+
     RaycastHit _hit;
     Vector3 _stepPosition;
+    Vector3 _initialRootPosition;
     float _paceDivisor;
     float _speedDivisor;
     float _paceTimer;
@@ -33,6 +34,7 @@ public class PlayerWalk : MonoBehaviour
         _rig.weight = 0;
         _stepPosition = _LFoot.position;
         _rig.weight = 1;
+        _initialRootPosition = _root.localPosition;
     }
 
     // Update is called once per frame
@@ -78,15 +80,17 @@ public class PlayerWalk : MonoBehaviour
             if (Cast(hip, paceData + Vector3.up * 0.5f))
             {
                 foot.position = _hit.point;
-                foot.position += Vector3.up
+                Vector3 bump = Vector3.up
                     * (_pace * _pace * paceMultiplier - Vector3.SqrMagnitude(paceData))
                     * _paceDivisor * _paceDivisor * _height
                     * paceMultiplier;
+                foot.position += bump;
                 otherfoot.position = _stepPosition;
+                _root.localPosition = _initialRootPosition + bump * 0.1f;
             }
             else
             {
-                Fall();
+                Fall(foot, hip);
             }
         }
         else
@@ -108,7 +112,7 @@ public class PlayerWalk : MonoBehaviour
 
     bool Cast(Transform hip, Vector3 paceData)
     {
-        return Physics.Raycast(new Ray(hip.position - Vector3.Dot(paceData, transform.forward) * transform.forward, Vector3.down), out _hit, 10);
+        return Physics.Raycast(new Ray(hip.position - Vector3.Dot(paceData, transform.forward) * transform.forward, Vector3.down), out _hit, 2);
     }
 
     float SqrPaceMultiplier()
@@ -122,8 +126,9 @@ public class PlayerWalk : MonoBehaviour
         return _rigidbody.velocity.magnitude * _speedDivisor;
     }
 
-    void Fall()
+    void Fall(Transform foot, Transform hip)
     {
-
+        foot.position = _stepPosition = hip.position - Vector3.up;
+        _root.localPosition = _initialRootPosition;
     }
 }
