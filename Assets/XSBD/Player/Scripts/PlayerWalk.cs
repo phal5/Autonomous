@@ -11,6 +11,7 @@ public class PlayerWalk : MonoBehaviour
     [SerializeField] float _pace;
     [SerializeField] float _minPaceTime = 0.2f;
     [SerializeField] float _height;
+    [SerializeField] float _maxHeight = 0.5f;
     [SerializeField] Transform _LFoot;
     [SerializeField] Transform _LHip;
     [SerializeField] Transform _RFoot;
@@ -87,9 +88,14 @@ public class PlayerWalk : MonoBehaviour
                     * _paceDivisor * _paceDivisor * _height
                     * paceMultiplier;
                     
+                if(bump > _maxHeight)
+                {
+                    bump = _maxHeight;
+                }
+
                 foot.position += bump * Vector3.up;
                 otherfoot.position = _stepPosition;
-                _root.localPosition = _initialRootPosition + bump * Vector3.up * 0.1f;
+                _root.localPosition = _initialRootPosition + bump * Vector3.up * 0.2f;
             }
             else
             {

@@ -8,6 +8,8 @@ public class PlantGrower : MonoBehaviour
     [SerializeField] float _stageRandomness = 10;
     Transform _plant;
     [SerializeField] float _timer;
+    [SerializeField] bool _randomizeYRotation = true;
+
     byte _index = 0;
 
     // Update is called once per frame
@@ -18,14 +20,7 @@ public class PlantGrower : MonoBehaviour
 
     void Grow()
     {
-        if(_timer > 0)
-        {
-            _timer -= Time.deltaTime;
-        }
-        if( _timer < 0)
-        {
-            _timer = 0;
-        }
+        SetTimer();
         if(_timer == 0)
         {
             if (_index < _growthPrefabs.Length)
@@ -34,19 +29,7 @@ public class PlantGrower : MonoBehaviour
                 {
                     Destroy(_plant.gameObject);
                 }
-                if(_growthPrefabs[_index].TryGetComponent<Item>(out Item item))
-                {
-                    int quantity = item.GetQuantity();
-                    Transform parent = item.GetParent();
-                    for (int i = 0; i < quantity; i++)
-                    {
-                        _plant = Instantiate(_growthPrefabs[_index++], transform.position, transform.rotation, parent).transform;
-                    }
-                }
-                else
-                {
-                    _plant = Instantiate(_growthPrefabs[_index++], transform).transform;
-                }
+                InstantiatePlant();
                 if(_index < _growthPrefabs.Length)
                 {
                     _timer = SetStageLength();
@@ -57,6 +40,36 @@ public class PlantGrower : MonoBehaviour
                 ResetIndex();
             }
         }
+    }
+
+    void SetTimer()
+    {
+        if (_timer > 0)
+        {
+            _timer -= Time.deltaTime;
+        }
+        if (_timer < 0)
+        {
+            _timer = 0;
+        }
+    }
+
+    void InstantiatePlant()
+    {
+        if (_randomizeYRotation)
+        {
+            float _rotY = 360 * Random.value;
+            Debug.Log(_rotY);
+            transform.rotation *= Quaternion.Euler(Vector3.up * _rotY);
+        }
+        _plant = Instantiate(_growthPrefabs[_index], transform).transform;
+
+        if (_growthPrefabs[_index].TryGetComponent<Item>(out Item item))
+        {
+            item = _plant.GetComponent<Item>();
+            _plant.parent = item.GetParent();
+        }
+        _index++;
     }
 
     void ResetIndex()

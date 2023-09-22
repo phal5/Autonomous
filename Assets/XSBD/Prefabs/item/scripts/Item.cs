@@ -13,7 +13,14 @@ public class Item : MonoBehaviour
     [SerializeField] Parent _type;
     [SerializeField] byte _parentIndex;
 
+    bool _parentSet = false;
+
     private void Start()
+    {
+        DecideParent();
+    }
+
+    void DecideParent()
     {
         switch (_type)
         {
@@ -29,6 +36,7 @@ public class Item : MonoBehaviour
                 _parent = null;
                 break;
         }
+        _parentSet = true;
     }
 
     public void GetItemData(out GameObject item, out Transform parent, out byte quantity, out bool stackable)
@@ -44,14 +52,21 @@ public class Item : MonoBehaviour
     {
         return _item;
     }
+
     public Transform GetParent()
     {
+        if (!_parentSet)
+        {
+            DecideParent();
+        }
         return _parent;
     }
+
     public byte GetQuantity()
     {
         return _quantity;
     }
+
     public bool GetStackable()
     {
         return _stackable;
