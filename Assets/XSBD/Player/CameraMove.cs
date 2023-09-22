@@ -41,6 +41,11 @@ public class CameraMove: MonoBehaviour
         this.transform.eulerAngles = targetRotation;// 각도를 지정해줌
 
         transform.position = target.position - transform.forward * distance + personViewOffset; //각도를 기반으로 카메라의 위치를 조정해준다.
+
+        if(Physics.SphereCast(target.position + personViewOffset, 0.3f, -transform.forward, out RaycastHit hit, distance))
+        {
+            transform.position = hit.point + hit.normal * 0.3f;
+        }
     }
     void ChangeView()
     {

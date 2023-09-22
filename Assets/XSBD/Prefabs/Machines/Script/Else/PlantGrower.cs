@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlantGrower : MonoBehaviour
 {
@@ -33,7 +34,19 @@ public class PlantGrower : MonoBehaviour
                 {
                     Destroy(_plant.gameObject);
                 }
-                _plant = Instantiate(_growthPrefabs[_index++], transform).transform;
+                if(_growthPrefabs[_index].TryGetComponent<Item>(out Item item))
+                {
+                    int quantity = item.GetQuantity();
+                    Transform parent = item.GetParent();
+                    for (int i = 0; i < quantity; i++)
+                    {
+                        _plant = Instantiate(_growthPrefabs[_index++], transform.position, transform.rotation, parent).transform;
+                    }
+                }
+                else
+                {
+                    _plant = Instantiate(_growthPrefabs[_index++], transform).transform;
+                }
                 if(_index < _growthPrefabs.Length)
                 {
                     _timer = SetStageLength();
@@ -48,11 +61,22 @@ public class PlantGrower : MonoBehaviour
 
     void ResetIndex()
     {
-        if(_index >= _growthPrefabs.Length && Vector3.SqrMagnitude(_plant.localPosition) > 1)
+        if(_index >= _growthPrefabs.Length)
         {
-            _index = 0;
-            _plant.parent = null;
-            _plant = null;
+            if (!_plant)
+            {
+                _index = 0;
+                
+            }
+            else if(Vector3.SqrMagnitude(_plant.position - transform.position) > 1)
+            {
+                _index = 0;
+                if(_plant.parent == transform)
+                {
+                    _plant.parent = null;
+                }
+                _plant = null;
+            }
         }
     }
 
