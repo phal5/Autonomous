@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Action : MonoBehaviour
 {
-    [SerializeField] Power _powerSupply;
-    [SerializeField] float _speedMultiplier;
+    [SerializeField] protected Power _powerSupply;
+    [SerializeField] protected float _speedMultiplier;
 
     protected float _Speed()
     {
