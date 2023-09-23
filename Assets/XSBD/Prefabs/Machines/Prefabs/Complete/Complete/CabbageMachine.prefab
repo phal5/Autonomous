@@ -11681,7 +11681,6 @@ GameObject:
   - component: {fileID: 2481811152987059501}
   - component: {fileID: 6782780667840972032}
   - component: {fileID: 6494067031260239712}
-  - component: {fileID: 3181914552360262270}
   m_Layer: 0
   m_Name: BowlMesh
   m_TagString: Untagged
@@ -11778,22 +11777,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5.342417, y: 1.5, z: 0.5}
   m_Center: {x: -0.14478013, y: 0.0025324821, z: -0.55}
---- !u!208 &3181914552360262270
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6451057777733652915}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 2.75, y: 1.5, z: 14.18}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: -0.14500001, y: 0, z: 7}
-  m_TimeToStationary: 0.5
 --- !u!1 &6468871612231787587
 GameObject:
   m_ObjectHideFlags: 0

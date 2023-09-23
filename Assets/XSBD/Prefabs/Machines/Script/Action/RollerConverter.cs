@@ -10,22 +10,26 @@ public class RollerConverter : Action
     void Update()
     {
         TimerAccumulate();
-        if(_timer > 0)
+        if (_timer > 0.1f)
         {
             _timer -= Time.deltaTime;
             RollerRotate();
             AddRollerTag();
         }
+        else
+        {
+            gameObject.tag = "Untagged";
+        }
     }
 
     void TimerAccumulate()
     {
-        _timer += _Speed();
+        _timer += (_Speed() > 0)? _Speed() : -_Speed();
     }
 
     void RollerRotate()
     {
-        transform.eulerAngles += new Vector3(1,0,0) * _Speed() * Time.deltaTime;
+        transform.rotation *= Quaternion.Euler(Vector3.up * Time.deltaTime * 100);
     }
 
     void AddRollerTag()
