@@ -8,6 +8,7 @@ public class PlayerInput : MonoBehaviour
     {
         [SerializeField] KeyCode _key;
         [SerializeField] string _trigger;
+        [SerializeField] Behaviour _behaviour;
 
         public void SetTrigger(Animator animator, ref string _currentTrigger)
         {
@@ -30,7 +31,10 @@ public class PlayerInput : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(_button))
             {
-                animator.ResetTrigger(_currentTrigger);
+                if(_currentTrigger != "")
+                {
+                    animator.ResetTrigger(_currentTrigger);
+                }
                 animator.SetTrigger(_trigger);
                 _currentTrigger = _trigger;
             }
