@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2023789346520831318}
   - component: {fileID: 5625904704921532785}
   - component: {fileID: 7000866441124662655}
-  - component: {fileID: 7495345746472498158}
   m_Layer: 5
   m_Name: InventoryBar
   m_TagString: Untagged
@@ -78,21 +77,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7495345746472498158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 237595788631401519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b1c3ebeff31af44498a856ecbe94823, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _key: 9
-  _direction: 1
-  _speed: 10
 --- !u!1 &1285772740366375336
 GameObject:
   m_ObjectHideFlags: 0

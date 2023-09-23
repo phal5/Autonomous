@@ -5,8 +5,9 @@ using UnityEngine.Rendering;
 
 public class Hitter : MonoBehaviour
 {
-    BoxCollider _collider;
     [SerializeField] KeyCode _key = KeyCode.Mouse0;
+
+    Collider _collider;
 
     // Start is called before the first frame update
     void Start()

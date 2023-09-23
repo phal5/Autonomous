@@ -59,7 +59,6 @@ public class PlantGrower : MonoBehaviour
         if (_randomizeYRotation)
         {
             float _rotY = 360 * Random.value;
-            Debug.Log(_rotY);
             transform.rotation *= Quaternion.Euler(Vector3.up * _rotY);
         }
         _plant = Instantiate(_growthPrefabs[_index], transform).transform;

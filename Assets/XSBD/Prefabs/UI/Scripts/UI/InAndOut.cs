@@ -25,12 +25,15 @@ public class InAndOut : MonoBehaviour
 
         _initial = _UI.transform.position;
 
+        Debug.Log(_UI.rect.width);
+        Debug.Log(_UI.rect.height);
+
         switch (_direction)
         {
-            case Direction.UP: _dir = Vector3.up * _UI.rect.height * 0.1f; break;
-            case Direction.DOWN: _dir = Vector3.down * _UI.rect.height * 0.1f; break;
-            case Direction.RIGHT: _dir = Vector3.right * _UI.rect.width * 0.1f; break;
-            case Direction.LEFT: _dir = Vector3.left * _UI.rect.width * 0.1f; break;
+            case Direction.UP: _dir = Vector3.up * _UI.rect.height * _UI.lossyScale.y * 0.01f; break;
+            case Direction.DOWN: _dir = Vector3.down * _UI.rect.height * _UI.lossyScale.y * 0.01f; break;
+            case Direction.RIGHT: _dir = Vector3.right * _UI.rect.width * _UI.lossyScale.x * 0.01f; break;
+            case Direction.LEFT: _dir = Vector3.left * _UI.rect.width * _UI.lossyScale.x * 0.01f; break;
         }
         _hidden = _UI.transform.position + _dir;
         _timer = 1;
