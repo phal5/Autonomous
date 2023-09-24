@@ -31,12 +31,6 @@ public class MachineDeployer : Deployer
         TriggerizeColliders(transform);
         SetLayersInChildren(transform, 2);
         PlayerMovementManager.Enable(false);
-
-        foreach(Transform child in transform)
-        {
-            ClearBehaviours(child);
-            ClearRigidbody(child);
-        }
     }
 
     // Update is called once per frame
@@ -69,18 +63,6 @@ public class MachineDeployer : Deployer
         }
     }
 
-    void ClearRigidbody(Transform transform)
-    {
-        foreach (Rigidbody rigidbody in transform.GetComponents<Rigidbody>())
-        {
-            Destroy(rigidbody);
-        }
-        foreach (Transform child in transform)
-        {
-            ClearRigidbody(child);
-        }
-    }
-
     void TriggerizeColliders(Transform transform)
     {
         Collider collider;
@@ -99,6 +81,7 @@ public class MachineDeployer : Deployer
         Renderer renderer;
         if(transform.TryGetComponent<Renderer>(out renderer))
         {
+            Debug.Log("Yep");
             for(int i = 0; i < renderer.materials.Length; ++i)
             {
                 renderer.SetMaterials(new List<Material>(Enumerable.Repeat<Material>(material, renderer.materials.Length)));
@@ -161,6 +144,7 @@ public class MachineDeployer : Deployer
             if (Deploy(transform.position, transform.rotation))
             {
                 Destroy(_pointer);
+                PlayerMovementManager.Enable(true);
             }
         }
     }

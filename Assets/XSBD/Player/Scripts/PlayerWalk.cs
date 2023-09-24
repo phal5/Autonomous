@@ -94,8 +94,7 @@ public class PlayerWalk : MonoBehaviour
                 }
 
                 foot.position += bump * Vector3.up;
-                Physics.Raycast(_stepPosition + Vector3.up, Vector3.down, out _hit);
-                otherfoot.position = _hit.point;
+                otherfoot.position = _stepPosition;
                 _root.localPosition = _initialRootPosition + bump * Vector3.up * 0.2f;
             }
             else
