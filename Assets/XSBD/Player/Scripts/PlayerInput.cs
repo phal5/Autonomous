@@ -14,14 +14,7 @@ public class PlayerInput : MonoBehaviour
         {
             if (Input.GetKeyDown(_key))
             {
-                if(_currentTrigger != null)
-                {
-                    animator.ResetTrigger(_currentTrigger);
-                }
-                if(_behaviour != null)
-                {
-                    _behaviour.enabled = true;
-                }
+                animator.ResetTrigger(_currentTrigger);
                 animator.SetTrigger(_trigger);
                 _currentTrigger = _trigger;
             }
@@ -33,7 +26,6 @@ public class PlayerInput : MonoBehaviour
     {
         [SerializeField] int _button;
         [SerializeField] string _trigger;
-        [SerializeField] Behaviour _behaviour;
 
         public void SetTrigger(Animator animator, ref string _currentTrigger)
         {
@@ -42,10 +34,6 @@ public class PlayerInput : MonoBehaviour
                 if(_currentTrigger != "")
                 {
                     animator.ResetTrigger(_currentTrigger);
-                }
-                if (_behaviour != null)
-                {
-                    _behaviour.enabled = true;
                 }
                 animator.SetTrigger(_trigger);
                 _currentTrigger = _trigger;

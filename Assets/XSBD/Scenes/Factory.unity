@@ -14283,7 +14283,7 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 504fa9e58ba17814d9492ef21ef76ca7, type: 2}
-  - {fileID: 2100000, guid: ace83832b31b39841bf6983796ada41e, type: 2}
+  - {fileID: 0}
   - {fileID: 2100000, guid: 733dceb7d017d3f4da04789e9929958f, type: 2}
   - {fileID: 2100000, guid: 1175176d4b5f3d34e8973afc5f2afe37, type: 2}
   - {fileID: 2100000, guid: 48da7648719be5c4881bd3f909574804, type: 2}
@@ -15045,13 +15045,13 @@ MonoBehaviour:
   _minPaceTime: 0.2
   _height: 0.03
   _maxHeight: 0.5
-  _LFootTarget: {fileID: 870947745}
+  _LFoot: {fileID: 870947745}
   _LHip: {fileID: 3063962574084605471}
-  _RFootTarget: {fileID: 1111154611}
+  _RFoot: {fileID: 1111154611}
   _RHip: {fileID: 7678317442683371219}
   _root: {fileID: 257560741424985483}
-  _LFoot: {fileID: 8875937685069324324}
-  _RFoot: {fileID: 5048070991852365459}
+  _RealLFoot: {fileID: 8875937685069324324}
+  _RealRFoot: {fileID: 5048070991852365459}
   _LR: 0
 --- !u!114 &383242166
 MonoBehaviour:
@@ -90806,10 +90806,8 @@ MonoBehaviour:
   _clickEvents:
   - _button: 0
     _trigger: Attack
-    _behaviour: {fileID: 0}
   - _button: 1
     _trigger: PutIn
-    _behaviour: {fileID: 0}
 --- !u!224 &919960595035198889
 RectTransform:
   m_ObjectHideFlags: 0
@@ -95055,7 +95053,7 @@ SkinnedMeshRenderer:
   - {fileID: 2100000, guid: 5778d2461d1f846458e5a2c62a65931e, type: 2}
   - {fileID: 2100000, guid: cf20c0de7dfacd44e9ea9ae6c56d2729, type: 2}
   - {fileID: 2100000, guid: ec2305696a28b7c4e9440d76334742e3, type: 2}
-  - {fileID: 2100000, guid: f6630d58b97c1ee4ea62d499ec8d49d4, type: 2}
+  - {fileID: 2100000, guid: ec2305696a28b7c4e9440d76334742e3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
