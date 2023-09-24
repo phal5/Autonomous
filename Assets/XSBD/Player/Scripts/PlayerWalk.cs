@@ -12,14 +12,14 @@ public class PlayerWalk : MonoBehaviour
     [SerializeField] float _minPaceTime = 0.2f;
     [SerializeField] float _height;
     [SerializeField] float _maxHeight = 0.5f;
-    [SerializeField] Transform _LFoot;
+    [SerializeField] Transform _LFootTarget;
     [SerializeField] Transform _LHip;
-    [SerializeField] Transform _RFoot;
+    [SerializeField] Transform _RFootTarget;
     [SerializeField] Transform _RHip;
     [Space(10f)]
     [SerializeField] Transform _root;
-    [SerializeField] Transform _RealLFoot;
-    [SerializeField] Transform _RealRFoot;
+    [SerializeField] Transform _LFoot;
+    [SerializeField] Transform _RFoot;
 
     RaycastHit _hit;
     Vector3 _stepPosition;
@@ -36,7 +36,7 @@ public class PlayerWalk : MonoBehaviour
         _speedDivisor = 1 / _runSpeed;
         TryGetComponent<Rig>(out _rig);
         _rig.weight = 0;
-        _stepPosition = _LFoot.position;
+        _stepPosition = _LFootTarget.position;
         _rig.weight = 1;
         _initialRootPosition = _root.localPosition;
     }
@@ -67,11 +67,11 @@ public class PlayerWalk : MonoBehaviour
 
         if (_LR)
         {
-            Step(_LFoot, _LHip, _RFoot, _RHip, _RealRFoot, SqrPaceMultiplier());
+            Step(_LFootTarget, _LHip, _RFootTarget, _RHip, _RFoot, SqrPaceMultiplier());
         }
         else
         {
-            Step(_RFoot, _RHip, _LFoot, _LHip, _RealLFoot, SqrPaceMultiplier());
+            Step(_RFootTarget, _RHip, _LFootTarget, _LHip, _LFoot, SqrPaceMultiplier());
         }
     }
 
@@ -128,13 +128,13 @@ public class PlayerWalk : MonoBehaviour
     {
         return _rigidbody.velocity.sqrMagnitude * _speedDivisor * _speedDivisor;
     }
-
+    
     //heavy, minimize use
     float PaceMultiplier()
     {
         return _rigidbody.velocity.magnitude * _speedDivisor;
     }
-
+    
     void Fall(Transform foot, Transform hip)
     {
         foot.position = _stepPosition = hip.position - Vector3.up;

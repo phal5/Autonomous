@@ -14,7 +14,7 @@ public class Planter : MonoBehaviour
     [SerializeField] bool _undo;
 
     RaycastHit _hit;
-    List<GameObject> gameObjects;
+    List<GameObject> gameObjects = new List<GameObject>();
 
     void Update()
     {
