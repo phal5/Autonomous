@@ -12,6 +12,8 @@ public class MillMachine : RotationMachine
     private Transform Crank;
     [SerializeField]
     private GameObject PowerReceiver;
+    [SerializeField]
+    private GameObject GearCenter;
     private float currentHeight;
     private float ActivationAngle;
 
@@ -46,7 +48,8 @@ public class MillMachine : RotationMachine
     protected override void Active() //리팩토링 필요5
     {
         ActivationAngle = currentAngle * rotationSpeedMultiplier; //작용부 작용각도 계산
-        if(Mathf.Sin(ActivationAngle) < -.8f) //최하위값일때 태그 변경
+        ActivationAngle = RoundAngle(ActivationAngle);
+        if(Crank.position.y < GearCenter.transform.position.y) //최하위값일때 태그 변경
         {
             activationField.tag = "Crusher";
         }
