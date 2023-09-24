@@ -31,6 +31,11 @@ public class MachineDeployer : Deployer
         TriggerizeColliders(transform);
         SetLayersInChildren(transform, 2);
         PlayerMovementManager.Enable(false);
+        foreach (Transform child in transform)
+        {
+            ClearBehaviours(child);
+            ClearRigidbody(child);
+        }
     }
 
     // Update is called once per frame
@@ -60,6 +65,18 @@ public class MachineDeployer : Deployer
         foreach (Transform child in transform)
         {
             ClearBehaviours(child);
+        }
+    }
+
+    void ClearRigidbody(Transform transform)
+    {
+        foreach (Rigidbody rigidbody in transform.GetComponents<Rigidbody>())
+        {
+            Destroy(rigidbody);
+        }
+        foreach (Transform child in transform)
+        {
+            ClearRigidbody(child);
         }
     }
 
@@ -144,7 +161,6 @@ public class MachineDeployer : Deployer
             if (Deploy(transform.position, transform.rotation))
             {
                 Destroy(_pointer);
-                PlayerMovementManager.Enable(true);
             }
         }
     }
