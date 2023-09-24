@@ -17,6 +17,7 @@ public class PlayerMovementManager : MonoBehaviour
         if(_playerMove != null)
         {
             _playerMove.enabled = enability;
+            Debug.Log("Yep");
         }
     }
 }
