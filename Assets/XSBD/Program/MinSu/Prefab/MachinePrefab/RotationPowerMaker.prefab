@@ -825,7 +825,7 @@ Transform:
   - {fileID: 2494863415786759577}
   - {fileID: 2981983104673232203}
   - {fileID: 2919139259288695790}
-  - {fileID: 8559753290739130984}
+  - {fileID: 6283977502047251927}
   - {fileID: 6824865030505770894}
   - {fileID: 4320014019950593178}
   - {fileID: 1241731786983117553}
@@ -1006,6 +1006,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8683080797592169746}
+    - targetCorrespondingSourceObject: {fileID: 937913172393296996, guid: e33e3de417bf2de44a40deee288e0695,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1627986238197246286}
   m_SourcePrefab: {fileID: 100100000, guid: e33e3de417bf2de44a40deee288e0695, type: 3}
 --- !u!1 &322439230306072634 stripped
 GameObject:
@@ -1036,6 +1040,22 @@ CapsuleCollider:
   m_Height: 0.40000015
   m_Direction: 1
   m_Center: {x: -0.019097917, y: -1.6962351e-17, z: 0.04235354}
+--- !u!208 &1627986238197246286
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 322439230306072634}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.317, y: 0.2, z: 0.317}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.019000001, y: 0, z: 0.042000003}
+  m_TimeToStationary: 0.5
 --- !u!4 &2919139259288695790 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2449806991647707056, guid: e33e3de417bf2de44a40deee288e0695,
@@ -1474,8 +1494,8 @@ NavMeshObstacle:
   m_GameObject: {fileID: 4449786290350004517}
   m_Enabled: 1
   serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.261, y: 0.2, z: 0.317}
+  m_Shape: 0
+  m_Extents: {x: 0.317, y: 0.2, z: 0.317}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 0
@@ -2729,7 +2749,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e33e3de417bf2de44a40deee288e0695, type: 3}
---- !u!4 &8559753290739130984 stripped
+--- !u!4 &6283977502047251927 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2449806991647707056, guid: e33e3de417bf2de44a40deee288e0695,
     type: 3}
