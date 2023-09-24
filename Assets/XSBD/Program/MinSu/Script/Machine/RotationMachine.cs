@@ -8,9 +8,10 @@ using UnityEngine.Animations.Rigging;
 public abstract class RotationMachine : MonoBehaviour
 {
     //하위 객체
-    [SerializeField] protected Transform activationField;
-    [SerializeField] protected Transform moveDetection;
-    [SerializeField] protected Transform feeder;
+    protected Transform controlBoard;
+    protected Transform activationField;
+    protected Transform moveDetection;
+    protected Transform feeder;
 
     protected float currentSpeed;
     protected float targetSpeed;
@@ -30,6 +31,13 @@ public abstract class RotationMachine : MonoBehaviour
         return;
     } 
 
+    private void LoadChildren() //Serialize Field로 변환 추천 -> Find 비용큼.
+    {
+        controlBoard = transform.Find("ControlBoard");
+        activationField = transform.Find("ActivationField");
+        moveDetection = transform.Find("MoveDetection");
+        feeder = transform.Find("Feeder");
+    }
     protected void InitializePreviousAngle()
     {
         int quotient = (int)Math.Round(currentAngle / angleDistance);
@@ -53,6 +61,7 @@ public abstract class RotationMachine : MonoBehaviour
 
     protected virtual void Start()
     {
+        LoadChildren();
         CurrentAngleUpdate();
         InitializePreviousAngle();
     }
