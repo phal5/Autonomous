@@ -12,6 +12,7 @@ public class PlayerWalk : MonoBehaviour
     [SerializeField] float _minPaceTime = 0.2f;
     [SerializeField] float _height;
     [SerializeField] float _maxHeight = 0.5f;
+    [Space(10f)]
     [SerializeField] Transform _LFootTarget;
     [SerializeField] Transform _LHip;
     [SerializeField] Transform _RFootTarget;
@@ -94,7 +95,8 @@ public class PlayerWalk : MonoBehaviour
                 }
 
                 foot.position += bump * Vector3.up;
-                otherfoot.position = _stepPosition;
+                Physics.Raycast(_stepPosition + Vector3.up, Vector3.down, out _hit);
+                otherfoot.position = _hit.point;
                 _root.localPosition = _initialRootPosition + bump * Vector3.up * 0.2f;
             }
             else
