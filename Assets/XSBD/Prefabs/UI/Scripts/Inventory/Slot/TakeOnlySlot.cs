@@ -31,7 +31,7 @@ public class TakeOnlySlot : Slot
         if (_quantity != 0)
         {
             _dragging = true;
-            InventoryManager.SetManagerData(_item, _parent, _quantity, _stackable);
+            InventoryManager.SetManagerData(_item, _parentData, _quantity, _stackable);
             Clear();
             if (_itemInstance)
             {
@@ -63,7 +63,7 @@ public class TakeOnlySlot : Slot
     protected void Clear()
     {
         _item = null;
-        _parent = null;
+        _parentData = null;
         _quantity = 0;
         _stackable = true;
     }
@@ -75,9 +75,9 @@ public class TakeOnlySlot : Slot
         return _item;
     }
 
-    public Transform GetSlotParent()
+    public ParentData GetSlotParentData()
     {
-        return _parent;
+        return _parentData;
     }
 
     public bool GetSlotStackable()

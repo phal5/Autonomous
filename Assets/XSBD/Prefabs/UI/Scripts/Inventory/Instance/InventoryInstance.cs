@@ -54,13 +54,13 @@ public class InventoryInstance : MonoBehaviour
         _slots = slots.ToArray();
     }
 
-    public void MoveToEmptySlot(GameObject item, Transform parent, byte quantity, bool stackable = true)
+    public void MoveToEmptySlot(GameObject item, ParentData parentData, byte quantity, bool stackable = true)
     {
         byte max = InventoryManager.GetMaxQuantity();
         InventorySlot slot = null;
         if (stackable)
         {
-            slot = SearchStackableSlot(parent, item);
+            slot = SearchStackableSlot(parentData, item);
         }
         if (slot != null)
         {
@@ -68,7 +68,7 @@ public class InventoryInstance : MonoBehaviour
             if (sum > max)
             {
                 slot.SetQuantity(max);
-                MoveToEmptySlot(item, parent, (byte)(sum - max));
+                MoveToEmptySlot(item, parentData, (byte)(sum - max));
             }
             else
             {
@@ -82,27 +82,27 @@ public class InventoryInstance : MonoBehaviour
             {
                 if (quantity > max)
                 {
-                    slot.SetSlotData(item, parent, max, stackable);
-                    MoveToEmptySlot(item, parent, (byte)(quantity - max));
+                    slot.SetSlotData(item, parentData, max, stackable);
+                    MoveToEmptySlot(item, parentData, (byte)(quantity - max));
                 }
                 else
                 {
-                    slot.SetSlotData(item, parent, quantity, stackable);
+                    slot.SetSlotData(item, parentData, quantity, stackable);
                 }
             }
             else
             {
-                InventoryManager.SetManagerData(item, parent, quantity, true);
+                InventoryManager.SetManagerData(item, parentData, quantity, true);
                 InventoryManager.ForceInstantiate();
             }
         }
     }
 
-    protected InventorySlot SearchSlot(Transform parent, GameObject item, byte quantity = 1)
+    protected InventorySlot SearchSlot(ParentData parentData, GameObject item, byte quantity = 1)
     {
         foreach (InventorySlot slot in _slots)
         {
-            if (slot.GetSlotQuantity() >= quantity && slot.GetSlotParent() == parent && slot.GetSlotItem() == item)
+            if (slot.GetSlotQuantity() >= quantity && slot.GetSlotParentData().GetParent() == parentData.GetParent() && slot.GetSlotItem() == item)
             {
                 return slot;
             }
@@ -110,11 +110,11 @@ public class InventoryInstance : MonoBehaviour
         return null;
     }
 
-    InventorySlot SearchStackableSlot(Transform parent, GameObject item, byte quantity = 1)
+    InventorySlot SearchStackableSlot(ParentData parentData, GameObject item, byte quantity = 1)
     {
         foreach (InventorySlot slot in _slots)
         {
-            if (slot.GetSlotQuantity() >= quantity && slot.GetSlotParent() == parent && slot.GetSlotItem() == item && slot.GetSlotStackable())
+            if (slot.GetSlotQuantity() >= quantity && slot.GetSlotParentData().GetParent() == parentData.GetParent() && slot.GetSlotItem() == item && slot.GetSlotStackable())
             {
                 return slot;
             }

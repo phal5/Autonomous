@@ -45,7 +45,12 @@ using UnityEngine.UIElements;
             GetManagerData();
             SolveOverload();
         }
-        else if (_stackable && InventoryManager.GetStackability() && _parent == InventoryManager.GetItemParent() && _item == InventoryManager.GetItem())
+        else if (
+            _stackable
+            && InventoryManager.GetStackability()
+            && _parentData.GetParent() == InventoryManager.GetItemParentData().GetParent()
+            && _item == InventoryManager.GetItem()
+            )
         {
             _quantity += InventoryManager.GetQuantity();
             SolveOverload();
@@ -54,7 +59,7 @@ using UnityEngine.UIElements;
         {
             if (InventoryManager.GetSlot() != null)
             {
-                InventoryManager.GetSlot().SetSlotData(_item, _parent, _quantity, _stackable);
+                InventoryManager.GetSlot().SetSlotData(_item, _parentData, _quantity, _stackable);
                 GetManagerData();
                 InventoryManager.Clear();
             }
@@ -62,7 +67,7 @@ using UnityEngine.UIElements;
             {
                 _inventory.MoveToEmptySlot(
                     InventoryManager.GetItem(),
-                    InventoryManager.GetItemParent(),
+                    InventoryManager.GetItemParentData(),
                     InventoryManager.GetQuantity(),
                     InventoryManager.GetStackability());
             }
@@ -116,7 +121,7 @@ using UnityEngine.UIElements;
     private void GetManagerData()
     {
         _item = InventoryManager.GetItem();
-        _parent = InventoryManager.GetItemParent();
+        _parentData = InventoryManager.GetItemParentData();
         _quantity = InventoryManager.GetQuantity();
         _stackable = InventoryManager.GetStackability();
     }
@@ -126,7 +131,7 @@ using UnityEngine.UIElements;
         byte maxQuantity = InventoryManager.GetMaxQuantity();
         if (_quantity > maxQuantity)
         {
-            _inventory.MoveToEmptySlot(_item, _parent, (byte)(_quantity - maxQuantity));
+            _inventory.MoveToEmptySlot(_item, _parentData, (byte)(_quantity - maxQuantity));
             _quantity = maxQuantity;
         }
     }

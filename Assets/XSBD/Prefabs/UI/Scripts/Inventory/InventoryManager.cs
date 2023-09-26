@@ -12,7 +12,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] Camera camera_;
     static Camera _camera;
     static GameObject _Item;
-    static Transform _Parent;
+    static ParentData _ParentData;
     static InventorySlot _Slot;
 
     static byte _MaxQuantity = 64;
@@ -49,19 +49,19 @@ public class InventoryManager : MonoBehaviour
     {
         for(int i = 0; i < _Quantity; i++)
         {
-            Instantiate(_Item, _player.position + Vector3.up, Random.rotation, _Parent);
+            Instantiate(_Item, _player.position + Vector3.up, Random.rotation, _ParentData.GetParent());
         }
         _Move = false;
         _stale = false;
         Clear();
     }
 
-    public static void SetManagerData(GameObject Item, Transform Parent, byte Quantity, bool stackability)
+    public static void SetManagerData(GameObject Item, ParentData ParentData, byte Quantity, bool Stackability)
     {
         _Item = Item;
-        _Parent = Parent;
+        _ParentData = ParentData;
         _Quantity = Quantity;
-        _Stackable = stackability;
+        _Stackable = Stackability;
     }
 
     public static void SetMove(bool move)
@@ -84,7 +84,7 @@ public class InventoryManager : MonoBehaviour
     public static void Clear()
     {
         _Item = null;
-        _Parent = null;
+        _ParentData = null;
         _Slot = null;
         _Quantity = 0;
         _Stackable = false;
@@ -107,9 +107,9 @@ public class InventoryManager : MonoBehaviour
         return _Item;
     }
 
-    public static Transform GetItemParent()
+    public static ParentData GetItemParentData()
     {
-        return _Parent;
+        return _ParentData;
     }
 
     public static byte GetMaxQuantity()

@@ -9,32 +9,39 @@ public class InAndOut : MonoBehaviour
     [SerializeField] Direction _direction;
     [SerializeField] float _speed = 10;
 
+    Canvas _canvas;
     RectTransform _UI;
-    Vector3 _dir;
     Vector3 _initial;
     Vector3 _hidden;
+    Vector2 _dir;
     float _timer;
     bool _show;
 
     void Start()
     {
+        if( _canvas == null)
+        {
+
+        }
+
         if(!TryGetComponent<RectTransform>(out _UI))
         {
             Destroy(this);
         }
 
         _initial = _UI.transform.position;
-
+        
         switch (_direction)
         {
-            case Direction.UP: _dir = Vector3.up * _UI.rect.height * _UI.lossyScale.y; break;
-            case Direction.DOWN: _dir = Vector3.down * _UI.rect.height * _UI.lossyScale.y; break;
-            case Direction.RIGHT: _dir = Vector3.right * _UI.rect.width * _UI.lossyScale.x; break;
-            case Direction.LEFT: _dir = Vector3.left * _UI.rect.width * _UI.lossyScale.x; break;
+            case Direction.UP: _dir = Vector2.up * (_UI.rect.height * 0.5f + Screen.height * 0.5f - _UI.anchoredPosition.y); break;
+            case Direction.DOWN: _dir = Vector2.down * (_UI.rect.height * 0.5f + Screen.height * 0.5f + _UI.anchoredPosition.y); break;
+            case Direction.RIGHT: _dir = Vector2.right * (_UI.rect.width * 0.5f + Screen.width * 0.5f - _UI.anchoredPosition.x); break;
+            case Direction.LEFT: _dir = Vector2.left * (_UI.rect.width * 0.5f + Screen.width * 0.5f + _UI.anchoredPosition.x); break;
+            default: _dir = Vector2.zero; break;
         }
-        _hidden = _UI.transform.position + _dir;
+        _UI.anchoredPosition += _dir;
         _timer = 1;
-        transform.position = _hidden;
+        _hidden = _UI.position;
     }
 
     // Update is called once per frame

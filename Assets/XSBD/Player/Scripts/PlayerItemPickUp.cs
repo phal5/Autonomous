@@ -27,11 +27,11 @@ public class PlayerItemPickUp : MonoBehaviour
                 if(coll.gameObject.TryGetComponent<Item>(out Item item))
                 {
                     GameObject _item;
-                    Transform _parent;
+                    ParentData _parentData;
                     byte _quantity;
                     bool _stackable;
-                    item.GetItemData(out _item, out _parent, out _quantity, out _stackable);
-                    inventory.MoveToEmptySlot(_item,_parent, _quantity, _stackable);
+                    item.GetItemData(out _item, out _parentData, out _quantity, out _stackable);
+                    inventory.MoveToEmptySlot(_item, _parentData, _quantity, _stackable);
                 }
             }
 

@@ -37,6 +37,7 @@ public class MachineDeployer : Deployer
             ClearRigidbody(child);
         }
         ClearNavMeshAgent(transform);
+        transform.rotation = Quaternion.Euler(Vector3.zero);
     }
 
     // Update is called once per frame
@@ -118,7 +119,6 @@ public class MachineDeployer : Deployer
         Renderer renderer;
         if(transform.TryGetComponent<Renderer>(out renderer))
         {
-            Debug.Log("Yep");
             for(int i = 0; i < renderer.materials.Length; ++i)
             {
                 renderer.SetMaterials(new List<Material>(Enumerable.Repeat<Material>(material, renderer.materials.Length)));

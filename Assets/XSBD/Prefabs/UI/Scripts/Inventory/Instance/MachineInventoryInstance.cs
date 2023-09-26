@@ -25,7 +25,7 @@ public class MachineInventoryInstance : InventoryInstance
             {
                 for (int i = 0; i < createAmount && slot.GetSlotQuantity() > 0; ++i)
                 {
-                    Instantiate(slot.GetSlotItem(), position, Random.rotation, slot.GetSlotParent());
+                    Instantiate(slot.GetSlotItem(), position, Random.rotation, slot.GetSlotParentData().GetParent());
                     slot.SetQuantity((byte)(slot.GetSlotQuantity() - 1));
                 }
             }
@@ -33,7 +33,7 @@ public class MachineInventoryInstance : InventoryInstance
             {
                 for (int i = 0; i < createAmount && slot.GetSlotQuantity() > 0; ++i)
                 {
-                    Instantiate(slot.GetSlotItem(), position, Random.rotation, slot.GetSlotParent());
+                    Instantiate(slot.GetSlotItem(), position, Random.rotation, slot.GetSlotParentData().GetParent());
                 }
             }
             if (slot.GetSlotQuantity() > 0)
@@ -57,7 +57,7 @@ public class MachineInventoryInstance : InventoryInstance
         {
             foreach(Transform parent in FoodManager.GetFoodParents(_foodIndexes))
             {
-                if (slot.GetSlotParent() == parent)
+                if (slot.GetSlotQuantity() > 0 && slot.GetSlotParentData().GetParent() == parent)
                 {
                     return slot;
                 }
@@ -70,7 +70,7 @@ public class MachineInventoryInstance : InventoryInstance
     {
         foreach (InventorySlot slot in _slots)
         {
-            if (slot.GetSlotParent().parent.TryGetComponent<FoodManager>(out _))
+            if (slot.GetSlotParentData().GetParent().parent.TryGetComponent<FoodManager>(out _))
             {
                 return slot;
             }

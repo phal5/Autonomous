@@ -8,7 +8,7 @@ using static UnityEditor.Progress;
 public class Slot : MonoBehaviour
 {
     [SerializeField] protected GameObject _item;
-    [SerializeField] protected Transform _parent;
+    [SerializeField] protected ParentData _parentData;
     [SerializeField] protected byte _quantity = 0;
     [SerializeField] protected bool _stackable;
 
@@ -28,10 +28,10 @@ public class Slot : MonoBehaviour
         SetScale();
     }
 
-    public void SetSlotData(GameObject item, Transform parent, byte quantity, bool stackable)
+    public void SetSlotData(GameObject item, ParentData parentData, byte quantity, bool stackable)
     {
         _item = item;
-        _parent = parent;
+        _parentData = parentData;
         _quantity = quantity;
         _stackable = stackable;
         SetText();

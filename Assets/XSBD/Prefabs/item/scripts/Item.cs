@@ -5,44 +5,22 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     enum Parent { ANIMAL, FOOD, NONE }
+
     [SerializeField] GameObject _item;
     [SerializeField] byte _quantity;
     [SerializeField] bool _stackable;
     [Space(10f)]
-    [SerializeField] Transform _parent;
-    [SerializeField] Parent _type;
-    [SerializeField] byte _parentIndex;
-
-    bool _parentSet = false;
+    [SerializeField] ParentData _parentData;
 
     private void Start()
     {
-        DecideParent();
+        _parentData.GetParent();
     }
 
-    void DecideParent()
-    {
-        switch (_type)
-        {
-            case Parent.ANIMAL:
-                _parent = AnimalManager.GetAnimalParent(_parentIndex);
-                break;
-
-            case Parent.FOOD:
-                _parent = FoodManager.GetFoodParent(_parentIndex);
-                break;
-
-            default:
-                _parent = null;
-                break;
-        }
-        _parentSet = true;
-    }
-
-    public void GetItemData(out GameObject item, out Transform parent, out byte quantity, out bool stackable)
+    public void GetItemData(out GameObject item, out ParentData parentData, out byte quantity, out bool stackable)
     {
         item = _item;
-        parent = _parent;
+        parentData = _parentData;
         quantity = _quantity;
         stackable = _stackable;
         Destroy(gameObject);
@@ -55,11 +33,7 @@ public class Item : MonoBehaviour
 
     public Transform GetParent()
     {
-        if (!_parentSet)
-        {
-            DecideParent();
-        }
-        return _parent;
+        return _parentData.GetParent();
     }
 
     public byte GetQuantity()

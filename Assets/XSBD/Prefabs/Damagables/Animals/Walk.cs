@@ -81,7 +81,8 @@ public class Walk : MonoBehaviour
                     * (_pace * _pace * paceMultiplier - Vector3.SqrMagnitude(paceData))
                     * _paceDivisor * _paceDivisor * _height
                     * paceMultiplier;
-                otherfoot.position = _stepPosition;
+                Physics.Raycast(_stepPosition + Vector3.up * 0.1f, Vector3.down, out _hit);
+                otherfoot.position = _hit.point;
             }
             else
             {

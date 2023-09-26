@@ -12,7 +12,7 @@ public class TradeInventoryInstance : InventoryInstance
         [SerializeField] string _name;
         [System.Serializable] public class ItemPair
         {
-            public Transform _parent;
+            public ParentData _parentData;
             public GameObject _item;
             public byte _quantity;
         }
@@ -34,13 +34,13 @@ public class TradeInventoryInstance : InventoryInstance
 
     protected void SetupTradeSlot()
     {
-        _result.SetSlotData(_recipe._result._item, _recipe._result._parent, _recipe._result._quantity, _recipe._stackable);
+        _result.SetSlotData(_recipe._result._item, _recipe._result._parentData, _recipe._result._quantity, _recipe._stackable);
         for (int i = 0; i < _ingredientPreview.Length; ++i)
         {
             if(i < _recipe._ingredients.Length)
             {
                 Recipe.ItemPair ingredient = _recipe._ingredients[i];
-                _ingredientPreview[i].SetSlotData(ingredient._item, ingredient._parent, ingredient._quantity, true);
+                _ingredientPreview[i].SetSlotData(ingredient._item, ingredient._parentData, ingredient._quantity, true);
             }
             else
             {
@@ -51,12 +51,17 @@ public class TradeInventoryInstance : InventoryInstance
 
     public bool Trade(byte index)
     {
+        if(_returnSlot.GetSlotQuantity() > 0 && !_returnSlot.GetSlotStackable())
+        {
+            return false;
+        }
+
         Recipe recipe = _recipe;
         InventorySlot[] slots = new InventorySlot[recipe._ingredients.Length];
         for(int i = 0; i < recipe._ingredients.Length; ++i)
         {
             InventorySlot slot = SearchSlot(
-                recipe._ingredients[i]._parent,
+                recipe._ingredients[i]._parentData,
                 recipe._ingredients[i]._item,
                 recipe._ingredients[i]._quantity);
             if (slot != null)
@@ -74,17 +79,12 @@ public class TradeInventoryInstance : InventoryInstance
         }
         if(_returnSlot.GetSlotQuantity() == 0)
         {
-            _returnSlot.SetSlotData(recipe._result._item, recipe._result._parent, recipe._result._quantity, recipe._stackable);
+            _returnSlot.SetSlotData(recipe._result._item, recipe._result._parentData, recipe._result._quantity, recipe._stackable);
         }
         else
         {
             _returnSlot.SetQuantity((byte)(_returnSlot.GetSlotQuantity() + recipe._result._quantity));
         }
         return true;
-    }
-
-    public void TestTrade()
-    {
-        Debug.Log(Trade(0));
     }
 }
