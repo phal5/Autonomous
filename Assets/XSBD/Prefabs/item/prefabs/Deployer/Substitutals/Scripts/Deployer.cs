@@ -6,11 +6,19 @@ using UnityEngine;
 public class Deployer : MonoBehaviour
 {
     [SerializeField] GameObject _deployObject;
+    [SerializeField] bool _randomizeRotation = true;
     
     // Start is called before the first frame update
     void Start()
     {
-        Deploy(transform.position, Random.rotation);
+        if (_randomizeRotation)
+        {
+            Deploy(transform.position, Random.rotation);
+        }
+        else
+        {
+            Deploy(transform.position, Quaternion.Euler(Vector3.zero));
+        }
     }
 
     protected bool Deploy(Vector3 position, Quaternion rotation)

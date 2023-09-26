@@ -58244,7 +58244,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148403881980}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 72
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -87174,7 +87174,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2055586145}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1000}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -93325,9 +93325,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2350319943190538325, guid: 7be3b2b1cfe0b4d49b6dcf50301695fc,
         type: 3}
+      propertyPath: _item
+      value: 
+      objectReference: {fileID: 2376162596366632390, guid: b7555dcfb154dfd4998fef312b236db3,
+        type: 3}
+    - target: {fileID: 2350319943190538325, guid: 7be3b2b1cfe0b4d49b6dcf50301695fc,
+        type: 3}
       propertyPath: _parent
       value: 
-      objectReference: {fileID: 923439541}
+      objectReference: {fileID: 0}
+    - target: {fileID: 2350319943190538325, guid: 7be3b2b1cfe0b4d49b6dcf50301695fc,
+        type: 3}
+      propertyPath: _quantity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2350319943190538325, guid: 7be3b2b1cfe0b4d49b6dcf50301695fc,
+        type: 3}
+      propertyPath: _stackable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2699880253680102870, guid: 7be3b2b1cfe0b4d49b6dcf50301695fc,
         type: 3}
       propertyPath: m_AnchorMax.y

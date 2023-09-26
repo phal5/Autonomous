@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UIElements;
 
 public class MachineDeployer : Deployer
@@ -30,12 +31,12 @@ public class MachineDeployer : Deployer
         ChangeMaterialInChildren(transform, MachineDeployManager.GetMaterial(true));
         TriggerizeColliders(transform);
         SetLayersInChildren(transform, 2);
-        PlayerMovementManager.Enable(false);
         foreach (Transform child in transform)
         {
             ClearBehaviours(child);
             ClearRigidbody(child);
         }
+        ClearNavMeshAgent(transform);
     }
 
     // Update is called once per frame
@@ -80,12 +81,31 @@ public class MachineDeployer : Deployer
         }
     }
 
+    void ClearNavMeshAgent(Transform transform)
+    {
+        foreach(NavMeshAgent navMeshAgent in transform.GetComponents<NavMeshAgent>())
+        {
+            Destroy(navMeshAgent);
+        }
+        foreach(Transform child in transform)
+        {
+            ClearNavMeshAgent(child);
+        }
+    }
+
     void TriggerizeColliders(Transform transform)
     {
         Collider collider;
         if(transform.TryGetComponent<Collider>(out collider))
         {
-            collider.isTrigger = true;
+            if(collider.GetType() == typeof(MeshCollider))
+            {
+                Destroy(collider);
+            }
+            else
+            {
+                collider.isTrigger = true;
+            }
         }
         foreach(Transform child in transform)
         {
