@@ -19,24 +19,27 @@ public class ClearThingsInChildren : MonoBehaviour
         if (_execute)
         {
             _execute = false;
-            if (_rigidbody)
+            foreach (Transform child in transform)
             {
-                ClearRigidbody(transform);
-            }
-            if (_monoBehaviour)
-            {
-                ClearBehaviour(transform);
-            }
-            if (_navMeshAgents)
-            {
-                ClearNavMeshAgents(transform);
+                if (_rigidbody)
+                {
+                    ClearRigidbody(child);
+                }
+                if (_monoBehaviour)
+                {
+                    ClearBehaviour(child);
+                }
+                if (_navMeshAgents)
+                {
+                    ClearNavMeshAgents(child);
+                }
             }
         }
     }
 
     void ClearRigidbody(Transform transform)
     {
-        foreach (Rigidbody rb in GetComponentsInChildren<Rigidbody>())
+        foreach (Rigidbody rb in GetComponents<Rigidbody>())
         {
             DestroyImmediate(rb);
         }
@@ -48,7 +51,7 @@ public class ClearThingsInChildren : MonoBehaviour
 
     void ClearBehaviour(Transform transform)
     {
-        foreach (MonoBehaviour monoBehaviour in GetComponentsInChildren<MonoBehaviour>())
+        foreach (MonoBehaviour monoBehaviour in GetComponents<MonoBehaviour>())
         {
             DestroyImmediate(monoBehaviour);
         }
@@ -60,7 +63,7 @@ public class ClearThingsInChildren : MonoBehaviour
 
     void ClearNavMeshAgents(Transform transform)
     {
-        foreach (NavMeshAgent navMeshAgent in GetComponentsInChildren<NavMeshAgent>())
+        foreach (NavMeshAgent navMeshAgent in GetComponents<NavMeshAgent>())
         {
             DestroyImmediate(navMeshAgent);
         }
