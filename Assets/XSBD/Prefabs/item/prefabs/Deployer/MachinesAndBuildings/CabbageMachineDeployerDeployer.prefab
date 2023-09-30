@@ -4142,7 +4142,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
-  _parent: {fileID: 0}
+  _parentData:
+    _type: 2
+    _index: 0
   _quantity: 0
   _stackable: 0
 --- !u!1 &2206085784167238504
@@ -7995,7 +7997,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
-  _parent: {fileID: 0}
+  _parentData:
+    _type: 2
+    _index: 0
   _quantity: 0
   _stackable: 1
 --- !u!1 &4510149850300135095
@@ -15049,7 +15053,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
-  _parent: {fileID: 0}
+  _parentData:
+    _type: 2
+    _index: 0
   _quantity: 0
   _stackable: 0
 --- !u!1 &7994103162472103207

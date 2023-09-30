@@ -44,7 +44,10 @@ public class CameraMove: MonoBehaviour
 
         if(Physics.SphereCast(target.position + personViewOffset, 0.3f, -transform.forward, out RaycastHit hit, distance))
         {
-            transform.position = hit.point + hit.normal * 0.3f;
+            if(hit.transform.gameObject.layer == 9)
+            {
+                transform.position = hit.point + hit.normal * 0.3f;
+            }
         }
     }
     void ChangeView()

@@ -10,6 +10,7 @@ public class ClearThingsInChildren : MonoBehaviour
     [SerializeField] bool _rigidbody = false;
     [SerializeField] bool _monoBehaviour = false;
     [SerializeField] bool _navMeshAgents = false;
+    [SerializeField] bool _meshColliders = false;
     [Space(10f)]
     [SerializeField] bool _execute = false;
 
@@ -33,13 +34,17 @@ public class ClearThingsInChildren : MonoBehaviour
                 {
                     ClearNavMeshAgents(child);
                 }
+                if (_meshColliders)
+                {
+                    ClearMeshColliders(child);
+                }
             }
         }
     }
 
     void ClearRigidbody(Transform transform)
     {
-        foreach (Rigidbody rb in GetComponents<Rigidbody>())
+        foreach (Rigidbody rb in transform.GetComponents<Rigidbody>())
         {
             DestroyImmediate(rb);
         }
@@ -51,7 +56,7 @@ public class ClearThingsInChildren : MonoBehaviour
 
     void ClearBehaviour(Transform transform)
     {
-        foreach (MonoBehaviour monoBehaviour in GetComponents<MonoBehaviour>())
+        foreach (MonoBehaviour monoBehaviour in transform.GetComponents<MonoBehaviour>())
         {
             DestroyImmediate(monoBehaviour);
         }
@@ -63,13 +68,25 @@ public class ClearThingsInChildren : MonoBehaviour
 
     void ClearNavMeshAgents(Transform transform)
     {
-        foreach (NavMeshAgent navMeshAgent in GetComponents<NavMeshAgent>())
+        foreach (NavMeshAgent navMeshAgent in transform.GetComponents<NavMeshAgent>())
         {
             DestroyImmediate(navMeshAgent);
         }
         foreach(Transform child in transform)
         {
             ClearNavMeshAgents(child);
+        }
+    }
+
+    void ClearMeshColliders(Transform transform)
+    {
+        foreach (MeshCollider meshCollider in transform.GetComponents<MeshCollider>())
+        {
+            DestroyImmediate(meshCollider);
+        }
+        foreach (Transform child in transform)
+        {
+            ClearMeshColliders(child);
         }
     }
 }

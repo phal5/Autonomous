@@ -367,7 +367,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
-  _parent: {fileID: 0}
+  _parentData:
+    _type: 2
+    _index: 0
   _quantity: 0
   _stackable: 0
 --- !u!1 &92790896675529552
@@ -1112,7 +1114,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
-  _parent: {fileID: 0}
+  _parentData:
+    _type: 2
+    _index: 0
   _quantity: 0
   _stackable: 0
 --- !u!1 &643709291776200673
@@ -7938,6 +7942,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2770598402738162179}
   - component: {fileID: 637753439707674373}
+  - component: {fileID: 8087620033898632907}
   m_Layer: 0
   m_Name: Slope1
   m_TagString: Untagged
@@ -7988,6 +7993,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 0.05, z: 1.3}
   m_Center: {x: 0, y: 0.03, z: 0}
+--- !u!208 &8087620033898632907
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4529683847597035118}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.025, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -0.6, z: 0.37}
+  m_TimeToStationary: 0.5
 --- !u!1 &4581895559577344669
 GameObject:
   m_ObjectHideFlags: 0
@@ -8240,7 +8261,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
-  _parent: {fileID: 0}
+  _parentData:
+    _type: 2
+    _index: 0
   _quantity: 0
   _stackable: 1
 --- !u!1 &4616577452767401826
