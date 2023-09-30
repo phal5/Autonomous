@@ -42,6 +42,11 @@ public class Deployer : MonoBehaviour
         }
     }
 
+    public GameObject GetDeployedObject()
+    {
+        return _deployObject;
+    }
+
     public ParentData GetParentData()
     {
         if (!_parentSet)

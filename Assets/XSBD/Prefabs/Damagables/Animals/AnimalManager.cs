@@ -92,7 +92,9 @@ public class AnimalManager : MonoBehaviour
         }
     }
 
-    public static Vector3[] _herbivoresPos;
+    public static Vector3[] _herbivores1Pos;
+    public static Vector3[] _herbivores2Pos;
+    public static Vector3[] _herbivores3Pos;
     public static Vector3[] _predators1Pos;
     public static Vector3[] _predators2Pos;
     public static Vector3[] _predators3Pos;
@@ -128,30 +130,38 @@ public class AnimalManager : MonoBehaviour
         {
             case 0:
                 {
-                    TransformToPosition(_herbivores1, ref _herbivoresPos);
+                    TransformToPosition(_herbivores1, ref _herbivores1Pos);
                     _frameCounter++;
                     break;
                 }
             case 1:
                 {
-                    TransformToPosition(_predators1, ref _predators1Pos);
+                    TransformToPosition(_herbivores2, ref _herbivores2Pos);
                     _frameCounter++;
                     break;
                 }
             case 2:
                 {
-                    TransformToPosition(_predators2, ref _predators2Pos);
+                    TransformToPosition(_herbivores3, ref _herbivores3Pos);
                     _frameCounter++;
                     break;
                 }
             case 3:
                 {
-                    TransformToPosition(_predators3, ref _predators3Pos);
+                    TransformToPosition(_predators1, ref _predators1Pos);
                     _frameCounter++;
                     break;
                 }
             case 4:
                 {
+                    TransformToPosition(_predators2, ref _predators2Pos);
+                    _frameCounter++;
+                    break;
+                }
+            case 5:
+                {
+                    TransformToPosition(_predators3, ref _predators3Pos);
+                    _frameCounter++;
                     _frameCounter = 0;
                     break;
                 }
@@ -180,7 +190,7 @@ public class AnimalManager : MonoBehaviour
         positions = tempList.ToArray();
     }
 
-    public static Vector3[] Search(Vector3 position, float distance, byte threatThreshold)
+    public static Vector3[] Search(Vector3 position, float distance, byte size, bool predators = true)
     {
         float Abs(float f)
         {
@@ -201,19 +211,43 @@ public class AnimalManager : MonoBehaviour
         }
 
         List<Vector3> Result = new List<Vector3>();
-        switch (threatThreshold)
+        switch (size)
         {
             case 1:
-                Result.AddRange(Search(_predators1Pos));
-                Result.AddRange(Search(_predators2Pos));
-                Result.AddRange(Search(_predators3Pos));
+                if (predators)
+                {
+                    Result.AddRange(Search(_predators1Pos));
+                    Result.AddRange(Search(_predators2Pos));
+                    Result.AddRange(Search(_predators3Pos));
+                }
+                else
+                {
+                    Result.AddRange(Search(_herbivores1Pos));
+                }
                 break;
             case 2:
-                Result.AddRange(Search(_predators2Pos));
-                Result.AddRange(Search(_predators3Pos));
+                if (predators)
+                {
+                    Result.AddRange(Search(_predators2Pos));
+                    Result.AddRange(Search(_predators3Pos));
+                }
+                else
+                {
+                    Result.AddRange(Search(_herbivores1Pos));
+                    Result.AddRange(Search(_herbivores2Pos));
+                }
                 break;
             case 3:
-                Result.AddRange(Search(_predators3Pos));
+                if (predators)
+                {
+                    Result.AddRange(Search(_predators3Pos));
+                }
+                else
+                {
+                    Result.AddRange(Search(_herbivores1Pos));
+                    Result.AddRange(Search(_herbivores2Pos));
+                    Result.AddRange(Search(_herbivores3Pos));
+                }
                 break;
             default:
                 Debug.LogError("threatThreshold maximum is 3, minimum being 1.");
@@ -222,7 +256,7 @@ public class AnimalManager : MonoBehaviour
         return Result.ToArray();
     }
 
-    public static Vector3 CrudeFlee(Vector3 position, float distance, byte threatThreshold)
+    public static Vector3 CrudeFlee(Vector3 position, float distance, byte size)
     {
         Vector3 Result = Vector3.zero;
         float Abs(float f)
@@ -242,7 +276,7 @@ public class AnimalManager : MonoBehaviour
             }
             return result;
         }
-        switch (threatThreshold)
+        switch (size)
         {
             case 1:
                 Result += SearchSum(_predators1Pos.ToArray());
@@ -259,6 +293,19 @@ public class AnimalManager : MonoBehaviour
             default:
                 Debug.LogError("threatThreshold maximum is 3, minimum being 1.");
                 break;
+        }
+        return Result;
+    }
+
+    public static Vector3 CrudePursue(Vector3 position, float distance, byte size)
+    {
+        Vector3 Result = Vector3.zero;
+        foreach(Vector3 direction in Search(position, distance, size, false))
+        {
+            if(direction.sqrMagnitude < Result.sqrMagnitude || Result == Vector3.zero)
+            {
+                Result = direction;
+            }
         }
         return Result;
     }

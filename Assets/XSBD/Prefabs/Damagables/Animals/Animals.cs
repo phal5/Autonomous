@@ -50,6 +50,7 @@ public class Animals : Damagable
     Transform[] _foodTargetNominees;
     Transform _foodTaget;
     Food _food;
+    float _foodTimer = 0;
     byte _hungerState;
     bool _isEating;
     bool _eatSwitch;
@@ -82,6 +83,7 @@ public class Animals : Damagable
                     {
                         SetFoodTarget1();
                         SetFoodTarget2();
+                        _foodTimer = 0;
                     }
                     break;
                 }
@@ -101,9 +103,9 @@ public class Animals : Damagable
                 }
             case 4:
                 {
-                    if (!_foodTaget)
+                    if (_foodTimer > 10)
                     {
-                        
+                        _foodTaget = null;
                     }
                     break;
                 }
@@ -112,6 +114,7 @@ public class Animals : Damagable
         SetManagedValues();
         Heal();
         Eat();
+        _foodTimer += Time.deltaTime;
     }
 
     //=====================================================================================================================================

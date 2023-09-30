@@ -14,27 +14,25 @@ public class MachineInventoryInstance : InventoryInstance
 
     public bool Feed(byte amount, Vector3 position)
     {
-        return RawInstantiate(SearchGivenFoodSlot(), amount, position, true);
+        return RawInstantiate(SearchGivenFoodSlot(), amount, position, true , true);
     }
 
-    bool RawInstantiate(InventorySlot slot, byte createAmount, Vector3 position, bool decrement = true)
+    bool RawInstantiate(InventorySlot slot, byte createAmount, Vector3 position, bool decrement = true, bool deitemize = false)
     {
+        GameObject gameObject = null;
         if(slot != null)
         {
-            if (decrement)
+            bool isDeployer = slot.GetSlotItem().TryGetComponent<Deployer>(out Deployer deployer);
+            for (int i = 0; i < createAmount && slot.GetSlotQuantity() > 0; ++i)
             {
-                for (int i = 0; i < createAmount && slot.GetSlotQuantity() > 0; ++i)
-                {
-                    Instantiate(slot.GetSlotItem(), position, Random.rotation, slot.GetSlotParentData().GetParent());
-                    slot.SetQuantity((byte)(slot.GetSlotQuantity() - 1));
-                }
-            }
-            else
-            {
-                for (int i = 0; i < createAmount && slot.GetSlotQuantity() > 0; ++i)
-                {
-                    Instantiate(slot.GetSlotItem(), position, Random.rotation, slot.GetSlotParentData().GetParent());
-                }
+                gameObject = Instantiate
+                    (
+                        (isDeployer) ? deployer.GetDeployedObject() : slot.GetSlotItem(),
+                        position, Random.rotation, slot.GetSlotParentData().GetParent()
+                    );
+                
+                if (decrement) slot.SetQuantity((byte)(slot.GetSlotQuantity() - 1));
+                if (deitemize) foreach (Item item in gameObject.GetComponents<Item>()) Destroy(item);
             }
             if (slot.GetSlotQuantity() > 0)
             {

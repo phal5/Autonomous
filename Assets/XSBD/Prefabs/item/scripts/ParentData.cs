@@ -14,7 +14,7 @@ using UnityEngine;
 
     Transform DecideParent()
     {
-        Transform parent;
+        Transform parent = null;
         switch (_type)
         {
             case Parent.ANIMAL:
@@ -24,14 +24,10 @@ using UnityEngine;
             case Parent.FOOD:
                 parent = FoodManager.GetFoodParent(_index);
                 break;
-
-            default:
-                parent = null;
-                break;
         }
         _parent = parent;
         _parentSet = true;
-        return parent;
+        return _parent;
     }
 
     public Transform GetParent()

@@ -37,7 +37,6 @@ public class SpontaneousTrader : TradeInventoryInstance
             {
                 index -= _divisor * recipe._probability;
             }
-            Debug.Log(index);
         }
         if (_Recipe == null)
         {
