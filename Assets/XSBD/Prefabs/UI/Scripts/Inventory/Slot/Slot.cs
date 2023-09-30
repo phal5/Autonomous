@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEditor.Progress;
 
 public class Slot : MonoBehaviour
 {
     [SerializeField] protected GameObject _item;
-    [SerializeField] protected ParentData _parentData;
+    [SerializeField] protected ParentData _parentData = new ParentData();
     [SerializeField] protected byte _quantity = 0;
     [SerializeField] protected bool _stackable;
 
@@ -83,6 +82,11 @@ public class Slot : MonoBehaviour
         if(_quantity > 0)
         {
             _itemInstance = Instantiate(_item, transform).transform;
+
+            if(_itemInstance.TryGetComponent<Deployer>(out Deployer deployer))
+            {
+                _parentData = deployer.GetParentData();
+            }
 
             if (_scaleDivisor == Vector3.zero)
             {

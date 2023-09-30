@@ -44725,6 +44725,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1049170786}
   m_Mesh: {fileID: 4013275331872712965, guid: 15d72941e1e55f242b8e3e84f56922a9, type: 3}
+--- !u!224 &1055841683 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 871690046166485989, guid: bdc6a5c5b016b254b928caad87b67da2,
+    type: 3}
+  m_PrefabInstance: {fileID: 9118552928694690933}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1059027393
 GameObject:
   m_ObjectHideFlags: 0
@@ -46557,6 +46563,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1114074246}
   m_Mesh: {fileID: 4013275331872712965, guid: 15d72941e1e55f242b8e3e84f56922a9, type: 3}
+--- !u!1 &1114253118
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1114253119}
+  m_Layer: 0
+  m_Name: Herbivores 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1114253119
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114253118}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.4099996, y: -2.3413815, z: 7.517494}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1055841683}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1114644933
 GameObject:
   m_ObjectHideFlags: 0
@@ -69414,6 +69451,37 @@ MonoBehaviour:
   - _prefab: {fileID: 0}
     _parent: {fileID: 0}
     _probability: 0
+--- !u!1 &1648899400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1648899401}
+  m_Layer: 0
+  m_Name: Herbivores 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1648899401
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648899400}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.4099996, y: -2.3413815, z: 7.517494}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1055841683}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1650515372
 GameObject:
   m_ObjectHideFlags: 0
@@ -90854,7 +90922,7 @@ GameObject:
   - component: {fileID: 919132148403881985}
   m_Layer: 2
   m_Name: Bob the Bushman
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93374,7 +93442,12 @@ PrefabInstance:
     - target: {fileID: 597387541977997952, guid: 7be3b2b1cfe0b4d49b6dcf50301695fc,
         type: 3}
       propertyPath: _parentData._type
-      value: 1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 597387541977997952, guid: 7be3b2b1cfe0b4d49b6dcf50301695fc,
+        type: 3}
+      propertyPath: _parentData._index
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 982837559166330627, guid: 7be3b2b1cfe0b4d49b6dcf50301695fc,
         type: 3}
@@ -93517,6 +93590,11 @@ PrefabInstance:
       propertyPath: _stackable
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2350319943190538325, guid: 7be3b2b1cfe0b4d49b6dcf50301695fc,
+        type: 3}
+      propertyPath: _parentData._type
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2699880253680102870, guid: 7be3b2b1cfe0b4d49b6dcf50301695fc,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -93651,7 +93729,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _item
       value: 
-      objectReference: {fileID: 7167813959204971396, guid: f7a611e0a78d34a47af37357c4deedfe,
+      objectReference: {fileID: 5401930028494635357, guid: e32782600845c7c49a671081294b972a,
         type: 3}
     - target: {fileID: 6093785733307018923, guid: 7be3b2b1cfe0b4d49b6dcf50301695fc,
         type: 3}
@@ -93667,6 +93745,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _stackable
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6093785733307018923, guid: 7be3b2b1cfe0b4d49b6dcf50301695fc,
+        type: 3}
+      propertyPath: _parentData._type
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6181623901774192618, guid: 7be3b2b1cfe0b4d49b6dcf50301695fc,
         type: 3}
@@ -93885,9 +93968,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8290359605334117863, guid: 7be3b2b1cfe0b4d49b6dcf50301695fc,
         type: 3}
+      propertyPath: _item
+      value: 
+      objectReference: {fileID: 6161099734480205392, guid: d81e5a8f76a4bca4eaa2d2e6c8ac188b,
+        type: 3}
+    - target: {fileID: 8290359605334117863, guid: 7be3b2b1cfe0b4d49b6dcf50301695fc,
+        type: 3}
       propertyPath: _parent
       value: 
       objectReference: {fileID: 923439541}
+    - target: {fileID: 8290359605334117863, guid: 7be3b2b1cfe0b4d49b6dcf50301695fc,
+        type: 3}
+      propertyPath: _quantity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8290359605334117863, guid: 7be3b2b1cfe0b4d49b6dcf50301695fc,
+        type: 3}
+      propertyPath: _parentData._type
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8481165923355685943, guid: 7be3b2b1cfe0b4d49b6dcf50301695fc,
         type: 3}
       propertyPath: _parent
@@ -95663,6 +95762,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2382046011288244483, guid: bdc6a5c5b016b254b928caad87b67da2,
         type: 3}
+      propertyPath: __herbivores1
+      value: 
+      objectReference: {fileID: 923439541}
+    - target: {fileID: 2382046011288244483, guid: bdc6a5c5b016b254b928caad87b67da2,
+        type: 3}
+      propertyPath: __herbivores2
+      value: 
+      objectReference: {fileID: 1114253119}
+    - target: {fileID: 2382046011288244483, guid: bdc6a5c5b016b254b928caad87b67da2,
+        type: 3}
+      propertyPath: __herbivores3
+      value: 
+      objectReference: {fileID: 1648899401}
+    - target: {fileID: 2382046011288244483, guid: bdc6a5c5b016b254b928caad87b67da2,
+        type: 3}
       propertyPath: _animalPrefabs.Array.data[0]._prefab
       value: 
       objectReference: {fileID: 0}
@@ -95763,6 +95877,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7232617711567068692, guid: bdc6a5c5b016b254b928caad87b67da2,
         type: 3}
+      propertyPath: m_Name
+      value: Herbivores 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7232617711567068692, guid: bdc6a5c5b016b254b928caad87b67da2,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -95773,7 +95892,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 871690046166485989, guid: bdc6a5c5b016b254b928caad87b67da2,
+        type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 1114253119}
+    - targetCorrespondingSourceObject: {fileID: 871690046166485989, guid: bdc6a5c5b016b254b928caad87b67da2,
+        type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 1648899401}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdc6a5c5b016b254b928caad87b67da2, type: 3}
 --- !u!1 &9167880574993822341

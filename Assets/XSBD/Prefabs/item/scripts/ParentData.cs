@@ -9,7 +9,7 @@ using UnityEngine;
     [SerializeField] Parent _type = Parent.NONE;
     [SerializeField] byte _index;
 
-    Transform _parent;
+    Transform _parent = null;
     bool _parentSet = false;
 
     Transform DecideParent()
@@ -41,6 +41,5 @@ using UnityEngine;
             return DecideParent();
         }
         return _parent;
-        return DecideParent();
     }
 }

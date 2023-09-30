@@ -6,14 +6,14 @@ using UnityEngine;
 
 public class AnimalManager : MonoBehaviour
 {
-    [SerializeField] Transform __herbivores;
+    [SerializeField] Transform __herbivores1;
     [SerializeField] Transform __herbivores2;
     [SerializeField] Transform __herbivores3;
     [SerializeField] Transform __predators1;
     [SerializeField] Transform __predators2;
     [SerializeField] Transform __predators3;
 
-    static Transform _herbivores;
+    static Transform _herbivores1;
     static Transform _herbivores2;
     static Transform _herbivores3;
     static Transform _predators1;
@@ -24,43 +24,58 @@ public class AnimalManager : MonoBehaviour
     public class AnimalPrefab
     {
         [SerializeField] GameObject _prefab;
-        [SerializeField][Tooltip("0 means herbivorous, 1 means small predators and so on. Maximum is 3.")] byte _threatLevel = 0;
+        [SerializeField][Tooltip("0 means herbivorous, 1 means small predators and so on. Maximum is 3.")] byte _size = 0;
         [SerializeField] bool _isPredator = false;
-
-        AnimalPrefab(GameObject prefab, byte threatLevel)
-        {
-            _prefab = prefab;
-            _threatLevel = threatLevel;
-        }
 
         public void InstantiateAnimal(Vector3 position, byte number)
         {
             Transform parent;
-            switch (_threatLevel)
+            switch (_size)
             {
                 case 0:
                     {
-                        parent = _herbivores;
+                        parent = _herbivores1;
                         break;
                     }
                 case 1:
                     {
-                        parent = _predators1;
+                        if (_isPredator)
+                        {
+                            parent = _predators1;
+                        }
+                        else
+                        {
+                            parent = _herbivores1;
+                        }
                         break;
                     }
                 case 2:
                     {
-                        parent = _predators2;
+                        if (_isPredator)
+                        {
+                            parent = _predators2;
+                        }
+                        else
+                        {
+                            parent = _herbivores2;
+                        }
                         break;
                     }
                 case 3:
                     {
-                        parent = _predators3;
+                        if (_isPredator)
+                        {
+                            parent = _predators3;
+                        }
+                        else
+                        {
+                            parent = _herbivores3;
+                        }
                         break;
                     }
                 default:
                     {
-                        Debug.LogError("À§Çù ÃÖ´ñ°ªÀº 3ÀÌ¿¡¿ä");
+                        Debug.LogError("Minimim value for animal size is 0, Maximum is 3");
                         parent = _predators3;
                         break;
                     }
@@ -97,7 +112,9 @@ public class AnimalManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _herbivores = __herbivores;
+        _herbivores1 = __herbivores1;
+        _herbivores2 = __herbivores2;
+        _herbivores3 = __herbivores3;
         _predators1 = __predators1;
         _predators2 = __predators2;
         _predators3 = __predators3;
@@ -111,7 +128,7 @@ public class AnimalManager : MonoBehaviour
         {
             case 0:
                 {
-                    TransformToPosition(_herbivores, ref _herbivoresPos);
+                    TransformToPosition(_herbivores1, ref _herbivoresPos);
                     _frameCounter++;
                     break;
                 }
@@ -257,14 +274,15 @@ public class AnimalManager : MonoBehaviour
     {
         switch (index)
         {
-            case 0: return _herbivores;
+            case 1: return _herbivores1;
+            case 2: return _herbivores2;
+            case 3: return _herbivores3;
 
-            case 1: return _predators1;
-
-            case 2: return _predators2;
-
-            case 3: return _predators3;
+            case 11: return _predators1;
+            case 12: return _predators2;
+            case 13: return _predators3;
         }
+        Debug.LogError("Animal Parent Inedx Error: 1, 2, 3 for herbivores, 11, 12, 13 for carnivores");
         return null;
     }
 

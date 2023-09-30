@@ -66,7 +66,7 @@ public class PlantGrower : MonoBehaviour
         if (_growthPrefabs[_index].TryGetComponent<Item>(out Item item))
         {
             item = _plant.GetComponent<Item>();
-            _plant.parent = item.GetParent();
+            _plant.parent = item.GetParentData().GetParent();
         }
         _index++;
     }

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Wheat
+  m_Name: ChickenCooked
   m_Shader: {fileID: -6465566751694194690, guid: b3df9b3fb8f70e044b8a6899f33e7ffd,
     type: 3}
   m_Parent: {fileID: 0}
@@ -17,14 +17,15 @@ Material:
   - _MAIN_LIGHT_CALCULATE_SHADOWS
   - _MAIN_LIGHT_SHADOWS_CASCADE
   - _SHADOWS_SOFT
+  - _SPECULAR
   m_InvalidKeywords: []
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 1
+  m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: _DarkLine
+  m_LockedProperties: _MAIN_LIGHT_SHADOWS_CASCADE
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -80,10 +81,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Texture2DAsset_10e77b1898674205a767238736b084ab_Out_0_Texture2D:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -118,7 +115,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Indirect: 0.1
-    - _Line1: 0.26
+    - _Line1: 0.38
     - _Line2: 0.2
     - _MAIN_LIGHT_CALCULATE_SHADOWS: 1
     - _MAIN_LIGHT_SHADOWS_CASCADE: 1
@@ -129,26 +126,26 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _SHADOWS_SOFT: 1
-    - _SPECULAR: 0
+    - _SPECULAR: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
-    - _Strength1: 0.54
+    - _Strength1: 0.5
     - _Strength2: 0.2
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _AmbientColor: {r: 0.3490566, g: 0.013415209, b: 0, a: 0}
+    - _AmbientColor: {r: 0.3301887, g: 0, b: 0.06510764, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Base_Color: {r: 1, g: 0.87834525, b: 0.36477983, a: 0}
+    - _Base_Color: {r: 0.5754717, g: 0.30530703, b: 0.25335228, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &9031909636692874629
+--- !u!114 &4165142753927951340
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

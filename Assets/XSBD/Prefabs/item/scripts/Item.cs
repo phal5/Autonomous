@@ -31,9 +31,9 @@ public class Item : MonoBehaviour
         return _item;
     }
 
-    public Transform GetParent()
+    public ParentData GetParentData()
     {
-        return _parentData.GetParent();
+        return _parentData;
     }
 
     public byte GetQuantity()

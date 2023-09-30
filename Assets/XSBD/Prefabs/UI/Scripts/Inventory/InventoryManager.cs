@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -47,10 +46,11 @@ public class InventoryManager : MonoBehaviour
 
     protected static void InstantiateItem()
     {
-        for(int i = 0; i < _Quantity; i++)
+        for (int i = 0; i < _Quantity; i++)
         {
-            Instantiate(_Item, _player.position + Vector3.up, Random.rotation, _ParentData.GetParent());
+            Instantiate(_Item, _player.position + Vector3.up, Quaternion.Euler(Vector3.zero), (_ParentData == null)? null : _ParentData.GetParent());
         }
+        
         _Move = false;
         _stale = false;
         Clear();
