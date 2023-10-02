@@ -145,7 +145,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 452502037975702574}
           m_TargetAssemblyTypeName: InventorySlot, Assembly-CSharp
-          m_MethodName: MouseDownEvent
+          m_MethodName: MouseDownEventInv
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -168,7 +168,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
-  _parent: {fileID: 0}
+  _parentData:
+    _type: 2
+    _index: 0
   _quantity: 0
   _stackable: 0
 --- !u!1 &7820741928947453917

@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class TakeOnlySlot : Slot
 {
-    bool _dragging = false;
+    protected bool _dragging = false;
 
     private void Start()
     {

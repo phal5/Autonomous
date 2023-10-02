@@ -10,9 +10,10 @@ using UnityEngine;
     [Space(10f)]
     [SerializeField] Transform _parent;
     [SerializeField] GameObject _instancee;
-    [SerializeField] GameObject _dimensionsRef;
-    [SerializeField] Vector3 _manualDimensions;
     [SerializeField] float _distance;
+    [Space(10f)]
+    [Tooltip("Not necessary")][SerializeField] float _manualDimension = 0.1f;
+    [Tooltip("Not necessary")][SerializeField] GameObject _dimensionsRef;
     [Space(10f)]
     [SerializeField] bool _instantiate = false;
     [SerializeField] bool _undo = false;
@@ -53,9 +54,9 @@ using UnityEngine;
         float zLength = (_thisEnd.position.z - _thatEnd.position.z);
         int x = 1;
         int z = 1;
-        Vector3 dimensions = _manualDimensions;
+        Vector3 dimensions = _manualDimension * Vector3.one;
         List<GameObject> list = new List<GameObject>();
-        if(_dimensionsRef.TryGetComponent<MeshRenderer>(out MeshRenderer renderer))
+        if(_dimensionsRef != null && _dimensionsRef.TryGetComponent<MeshRenderer>(out MeshRenderer renderer))
         {
             dimensions = renderer.bounds.size;
         }

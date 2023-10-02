@@ -31,7 +31,7 @@ public class Calendar : MonoBehaviour
 
     static Light _mainLight;
     static float _dayNightDivisor;
-    static float _timer = 0.5f;
+    static float _timer = 0.375f;
     static byte day = 1;
     static byte month = 1;
     

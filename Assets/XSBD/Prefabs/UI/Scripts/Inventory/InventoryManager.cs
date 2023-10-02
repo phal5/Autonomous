@@ -132,7 +132,7 @@ public class InventoryManager : MonoBehaviour
         return _Move;
     }
 
-    public static TakeOnlySlot GetSlot()
+    public static InventorySlot GetSlot()
     {
         return _Slot;
     }

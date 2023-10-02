@@ -89,7 +89,7 @@ public class InventoryInstance : MonoBehaviour
         return null;
     }
 
-    public void MoveToEmptySlot(GameObject item, ParentData parentData, byte quantity, bool stackable = true)
+    public bool MoveToEmptySlot(GameObject item, ParentData parentData, byte quantity, bool stackable = true)
     {
         byte max = InventoryManager.GetMaxQuantity();
         InventorySlot slot = null;
@@ -109,6 +109,7 @@ public class InventoryInstance : MonoBehaviour
             {
                 slot.SetQuantity(sum);
             }
+            return true;
         }
         else
         {
@@ -124,11 +125,13 @@ public class InventoryInstance : MonoBehaviour
                 {
                     slot.SetSlotData(item, parentData, quantity, stackable);
                 }
+                return true;
             }
             else
             {
-                InventoryManager.SetManagerData(item, parentData, quantity, true);
+                InventoryManager.SetManagerData(item, parentData, quantity, stackable);
                 InventoryManager.ForceInstantiate();
+                return false;
             }
         }
     }

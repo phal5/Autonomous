@@ -48,6 +48,7 @@ using UnityEngine.UIElements;
         else if (
             _stackable
             && InventoryManager.GetStackability()
+            && _parentData != null
             && _parentData.GetParent() == InventoryManager.GetItemParentData().GetParent()
             && _item == InventoryManager.GetItem()
             )
@@ -69,12 +70,28 @@ using UnityEngine.UIElements;
                     InventoryManager.GetItem(),
                     InventoryManager.GetItemParentData(),
                     InventoryManager.GetQuantity(),
-                    InventoryManager.GetStackability());
+                    InventoryManager.GetStackability()
+                );
             }
         }
         InventoryManager.SetSlot(null);
         SetText();
         InstanceItem();
+    }
+
+    public void MouseDownEventInv()
+    {
+        if (_quantity != 0)
+        {
+            _dragging = true;
+            InventoryManager.SetManagerData(_item, _parentData, _quantity, _stackable);
+            InventoryManager.SetSlot(this);
+            Clear();
+            if (_itemInstance)
+            {
+                SetLayerInChildren(_itemInstance, 7);
+            }
+        }
     }
 
     public void MouseEnterEvent()
@@ -99,7 +116,7 @@ using UnityEngine.UIElements;
     {
         if (!EventSystem.current.IsPointerOverGameObject())
         {
-            MouseDownEvent();
+            MouseDownEventInv();
         }
     }
 
