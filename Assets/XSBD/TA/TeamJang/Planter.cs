@@ -21,9 +21,19 @@ public class Planter : MonoBehaviour
         if (_plant)
         {
             gameObjects.Clear();
-            foreach (Transform planter in planters)
+            if(planters.Length > 0)
             {
-                gameObjects.Add(Plant(planter, _parent));
+                foreach (Transform planter in planters)
+                {
+                    gameObjects.Add(Plant(planter, _parent));
+                }
+            }
+            else
+            {
+                foreach(Transform child in transform)
+                {
+                    gameObjects.Add(Plant(child, _parent));
+                }
             }
             _plant = false;
         }

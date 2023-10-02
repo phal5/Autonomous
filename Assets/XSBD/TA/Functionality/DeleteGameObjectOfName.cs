@@ -20,17 +20,18 @@ public class DeleteGameObjectOfName : MonoBehaviour
 
     void DeleteByName(Transform _transform)
     {
-        if(_transform.gameObject.name == _name)
+        foreach (Transform child in _transform)
+        {
+            DeleteByName(child);
+        }
+        if (_transform.gameObject.name == _name)
         {
             foreach(Transform child in _transform)
             {
                 child.parent = _transform.parent;
             }
             DestroyImmediate(_transform.gameObject);
-        }
-        foreach (Transform child in _transform)
-        {
-            DeleteByName(child);
+            return;
         }
     }
 }
