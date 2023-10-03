@@ -12,6 +12,8 @@ public class SaveManager : MonoBehaviour
 
     private void Awake()
     {
+        //Singleton pattern in Unity
+
         if (_instance != null)
         {
             Debug.LogError("You don't really want two save systems running");
