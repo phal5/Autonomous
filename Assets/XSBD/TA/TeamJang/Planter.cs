@@ -8,6 +8,7 @@ public class Planter : MonoBehaviour
     [SerializeField] Transform[] planters;
     [SerializeField] Transform _parent;
     [SerializeField] GameObject _plantPrefab;
+    [Range(0.0f, 1.0f)][SerializeField] float _probability;
     [SerializeField] byte _layer;
     [Space(10)]
     [SerializeField] bool _plant;
@@ -50,7 +51,7 @@ public class Planter : MonoBehaviour
 
     GameObject Plant(Transform from, Transform parent)
     {
-        if(Physics.Raycast(from.position, Vector3.down, out _hit) && _hit.transform.gameObject.layer == _layer)
+        if(Random.value < _probability && Physics.Raycast(from.position, Vector3.down, out _hit) && _hit.transform.gameObject.layer == _layer)
         {
             Quaternion rotation =
                 Quaternion.LookRotation(_hit.normal, Vector3.back)

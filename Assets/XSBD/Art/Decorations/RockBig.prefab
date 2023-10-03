@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8821247971857310403}
   - component: {fileID: 6441844838996406702}
   m_Layer: 0
-  m_Name: Rock_01
+  m_Name: Outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 5094325485948721889}
   - component: {fileID: 7904806532012349642}
   m_Layer: 0
-  m_Name: Outline
+  m_Name: Rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -215,8 +215,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.6739128, y: 1.6739128, z: 1.6739128}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6525545920979755841}
   - {fileID: 528729389086269458}
