@@ -16,9 +16,10 @@ Material:
   - ADDITIONAL_LIGHT_CALCULATE_SHADOWS
   - _MAIN_LIGHT_CALCULATE_SHADOWS
   - _SHADOWS_SOFT
+  - _SPECULAR
   m_InvalidKeywords: []
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -51,7 +52,7 @@ Material:
     - _DarkLine: -1.05
     - _Defluff: 0
     - _FoamDensity: 4139.1
-    - _FoamDistance: -1.9
+    - _FoamDistance: -2
     - _Indirect: 0.25
     - _InverseNoise2Scale: 100
     - _InverseNoiseScale: 1393.22
@@ -69,7 +70,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SHADOWS_SOFT: 1
-    - _SPECULAR: 0
+    - _SPECULAR: 1
     - _Smoothness: 0.25
     - _Speed: 1
     - _Strength1: 0.05

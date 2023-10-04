@@ -45,6 +45,7 @@ using UnityEngine;
                 }
             }
             _installList.Clear();
+            Debug.Log("Cleared All Objects!");
         }
     }
 
