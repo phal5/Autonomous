@@ -5,19 +5,20 @@ using UnityEngine.Rendering;
 
 public class Hitter : MonoBehaviour
 {
-    [SerializeField] KeyCode _key = KeyCode.Mouse0;
+    [SerializeField] int _mouseButtonIndex = 0;
 
     Collider _collider;
 
     // Start is called before the first frame update
     void Start()
     {
-        _collider = GetComponent<BoxCollider>();
+        _collider = GetComponent<Collider>();
+        _collider.enabled = false;
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(_key)) 
+        if(Input.GetMouseButtonDown(0)) 
         {
             _collider.enabled = true;
         }
