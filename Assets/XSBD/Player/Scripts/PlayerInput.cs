@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerInput : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PlayerInput : MonoBehaviour
         [SerializeField] KeyCode _key;
         [SerializeField] string _trigger;
         [SerializeField] Behaviour _behaviour;
+        [SerializeField] UnityEvent _event;
 
         public void SetTrigger(Animator animator, ref string _currentTrigger)
         {
@@ -24,6 +26,7 @@ public class PlayerInput : MonoBehaviour
                 }
                 animator.SetTrigger(_trigger);
                 _currentTrigger = _trigger;
+                _event.Invoke();
             }
         }
     }
@@ -34,7 +37,7 @@ public class PlayerInput : MonoBehaviour
         [SerializeField] int _button;
         [SerializeField] string _trigger;
         [SerializeField] Behaviour _behaviour;
-
+        [SerializeField] UnityEvent _event;
         public void SetTrigger(Animator animator, ref string _currentTrigger)
         {
             if (Input.GetMouseButtonDown(_button))
@@ -49,6 +52,7 @@ public class PlayerInput : MonoBehaviour
                 }
                 animator.SetTrigger(_trigger);
                 _currentTrigger = _trigger;
+                _event.Invoke();
             }
         }
     }

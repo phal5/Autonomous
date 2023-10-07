@@ -30,6 +30,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7450039556554769179}
+  - {fileID: 1197137586752312934}
+  - {fileID: 1744147758088755220}
   - {fileID: 6637921741715241634}
   - {fileID: 2230760068396787941}
   - {fileID: 19407521266478244}
@@ -52,17 +54,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b8912ac50457447964e031df743d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __herbivores: {fileID: 7450039556554769179}
-  __herbivores2: {fileID: 0}
-  __herbivores3: {fileID: 0}
+  __herbivores1: {fileID: 7450039556554769179}
+  __herbivores2: {fileID: 1197137586752312934}
+  __herbivores3: {fileID: 1744147758088755220}
   __predators1: {fileID: 6637921741715241634}
   __predators2: {fileID: 2230760068396787941}
   __predators3: {fileID: 19407521266478244}
   _init: 0
   _animalPrefabs:
-  - _prefab: {fileID: 5605127604356286759, guid: 8541351f9edc69340ab869bf22703ba0,
-      type: 3}
-    _threatLevel: 0
+  - _prefab: {fileID: 0}
+    _size: 0
     _isPredator: 0
 --- !u!1 &333212426086116985
 GameObject:
@@ -141,6 +142,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   camera_: {fileID: 0}
+--- !u!1 &1233697452022979740
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1197137586752312934}
+  m_Layer: 0
+  m_Name: Herbivores 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1197137586752312934
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1233697452022979740}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.4099996, y: -2.3413815, z: 7.517494}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 871690046166485989}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3998314525084150312
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,6 +220,37 @@ MonoBehaviour:
   _Player: {fileID: 0}
   _Camera: {fileID: 0}
   _EyesOffset: {x: 0, y: 3, z: 0}
+--- !u!1 &4060274371544140151
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1744147758088755220}
+  m_Layer: 0
+  m_Name: Herbivores 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1744147758088755220
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4060274371544140151}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.4099996, y: -2.3413815, z: 7.517494}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 871690046166485989}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4144295053629609712
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,9 +295,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64daa003aed8f194190db05bca63b057, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deployable: {fileID: 0}
-  notDeployable: {fileID: 0}
-  pointerPrefab: {fileID: 0}
+  deployable: {fileID: 2100000, guid: b5cc4902a34eea24babfaf5e19cd8553, type: 2}
+  notDeployable: {fileID: 2100000, guid: 1549ebd6ca75a8142b1f9d7c986a53ca, type: 2}
+  pointerPrefab: {fileID: 6626793928493649590, guid: e484d654a5f66a44d81f6f7e583903a9,
+    type: 3}
   xRotatePlus: 105
   xRotateMinus: 107
   yRotatePlus: 106
@@ -526,7 +590,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7450039556554769179}
   m_Layer: 0
-  m_Name: Herbivores
+  m_Name: Herbivores 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
