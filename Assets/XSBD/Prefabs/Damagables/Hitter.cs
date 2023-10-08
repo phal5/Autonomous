@@ -26,11 +26,9 @@ public class Hitter : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        print("entered");
         if (other.gameObject.TryGetComponent<Damagable>(out Damagable damageScript))
         {
             damageScript.DecreaseHP();
-            print("Work");
         }
 
         _collider.enabled = false;

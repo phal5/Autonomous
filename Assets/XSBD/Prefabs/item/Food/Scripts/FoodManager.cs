@@ -36,7 +36,7 @@ public class FoodManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetFoodParents();
+        SetFoodParents();
         __food = _food;
     }
 
@@ -77,7 +77,7 @@ public class FoodManager : MonoBehaviour
         }
     }
 
-    void GetFoodParents()
+    void SetFoodParents()
     {
         _foodTypes = new Transform[transform.childCount];
         byte index = 0;
@@ -94,7 +94,9 @@ public class FoodManager : MonoBehaviour
         byte index = 0;
         foreach(byte id in indexes)
         {
+            Debug.Log(id);
             result[index] = _foodTypes[id];
+            Debug.Log(new Vector2(index, id));
             ++index;
         }
         return result;

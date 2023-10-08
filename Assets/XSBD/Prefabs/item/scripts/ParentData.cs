@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 [System.Serializable] public class ParentData
@@ -37,5 +38,21 @@ using UnityEngine;
             return DecideParent();
         }
         return _parent;
+    }
+
+    public GameObject InstantiateAsChild(GameObject gameObject, Vector3 position, quaternion rotation)
+    {
+        return MonoBehaviour.Instantiate(gameObject, position, rotation, GetParent());
+    }
+
+    public GameObject InstantiateRaycast(GameObject gameObject, Vector3 position, quaternion rotation)
+    {
+        float maxDimension = 0;
+        if(gameObject.TryGetComponent<Renderer>(out Renderer renderer))
+        {
+            maxDimension = renderer.bounds.max.magnitude;
+        }
+        Physics.Raycast(position + Vector3.up * maxDimension, Vector3.down, out RaycastHit hit);
+        return MonoBehaviour.Instantiate(gameObject, hit.point, rotation, GetParent());
     }
 }

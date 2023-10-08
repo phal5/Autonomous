@@ -8,14 +8,14 @@ public class Damagable : MonoBehaviour
     [System.Serializable] class Drop
     {
         [SerializeField] GameObject _prefab;
-        [SerializeField] Transform _parent;
+        [SerializeField] ParentData _parentData;
         [SerializeField] float _probability;
 
         public void InstantiateDrop(Vector3 position)
         {
             if (Random.value < _probability)
             {
-                Instantiate(_prefab, position, Random.rotation, _parent);
+                Instantiate(_prefab, position, Random.rotation, _parentData.GetParent());
             }
         }
     }
