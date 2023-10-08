@@ -129,8 +129,6 @@ public class InventoryInstance : MonoBehaviour
             }
             else
             {
-                InventoryManager.SetManagerData(item, parentData, quantity, stackable);
-                InventoryManager.ForceInstantiate();
                 return false;
             }
         }

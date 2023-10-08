@@ -13,6 +13,14 @@ using UnityEngine;
     Transform _parent = null;
     bool _parentSet = false;
 
+    public ParentData()
+    {
+        _type = Parent.NONE;
+        _index = 0;
+        _parent = null;
+        _parentSet = false;
+    }
+
     Transform DecideParent()
     {
         Transform parent = null;

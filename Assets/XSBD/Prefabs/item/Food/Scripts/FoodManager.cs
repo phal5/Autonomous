@@ -94,9 +94,7 @@ public class FoodManager : MonoBehaviour
         byte index = 0;
         foreach(byte id in indexes)
         {
-            Debug.Log(id);
             result[index] = _foodTypes[id];
-            Debug.Log(new Vector2(index, id));
             ++index;
         }
         return result;

@@ -32,7 +32,10 @@ public class PlayerItemPickUp : MonoBehaviour
                     bool _stackable;
                     item.GetItemData(out _item, out _parentData, out _quantity, out _stackable);
 
-                    inventory.MoveToEmptySlot(_item, _parentData, _quantity, _stackable);
+                    if(inventory.MoveToEmptySlot(_item, _parentData, _quantity, _stackable))
+                    {
+                        Destroy(coll.gameObject);
+                    }
                 }
             }
 

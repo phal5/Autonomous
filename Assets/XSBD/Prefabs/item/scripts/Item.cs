@@ -14,6 +14,10 @@ public class Item : MonoBehaviour
 
     private void Start()
     {
+        if(_parentData == null)
+        {
+            _parentData = new ParentData();
+        }
         _parentData.GetParent();
     }
 
@@ -23,7 +27,6 @@ public class Item : MonoBehaviour
         parentData = _parentData;
         quantity = _quantity;
         stackable = _stackable;
-        Destroy(gameObject);
     }
 
     public GameObject GetItem()
