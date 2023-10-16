@@ -51,6 +51,8 @@ Material:
     - _CardSize: 0
     - _DarkLine: -1.05
     - _Defluff: 0
+    - _DistanceBlendThreshold: 0.7
+    - _DitherParticleSizeInv: 0.5
     - _FoamDensity: 4139.1
     - _FoamDistance: -2
     - _Indirect: 0.25
@@ -61,6 +63,7 @@ Material:
     - _Line2: 0.87
     - _MAIN_LIGHT_CALCULATE_SHADOWS: 1
     - _MAIN_LIGHT_SHADOWS_CASCADE: 0
+    - _MaxTransparentDepth: 62.1
     - _Noise2Speed: 0.002
     - _Noise2Strength: 43.8
     - _NoiseNormalStrength: 9.5
@@ -76,12 +79,12 @@ Material:
     - _Strength1: 0.05
     - _Strength2: 0.01
     - _blendStrength: 3.75
-    - _depth: 0
+    - _depth: -0.16
     - _foamSize: -0.26
     - _foam_speed: 5
     m_Colors:
-    - _AmbientColor: {r: 0.21568628, g: 0.56078434, b: 1, a: 1}
-    - _Base_Color: {r: 0.5882353, g: 0.76862746, b: 1, a: 1}
+    - _AmbientColor: {r: 0.21568626, g: 0.7254903, b: 1, a: 1}
+    - _Base_Color: {r: 0.5882353, g: 0.8558824, b: 1, a: 1}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6078236761265129716

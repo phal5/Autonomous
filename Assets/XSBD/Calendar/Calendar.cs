@@ -110,4 +110,9 @@ public class Calendar : MonoBehaviour
     {
         return month;
     }
+
+    public static float GetTimer()
+    {
+        return _timer;
+    }
 }
