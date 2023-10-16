@@ -28,8 +28,9 @@ public class PlayerWalk : MonoBehaviour
     float _paceDivisor;
     float _speedDivisor;
     float _paceTimer;
-    [SerializeField] bool _LR;
+    bool _LR;
     Rig _rig;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -123,7 +124,7 @@ public class PlayerWalk : MonoBehaviour
 
     bool Cast(Transform hip, Vector3 paceData)
     {
-        return Physics.Raycast(new Ray(hip.position - Vector3.Dot(paceData, transform.forward) * transform.forward, Vector3.down), out _hit, 2);
+        return Physics.Raycast(new Ray(hip.position - Vector3.Dot(paceData, transform.forward) * transform.forward, Vector3.down), out _hit);
     }
 
     float SqrPaceMultiplier()

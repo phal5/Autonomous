@@ -56,9 +56,9 @@ Material:
     - _FoamDensity: 4139.1
     - _FoamDistance: -2
     - _Indirect: 0.25
-    - _InverseNoise2Scale: 100
-    - _InverseNoiseScale: 1393.22
-    - _InverseWavelength: 500
+    - _InverseNoise2Scale: 0.01
+    - _InverseNoiseScale: 0.139322
+    - _InverseWavelength: -0.05
     - _Line1: 1.12
     - _Line2: 0.87
     - _MAIN_LIGHT_CALCULATE_SHADOWS: 1
@@ -74,6 +74,7 @@ Material:
     - _QueueOffset: 0
     - _SHADOWS_SOFT: 1
     - _SPECULAR: 1
+    - _Scale: 1
     - _Smoothness: 0.25
     - _Speed: 1
     - _Strength1: 0.05
