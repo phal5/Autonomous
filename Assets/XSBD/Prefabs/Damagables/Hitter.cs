@@ -7,21 +7,13 @@ public class Hitter : MonoBehaviour
 {
     [SerializeField] int _mouseButtonIndex = 0;
 
-    Collider _collider;
+    static Collider _collider;
 
     // Start is called before the first frame update
     void Start()
     {
         _collider = GetComponent<Collider>();
         _collider.enabled = false;
-    }
-
-    void Update()
-    {
-        if(Input.GetMouseButtonDown(0)) 
-        {
-            _collider.enabled = true;
-        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -32,5 +24,10 @@ public class Hitter : MonoBehaviour
         }
 
         _collider.enabled = false;
+    }
+
+    public static void SetColliderEnability(bool enable)
+    {
+        _collider.enabled = enable;
     }
 }

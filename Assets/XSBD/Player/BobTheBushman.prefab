@@ -74,7 +74,6 @@ MonoBehaviour:
   _root: {fileID: 8992113973070890301}
   _LFoot: {fileID: 5782773818754536103}
   _RFoot: {fileID: 1751326455202793606}
-  _LR: 0
 --- !u!1 &271183489713077656
 GameObject:
   m_ObjectHideFlags: 0
@@ -2505,6 +2504,7 @@ GameObject:
   - component: {fileID: 8341187916791640867}
   - component: {fileID: 4620584782725103324}
   - component: {fileID: 4719716663106435265}
+  - component: {fileID: 7126663704532472570}
   - component: {fileID: 3854201411720279776}
   - component: {fileID: 4198231934684972802}
   - component: {fileID: 5786447336836789925}
@@ -2671,6 +2671,18 @@ MonoBehaviour:
   pickUpDistance: 5
   inventory: {fileID: 0}
   pickUpKey: 102
+--- !u!114 &7126663704532472570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7828633824862558775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cdeb207ee43afb4d992580c0cffed94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &3854201411720279776
 Animator:
   serializedVersion: 5
@@ -2738,6 +2750,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _object: {fileID: 9161137721218966454, guid: 37183fe60d0b8c048b7e59510d5548fd, type: 3}
   _parent: {fileID: 2062096738638290765}
+  _time: 0
 --- !u!1 &7879470191643640607
 GameObject:
   m_ObjectHideFlags: 0

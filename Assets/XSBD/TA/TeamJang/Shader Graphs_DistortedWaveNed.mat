@@ -17,11 +17,12 @@ Material:
   - _MAIN_LIGHT_CALCULATE_SHADOWS
   - _SHADOWS_SOFT
   - _SPECULAR
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -48,11 +49,17 @@ Material:
     m_Floats:
     - ADDITIONAL_LIGHT_CALCULATE_SHADOWS: 1
     - _Alpha: 1
+    - _AlphaClip: 0
+    - _AlphaToMask: 0
+    - _Blend: 0
     - _CardSize: 0
+    - _CastShadows: 1
+    - _Cull: 2
     - _DarkLine: -1.05
     - _Defluff: 0
     - _DistanceBlendThreshold: 0.7
-    - _DitherParticleSizeInv: 0.5
+    - _DitherParticleSizeInv: 0.497
+    - _DstBlend: 10
     - _FoamDensity: 4139.1
     - _FoamDistance: -2
     - _Indirect: 0.25
@@ -77,10 +84,15 @@ Material:
     - _Scale: 1
     - _Smoothness: 0.25
     - _Speed: 1
+    - _SrcBlend: 5
     - _Strength1: 0.05
     - _Strength2: 0.01
-    - _blendStrength: 3.75
-    - _depth: -0.16
+    - _Surface: 1
+    - _ZTest: 4
+    - _ZWrite: 0
+    - _ZWriteControl: 0
+    - _blendStrength: 6.83
+    - _depth: -0.03
     - _foamSize: -0.26
     - _foam_speed: 5
     m_Colors:
