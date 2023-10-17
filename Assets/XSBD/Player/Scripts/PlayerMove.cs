@@ -18,6 +18,7 @@ public class PlayerMove : MonoBehaviour
     private float speedVelocity;
     private float currentSpeed;
     private float targetSpeed;
+    private Vector3 zExcecuter = new Vector3(1, 1, 0);
 
     private Transform cameraTransform;
     void Start()
@@ -44,7 +45,8 @@ public class PlayerMove : MonoBehaviour
     void ChangeCurrentSpeedBasedOnTargetSpeed(Vector2 inputDir)
     {
         targetSpeed = moveSpeed * inputDir.magnitude; //최종 속도 계산
-        currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedVelocity, smoothMoveTime);
+        //currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedVelocity, smoothMoveTime);
+        currentSpeed = targetSpeed;
     }
     void PersonMoveModeHorizontalMove()
     {
@@ -57,7 +59,14 @@ public class PlayerMove : MonoBehaviour
         ChangeCurrentSpeedBasedOnTargetSpeed(inputDir);
         float fallSpeed = rigidbody.velocity.y;
         //Vector3 velocity = new Vector3(cameraTransform.forward.x * inputDir.x * currentSpeed, 0, currentSpeed * inputDir.y * cameraTransform.forward.z); // 앞방향으로
-        Vector3 velocity = (cameraTransform.forward*inputDir.y + cameraTransform.right*inputDir.x)*currentSpeed;
+        Vector3 forward = cameraTransform.forward;
+        forward.y = 0;
+        Vector3 right = cameraTransform.right;
+        right.y = 0;
+
+        Vector3 velocity = (forward.normalized *inputDir.y + right.normalized*inputDir.x)*currentSpeed;
+        Debug.Log(cameraTransform.forward + " forward");
+        Debug.Log(cameraTransform.right + " right");
         velocity.y = fallSpeed;
         rigidbody.velocity = velocity;
         //this.transform.Translate(this.transform.forward * currentSpeed * Time.deltaTime, Space.World);
