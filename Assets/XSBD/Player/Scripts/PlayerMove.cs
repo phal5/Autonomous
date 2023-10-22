@@ -65,8 +65,6 @@ public class PlayerMove : MonoBehaviour
         right.y = 0;
 
         Vector3 velocity = (forward.normalized *inputDir.y + right.normalized*inputDir.x)*currentSpeed;
-        Debug.Log(cameraTransform.forward + " forward");
-        Debug.Log(cameraTransform.right + " right");
         velocity.y = fallSpeed;
         rigidbody.velocity = velocity;
         //this.transform.Translate(this.transform.forward * currentSpeed * Time.deltaTime, Space.World);

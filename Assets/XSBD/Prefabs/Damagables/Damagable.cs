@@ -22,8 +22,8 @@ public class Damagable : MonoBehaviour
 
     [Header("Damagable")]
     [SerializeField] protected float _MaxHP;
-    [SerializeField] protected float _HP;
     [SerializeField] Drop[] _dropsWhenDead;
+    protected float _HP;
 
     // Start is called before the first frame update
     void Start()

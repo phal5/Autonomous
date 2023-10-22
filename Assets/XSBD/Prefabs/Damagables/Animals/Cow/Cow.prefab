@@ -488,7 +488,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _MaxHP: 12
-  _HP: 12
   _dropsWhenDead: []
   _agent: {fileID: 6212010673593697723}
   _mouth: {fileID: 3776352831789892675}
@@ -498,10 +497,11 @@ MonoBehaviour:
   _satiety: 300
   _eatAmount: 5
   _walkingSpeed: 2
-  _RunningSpeed: 3
+  _RunningSpeed: 7
   _levelOfSize: 2
   _foodTypeIndex: 00010304
   _gimmicks: []
+  _foodTaget: {fileID: 0}
 --- !u!95 &8155602638575200440
 Animator:
   serializedVersion: 5
@@ -624,12 +624,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.5, z: 1.8}
-  m_Center: {x: 0, y: 0.7, z: 0.24}
+  m_Size: {x: 0.7, y: 1.5, z: 1.5}
+  m_Center: {x: 0, y: 0.7, z: 0}
 --- !u!1 &3247692028660594426
 GameObject:
   m_ObjectHideFlags: 0

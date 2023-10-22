@@ -109,10 +109,13 @@ public class PlayerWalk : MonoBehaviour
         {
             if (SwitchFoot())
             {
-                Cast(hip, -transform.forward * _pace * PaceMultiplier());
-                foot.position = _hit.point;
+                if (Cast(hip, -transform.forward * _pace * PaceMultiplier()))
+                {
+                    foot.position = _hit.point;
+                    _stepPosition = foot.position;
+                }
+                else Fall(foot, hip);
 
-                _stepPosition = foot.position;
                 if (Vector3.SqrMagnitude(_stepPosition - transform.position) > _pace * _pace * paceMultiplier)
                 {
                     Physics.Raycast(hip.position, Vector3.down, out _hit);

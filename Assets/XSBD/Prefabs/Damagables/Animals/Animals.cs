@@ -48,7 +48,7 @@ public class Animals : Damagable
     Vector3 _cognitiveTarget;
     Transform[] _foodParents;
     Transform[] _foodTargetNominees;
-    Transform _foodTaget;
+    [SerializeField] Transform _foodTaget;
     Food _food;
     float _foodTimer = 0;
     byte _hungerState;

@@ -26,6 +26,16 @@ public class Hitter : MonoBehaviour
         _collider.enabled = false;
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.TryGetComponent<Damagable>(out Damagable damageScript))
+        {
+            damageScript.DecreaseHP();
+        }
+
+        _collider.enabled = false;
+    }
+
     public static void SetColliderEnability(bool enable)
     {
         _collider.enabled = enable;
