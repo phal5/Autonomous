@@ -9,9 +9,8 @@ public class FeedOnRotation : MonoBehaviour
     [SerializeField] float _angularThreshold;
     [Space(10f)]
     [SerializeField] bool _resetWhenStopped;
-    float _resetTime = 1;
 
-    float y = 0;
+    float _resetTime = 1;
     float _angle = 0;
     float _timer = 0;
     bool _stoppedAndFed = false;
@@ -45,14 +44,11 @@ public class FeedOnRotation : MonoBehaviour
                 _angle = _rotatingPart.transform.eulerAngles.y;
                 _feed = true;
             }
-            Debug.Log("1");
         }
         else if(_resetWhenStopped)
         {
             Tick();
-            Debug.Log("2");
         }
-        Debug.Log("3");
     }
 
     void Tick()
