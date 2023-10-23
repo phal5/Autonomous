@@ -467,7 +467,7 @@ GameObject:
   - component: {fileID: 9199641636101694958}
   - component: {fileID: 361463151739600527}
   - component: {fileID: 4463748296205715672}
-  - component: {fileID: 6086185503090747140}
+  - component: {fileID: 8306359665070811293}
   m_Layer: 0
   m_Name: MiddleLog (7)
   m_TagString: Untagged
@@ -552,12 +552,12 @@ NavMeshObstacle:
   serializedVersion: 3
   m_Shape: 0
   m_Extents: {x: 0.2, y: 0.35, z: 0.2}
-  m_MoveThreshold: 0.1
+  m_MoveThreshold: 0.5
   m_Carve: 1
   m_CarveOnlyStationary: 0
   m_Center: {x: -0.9, y: 0, z: 0.042000003}
   m_TimeToStationary: 0.5
---- !u!136 &6086185503090747140
+--- !u!136 &8306359665070811293
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -576,10 +576,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.75
-  m_Height: 0.4000001
+  m_Radius: 0.31673315
+  m_Height: 0.40000007
   m_Direction: 1
-  m_Center: {x: -0.019097794, y: -0.000000059364655, z: 0.042354017}
+  m_Center: {x: -0.01909779, y: -1.5777746e-10, z: 0.042354967}
 --- !u!1 &748910000232917490
 GameObject:
   m_ObjectHideFlags: 0
@@ -6892,7 +6892,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 94
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!1 &7213276875887586564
 GameObject:
   m_ObjectHideFlags: 0
