@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class PlayerManager : MonoBehaviour
     static GameObject _player;
     static GameObject _camera;
     static Rigidbody _rigidbody;
+    static PlayerMove _playerMove;
     static PlayerWalk _playerWalk;
     static Vector3 _eyesOffset;
 
@@ -19,21 +22,31 @@ public class PlayerManager : MonoBehaviour
     {
         if(_Player == null) _player = GameObject.FindGameObjectWithTag("Player");
         else _player = _Player;
-        if(!_player.TryGetComponent<Rigidbody>(out _rigidbody)) Debug.LogError("No Rigidbody found in player!");
-        if (!_player.TryGetComponent<PlayerWalk>(out _playerWalk)) Debug.LogError("No PlayerWalk found in player!");
+
+        if (!_player.TryGetComponent<Rigidbody>(out _rigidbody)) Debug.LogError("No Rigidbody found in player!");
+        if (!SearchComponentInChildren<PlayerWalk>(_player.transform, out _playerWalk)) Debug.LogError("No PlayerWalk found in player!");
+        if (!SearchComponentInChildren<PlayerMove>(_player.transform, out _playerMove)) Debug.LogError("No PlayerMove found in player!");
+
         if (_Camera == null) _camera = Camera.main.gameObject;
         else _camera = _Camera;
         _eyesOffset = _EyesOffset;
     }
 
+    bool SearchComponentInChildren<T>(Transform transform, out T component)
+    {
+        if(transform.TryGetComponent<T>(out component)) return true;
+        foreach (Transform child in transform)
+        {
+            if(SearchComponentInChildren<T>(child, out component)) return true;
+        }
+        return false;
+    }
+
+    //---
+
     public static GameObject GetPlayer()
     {
         return _player;
-    }
-
-    public static Vector3 GetCamPosition()
-    {
-        return _camera.transform.position;
     }
 
     public static Rigidbody GetRigidbody()
@@ -41,8 +54,25 @@ public class PlayerManager : MonoBehaviour
         return _rigidbody;
     }
 
+    public static PlayerWalk GetPlayerWalkAnim()
+    {
+        return _playerWalk;
+    }
+
+    public static PlayerMove GetPlayerMove()
+    {
+        return _playerMove;
+    }
+
+    public static Vector3 GetCamPosition()
+    {
+        return _camera.transform.position;
+    }
+
+    //---
+
     public static void SetWalkability(bool enable)
     {
-        _playerWalk.enabled = enable;
+        _playerMove.enabled = enable;
     }
 }
