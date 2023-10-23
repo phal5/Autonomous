@@ -63,6 +63,7 @@ public class Animals : Damagable
             _agent = GetComponent<NavMeshAgent>();
         }
         SetFoodParents();
+        _HP = _MaxHP;
         _foodTargetNominees = new Transform[_foodTypeIndex.Length];
         _walkingSpeed = _agent.speed;
     }

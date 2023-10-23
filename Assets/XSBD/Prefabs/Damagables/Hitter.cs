@@ -5,8 +5,7 @@ using UnityEngine.Rendering;
 
 public class Hitter : MonoBehaviour
 {
-    [SerializeField] int _mouseButtonIndex = 0;
-
+    [Header("Call SetColliderEnability with UnityEvent")]
     static Collider _collider;
 
     // Start is called before the first frame update
