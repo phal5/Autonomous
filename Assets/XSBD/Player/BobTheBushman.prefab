@@ -72,8 +72,6 @@ MonoBehaviour:
   _RFootTarget: {fileID: 7128108120353928176}
   _RHip: {fileID: 8579895322846124613}
   _root: {fileID: 8992113973070890301}
-  _LFoot: {fileID: 5782773818754536103}
-  _RFoot: {fileID: 1751326455202793606}
 --- !u!1 &271183489713077656
 GameObject:
   m_ObjectHideFlags: 0
@@ -1836,7 +1834,7 @@ Transform:
   m_GameObject: {fileID: 5740951445329877933}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.125, y: 1.2, z: 0.5}
+  m_LocalPosition: {x: 0.125, y: 1, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2922,7 +2920,7 @@ Transform:
   m_GameObject: {fileID: 8366119413257498291}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.125, y: 1.2, z: 0.6}
+  m_LocalPosition: {x: -0.125, y: 1, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

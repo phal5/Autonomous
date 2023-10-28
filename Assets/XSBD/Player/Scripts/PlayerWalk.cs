@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Animations.Rigging;
@@ -19,12 +20,16 @@ public class PlayerWalk : MonoBehaviour
     [SerializeField] Transform _RHip;
     [Space(10f)]
     [SerializeField] Transform _root;
-    [SerializeField] Transform _LFoot;
-    [SerializeField] Transform _RFoot;
 
     RaycastHit _hit;
     Vector3 _stepPosition;
     Vector3 _initialRootPosition;
+    Vector3 _rootBuffer;
+    Vector3 _leftFootBuffer;
+    Vector3 _rightFootBuffer;
+    Vector3 _rootVelocity;
+    Vector3 _leftFootVelocity;
+    Vector3 _rightFootVelocity;
     float _paceDivisor;
     float _speedDivisor;
     float _paceTimer;
@@ -69,15 +74,18 @@ public class PlayerWalk : MonoBehaviour
 
         if (_LR)
         {
-            Step(_LFootTarget, _LHip, _RFootTarget, _RHip, _RFoot, SqrPaceMultiplier());
+            Step(ref _leftFootBuffer, _LHip, ref _rightFootBuffer, _RHip, SqrPaceMultiplier());
         }
         else
         {
-            Step(_RFootTarget, _RHip, _LFootTarget, _LHip, _LFoot, SqrPaceMultiplier());
+            Step(ref _rightFootBuffer, _RHip, ref _leftFootBuffer, _LHip, SqrPaceMultiplier());
         }
+        _RFootTarget.position = Vector3.SmoothDamp(_RFootTarget.position, _rightFootBuffer, ref _rightFootVelocity, 0.1f);
+        _LFootTarget.position = Vector3.SmoothDamp(_LFootTarget.position, _leftFootBuffer, ref _leftFootVelocity, 0.1f);
+        _root.localPosition = Vector3.SmoothDamp(_root.localPosition, _rootBuffer, ref _rootVelocity, 0.1f);
     }
 
-    void Step(Transform foot, Transform hip, Transform otherfoot, Transform otherHip, Transform realOtherFoot, float paceMultiplier)
+    void Step(ref Vector3 foot, Transform hip, ref Vector3 otherfoot, Transform otherHip, float paceMultiplier)
     {
         Vector3 paceData = Vector3.Scale(_stepPosition - otherHip.position, new Vector3(1, 0, 1));
 
@@ -85,7 +93,7 @@ public class PlayerWalk : MonoBehaviour
         {
             if (Cast(hip, paceData + Vector3.up * 0.5f))
             {
-                foot.position = _hit.point;
+                foot = _hit.point;
                 float bump = (_pace * _pace * paceMultiplier - Vector3.SqrMagnitude(paceData))
                     * _paceDivisor * _paceDivisor * _height
                     * paceMultiplier;
@@ -95,14 +103,14 @@ public class PlayerWalk : MonoBehaviour
                     bump = _maxHeight;
                 }
 
-                foot.position += bump * Vector3.up;
+                foot += bump * Vector3.up;
                 Physics.Raycast(_stepPosition + Vector3.up, Vector3.down, out _hit);
-                otherfoot.position = _hit.point;
-                _root.localPosition = _initialRootPosition + bump * Vector3.up * 0.2f;
+                otherfoot = _hit.point;
+                _rootBuffer = _initialRootPosition + bump * Vector3.up * 0.2f;
             }
             else
             {
-                Fall(foot, hip);
+                Fall(ref foot, hip);
             }
         }
         else
@@ -111,10 +119,10 @@ public class PlayerWalk : MonoBehaviour
             {
                 if (Cast(hip, -transform.forward * _pace * PaceMultiplier()))
                 {
-                    foot.position = _hit.point;
-                    _stepPosition = foot.position;
+                    foot = _hit.point;
+                    _stepPosition = foot;
                 }
-                else Fall(foot, hip);
+                else Fall(ref foot, hip);
 
                 if (Vector3.SqrMagnitude(_stepPosition - transform.position) > _pace * _pace * paceMultiplier)
                 {
@@ -141,9 +149,9 @@ public class PlayerWalk : MonoBehaviour
         return _rigidbody.velocity.magnitude * _speedDivisor;
     }
     
-    void Fall(Transform foot, Transform hip)
+    void Fall(ref Vector3 foot, Transform hip)
     {
-        foot.position = _stepPosition = hip.position - Vector3.up;
+        foot = _stepPosition = hip.position - Vector3.up;
         _root.localPosition = _initialRootPosition;
     }
 }
