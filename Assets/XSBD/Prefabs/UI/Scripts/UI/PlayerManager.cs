@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -8,10 +9,12 @@ public class PlayerManager : MonoBehaviour
 {
     [SerializeField] GameObject _Player;
     [SerializeField] GameObject _Camera;
+    [SerializeField] InventoryInstance _Inventory;
     [SerializeField] Vector3 _EyesOffset;
 
     static GameObject _player;
     static GameObject _camera;
+    static InventoryInstance _inventory;
     static Rigidbody _rigidbody;
     static PlayerMove _playerMove;
     static PlayerWalk _playerWalk;
@@ -30,6 +33,9 @@ public class PlayerManager : MonoBehaviour
         if (_Camera == null) _camera = Camera.main.gameObject;
         else _camera = _Camera;
         _eyesOffset = _EyesOffset;
+
+        if (_Inventory == null) GameObject.Find("PlayerInventory").TryGetComponent<InventoryInstance>(out _inventory);
+        else _inventory = _Inventory;
     }
 
     bool SearchComponentInChildren<T>(Transform transform, out T component)
@@ -52,6 +58,11 @@ public class PlayerManager : MonoBehaviour
     public static Rigidbody GetRigidbody()
     {
         return _rigidbody;
+    }
+
+    public static InventoryInstance GetInventoryInstance()
+    {
+        return _inventory;
     }
 
     public static PlayerWalk GetPlayerWalkAnim()

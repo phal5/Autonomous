@@ -10,6 +10,9 @@ public class MachineDeployer : Deployer
 {
     [SerializeField] bool _xRotatable;
     [SerializeField] bool _liftable;
+    [Space(10f)]
+    [SerializeField] GameObject _item;
+    [SerializeField] bool _stackable;
 
     GameObject _pointer;
     RaycastHit _hit;
@@ -43,6 +46,7 @@ public class MachineDeployer : Deployer
     // Update is called once per frame
     void Update()
     {
+        Cancel();
         SetHeight();
         SetRotation();
         SetPosition();
@@ -182,6 +186,16 @@ public class MachineDeployer : Deployer
             {
                 Destroy(_pointer);
             }
+        }
+    }
+
+    void Cancel()
+    {
+        if (Input.GetKeyDown(MachineDeployManager.GetKey(4)))
+        {
+            PlayerManager.GetInventoryInstance().MoveToEmptySlot(_item, ParentData.zero(), 1, _stackable);
+            Destroy(_pointer);
+            Destroy(gameObject);
         }
     }
 

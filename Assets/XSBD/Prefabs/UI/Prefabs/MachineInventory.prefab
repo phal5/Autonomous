@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 20, y: 15}
+  m_AnchoredPosition: {x: 36, y: 29.2}
   m_SizeDelta: {x: 70, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1950766432761646631
@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _slots: []
-  _foodIndexes: 
+  _foodIndexes: 00
 --- !u!1 &8588359322309524231
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,6 +204,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9116661497602259479}
+  - component: {fileID: 4614126380394499645}
   m_Layer: 0
   m_Name: MachineInventory
   m_TagString: Untagged
@@ -221,12 +222,25 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.99, y: 2.13, z: -0.69}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3560097977563746564}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4614126380394499645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8588359322309524231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c784f16dec311640bd38c6a394ac9fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inverse: 1
 --- !u!1001 &430786488985867948
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -344,8 +358,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _item
       value: 
-      objectReference: {fileID: 5605127604356286759, guid: 8541351f9edc69340ab869bf22703ba0,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 829777768711575934, guid: 8ec067ab93de6b24d8cd83bbc02b69e9,
         type: 3}
       propertyPath: m_Name
@@ -524,12 +537,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _item
       value: 
-      objectReference: {fileID: 5605127604356286759, guid: 8541351f9edc69340ab869bf22703ba0,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 452502037975702574, guid: 8ec067ab93de6b24d8cd83bbc02b69e9,
         type: 3}
       propertyPath: _quantity
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 829777768711575934, guid: 8ec067ab93de6b24d8cd83bbc02b69e9,
         type: 3}

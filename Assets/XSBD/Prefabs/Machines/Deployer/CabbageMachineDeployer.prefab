@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 4281377094206783281, guid: 1594430defe1683458a41d5b6073dc6a,
         type: 3}
       propertyPath: m_Name
-      value: CabbageMachine Variant
+      value: CabbageMachineDeployer
       objectReference: {fileID: 0}
     - target: {fileID: 5418808748116753228, guid: 1594430defe1683458a41d5b6073dc6a,
         type: 3}
@@ -96,8 +96,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _deployObject: {fileID: 4281377094206783281, guid: 1594430defe1683458a41d5b6073dc6a,
     type: 3}
+  _randomizeRotation: 1
   _xRotatable: 0
   _liftable: 0
+  _item: {fileID: 2376162596366632390, guid: b7555dcfb154dfd4998fef312b236db3, type: 3}
+  _stackable: 0
 --- !u!54 &883237014739482016
 Rigidbody:
   m_ObjectHideFlags: 0

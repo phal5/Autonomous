@@ -8,7 +8,7 @@ using UnityEngine;
     enum Parent { ANIMAL, FOOD, NONE }
     
     [SerializeField] Parent _type = Parent.NONE;
-    [SerializeField] byte _index;
+    [SerializeField] byte _index = 0;
 
     Transform _parent = null;
     bool _parentSet = false;
@@ -62,5 +62,15 @@ using UnityEngine;
         }
         Physics.Raycast(position + Vector3.up * maxDimension, Vector3.down, out RaycastHit hit);
         return MonoBehaviour.Instantiate(gameObject, hit.point, rotation, GetParent());
+    }
+
+    public static ParentData zero()
+    {
+        ParentData data = new ParentData();
+        data._type = Parent.NONE;
+        data._index = 0;
+        data._parent = null;
+        data._parentSet = false;
+        return data;
     }
 }

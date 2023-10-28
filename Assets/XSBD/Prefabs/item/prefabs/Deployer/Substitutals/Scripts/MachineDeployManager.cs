@@ -12,6 +12,7 @@ public class MachineDeployManager : MonoBehaviour
     [SerializeField] KeyCode xRotateMinus = KeyCode.K;
     [SerializeField] KeyCode yRotatePlus = KeyCode.J;
     [SerializeField] KeyCode yRotateMinus = KeyCode.L;
+    [SerializeField] KeyCode cancel = KeyCode.Escape;
 
     static GameObject _pointerPrefab;
     static Material _deployable;
@@ -20,6 +21,7 @@ public class MachineDeployManager : MonoBehaviour
     static KeyCode _xRotateMinus;
     static KeyCode _yRotatePlus;
     static KeyCode _yRotateMinus;
+    static KeyCode _cancel;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +32,7 @@ public class MachineDeployManager : MonoBehaviour
         _xRotateMinus = xRotateMinus;
         _yRotatePlus = yRotatePlus;
         _yRotateMinus = yRotateMinus;
+        _cancel = cancel;
     }
 
     // Update is called once per frame
@@ -46,6 +49,7 @@ public class MachineDeployManager : MonoBehaviour
             case 1: return _xRotateMinus;
             case 2: return _yRotatePlus;
             case 3: return _yRotateMinus;
+            case 4: return _cancel;
         }
         return _yRotateMinus;
     }
