@@ -46,11 +46,16 @@ public class InventoryManager : MonoBehaviour
 
     protected static void InstantiateItem()
     {
-        for (int i = 0; i < _Quantity; i++)
+        if (_Item.TryGetComponent<Deployer>(out Deployer deployer) && deployer.GetDeployedObject().TryGetComponent<MachineDeployer>(out _))
         {
-            Instantiate(_Item, _player.position + Vector3.up, Quaternion.Euler(Vector3.zero), (_ParentData == null)? null : _ParentData.GetParent());
+            Instantiate(_Item, _player.position + Vector3.up, Quaternion.Euler(Vector3.zero), (_ParentData == null) ? null : _ParentData.GetParent());
+            _Slot.SetSlotData(_Item, _ParentData, --_Quantity, _Stackable);
         }
-        
+        else for (int i = 0; i < _Quantity; i++)
+        {
+            Instantiate(_Item, _player.position + Vector3.up, Quaternion.Euler(Vector3.zero), (_ParentData == null) ? null : _ParentData.GetParent());
+        }
+
         _Move = false;
         _stale = false;
         Clear();
