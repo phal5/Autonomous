@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Foliage
+  m_Shader: {fileID: -6465566751694194690, guid: 0532df396c6447242ac25f70f99af27a,
+    type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - ADDITIONAL_LIGHT_CALCULATE_SHADOWS
+  - _MAIN_LIGHT_CALCULATE_SHADOWS
+  - _MAIN_LIGHT_SHADOWS_CASCADE
+  - _SHADOWS_SOFT
+  - _SPECULAR
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 2450
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Albedo:
+        m_Texture: {fileID: 2800000, guid: 5379da225f0b70f458d558e1593e8faa, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - ADDITIONAL_LIGHT_CALCULATE_SHADOWS: 1
+    - _AlphaClip: 1
+    - _AlphaToMask: 1
+    - _Blend: 0
+    - _Card_size: 0.49
+    - _CastShadows: 1
+    - _Cull: 0
+    - _DarkLine: 0
+    - _Defluff: 0.49
+    - _DstBlend: 0
+    - _Indirect: 0.1
+    - _Line1: 0.3
+    - _Line2: 0.2
+    - _MAIN_LIGHT_CALCULATE_SHADOWS: 1
+    - _MAIN_LIGHT_SHADOWS_CASCADE: 1
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _SHADOWS_SOFT: 1
+    - _SPECULAR: 1
+    - _Smoothness: 0.21
+    - _SrcBlend: 1
+    - _Strength1: 0.5
+    - _Strength2: 0.09
+    - _Surface: 0
+    - _ZTest: 4
+    - _ZWrite: 1
+    - _ZWriteControl: 0
+    m_Colors:
+    - _AmbientColor: {r: 0.5, g: 0, b: 0, a: 0}
+    - _Base_Color: {r: 0.362069, g: 1, b: 0, a: 0}
+  m_BuildTextureStacks: []
+--- !u!114 &5253650160515543008
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7

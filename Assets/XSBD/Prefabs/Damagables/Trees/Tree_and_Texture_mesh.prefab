@@ -468,24 +468,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _MaxHP: 10
-  _HP: 0
   _dropsWhenDead:
   - _prefab: {fileID: 670044490187064300, guid: 22d9b9cbc130902408a514f81b36f1e2,
       type: 3}
-    _parent: {fileID: 0}
+    _parentData:
+      _type: 2
+      _index: 0
     _probability: 1
+    _localDropOffset: {x: -0.1, y: 1, z: 0}
   - _prefab: {fileID: 670044490187064300, guid: 22d9b9cbc130902408a514f81b36f1e2,
       type: 3}
-    _parent: {fileID: 0}
-    _probability: 0.7
+    _parentData:
+      _type: 2
+      _index: 0
+    _probability: 0.3
+    _localDropOffset: {x: 0.1, y: 1, z: 0}
   - _prefab: {fileID: 670044490187064300, guid: 22d9b9cbc130902408a514f81b36f1e2,
       type: 3}
-    _parent: {fileID: 0}
-    _probability: 0.7
+    _parentData:
+      _type: 2
+      _index: 0
+    _probability: 0.1
+    _localDropOffset: {x: 0, y: 1, z: 0}
   - _prefab: {fileID: 8427808551906393170, guid: 1cf13ff871ba8fc4082028d6e7804522,
       type: 3}
-    _parent: {fileID: 0}
+    _parentData:
+      _type: 2
+      _index: 0
     _probability: 0.1
+    _localDropOffset: {x: 0, y: 2, z: 0}
 --- !u!54 &2708167814853176085
 Rigidbody:
   m_ObjectHideFlags: 0

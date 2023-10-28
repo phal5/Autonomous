@@ -10,12 +10,14 @@ public class Damagable : MonoBehaviour
         [SerializeField] GameObject _prefab;
         [SerializeField] ParentData _parentData;
         [SerializeField] float _probability;
+        [Space(10f)]
+        [SerializeField] Vector3 _localDropOffset = Vector3.zero;
 
         public void InstantiateDrop(Vector3 position)
         {
             if (Random.value < _probability)
             {
-                Instantiate(_prefab, position, Random.rotation, _parentData.GetParent());
+                Instantiate(_prefab, position, Random.rotation, _parentData.GetParent()).transform.localPosition += _localDropOffset;
             }
         }
     }
