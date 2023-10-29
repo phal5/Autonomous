@@ -29,7 +29,7 @@ public class InAndOut : MonoBehaviour
             Destroy(this);
         }
 
-        _initial = _UI.transform.position;
+        _initial = _UI.transform.localPosition;
         
         switch (_direction)
         {
@@ -41,7 +41,7 @@ public class InAndOut : MonoBehaviour
         }
         _UI.anchoredPosition += _dir;
         _timer = 1;
-        _hidden = _UI.position;
+        _hidden = _UI.localPosition;
     }
 
     // Update is called once per frame
@@ -100,7 +100,7 @@ public class InAndOut : MonoBehaviour
                     _timer = 0;
                 }
                 float timer = 0.5f - Mathf.Cos(_timer * Mathf.PI) * 0.5f;
-                transform.position = Vector3.Lerp(_initial, _hidden, timer);
+                _UI.localPosition = Vector3.Lerp(_initial, _hidden, timer);
             }
         }
         else
@@ -113,7 +113,7 @@ public class InAndOut : MonoBehaviour
                     _timer = 1;
                 }
                 float timer = 0.5f - Mathf.Cos(_timer * Mathf.PI) * 0.5f;
-                transform.position = Vector3.Lerp(_initial, _hidden, timer);
+                _UI.localPosition = Vector3.Lerp(_initial, _hidden, timer);
             }
         }
     }

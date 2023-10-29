@@ -48,7 +48,7 @@ public class TradeInventoryInstance : InventoryInstance
         }
     }
 
-    public bool Trade(byte index)
+    public bool Trade()
     {
         if(_returnSlot.GetSlotQuantity() > 0 && !_returnSlot.GetSlotStackable())
         {

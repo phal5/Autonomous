@@ -57,7 +57,7 @@ public class InventoryInstance : MonoBehaviour
     {
         foreach (InventorySlot slot in _slots)
         {
-            if (slot.GetSlotQuantity() >= quantity && slot.GetSlotParentData().GetParent() == parentData.GetParent() && slot.GetSlotItem() == item)
+            if (slot.GetSlotQuantity() >= quantity && (parentData.GetParent() == null || slot.GetSlotParentData().GetParent() == parentData.GetParent()) && slot.GetSlotItem() == item)
             {
                 return slot;
             }

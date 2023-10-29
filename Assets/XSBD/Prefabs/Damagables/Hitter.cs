@@ -6,21 +6,28 @@ using UnityEngine.Rendering;
 public class Hitter : MonoBehaviour
 {
     [Header("Call SetColliderEnability with UnityEvent")]
-    static Collider _collider;
+    [SerializeField] float _damage = 1;
+    static Collider[] _collider;
 
     // Start is called before the first frame update
     void Start()
     {
-        _collider = GetComponent<Collider>();
-        _collider.enabled = false;
+        _collider = GetComponents<Collider>();
+        foreach(Collider collider in _collider)
+        {
+            collider.enabled = false;
+        }
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.TryGetComponent<Damagable>(out Damagable damageScript))
         {
-            damageScript.DecreaseHP();
-            _collider.enabled = false;
+            damageScript.DecreaseHP(_damage);
+            foreach (Collider collider in _collider)
+            {
+                collider.enabled = false;
+            }
         }
     }
 
@@ -28,13 +35,19 @@ public class Hitter : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent<Damagable>(out Damagable damageScript))
         {
-            damageScript.DecreaseHP();
-            _collider.enabled = false;
+            damageScript.DecreaseHP(_damage);
+            foreach (Collider collider in _collider)
+            {
+                collider.enabled = false;
+            }
         }
     }
 
     public static void SetColliderEnability(bool enable)
     {
-        _collider.enabled = enable;
+        foreach (Collider collider in _collider)
+        {
+            collider.enabled = enable;
+        }
     }
 }

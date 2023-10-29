@@ -22,7 +22,7 @@ using UnityEngine.UIElements;
 
     public void PointerDownEvent()
     {
-        _tradeInventoryInstance.Trade(0);
+        _tradeInventoryInstance.Trade();
     }
 
     void SetTradeInventoryInstance()
