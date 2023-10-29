@@ -1199,21 +1199,11 @@ MonoBehaviour:
       _name: Wall
       _ingredients:
       - _parentData:
-          _type: 2
+          _type: 1
           _index: 0
         _item: {fileID: 7848939150939548586, guid: 2dc1ba4e45acf9c4fb96948c86c5d3c4,
           type: 3}
         _quantity: 10
-      - _parentData:
-          _type: 2
-          _index: 0
-        _item: {fileID: 0}
-        _quantity: 0
-      - _parentData:
-          _type: 2
-          _index: 0
-        _item: {fileID: 0}
-        _quantity: 0
       _result:
         _parentData:
           _type: 2
@@ -1232,16 +1222,6 @@ MonoBehaviour:
         _item: {fileID: 7039488791730661938, guid: d234f6fa78dd487409830d5b4d5c45f7,
           type: 3}
         _quantity: 3
-      - _parentData:
-          _type: 2
-          _index: 0
-        _item: {fileID: 0}
-        _quantity: 0
-      - _parentData:
-          _type: 2
-          _index: 0
-        _item: {fileID: 0}
-        _quantity: 0
       _result:
         _parentData:
           _type: 2
@@ -2422,7 +2402,7 @@ MonoBehaviour:
   _parentData:
     _type: 0
     _index: 0
-  _quantity: 10
+  _quantity: 0
   _stackable: 0
 --- !u!1 &9104791112300726823
 GameObject:
