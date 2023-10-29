@@ -7,6 +7,7 @@ public class Hitter : MonoBehaviour
 {
     [Header("Call SetColliderEnability with UnityEvent")]
     [SerializeField] float _damage = 1;
+    [SerializeField] bool _playerHits;
     static Collider[] _collider;
 
     // Start is called before the first frame update
@@ -23,7 +24,7 @@ public class Hitter : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent<Damagable>(out Damagable damageScript))
         {
-            damageScript.DecreaseHP(_damage);
+            damageScript.DecreaseHP(_playerHits, _damage);
             foreach (Collider collider in _collider)
             {
                 collider.enabled = false;
@@ -35,7 +36,7 @@ public class Hitter : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent<Damagable>(out Damagable damageScript))
         {
-            damageScript.DecreaseHP(_damage);
+            damageScript.DecreaseHP(_playerHits, _damage);
             foreach (Collider collider in _collider)
             {
                 collider.enabled = false;

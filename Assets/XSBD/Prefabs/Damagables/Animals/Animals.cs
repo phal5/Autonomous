@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -51,6 +52,7 @@ public class Animals : Damagable
     [SerializeField] Transform _foodTaget;
     Food _food;
     float _foodTimer = 0;
+    float _runTimer = 0;
     byte _hungerState;
     bool _isEating;
     bool _eatSwitch;
@@ -126,8 +128,11 @@ public class Animals : Damagable
     void CognitiveManager(byte animalSize)
     {
         ++animalSize;
+
+        _cognitiveTarget = AnimalManager.CrudeFlee(transform.position, _cognitiveDistance, animalSize);
+        if (_runTimer > 0) _cognitiveTarget += (_cognitiveDistance * _cognitiveDistance - (transform.position - PlayerManager.GetPlayerPosition()).sqrMagnitude) * (transform.position - PlayerManager.GetPlayerPosition());
+        _cognitiveTarget = _cognitiveTarget.normalized * _agent.speed * 10;
         
-        _cognitiveTarget = AnimalManager.CrudeFlee(transform.position, _cognitiveDistance, animalSize).normalized * _agent.speed * 10;
         if (_cognitiveTarget == Vector3.zero)
         {
             //Search for Chase target
@@ -376,6 +381,12 @@ public class Animals : Damagable
     public bool GetIsEating()
     {
         return _isEating;
+    }
+
+    public override void DecreaseHP(bool didPlayerHit, float amount = 1)
+    {
+        base.DecreaseHP(didPlayerHit, amount);
+        if (didPlayerHit) _runTimer = 10;
     }
 
     //DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO NOT TOUCH DO

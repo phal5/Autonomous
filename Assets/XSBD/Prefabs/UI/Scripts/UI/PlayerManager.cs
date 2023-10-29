@@ -55,6 +55,11 @@ public class PlayerManager : MonoBehaviour
         return _player;
     }
 
+    public static Vector3 GetPlayerPosition()
+    {
+        return _player.transform.position;
+    }
+
     public static Rigidbody GetRigidbody()
     {
         return _rigidbody;

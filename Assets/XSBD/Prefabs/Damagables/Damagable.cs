@@ -39,7 +39,7 @@ public class Damagable : MonoBehaviour
         HPManager();
     }
 
-    public void DecreaseHP(float amount = 1)
+    public virtual void DecreaseHP(bool didPlayerHit, float amount = 1)
     {
         _HP -= amount;
     }
