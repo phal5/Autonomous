@@ -45,7 +45,7 @@ public class PlayerWalk : MonoBehaviour
         _rig.weight = 0;
         _stepPosition = _LFootTarget.position;
         _rig.weight = 1;
-        _initialRootPosition = _root.localPosition;
+        _rootBuffer = _initialRootPosition = _root.localPosition;
     }
 
     // Update is called once per frame
@@ -82,7 +82,7 @@ public class PlayerWalk : MonoBehaviour
         }
         _RFootTarget.position = Vector3.SmoothDamp(_RFootTarget.position, _rightFootBuffer, ref _rightFootVelocity, 0.1f);
         _LFootTarget.position = Vector3.SmoothDamp(_LFootTarget.position, _leftFootBuffer, ref _leftFootVelocity, 0.1f);
-        //_root.localPosition = Vector3.SmoothDamp(_root.localPosition, _rootBuffer, ref _rootVelocity, 0.1f);
+        _root.localPosition = Vector3.SmoothDamp(_root.localPosition, _rootBuffer, ref _rootVelocity, 0.1f);
     }
 
     void Step(ref Vector3 foot, Transform hip, ref Vector3 otherfoot, Transform otherHip, float paceMultiplier)
@@ -106,7 +106,7 @@ public class PlayerWalk : MonoBehaviour
                 foot += bump * Vector3.up;
                 Physics.Raycast(_stepPosition + Vector3.up, Vector3.down, out _hit);
                 otherfoot = _hit.point;
-                _root.localPosition = _initialRootPosition + bump * Vector3.up * 0.2f;
+                _rootBuffer = _initialRootPosition + bump * Vector3.up * 0.2f;
             }
             else
             {
@@ -152,6 +152,6 @@ public class PlayerWalk : MonoBehaviour
     void Fall(ref Vector3 foot, Transform hip)
     {
         foot = _stepPosition = hip.position - Vector3.up;
-        _root.localPosition = _initialRootPosition;
+        _rootBuffer = _initialRootPosition;
     }
 }
