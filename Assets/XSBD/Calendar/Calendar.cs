@@ -115,4 +115,9 @@ public class Calendar : MonoBehaviour
     {
         return _timer;
     }
+
+    public static bool IsDaytime()
+    {
+        return _timer > 0.25f && _timer < 0.75f;
+    }
 }
