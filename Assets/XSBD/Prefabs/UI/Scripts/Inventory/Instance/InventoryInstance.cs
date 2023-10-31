@@ -57,7 +57,7 @@ public class InventoryInstance : MonoBehaviour
     {
         foreach (InventorySlot slot in _slots)
         {
-            if (slot.GetSlotQuantity() >= quantity && (parentData.GetParent() == null || slot.GetSlotParentData().GetParent() == parentData.GetParent()) && slot.GetSlotItem() == item)
+            if (slot.GetSlotQuantity() >= quantity && (parentData.GetParent() == null || slot.GetSlotParentData().Is(parentData)) && slot.GetSlotItem() == item)
             {
                 return slot;
             }
@@ -65,11 +65,11 @@ public class InventoryInstance : MonoBehaviour
         return null;
     }
 
-    InventorySlot SearchStackableSlot(ParentData parentData, GameObject item, byte quantity = 1)
+    InventorySlot SearchStackableSlot(ParentData parentData, GameObject item)
     {
         foreach (InventorySlot slot in _slots)
         {
-            if (slot.GetSlotQuantity() >= quantity && (slot.GetSlotParentData() == null || slot.GetSlotParentData().GetParent() == parentData.GetParent()) && slot.GetSlotItem() == item && slot.GetSlotStackable())
+            if ((slot.GetSlotParentData() == null || slot.GetSlotParentData().Is(parentData)) && slot.GetSlotItem() == item && slot.GetSlotStackable())
             {
                 return slot;
             }

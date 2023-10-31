@@ -13,9 +13,11 @@ public class MachineDeployer : Deployer
     [Space(10f)]
     [SerializeField] GameObject _item;
     [SerializeField] bool _stackable;
+    [SerializeField] bool _affectedByNormal;
 
     GameObject _pointer;
     RaycastHit _hit;
+    Vector3 _eulerRotation = Vector3.zero;
     float _heightOffset;
     bool _deployable = true;
     
@@ -161,20 +163,24 @@ public class MachineDeployer : Deployer
 
     void SetRotation()
     {
-        if (_xRotatable)
+        if (_affectedByNormal) transform.rotation = Quaternion.LookRotation(_hit.normal) * Quaternion.Euler(Vector3.right * 90);
+        else
         {
-            Rotate(0, Vector3.right * 5);
-            Rotate(1, Vector3.right * -5);
+            if (_xRotatable)
+            {
+                Rotate(0, Vector3.right * 5);
+                Rotate(1, Vector3.right * -5);
+            }
+            Rotate(2, Vector3.up * 5);
+            Rotate(3, Vector3.up * -5);
         }
-        Rotate(2, Vector3.up * 5);
-        Rotate(3, Vector3.up * -5);
     }
 
     void Rotate(byte index, Vector3 rotation)
     {
         if (Input.GetKeyDown(MachineDeployManager.GetKey(index)))
         {
-            transform.eulerAngles += rotation;
+            transform.eulerAngles = (_eulerRotation += rotation);
         }
     }
 

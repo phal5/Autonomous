@@ -449,6 +449,7 @@ GameObject:
   - component: {fileID: 2208455697156349904}
   - component: {fileID: 5149726517767506792}
   - component: {fileID: 5125747475458573348}
+  - component: {fileID: 6657397792684894976}
   m_Layer: 2
   m_Name: Cow
   m_TagString: Untagged
@@ -501,7 +502,10 @@ MonoBehaviour:
   _RunningSpeed: 7
   _levelOfSize: 2
   _foodTypeIndex: 00010304
-  _gimmicks: []
+  _gimmicks:
+  - _behaviour: {fileID: 6657397792684894976}
+    _state: 0
+  _finalState: 0
   _foodTaget: {fileID: 0}
 --- !u!95 &8155602638575200440
 Animator:
@@ -631,6 +635,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.7, y: 1.5, z: 1}
   m_Center: {x: 0, y: 0.7, z: 0}
+--- !u!114 &6657397792684894976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3246801931207064065}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ced2bee6d436b0f4e8b6e3213d4775e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _avgMoveTime: 3
+  _avgRestTime: 5
+  _strollSpeed: 1
 --- !u!1 &3247692028660594426
 GameObject:
   m_ObjectHideFlags: 0

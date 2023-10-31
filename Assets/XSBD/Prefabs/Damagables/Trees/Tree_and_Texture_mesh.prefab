@@ -493,16 +493,23 @@ MonoBehaviour:
   - _prefab: {fileID: 8427808551906393170, guid: 1cf13ff871ba8fc4082028d6e7804522,
       type: 3}
     _parentData:
-      _type: 2
-      _index: 0
+      _type: 1
+      _index: 4
     _probability: 0.1
     _localDropOffset: {x: 0, y: 2, z: 0}
-  - _prefab: {fileID: 8427808551906393170, guid: 1cf13ff871ba8fc4082028d6e7804522,
+  - _prefab: {fileID: 1435306860141351075, guid: 2849b2c160920a24c9df2a4ba647c4da,
       type: 3}
     _parentData:
       _type: 2
       _index: 0
-    _probability: 0.1
+    _probability: 0.55
+    _localDropOffset: {x: 0, y: 2, z: 0}
+  - _prefab: {fileID: 1435306860141351075, guid: 2849b2c160920a24c9df2a4ba647c4da,
+      type: 3}
+    _parentData:
+      _type: 2
+      _index: 0
+    _probability: 0.55
     _localDropOffset: {x: 0, y: 2, z: 0}
   _HP: 0
 --- !u!54 &2708167814853176085

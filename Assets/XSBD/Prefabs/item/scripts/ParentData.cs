@@ -73,4 +73,10 @@ using UnityEngine;
         data._parentSet = false;
         return data;
     }
+
+    public bool Is(ParentData parentData)
+    {
+        if (parentData._type == _type && parentData._index == _index) return true;
+        else return false;
+    }
 }
