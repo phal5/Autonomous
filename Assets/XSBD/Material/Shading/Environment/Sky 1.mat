@@ -67,27 +67,35 @@ Material:
     - _Horizon_Strength: 1
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _Size: 0.001
+    - _SqrSize: 0.95
     - _SrcBlend: 5
     - _Star_Density: 10
     - _Star_Size: 0.01
     - _Surface: 1
-    - _Time_d: 0.9720618
+    - _Time_d: 0.45777026
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
+    - _Direction: {r: 0, g: -1, b: 0, a: 0}
+    - _DirectionNormalized: {r: 0, g: -1, b: 0, a: 0}
     - _Horizon: {r: 0.44, g: 0.37573034, b: 0.44, a: 1}
     - _Horizon_1: {r: 0.6775281, g: 0.9, b: 0.8696629, a: 1}
     - _Horizon_2: {r: 0.5, g: 0.88888884, b: 1, a: 1}
     - _Horizon_3: {r: 0.48039216, g: 0.6647059, b: 0.9607843, a: 1}
     - _Horizon_4: {r: 0.34901962, g: 0.036443494, b: 0.019607838, a: 1}
     - _Horizon_5: {r: 0, g: 0.039215688, b: 0.098039225, a: 1}
+    - _Light_Direction: {r: -0.045512438, g: 0.9989638, b: 0, a: 0}
+    - _MoonColor: {r: 0.74073774, g: 0.745283, b: 0.59528893, a: 1}
     - _Nadir: {r: 0.44, g: 0.2784375, b: 0.3196875, a: 0}
     - _Nadir_1: {r: 0.9, g: 0.9, b: 0.9, a: 0}
     - _Nadir_2: {r: 1, g: 1, b: 1, a: 0}
     - _Nadir_3: {r: 0.45686275, g: 0.8490195, b: 0.9137255, a: 1}
     - _Nadir_4: {r: 0.01483325, g: 0.076717675, b: 0.23584908, a: 1}
     - _Nadir_5: {r: 0, g: 0.098039225, b: 0.098039225, a: 1}
+    - _SunColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Sunlight: {r: -0.2623336, g: -0.96497726, b: -0.000000029802322, a: 0}
     - _Zenith: {r: 0.13062498, g: 0.2131249, b: 0.44, a: 1}
     - _Zenith_1: {r: 0, g: 0.7078652, b: 0.9, a: 1}
     - _Zenith_2: {r: 0.29764706, g: 0.5078279, b: 0.99215686, a: 1}

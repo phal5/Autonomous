@@ -14,5 +14,6 @@ public class SkyCycle : MonoBehaviour
     void Update()
     {
         RenderSettings.skybox.SetFloat("_Time_d", Calendar.GetTimer());
+        RenderSettings.skybox.SetVector("_Sunlight", transform.forward);
     }
 }

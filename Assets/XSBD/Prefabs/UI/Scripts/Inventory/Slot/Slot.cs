@@ -103,7 +103,7 @@ public class Slot : MonoBehaviour
 
             _itemInstance.localScale = _scaleDivisor * 0.7f;
             _itemInstance.position = transform.position - transform.forward * 0.5f;
-            _itemInstance.rotation = transform.rotation * Quaternion.Euler(Vector3.up * 180);
+            _itemInstance.localRotation = Quaternion.Euler(Vector3.up * 180);
         }
     }
 
