@@ -1455,6 +1455,7 @@ GameObject:
   - component: {fileID: 3767091325703915022}
   - component: {fileID: 9218108940901992634}
   - component: {fileID: 2928981236096221067}
+  - component: {fileID: -2624149089887644990}
   m_Layer: 0
   m_Name: Hen
   m_TagString: Untagged
@@ -1491,7 +1492,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _MaxHP: 0.7
-  _dropsWhenDead: []
+  _dropsWhenDead:
+  - _prefab: {fileID: 5605127604356286759, guid: 32738f368a37a6f43be1d69e2248c4cd,
+      type: 3}
+    _parentData:
+      _type: 0
+      _index: 1
+    _probability: 1
+    _localDropOffset: {x: 0, y: 0, z: 0}
+    _randomizeRotation: 0
   _HP: 0.7
   _agent: {fileID: 4600215332168384808}
   _mouth: {fileID: 5055654453543731947}
@@ -1509,6 +1518,8 @@ MonoBehaviour:
     _state: 1
   - _behaviour: {fileID: 1837799961775594676}
     _state: 2
+  - _behaviour: {fileID: -2624149089887644990}
+    _state: 0
   _finalState: 0
   _foodTaget: {fileID: 0}
 --- !u!195 &4600215332168384808
@@ -1658,6 +1669,21 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.1
   m_Center: {x: 0, y: 0.07, z: 0}
+--- !u!114 &-2624149089887644990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5605127604356286759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ced2bee6d436b0f4e8b6e3213d4775e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _avgMoveTime: 3
+  _avgRestTime: 5
+  _strollSpeed: 3
 --- !u!1 &6315786377556690248
 GameObject:
   m_ObjectHideFlags: 0

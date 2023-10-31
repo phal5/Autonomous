@@ -489,7 +489,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _MaxHP: 12
-  _dropsWhenDead: []
+  _dropsWhenDead:
+  - _prefab: {fileID: 5238860552042161387, guid: cc6c7360b32e7d448bbf6d021f888339,
+      type: 3}
+    _parentData:
+      _type: 0
+      _index: 3
+    _probability: 1
+    _localDropOffset: {x: 0, y: 0, z: 0}
+    _randomizeRotation: 0
   _HP: 0
   _agent: {fileID: 6212010673593697723}
   _mouth: {fileID: 3776352831789892675}

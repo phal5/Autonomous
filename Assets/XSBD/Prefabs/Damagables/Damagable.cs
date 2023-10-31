@@ -12,12 +12,13 @@ public class Damagable : MonoBehaviour
         [SerializeField] float _probability;
         [Space(10f)]
         [SerializeField] Vector3 _localDropOffset = Vector3.zero;
+        [SerializeField] bool _randomizeRotation = true;
 
-        public void InstantiateDrop(Vector3 position)
+        public void InstantiateDrop(Transform transform)
         {
             if (Random.value < _probability)
             {
-                Instantiate(_prefab, position, Random.rotation, _parentData.GetParent()).transform.localPosition += _localDropOffset;
+                Instantiate(_prefab, transform.position, (_randomizeRotation? Random.rotation : transform.rotation), _parentData.GetParent()).transform.localPosition += _localDropOffset;
             }
         }
     }
@@ -48,7 +49,7 @@ public class Damagable : MonoBehaviour
     {
         foreach (Drop item in drops)
         {
-            item.InstantiateDrop(transform.position);
+            item.InstantiateDrop(transform);
         }
     }
 
