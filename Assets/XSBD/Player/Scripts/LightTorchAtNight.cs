@@ -31,7 +31,6 @@ public class LightTorchAtNight : MonoBehaviour
         if(_day != Calendar.IsDaytime())
         {
             _day = Calendar.IsDaytime();
-            Constrain(!_day);
             _setTorch = true;
         }
         if (_setTorch)
@@ -52,7 +51,8 @@ public class LightTorchAtNight : MonoBehaviour
     {
         if (pull)
         {
-            _torch.SetActive(pull);
+            _torch.SetActive(true);
+            Constrain(true);
         }
 
         _timer += Time.deltaTime;
@@ -72,7 +72,8 @@ public class LightTorchAtNight : MonoBehaviour
             {
                 _torchLight.range = 0;
                 _flame.SetFloat("_Height", 0);
-                _torch.SetActive(pull);
+                _torch.SetActive(false);
+                Constrain(false);
                 _armControl.weight = 0;
             }
         }

@@ -14,10 +14,6 @@ public class MachineInventoryInstance : InventoryInstance
 
     public bool Feed(byte amount, Vector3 position)
     {
-        if(SearchGivenFoodSlot() != null)
-        {
-            Debug.Log("Yep");
-        }
         return RawInstantiate(SearchGivenFoodSlot(), amount, position, true , true);
     }
 

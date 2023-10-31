@@ -44,7 +44,7 @@ public class Animals : Damagable
     [SerializeField] byte[] _foodTypeIndex;
     [SerializeField] Gimmick[] _gimmicks;
     
-    STATE _finalState;
+    [SerializeField] STATE _finalState;
     STATE _cognitiveState = STATE.NORMAL;
     Vector3 _cognitiveTarget;
     Transform[] _foodParents;
@@ -130,8 +130,7 @@ public class Animals : Damagable
         ++animalSize;
 
         _cognitiveTarget = AnimalManager.CrudeFlee(transform.position, _cognitiveDistance, animalSize);
-        if (_runTimer > 0) _cognitiveTarget += (_cognitiveDistance * _cognitiveDistance - (transform.position - PlayerManager.GetPlayerPosition()).sqrMagnitude) * (transform.position - PlayerManager.GetPlayerPosition());
-        _cognitiveTarget = _cognitiveTarget.normalized * _agent.speed * 10;
+        if (_runTimer > 0) _cognitiveTarget += (_cognitiveDistance * _cognitiveDistance - (transform.position - PlayerManager.GetPlayerPosition()).sqrMagnitude) * (transform.position - PlayerManager.GetPlayerPosition()).normalized;
         
         if (_cognitiveTarget == Vector3.zero)
         {
@@ -143,6 +142,7 @@ public class Animals : Damagable
         }
         else
         {
+            _cognitiveTarget = _cognitiveTarget.normalized * _agent.speed * 10;
             _cognitiveState = STATE.RUN;
             _cognitiveTarget += transform.position;
         }
@@ -182,6 +182,7 @@ public class Animals : Damagable
             else
             {
                 _agent.SetDestination(_foodTaget.position);
+                _finalState = STATE.CHASE;
             }
         }
         else
@@ -251,15 +252,22 @@ public class Animals : Damagable
     //Called Every Frame
     void SetManagedValues()
     {
-        _satiety -= Time.deltaTime;
-        if (_satiety < 0)
+        //less efficient
+        //if(((_satiety > 0)? (_satiety -= Time.deltaTime) : (_satiety = 0)) == 0)
+        //{
+        //    _HP -= Time.deltaTime * 0.0167f;
+        //}
+
+        if (_satiety > 0) _satiety -= Time.deltaTime;
+        else
         {
             _satiety = 0;
-        }
-        if (_satiety == 0)
-        {
             _HP -= Time.deltaTime * 0.0167f;
         }
+
+        if (_runTimer > 0) _runTimer -= Time.deltaTime;
+        else _runTimer = 0;
+
     }
 
     void ManageEat()
