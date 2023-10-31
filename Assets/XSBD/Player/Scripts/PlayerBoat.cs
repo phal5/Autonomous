@@ -11,30 +11,49 @@ public class PlayerBoat : MonoBehaviour
     GameObject _player;
     Rigidbody _playerRB;
     float _playerPosY;
-
     void Start()
     {
         _player = PlayerManager.GetPlayer();
-        _playerRB = PlayerManager.GetRigidbody();
+        _playerRB = GetComponent<Rigidbody>();
 
     }
 
     void Update()
     {
         if (OnWater()) MakePlayerFloat();
+        else _playerRB.constraints = RigidbodyConstraints.FreezeRotation;
     }
 
     bool OnWater()
     {
-        Physics.Raycast(_rayOriginPos.position, transform.TransformDirection(Vector3.down), out hit, 10f);
+        Physics.Raycast(_rayOriginPos.position, transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity);
 
-        if (hit.transform.gameObject.layer == 4) return true; // water 레이어 
-        else return false;
+        if (hit.transform.gameObject != null && hit.transform.gameObject.layer == 4)
+        {
+            return true; // water 레이어 
+        }
+        return false;
     }
 
     void MakePlayerFloat()
     {
-        _playerPosY = _player.transform.position.y;
-        _player.transform.position = new Vector3(_player.transform.position.x, _playerPosY, _player.transform.position.z);
+        //_player.transform.position = new Vector3(_player.transform.position.x, _playerPosY, _player.transform.position.z);
+        _playerRB.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
+    }
+
+
+    void OnTriggerEnter(Collider other)
+    {
+
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+     
+
+    }
+    void OnTriggerExit(Collider other)
+    {
+        
     }
 }
