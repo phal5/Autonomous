@@ -91,7 +91,7 @@ public class PlayerWalk : MonoBehaviour
 
         if (Vector3.SqrMagnitude(paceData) <= _pace * _pace * paceMultiplier)
         {
-            if (Cast(hip, paceData + Vector3.up * 0.5f))
+            if (Cast(hip.position, paceData + Vector3.up * 0.5f))
             {
                 foot = _hit.point;
                 float bump = (_pace * _pace * paceMultiplier - Vector3.SqrMagnitude(paceData))
@@ -117,7 +117,7 @@ public class PlayerWalk : MonoBehaviour
         {
             if (SwitchFoot())
             {
-                if (Cast(hip, -transform.forward * _pace * PaceMultiplier()))
+                if (Cast(hip.position, -transform.forward * _pace * PaceMultiplier()))
                 {
                     foot = _hit.point;
                     _stepPosition = foot;
@@ -127,15 +127,21 @@ public class PlayerWalk : MonoBehaviour
                 if (Vector3.SqrMagnitude(_stepPosition - transform.position) > _pace * _pace * paceMultiplier)
                 {
                     Physics.Raycast(hip.position, Vector3.down, out _hit);
+                    if (_hit.collider.gameObject.layer == 4) Physics.Raycast(_hit.point, Vector3.down, out _hit);
                     _stepPosition = _hit.point;
                 }
             }
         }
     }
 
-    bool Cast(Transform hip, Vector3 paceData)
+    bool Cast(Vector3 origin, Vector3 paceData)
     {
-        return Physics.Raycast(new Ray(hip.position - Vector3.Dot(paceData, transform.forward) * transform.forward, Vector3.down), out _hit);
+        return (PaceCastOnce(origin, paceData) ? (_hit.collider.gameObject.layer == 4) ? PaceCastOnce(_hit.point, paceData) : true : false);
+    }
+
+    bool PaceCastOnce(Vector3 origin, Vector3 paceData)
+    {
+        return Physics.Raycast(origin - Vector3.Dot(paceData, transform.forward) * transform.forward, Vector3.down, out _hit);
     }
 
     float SqrPaceMultiplier()
