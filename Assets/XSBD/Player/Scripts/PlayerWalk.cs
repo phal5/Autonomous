@@ -13,6 +13,7 @@ public class PlayerWalk : MonoBehaviour
     [SerializeField] float _minPaceTime = 0.2f;
     [SerializeField] float _height;
     [SerializeField] float _maxHeight = 0.5f;
+    [SerializeField] float _headBob = 0.5f;
     [Space(10f)]
     [SerializeField] Transform _LFootTarget;
     [SerializeField] Transform _LHip;
@@ -46,6 +47,8 @@ public class PlayerWalk : MonoBehaviour
         _stepPosition = _LFootTarget.position;
         _rig.weight = 1;
         _rootBuffer = _initialRootPosition = _root.localPosition;
+        _leftFootBuffer = _LFootTarget.position;
+        _rightFootBuffer = _RFootTarget.position;
     }
 
     // Update is called once per frame
@@ -105,8 +108,9 @@ public class PlayerWalk : MonoBehaviour
 
                 foot += bump * Vector3.up;
                 Physics.Raycast(_stepPosition + Vector3.up, Vector3.down, out _hit);
+                if (_hit.collider.gameObject.layer == 4) Physics.Raycast(_hit.point, Vector3.down, out _hit);
                 otherfoot = _hit.point;
-                _rootBuffer = _initialRootPosition + bump * Vector3.up * 0.2f;
+                _rootBuffer = _initialRootPosition + Vector3.up * (_headBob * bump);
             }
             else
             {
@@ -136,7 +140,7 @@ public class PlayerWalk : MonoBehaviour
 
     bool Cast(Vector3 origin, Vector3 paceData)
     {
-        return (PaceCastOnce(origin, paceData) ? (_hit.collider.gameObject.layer == 4) ? PaceCastOnce(_hit.point, paceData) : true : false);
+        return (PaceCastOnce(origin, paceData) ? (_hit.collider.gameObject.layer == 4) ? Physics.Raycast(_hit.point, Vector3.down, out _hit) : true : false);
     }
 
     bool PaceCastOnce(Vector3 origin, Vector3 paceData)
