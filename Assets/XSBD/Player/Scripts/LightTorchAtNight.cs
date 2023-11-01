@@ -80,7 +80,6 @@ public class LightTorchAtNight : MonoBehaviour
         else
         {
             float smooth = (_timer * _timer * 0.5f - _timer * _timer * _timer * _oneThirds) * 6;
-            if (smooth > 1) Debug.Log(smooth);
             _torchLight.range = ((pull)? smooth : 1 - smooth) * _initialRange;
             _flame.SetFloat("_Height", ((pull) ? smooth : 1 - smooth));
             _armControl.weight = (pull) ? smooth : 1 - smooth;
