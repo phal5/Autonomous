@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    enum Parent { ANIMAL, FOOD, NONE }
-
     [SerializeField] GameObject _item;
     [SerializeField] byte _quantity;
     [SerializeField] bool _stackable;

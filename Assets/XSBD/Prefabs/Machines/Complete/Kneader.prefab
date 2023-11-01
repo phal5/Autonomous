@@ -1915,6 +1915,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7739202769244461477}
+  - component: {fileID: 1306082913128132798}
+  - component: {fileID: 1077299782960710266}
   m_Layer: 0
   m_Name: Kneader
   m_TagString: Untagged
@@ -1939,6 +1941,50 @@ Transform:
   - {fileID: 1811640081681163637}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1306082913128132798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8010494925997603287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58b417c5ceb605943a7ba2984e02cece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _MaxHP: 1
+  _dropsWhenDead:
+  - _prefab: {fileID: 6755853357971446034, guid: fed6eea9336942c46856b1b9f0d2d378,
+      type: 3}
+    _parentData:
+      _type: 0
+      _index: 0
+    _probability: 1
+    _localDropOffset: {x: 0, y: 0, z: 0}
+    _randomizeRotation: 0
+  _HP: 0
+--- !u!65 &1077299782960710266
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8010494925997603287}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.1, y: 3.2783182, z: 7}
+  m_Center: {x: -2.84, y: 2.8355756, z: -1.5}
 --- !u!1 &8344327522631912298
 GameObject:
   m_ObjectHideFlags: 0

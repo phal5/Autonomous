@@ -9,7 +9,7 @@ public class Damagable : MonoBehaviour
     {
         [SerializeField] GameObject _prefab;
         [SerializeField] ParentData _parentData;
-        [SerializeField] float _probability;
+        [SerializeField] float _probability = 1;
         [Space(10f)]
         [SerializeField] Vector3 _localDropOffset = Vector3.zero;
         [SerializeField] bool _randomizeRotation = true;

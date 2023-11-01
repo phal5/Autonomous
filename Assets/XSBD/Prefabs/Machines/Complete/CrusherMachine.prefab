@@ -2659,6 +2659,7 @@ GameObject:
   - component: {fileID: 6828896111790399485}
   - component: {fileID: 4495184522519704503}
   - component: {fileID: 1547233242961782959}
+  - component: {fileID: 9204213116838536954}
   m_Layer: 0
   m_Name: CrusherMachine
   m_TagString: Untagged
@@ -2717,16 +2718,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58b417c5ceb605943a7ba2984e02cece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _MaxHP: 5
+  _MaxHP: 1
   _dropsWhenDead:
-  - _prefab: {fileID: 6161099734480205392, guid: d81e5a8f76a4bca4eaa2d2e6c8ac188b,
+  - _prefab: {fileID: 6755853357971446034, guid: bca3a5c3c060421429f81a7cdaf6c7fb,
       type: 3}
     _parentData:
       _type: 2
       _index: 0
     _probability: 1
     _localDropOffset: {x: 0, y: 0, z: 0}
+    _randomizeRotation: 0
   _HP: 0
+--- !u!65 &9204213116838536954
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2796506911987684267}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 9, y: 1.0820553, z: 9}
+  m_Center: {x: 0, y: 1.3765548, z: 0}
 --- !u!1 &2971299967219127434
 GameObject:
   m_ObjectHideFlags: 0

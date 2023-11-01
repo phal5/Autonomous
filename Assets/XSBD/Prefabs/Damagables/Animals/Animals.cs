@@ -281,7 +281,7 @@ public class Animals : Damagable
             _eatSwitch = false;
         }
 
-        if (_finalState == STATE.NORMAL && _eatSwitch && _foodTaget
+        if (_finalState == STATE.CHASE && _eatSwitch && _foodTaget
             && Vector3.SqrMagnitude(transform.position - _foodTaget.position) < _eatRange * _eatRange)
         {
             _isEating = true;

@@ -67,6 +67,7 @@ MonoBehaviour:
   _minPaceTime: 0.2
   _height: 0.03
   _maxHeight: 0.5
+  _headBob: 0.5
   _LFootTarget: {fileID: 2930932121565950163}
   _LHip: {fileID: 7161609789384211155}
   _RFootTarget: {fileID: 7128108120353928176}
@@ -2984,8 +2985,6 @@ MonoBehaviour:
   m_RigLayers:
   - m_Rig: {fileID: 5311904069065894096}
     m_Active: 1
-  - m_Rig: {fileID: 3991556222280212872}
-    m_Active: 1
   m_Effectors: []
 --- !u!114 &2022545133140987286
 MonoBehaviour:
@@ -3000,6 +2999,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rayOriginPos: {fileID: 8992113973070890301}
+  _enterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _exitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _depth: 0.5
 --- !u!208 &5786447336836789925
 NavMeshObstacle:
   m_ObjectHideFlags: 0

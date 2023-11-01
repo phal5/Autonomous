@@ -1444,8 +1444,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _MaxHP: 0.7
-  _HP: Infinity
   _dropsWhenDead: []
+  _HP: Infinity
   _agent: {fileID: 4600215332168384808}
   _mouth: {fileID: 5055654453543731947}
   _cognitiveDistance: 100
@@ -1459,9 +1459,11 @@ MonoBehaviour:
   _foodTypeIndex: 0002
   _gimmicks:
   - _behaviour: {fileID: 6733657355043052707}
-    _state: 0
+    _state: 1
   - _behaviour: {fileID: 1837799961775594676}
     _state: 2
+  _finalState: 0
+  _foodTaget: {fileID: 0}
 --- !u!195 &4600215332168384808
 NavMeshAgent:
   m_ObjectHideFlags: 0
