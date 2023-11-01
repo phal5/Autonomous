@@ -6,11 +6,6 @@ using UnityEngine.Animations.Rigging;
 public class PeckWrapUp : MonoBehaviour
 {
     [SerializeField] Rig _chainIK;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()

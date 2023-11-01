@@ -9,8 +9,8 @@ public class InAndOut : MonoBehaviour
     [SerializeField] Direction _direction;
     [SerializeField] float _speed = 10;
 
-    Canvas _canvas;
     RectTransform _UI;
+    RectTransform _canvasRect;
     Vector3 _initial;
     Vector3 _hidden;
     Vector2 _dir;
@@ -19,9 +19,9 @@ public class InAndOut : MonoBehaviour
 
     void Start()
     {
-        if( _canvas == null)
+        if( _canvasRect == null)
         {
-
+            _canvasRect = GetCanvasInParents(transform).GetComponent<RectTransform>();
         }
 
         if(!TryGetComponent<RectTransform>(out _UI))
@@ -33,10 +33,10 @@ public class InAndOut : MonoBehaviour
         
         switch (_direction)
         {
-            case Direction.UP: _dir = Vector2.up * (_UI.rect.height * 0.5f + Screen.height * 0.5f - _UI.anchoredPosition.y); break;
-            case Direction.DOWN: _dir = Vector2.down * (_UI.rect.height * 0.5f + Screen.height * 0.5f + _UI.anchoredPosition.y); break;
-            case Direction.RIGHT: _dir = Vector2.right * (_UI.rect.width * 0.5f + Screen.width * 0.5f - _UI.anchoredPosition.x); break;
-            case Direction.LEFT: _dir = Vector2.left * (_UI.rect.width * 0.5f + Screen.width * 0.5f + _UI.anchoredPosition.x); break;
+            case Direction.UP: _dir = Vector2.up * ((_canvasRect.rect.height + _UI.rect.height) * 0.5f - _UI.anchoredPosition.y); break;
+            case Direction.DOWN: _dir = Vector2.down * ((_canvasRect.rect.height + _UI.rect.height) * 0.5f + _UI.anchoredPosition.y); break;
+            case Direction.RIGHT: _dir = Vector2.right * ((_canvasRect.rect.width + _UI.rect.width) * 0.5f - _UI.anchoredPosition.x); break;
+            case Direction.LEFT: _dir = Vector2.left * ((_canvasRect.rect.width + _UI.rect.width) * 0.5f + _UI.anchoredPosition.x); break;
             default: _dir = Vector2.zero; break;
         }
         _UI.anchoredPosition += _dir;
@@ -116,5 +116,11 @@ public class InAndOut : MonoBehaviour
                 _UI.localPosition = Vector3.Lerp(_initial, _hidden, timer);
             }
         }
+    }
+
+    Canvas GetCanvasInParents(Transform transform)
+    {
+        if (transform.TryGetComponent<Canvas>(out Canvas canvas)) return canvas;
+        else return GetCanvasInParents(transform.parent);
     }
 }

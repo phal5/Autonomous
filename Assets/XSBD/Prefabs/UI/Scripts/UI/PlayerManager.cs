@@ -20,10 +20,9 @@ public class PlayerManager : MonoBehaviour
     static PlayerWalk _playerWalk;
     static Vector3 _eyesOffset;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        if(_Player == null) _player = GameObject.FindGameObjectWithTag("Player");
+        if (_Player == null) _player = GameObject.FindGameObjectWithTag("Player");
         else _player = _Player;
 
         if (!_player.TryGetComponent<Rigidbody>(out _rigidbody)) Debug.LogError("No Rigidbody found in player!");

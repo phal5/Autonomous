@@ -9,11 +9,6 @@ public class Flap : MonoBehaviour
     [SerializeField] Behaviour _wrapUp;
     float _timer = 0;
     bool _loop = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     private void OnEnable()
     {

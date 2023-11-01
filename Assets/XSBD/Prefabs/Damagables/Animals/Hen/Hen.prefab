@@ -851,7 +851,6 @@ GameObject:
   - component: {fileID: 3617454983481784776}
   - component: {fileID: 3853859620536982922}
   - component: {fileID: 661810041142231483}
-  - component: {fileID: 7879456062765627476}
   m_Layer: 0
   m_Name: Chicken
   m_TagString: Untagged
@@ -921,52 +920,6 @@ MonoBehaviour:
   - m_Rig: {fileID: 2967785515813973766}
     m_Active: 1
   m_Effectors: []
---- !u!114 &7879456062765627476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3429162258148302347}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2d8418b0b9634b1892b0268dd9c2743, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boneShape: 1
-  drawBones: 1
-  drawTripods: 0
-  boneSize: 1
-  tripodSize: 1
-  boneColor: {r: 0, g: 0, b: 1, a: 0.5}
-  m_Transforms:
-  - {fileID: 1894972949173884574}
-  - {fileID: 2905582110550762272}
-  - {fileID: 8581236108188524046}
-  - {fileID: 1513448808624892444}
-  - {fileID: 5230677865279066214}
-  - {fileID: 3834366355114670628}
-  - {fileID: 1288228673645567126}
-  - {fileID: 4905170139209054332}
-  - {fileID: 3041454887173942183}
-  - {fileID: 6336847804998215771}
-  - {fileID: 3300350620161136810}
-  - {fileID: 8310031626211161277}
-  - {fileID: 6516058533911154640}
-  - {fileID: 1634820546539722997}
-  - {fileID: 3692576456143235094}
-  - {fileID: 8780401751952040269}
-  - {fileID: 764710201901101911}
-  - {fileID: 5055654453543731947}
-  - {fileID: 7941986424565430281}
-  - {fileID: 1423365999558232220}
-  - {fileID: 4201079313452966416}
-  - {fileID: 4486938467644764670}
-  - {fileID: 6066967941330940621}
-  - {fileID: 5018592166798277226}
-  - {fileID: 611956583709411468}
-  - {fileID: 5035067654659242626}
-  - {fileID: 5679405007267263700}
 --- !u!1 &3862748981677098467
 GameObject:
   m_ObjectHideFlags: 0
