@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -7,16 +8,18 @@ public class CustomMath
 {
     public static float QRsqrt(float original)
     {
-        int i;
         float _1;
-        const float _threeHalves = 1.5f;
         _1 = original * 0.5f;
-        i = 0x5f375a86 - (FtoI(original) >> 1);
-        original = ItoF(i);
-        original = original * (_threeHalves - (_1 * original * original));
-        original = original * (_threeHalves - (_1 * original * original));
+        original = ItoF(0x5f375a86 - (FtoI(original) >> 1));
+        original *= (1.5f - (_1 * original * original));
+        //original = original * (_threeHalves - (_1 * original * original));
 
         return original;
+    }
+
+    public static float RsqrtE(float original)
+    {
+        return MathF.Sqrt(original);
     }
 
     [StructLayout(LayoutKind.Explicit)]

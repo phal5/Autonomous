@@ -146,7 +146,7 @@ public class Animals : Damagable
         }
         else
         {
-            _cognitiveTarget *= CustomMath.QRsqrt(_cognitiveTarget.sqrMagnitude) * 10 * _agent.speed;
+            _cognitiveTarget = _cognitiveTarget.normalized * 10 * _agent.speed;
             if (Physics.Raycast(transform.position, _cognitiveTarget, out _hit, 10 * _agent.speed)) _cognitiveTarget = _hit.point;
             else _cognitiveTarget += transform.position;
             _cognitiveState = STATE.RUN;

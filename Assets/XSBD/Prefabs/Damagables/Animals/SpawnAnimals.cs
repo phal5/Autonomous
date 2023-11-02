@@ -39,7 +39,7 @@ public class SpawnAnimals : MonoBehaviour
         if (AnimalManager.HowManyAround(PlayerManager.GetPlayerPosition(), _range, 1, false) < _maxInRange)
         {
             _circular = Random.insideUnitCircle.x * Vector3.right + Random.insideUnitCircle.y * Vector3.forward;
-            _circular *= CustomMath.QRsqrt(_circular.sqrMagnitude) * _range * 0.5f;
+            _circular = _circular.normalized * _range * 0.5f;
             _circular += PlayerManager.GetPlayerPosition();
 
             if (Physics.Raycast(_circular, Vector3.up, out _hit)) Physics.Raycast(_hit.point, Vector3.down, out _hit);
