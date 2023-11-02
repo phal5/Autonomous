@@ -22,7 +22,7 @@ public class AnimalManager : MonoBehaviour
     static Transform _predators1;
     static Transform _predators2;
     static Transform _predators3;
-
+    
     [System.Serializable]
     public class AnimalPrefab
     {

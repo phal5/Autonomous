@@ -45,7 +45,7 @@ public class SpawnAnimals : MonoBehaviour
             if (Physics.Raycast(_circular, Vector3.up, out _hit)) Physics.Raycast(_hit.point, Vector3.down, out _hit);
             else Physics.Raycast(_circular + Vector3.up * 100, Vector3.down, out _hit);
 
-            if(!_hit.collider.isTrigger) _spawnAnimals.Add(AnimalManager.InstantiateAnimal(index, _hit.point).transform);
+            if(!_hit.collider.isTrigger) _spawnAnimals.Add(AnimalManager.InstantiateAnimal(index, _hit.point + Vector3.up).transform);
         }
     }
 

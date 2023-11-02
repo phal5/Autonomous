@@ -43,13 +43,17 @@ public class Animals : Damagable
     [Space(10f)]
     [SerializeField] byte[] _foodTypeIndex;
     [SerializeField] Gimmick[] _gimmicks;
+
+    [Space(10f)]
+    [SerializeField] bool _isPredator = false;
     
-    [SerializeField] STATE _finalState;
+    STATE _finalState;
     STATE _cognitiveState = STATE.NORMAL;
     Vector3 _cognitiveTarget;
+    RaycastHit _hit;
     Transform[] _foodParents;
     Transform[] _foodTargetNominees;
-    [SerializeField] Transform _foodTaget;
+    Transform _foodTaget;
     Food _food;
     float _foodTimer = 0;
     float _runTimer = 0;
@@ -142,9 +146,10 @@ public class Animals : Damagable
         }
         else
         {
-            _cognitiveTarget = _cognitiveTarget.normalized * _agent.speed * 10;
+            _cognitiveTarget *= CustomMath.QRsqrt(_cognitiveTarget.sqrMagnitude) * 10 * _agent.speed;
+            if (Physics.Raycast(transform.position, _cognitiveTarget, out _hit, 10 * _agent.speed)) _cognitiveTarget = _hit.point;
+            else _cognitiveTarget += transform.position;
             _cognitiveState = STATE.RUN;
-            _cognitiveTarget += transform.position;
         }
     }
 

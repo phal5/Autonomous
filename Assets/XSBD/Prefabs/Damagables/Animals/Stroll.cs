@@ -17,6 +17,7 @@ public class Stroll : MonoBehaviour
     void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
+        if (!_agent.isOnNavMesh) Debug.Log(gameObject.transform.position);
     }
 
     // Update is called once per frame
