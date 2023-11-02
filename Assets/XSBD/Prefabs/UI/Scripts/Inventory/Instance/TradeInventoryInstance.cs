@@ -24,7 +24,7 @@ public class TradeInventoryInstance : InventoryInstance
     [SerializeField] TradeSlot _result;
     [SerializeField] Slot[] _ingredientPreview;
 
-    private void Start()
+    new void Start()
     {
         //SetCamera();
         SetupTradeSlot();

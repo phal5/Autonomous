@@ -147,7 +147,7 @@ public class Animals : Damagable
         else
         {
             _cognitiveTarget = _cognitiveTarget.normalized * 10 * _agent.speed;
-            if (Physics.Raycast(transform.position, _cognitiveTarget, out _hit, 10 * _agent.speed)) _cognitiveTarget = _hit.point;
+            if (Physics.Raycast(transform.position, _cognitiveTarget, out _hit, 10 * _agent.speed)) _cognitiveTarget = _hit.point + _hit.normal * 0.5f;
             else _cognitiveTarget += transform.position;
             _cognitiveState = STATE.RUN;
         }

@@ -139,7 +139,7 @@ public class MachineDeployer : Deployer
 
     void SetPosition()
     {
-        if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out _hit, 100))
+        if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out _hit, 100) && (_liftable || !_hit.collider.isTrigger))
         {
             transform.position = _hit.point + Vector3.up * _heightOffset;
             if(_pointer != null)

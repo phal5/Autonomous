@@ -9,7 +9,7 @@ public class InventoryInstance : MonoBehaviour
     [SerializeField] protected InventorySlot[] _slots;
     
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
         SetupInventorySlots();
     }

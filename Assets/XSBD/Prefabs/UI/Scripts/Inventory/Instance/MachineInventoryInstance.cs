@@ -6,7 +6,7 @@ public class MachineInventoryInstance : InventoryInstance
 {
     [SerializeField] byte[] _foodIndexes;
     // Start is called before the first frame update
-    void Start()
+    new void Start()
     {
         SetCamera();
         SetupInventorySlots();
