@@ -427,6 +427,7 @@ GameObject:
   - component: {fileID: 7527763175848990468}
   - component: {fileID: 2708167814853176085}
   - component: {fileID: 7685284375714798614}
+  - component: {fileID: 3485654985642979464}
   m_Layer: 0
   m_Name: Tree_and_Texture_mesh
   m_TagString: Untagged
@@ -476,6 +477,7 @@ MonoBehaviour:
       _index: 0
     _probability: 1
     _localDropOffset: {x: -0.1, y: 1, z: 0}
+    _randomizeRotation: 1
   - _prefab: {fileID: 670044490187064300, guid: 22d9b9cbc130902408a514f81b36f1e2,
       type: 3}
     _parentData:
@@ -483,6 +485,7 @@ MonoBehaviour:
       _index: 0
     _probability: 0.3
     _localDropOffset: {x: 0.1, y: 1, z: 0}
+    _randomizeRotation: 1
   - _prefab: {fileID: 670044490187064300, guid: 22d9b9cbc130902408a514f81b36f1e2,
       type: 3}
     _parentData:
@@ -490,6 +493,7 @@ MonoBehaviour:
       _index: 0
     _probability: 0.1
     _localDropOffset: {x: 0, y: 1, z: 0}
+    _randomizeRotation: 1
   - _prefab: {fileID: 8427808551906393170, guid: 1cf13ff871ba8fc4082028d6e7804522,
       type: 3}
     _parentData:
@@ -497,6 +501,7 @@ MonoBehaviour:
       _index: 4
     _probability: 0.1
     _localDropOffset: {x: 0, y: 2, z: 0}
+    _randomizeRotation: 1
   - _prefab: {fileID: 1435306860141351075, guid: 2849b2c160920a24c9df2a4ba647c4da,
       type: 3}
     _parentData:
@@ -504,6 +509,7 @@ MonoBehaviour:
       _index: 0
     _probability: 0.55
     _localDropOffset: {x: 0, y: 2, z: 0}
+    _randomizeRotation: 1
   - _prefab: {fileID: 1435306860141351075, guid: 2849b2c160920a24c9df2a4ba647c4da,
       type: 3}
     _parentData:
@@ -511,6 +517,7 @@ MonoBehaviour:
       _index: 0
     _probability: 0.55
     _localDropOffset: {x: 0, y: 2, z: 0}
+    _randomizeRotation: 1
   _HP: 0
 --- !u!54 &2708167814853176085
 Rigidbody:
@@ -560,6 +567,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.3, y: 2.84, z: 0.3}
   m_Center: {x: 0, y: 1.67, z: 0}
+--- !u!208 &3485654985642979464
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5845399837318272455}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &7736290703849077774
 GameObject:
   m_ObjectHideFlags: 0

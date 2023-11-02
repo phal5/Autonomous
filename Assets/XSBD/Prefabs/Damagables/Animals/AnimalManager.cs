@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
+using UnityEngine.UIElements;
 
 public class AnimalManager : MonoBehaviour
 {
@@ -27,7 +30,7 @@ public class AnimalManager : MonoBehaviour
         [SerializeField][Tooltip("0 means herbivorous, 1 means small predators and so on. Maximum is 3.")] byte _size = 0;
         [SerializeField] bool _isPredator = false;
 
-        public void InstantiateAnimal(Vector3 position, byte number)
+        public GameObject InstantiateAnimal(Vector3 position)
         {
             Transform parent;
             switch (_size)
@@ -80,15 +83,7 @@ public class AnimalManager : MonoBehaviour
                         break;
                     }
             }
-            if (number + parent.childCount > 1024)
-            {
-                number = (byte)(1024 - parent.childCount);
-            }
-            for (int i = 0; i < number; i++)
-            {
-                GameObject o = Instantiate(_prefab, parent, true);
-                o.transform.position = position;
-            }
+            return Instantiate(_prefab, position, Quaternion.Euler(Vector3.up * Random.value * 360), parent);
         }
     }
 
@@ -98,9 +93,6 @@ public class AnimalManager : MonoBehaviour
     public static Vector3[] _predators1Pos;
     public static Vector3[] _predators2Pos;
     public static Vector3[] _predators3Pos;
-
-    //Test Variables
-    [SerializeField] bool _init = false;
 
     public static byte _frameCounter = 0;
 
@@ -175,9 +167,6 @@ public class AnimalManager : MonoBehaviour
                     break;
                 }
         }
-
-        //Test functions
-        Init();
     }
 
     void TransformToPosition(Transform parent, ref Vector3[] positions)
@@ -256,6 +245,59 @@ public class AnimalManager : MonoBehaviour
         return Result.ToArray();
     }
 
+    public static int HowManyAround(Vector3 position, float distance, byte size, bool predators = true)
+    {
+        float Abs(float f)
+        {
+            return (f > 0) ? f : -f;
+        }
+        int Search(Vector3[] Positions)
+        {
+            int i = 0;
+            foreach (Vector3 Position in Positions)
+            {
+                Vector3 v = (position - Position);
+                if (Abs(v.x) < distance && Abs(v.y) < distance && Abs(v.z) < distance && v.sqrMagnitude < distance * distance) ++i;
+            }
+            return i;
+        }
+
+        switch (size)
+        {
+            case 1:
+                if (predators)
+                {
+                    return Search(_predators1Pos) + Search(_predators2Pos) + Search(_predators3Pos);
+                }
+                else
+                {
+                    return Search(_herbivores1Pos);
+                }
+            case 2:
+                if (predators)
+                {
+                    return Search(_predators2Pos) + Search(_predators3Pos);
+                }
+                else
+                {
+                    return Search(_herbivores1Pos) + Search(_herbivores2Pos);
+                }
+            case 3:
+                if (predators)
+                {
+                    return Search(_predators3Pos);
+                }
+                else
+                {
+                    return Search(_herbivores1Pos) + Search(_herbivores2Pos) + Search(_herbivores3Pos);
+                }
+            default:
+                Debug.LogError("threatThreshold maximum is 3, minimum being 1.");
+                break;
+        }
+        return -1;
+    }
+
     public static Vector3 CrudeFlee(Vector3 position, float distance, byte size)
     {
         Vector3 Result = Vector3.zero;
@@ -310,9 +352,9 @@ public class AnimalManager : MonoBehaviour
         return Result;
     }
 
-    public static void InstantiateAnimal(byte index, Vector3 position)
+    public static GameObject InstantiateAnimal(byte index, Vector3 position)
     {
-        _AnimalPrefabs[index].InstantiateAnimal(position, 1);
+        return _AnimalPrefabs[index].InstantiateAnimal(position);
     }
 
     //Test Functions======================================================================================================================
@@ -331,18 +373,5 @@ public class AnimalManager : MonoBehaviour
         }
         Debug.LogError("Animal Parent Inedx Error: 1, 2, 3 for herbivores, 11, 12, 13 for carnivores");
         return null;
-    }
-
-    //Test Functions======================================================================================================================
-    void Init()
-    {
-        if (_init)
-        {
-            _init = false;
-            foreach (AnimalPrefab animalPrefab in _animalPrefabs)
-            {
-                animalPrefab.InstantiateAnimal(Random.onUnitSphere, 1);
-            }
-        }
     }
 }

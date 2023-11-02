@@ -19,12 +19,12 @@ using UnityEngine.UIElements;
     private void Start()
     {
         SetText();
-        SetScale();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!_itemInstance && _quantity != 0) InstanceItem();
         if (_pull && InventoryManager.GetMove())
         {
             Pull();

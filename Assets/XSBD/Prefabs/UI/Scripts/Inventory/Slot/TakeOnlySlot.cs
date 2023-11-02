@@ -99,6 +99,7 @@ public class TakeOnlySlot : Slot
 
     public void SetQuantity(byte quantity)
     {
+        if (_quantity == 0) InstanceItem();
         _quantity = quantity;
         SetText();
         if (_quantity <= 0 && _itemInstance)

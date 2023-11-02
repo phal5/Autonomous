@@ -21,12 +21,6 @@ public class Slot : MonoBehaviour
         SetText();
     }
 
-    // Start is called before the first frame update
-    private void Start()
-    {
-        SetScale();
-    }
-
     public void SetSlotData(GameObject item, ParentData parentData, byte quantity, bool stackable)
     {
         _item = item;
@@ -81,13 +75,6 @@ public class Slot : MonoBehaviour
 
         if(_quantity > 0)
         {
-            _itemInstance = Instantiate(_item, transform).transform;
-
-            if(_itemInstance.TryGetComponent<Deployer>(out Deployer deployer))
-            {
-                _parentData = deployer.GetParentData();
-            }
-
             if (_scaleDivisor == Vector3.zero)
             {
                 _scaleDivisor.x = 1f / transform.lossyScale.x;
@@ -95,15 +82,22 @@ public class Slot : MonoBehaviour
                 _scaleDivisor.z = 1f / transform.lossyScale.z;
             }
 
+            _itemInstance = Instantiate
+                (
+                _item,
+                transform.position - transform.forward * 0.5f,
+                transform.rotation * Quaternion.Euler(Vector3.up * 180),
+                transform
+                ).transform;
+
             SetLayerInChildren(_itemInstance, gameObject.layer);
+            ClearAnimators(_itemInstance);
             ClearColliders(_itemInstance);
             ClearBehaviours(_itemInstance);
             ClearNavAgents(_itemInstance);
             ClearRigidBody(_itemInstance);
 
             _itemInstance.localScale = _scaleDivisor * 0.7f;
-            _itemInstance.position = transform.position - transform.forward * 0.5f;
-            _itemInstance.localRotation = Quaternion.Euler(Vector3.up * 180);
         }
     }
 
@@ -161,6 +155,18 @@ public class Slot : MonoBehaviour
         foreach (Transform child in transform)
         {
             ClearRigidBody(child);
+        }
+    }
+
+    void ClearAnimators(Transform transform)
+    {
+        foreach (Animator anim in transform.GetComponents<Animator>())
+        {
+            anim.enabled = false;
+        }
+        foreach (Transform child in transform)
+        {
+            ClearAnimators(child);
         }
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 public class SleightOfHand : MonoBehaviour
 {
     [SerializeField] GameObject _item;
+    [SerializeField] GameObject _replacement;
     [SerializeField] ParentData _parent;
     [SerializeField] byte _quantity;
     [SerializeField] bool _stackable;
@@ -13,7 +14,10 @@ public class SleightOfHand : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayerManager.GetInventoryInstance().MoveToEmptySlot(_item, _parent, _quantity, _stackable);
+        if(!PlayerManager.GetInventoryInstance().MoveToEmptySlot(_item, _parent, _quantity, _stackable))
+        {
+            Instantiate(_replacement);
+        }
         Destroy(gameObject);
     }
 }
