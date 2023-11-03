@@ -11,10 +11,11 @@ public class TradeInventoryInstance : InventoryInstance
         [SerializeField] string _name;
         [System.Serializable] public class ItemPair
         {
-            public ParentData _parentData;
+            public ParentData _parentData = ParentData.zero();
             public GameObject _item;
             public byte _quantity;
         }
+
         public ItemPair[] _ingredients;
         public ItemPair _result;
         public bool _stackable;
