@@ -32,6 +32,7 @@ public class TakeOnlySlot : Slot
         {
             _dragging = true;
             InventoryManager.SetManagerData(_item, _parentData, _quantity, _stackable);
+            InventoryManager.SetSlot(this);
             Clear();
             if (_itemInstance)
             {

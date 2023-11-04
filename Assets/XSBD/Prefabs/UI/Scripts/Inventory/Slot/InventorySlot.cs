@@ -60,9 +60,16 @@ using UnityEngine.UIElements;
         {
             if (InventoryManager.GetSlot() != null)
             {
-                InventoryManager.GetSlot().SetSlotData(_item, _parentData, _quantity, _stackable);
-                GetManagerData();
-                InventoryManager.Clear();
+                if(InventoryManager.GetSlot() is InventorySlot)
+                {
+                    InventoryManager.GetSlot().SetSlotData(_item, _parentData, _quantity, _stackable);
+                    GetManagerData();
+                    InventoryManager.Clear();
+                }
+                else
+                {
+                    InventoryManager.ReturnItem();
+                }
             }
             else
             {

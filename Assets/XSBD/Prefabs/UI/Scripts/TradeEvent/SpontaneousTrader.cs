@@ -13,7 +13,7 @@ public class SpontaneousTrader : TradeInventoryInstance
     float _divisor = 0;
 
     // Start is called before the first frame update
-    void Start()
+    new void Start()
     {
         foreach(RecipeList recipe in _recipes)
         {
