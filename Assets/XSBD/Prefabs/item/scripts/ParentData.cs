@@ -6,7 +6,7 @@ using UnityEngine;
 [System.Serializable] public class ParentData
 {
     enum Parent { ANIMAL, FOOD, NONE }
-    
+
     [SerializeField] Parent _type = Parent.NONE;
     [SerializeField] byte _index = 0;
 
@@ -78,5 +78,10 @@ using UnityEngine;
     {
         if (parentData._type == _type && parentData._index == _index) return true;
         else return false;
+    }
+
+    public int GetTypeIndex()
+    {
+        return (int)_type;
     }
 }
