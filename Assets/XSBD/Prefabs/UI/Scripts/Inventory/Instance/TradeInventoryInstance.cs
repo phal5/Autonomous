@@ -25,11 +25,21 @@ public class TradeInventoryInstance : InventoryInstance
     [SerializeField] TradeSlot _result;
     [SerializeField] Slot[] _ingredientPreview;
 
+    bool _instanced = false;
+
     new void Start()
     {
         //SetCamera();
-        SetupTradeSlot();
         SetupInventorySlots();
+    }
+
+    private void Update()
+    {
+        if (!_instanced)
+        {
+            _instanced = true;
+            SetupTradeSlot();
+        }
     }
 
     protected void SetupTradeSlot()
