@@ -9,6 +9,7 @@ public class SpawnAnimals : MonoBehaviour
     [SerializeField] float _range;
 
     List<Transform> _spawnAnimals = new List<Transform>();
+    List<Transform> _deleteList = new List<Transform>();
     Transform _playerTransform;
     RaycastHit _hit;
     Vector3 _circular;
@@ -42,10 +43,10 @@ public class SpawnAnimals : MonoBehaviour
             _circular = _circular.normalized * _range * 0.5f;
             _circular += PlayerManager.GetPlayerPosition();
 
-            if (Physics.Raycast(_circular, Vector3.up, out _hit)) Physics.Raycast(_hit.point, Vector3.down, out _hit);
-            else Physics.Raycast(_circular + Vector3.up * 100, Vector3.down, out _hit);
-
-            if(!_hit.collider.isTrigger) _spawnAnimals.Add(AnimalManager.InstantiateAnimal(index, _hit.point + Vector3.up).transform);
+            if ((Physics.Raycast(_circular, Vector3.up, out _hit)? Physics.Raycast(_hit.point, Vector3.down, out _hit) : Physics.Raycast(_circular + Vector3.up * 100, Vector3.down, out _hit)))
+            {
+                if (!_hit.collider.isTrigger) _spawnAnimals.Add(AnimalManager.InstantiateAnimal(index, _hit.point + Vector3.up).transform);
+            }
         }
     }
 
@@ -57,12 +58,16 @@ public class SpawnAnimals : MonoBehaviour
             {
                 if ((_playerTransform.position - t.position).sqrMagnitude > _range * _range)
                 {
-                    _spawnAnimals.Remove(t);
-                    Destroy(t.gameObject);
-                    Debug.Log("yep");
+                    _deleteList.Add(t);
                 }
             }
             else _spawnAnimals.Remove(t);
         }
+        foreach (Transform t in _deleteList)
+        {
+            _spawnAnimals.Remove(t);
+            Destroy(t.gameObject);
+        }
+        _deleteList = new List<Transform>();
     }
 }

@@ -301,6 +301,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6927367121806331159}
   - component: {fileID: 6434707293008459922}
+  - component: {fileID: 257222761859574450}
   m_Layer: 2
   m_Name: ItemManager
   m_TagString: Untagged
@@ -338,6 +339,21 @@ MonoBehaviour:
   _object: {fileID: 67028098762752751, guid: 37183fe60d0b8c048b7e59510d5548fd, type: 3}
   _parent: {fileID: 2062096738638290765}
   _time: 0.7
+--- !u!114 &257222761859574450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328573170058885602}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eee08e6cb4014941bd9fed6cdb17102, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _object: {fileID: 2507202577285277380, guid: cfbd955014b0c4242b6817323e3c30a7, type: 3}
+  _parent: {fileID: 8992113973070890301}
+  _time: 0
 --- !u!1 &1363173964031937927
 GameObject:
   m_ObjectHideFlags: 0
@@ -1409,7 +1425,7 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 504fa9e58ba17814d9492ef21ef76ca7, type: 2}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 5778d2461d1f846458e5a2c62a65931e, type: 2}
   - {fileID: 2100000, guid: 733dceb7d017d3f4da04789e9929958f, type: 2}
   - {fileID: 2100000, guid: 1175176d4b5f3d34e8973afc5f2afe37, type: 2}
   - {fileID: 2100000, guid: 48da7648719be5c4881bd3f909574804, type: 2}
@@ -2921,6 +2937,25 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  _whenDisabled:
+    _invokeEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6434707293008459922}
+          m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+          m_MethodName: set_enabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    _disableBehaviour: []
+    _setTrigger:
+    - PutIn
 --- !u!114 &4719716663106435265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3001,10 +3036,82 @@ MonoBehaviour:
   _rayOriginPos: {fileID: 8992113973070890301}
   _enterEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 257222761859574450}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 7502944433988390246}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4620584782725103324}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _exitEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 257222761859574450}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7502944433988390246}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 4620584782725103324}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   _depth: 0.5
 --- !u!208 &5786447336836789925
 NavMeshObstacle:
@@ -3018,7 +3125,7 @@ NavMeshObstacle:
   m_Shape: 0
   m_Extents: {x: 0.6, y: 1, z: 0.6}
   m_MoveThreshold: 0.1
-  m_Carve: 1
+  m_Carve: 0
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5

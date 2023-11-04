@@ -16,7 +16,7 @@ public class PlayerInput : MonoBehaviour
         {
             if (Input.GetKeyDown(_key))
             {
-                if(_currentTrigger != null)
+                if(_currentTrigger != "")
                 {
                     animator.ResetTrigger(_currentTrigger);
                 }
@@ -31,8 +31,7 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
-    [System.Serializable]
-    class Mouse
+    [System.Serializable] class Mouse
     {
         [SerializeField] int _button;
         [SerializeField] string _trigger;
@@ -56,9 +55,33 @@ public class PlayerInput : MonoBehaviour
             }
         }
     }
+
+    [System.Serializable] class WhenDisabled
+    {
+        [SerializeField] UnityEvent _invokeEvent;
+        [SerializeField] Behaviour[] _disableBehaviour;
+        [SerializeField] string[] _setTrigger;
+
+        public void Disable(Animator animator, ref string _currentTrigger)
+        {
+            _invokeEvent.Invoke();
+            animator.ResetTrigger(_currentTrigger);
+            foreach (Behaviour behaviour in _disableBehaviour)
+            {
+                behaviour.enabled = false;
+            }
+            foreach(string trigger in _setTrigger)
+            {
+                animator.SetTrigger(trigger);
+            }
+        }
+    }
+
     [SerializeField] Animator _animator;
     [SerializeField] Key[] _keys;
     [SerializeField] Mouse[] _clickEvents;
+    [Space(10f)]
+    [SerializeField] WhenDisabled _whenDisabled;
 
     string _currentTrigger = "";
 
@@ -79,5 +102,10 @@ public class PlayerInput : MonoBehaviour
         {
             mouse.SetTrigger(_animator, ref _currentTrigger);
         }
+    }
+
+    private void OnDisable()
+    {
+        _whenDisabled.Disable(_animator, ref _currentTrigger);
     }
 }

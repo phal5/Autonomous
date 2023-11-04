@@ -43,7 +43,7 @@ public class PlayerBoat : MonoBehaviour
 
     bool OnWater()
     {
-        return Physics.Raycast(_rayOriginPos.position + Vector3.up * 2, transform.TransformDirection(Vector3.down), out hit, _rayOriginPos.localPosition.y + 2 - _depth, layerMask);
+        return Physics.Raycast(_rayOriginPos.position + Vector3.up * 2, transform.TransformDirection(Vector3.down), out hit, _rayOriginPos.localPosition.y + 2 - _depth + 0.05f, layerMask);
     }
 
     void MakePlayerFloat()
