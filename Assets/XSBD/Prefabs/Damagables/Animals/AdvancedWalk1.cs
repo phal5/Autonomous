@@ -51,7 +51,9 @@ public class AdvancedWalk1 : MonoBehaviour
                     foot.position = _hit.point;
                     foot.position += Vector3.up
                     * f * height * _paceDivisor * _paceDivisor * _paceDivisor;
-                    fixedFoot.position = _stepPosition;
+                    Physics.Raycast(_stepPosition + Vector3.up, Vector3.down, out _hit);
+                    if (_hit.collider.gameObject.layer == 4) Physics.Raycast(_hit.point, Vector3.down, out _hit);
+                    fixedFoot.position = _hit.point;
                 }
             }
             else
