@@ -7,7 +7,7 @@ public class SkyCycle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        RenderSettings.skybox = Resources.Load<Material>("Sky 2");
     }
 
     // Update is called once per frame
