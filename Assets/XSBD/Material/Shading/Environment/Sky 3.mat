@@ -20,14 +20,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Sky 1
-  m_Shader: {fileID: -6465566751694194690, guid: 67572883f25dad5498634e1c09b09192,
+  m_Name: Sky 3
+  m_Shader: {fileID: -6465566751694194690, guid: c4971569525ca2148bb8d6339373e6e3,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
-  m_InvalidKeywords:
-  - _SURFACE_TYPE_TRANSPARENT
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 1
@@ -65,40 +64,46 @@ Material:
     - _DstBlend: 10
     - _Height: 1
     - _Horizon_Strength: 1
+    - _InvSize: 3.95
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Size: 0.001
+    - _Speed: 0.02
     - _SqrSize: 0.95
     - _SrcBlend: 5
     - _Star_Density: 10
     - _Star_Size: 0.01
+    - _Strength: 1
     - _Surface: 1
-    - _Time_d: 0.62730587
+    - _Threshold: 0.5
+    - _Time_d: 0.3916846
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
     - _Direction: {r: 0, g: -1, b: 0, a: 0}
     - _DirectionNormalized: {r: 0, g: -1, b: 0, a: 0}
-    - _Horizon: {r: 0.29, g: 0.24857143, b: 0.29, a: 1}
-    - _Horizon_1: {r: 0.6775281, g: 0.9, b: 0.8696629, a: 1}
-    - _Horizon_2: {r: 0.5, g: 0.88888884, b: 1, a: 1}
+    - _Horizon: {r: 0.44, g: 0.37573034, b: 0.44, a: 1}
+    - _Horizon_1: {r: 0, g: 0, b: 0, a: 1}
+    - _Horizon_2: {r: 0, g: 0, b: 0, a: 1}
     - _Horizon_3: {r: 0.48039216, g: 0.6647059, b: 0.9607843, a: 1}
     - _Horizon_4: {r: 0.34901962, g: 0.036443494, b: 0.019607838, a: 1}
     - _Horizon_5: {r: 0, g: 0.039215688, b: 0.098039225, a: 1}
     - _Light_Direction: {r: -0.045512438, g: 0.9989638, b: 0, a: 0}
-    - _MoonColor: {r: 0.49611056, g: 0.5, b: 0.35220122, a: 1}
-    - _Nadir: {r: 0.29, g: 0.18383929, b: 0.21232145, a: 0}
-    - _Nadir_1: {r: 0.9, g: 0.9, b: 0.9, a: 0}
+    - _MoonColor: {r: 0.74073774, g: 0.745283, b: 0.59528893, a: 1}
+    - _Nadir: {r: 0.44, g: 0.2784375, b: 0.3196875, a: 0}
+    - _Nadir_1: {r: 0, g: 0, b: 0, a: 0}
     - _Nadir_2: {r: 1, g: 1, b: 1, a: 0}
     - _Nadir_3: {r: 0.45686275, g: 0.8490195, b: 0.9137255, a: 1}
     - _Nadir_4: {r: 0.01483325, g: 0.076717675, b: 0.23584908, a: 1}
     - _Nadir_5: {r: 0, g: 0.098039225, b: 0.098039225, a: 1}
+    - _Strengths_1_2: {r: 0.8, g: 0.5, b: 0, a: 0}
     - _SunColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Sunlight: {r: 0.71713686, g: -0.6969326, b: -0.00000014901161, a: 0}
+    - _Sunlight: {r: -0.6293989, g: -0.7770825, b: -0.000000074505806, a: 0}
+    - _Thresholds_1_2: {r: 0.2, g: 0.05, b: 0, a: 0}
     - _Zenith: {r: 0.13062498, g: 0.2131249, b: 0.44, a: 1}
-    - _Zenith_1: {r: 0, g: 0.5012912, b: 0.637, a: 1}
-    - _Zenith_2: {r: 0.29764706, g: 0.5078279, b: 0.99215686, a: 1}
+    - _Zenith_1: {r: 0, g: 0, b: 0, a: 1}
+    - _Zenith_2: {r: 0, g: 0, b: 0, a: 1}
     - _Zenith_3: {r: 0.3611385, g: 0.30588236, b: 0.6117647, a: 1}
     - _Zenith_4: {r: 0.078206256, g: 0, b: 0.4339623, a: 1}
     - _Zenith_5: {r: 0, g: 0, b: 0.098039225, a: 1}
