@@ -39,7 +39,7 @@ using UnityEngine.UIElements;
     public void PrintSpeech(TextMeshProUGUI speaker, TextMeshProUGUI speech)
     {
         speaker.text = _speaker;
-        speech.text = _speech;
+        speech.text = _speech.Replace("/", "\n");
 
         if(_image != null)
         {

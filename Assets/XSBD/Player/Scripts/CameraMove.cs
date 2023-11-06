@@ -23,6 +23,8 @@ public class CameraMove: MonoBehaviour
     private Vector3 targetRotation;
     private Vector3 currentVel;
 
+    RaycastHit _hit;
+
     void ChangeTargetRotation()
     {
         if (!Input.GetKey(KeyCode.Mouse0))
@@ -42,12 +44,9 @@ public class CameraMove: MonoBehaviour
 
         transform.position = target.position - transform.forward * distance + personViewOffset; //각도를 기반으로 카메라의 위치를 조정해준다.
 
-        if(Physics.SphereCast(target.position + personViewOffset, 0.3f, -transform.forward, out RaycastHit hit, distance))
+        if(Physics.SphereCast(target.position + personViewOffset, 0.3f, -transform.forward, out _hit, distance, 1 << 9))
         {
-            if(hit.transform.gameObject.layer == 9)
-            {
-                transform.position = hit.point + hit.normal * 0.3f;
-            }
+            transform.position = _hit.point + _hit.normal * 0.3f;
         }
     }
     void ChangeView()
