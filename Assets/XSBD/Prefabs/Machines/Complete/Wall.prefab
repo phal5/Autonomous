@@ -676,7 +676,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &-3564908085594506690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -694,9 +694,9 @@ MonoBehaviour:
   - _prefab: {fileID: 9021376491933957862, guid: 1a0dc7e5d4e5ed641a3e5267891c701d,
       type: 3}
     _parentData:
-      _type: 0
+      _type: 2
       _index: 0
-    _probability: 0
+    _probability: 1
     _localDropOffset: {x: 0, y: 0, z: 0}
     _randomizeRotation: 0
   _HP: 0

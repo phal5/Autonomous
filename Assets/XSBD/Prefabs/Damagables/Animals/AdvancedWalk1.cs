@@ -42,6 +42,7 @@ public class AdvancedWalk1 : MonoBehaviour
             if(Cast(hip, Vector3.Dot(horizontal, forward) * forward))
             {
                 float f = (sqrMagnitude * sqrMagnitude < doubleSqrPace) ? doubleSqrPace - sqrMagnitude * sqrMagnitude : 0;
+
                 if (timeUp && f == 0)
                 {
                     switchFeet = true;
@@ -49,8 +50,8 @@ public class AdvancedWalk1 : MonoBehaviour
                 else
                 {
                     foot.position = _hit.point;
-                    foot.position += Vector3.up
-                    * f * height * _paceDivisor * _paceDivisor * _paceDivisor;
+                    foot.position += Vector3.up * f * height * _paceDivisor * _paceDivisor * _paceDivisor;
+
                     Physics.Raycast(_stepPosition + Vector3.up, Vector3.down, out _hit);
                     if (_hit.collider.gameObject.layer == 4) Physics.Raycast(_hit.point, Vector3.down, out _hit);
                     fixedFoot.position = _hit.point;

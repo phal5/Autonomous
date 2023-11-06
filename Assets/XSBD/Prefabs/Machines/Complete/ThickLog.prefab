@@ -61,7 +61,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &8366384199663148393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,15 +75,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _MaxHP: 1
-  _HP: 1
   _dropsWhenDead:
   - _prefab: {fileID: 670044490187064300, guid: 22d9b9cbc130902408a514f81b36f1e2,
       type: 3}
-    _parent: {fileID: 0}
     _parentData:
       _type: 2
       _index: 0
     _probability: 1
+    _localDropOffset: {x: 0, y: 0.3, z: 0}
+    _randomizeRotation: 0
+  _HP: 1
 --- !u!65 &466922377120090079
 BoxCollider:
   m_ObjectHideFlags: 0
