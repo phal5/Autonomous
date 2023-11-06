@@ -59,7 +59,7 @@ public class AdvancedWalk1 : MonoBehaviour
             }
             else
             {
-                //fall
+                SetUp();
             }
         }
 
@@ -90,6 +90,14 @@ public class AdvancedWalk1 : MonoBehaviour
             }
             _12 ^= true;
         }
+
+        public void SetUp()
+        {
+            Physics.Raycast(_hip1.position, Vector3.down, out _hit);
+            _foot1.position = _hit.point;
+            Physics.Raycast(_hip2.position, Vector3.down, out _hit);
+            _foot2.position = _hit.point;
+        }
     }
 
     [SerializeField] NavMeshAgent _agent;
@@ -112,6 +120,7 @@ public class AdvancedWalk1 : MonoBehaviour
         foreach(FootPair footPair in _footPairs)
         {
             footPair.SetPaceDivisor(_paceDivisor);
+            footPair.SetUp();
         }
     }
 
