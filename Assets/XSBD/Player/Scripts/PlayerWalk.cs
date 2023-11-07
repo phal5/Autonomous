@@ -108,8 +108,8 @@ public class PlayerWalk : MonoBehaviour
 
                 foot += bump * Vector3.up;
                 Physics.Raycast(_stepPosition + Vector3.up, Vector3.down, out _hit);
-                if (_hit.collider.gameObject.layer == 4) Physics.Raycast(_hit.point, Vector3.down, out _hit);
                 otherfoot = _hit.point;
+                if (_hit.collider.gameObject.layer == 4 && Physics.Raycast(_hit.point, Vector3.down, out _hit)) otherfoot = _hit.point;
                 _rootBuffer = _initialRootPosition + Vector3.up * (_headBob * bump);
             }
             else
@@ -131,8 +131,8 @@ public class PlayerWalk : MonoBehaviour
                 if (Vector3.SqrMagnitude(_stepPosition - transform.position) > _pace * _pace * paceMultiplier)
                 {
                     Physics.Raycast(hip.position, Vector3.down, out _hit);
-                    if (_hit.collider.gameObject.layer == 4) Physics.Raycast(_hit.point, Vector3.down, out _hit);
                     _stepPosition = _hit.point;
+                    if (_hit.collider.gameObject.layer == 4 && Physics.Raycast(_hit.point, Vector3.down, out _hit)) _stepPosition = _hit.point;
                 }
             }
         }

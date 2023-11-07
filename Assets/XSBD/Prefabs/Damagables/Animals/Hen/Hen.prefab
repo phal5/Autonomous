@@ -1473,8 +1473,7 @@ MonoBehaviour:
     _state: 2
   - _behaviour: {fileID: -2624149089887644990}
     _state: 0
-  _finalState: 0
-  _foodTaget: {fileID: 0}
+  _isPredator: 0
 --- !u!195 &4600215332168384808
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1572,8 +1571,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.34, y: 0.9, z: 0.63}
-  m_Center: {x: 0, y: 0.2, z: -0.04}
+  m_Size: {x: 0.34, y: 1.3918389, z: 0.63}
+  m_Center: {x: 0, y: 0.44591933, z: -0.03999999}
 --- !u!54 &9218108940901992634
 Rigidbody:
   m_ObjectHideFlags: 0

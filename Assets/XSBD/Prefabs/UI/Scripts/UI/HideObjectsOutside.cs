@@ -30,4 +30,9 @@ public class HideObjectsOutside : MonoBehaviour
             SetChildrenRenderQueue(child);
         }
     }
+
+    public void Reset()
+    {
+        _done = false;
+    }
 }
