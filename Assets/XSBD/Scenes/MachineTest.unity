@@ -1597,22 +1597,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2215535157384893673, guid: 1594430defe1683458a41d5b6073dc6a,
-        type: 3}
-      propertyPath: _item
-      value: 
-      objectReference: {fileID: 7848939150939548586, guid: 2dc1ba4e45acf9c4fb96948c86c5d3c4,
-        type: 3}
-    - target: {fileID: 2215535157384893673, guid: 1594430defe1683458a41d5b6073dc6a,
-        type: 3}
-      propertyPath: _parent
-      value: 
-      objectReference: {fileID: 2489540575550975291}
-    - target: {fileID: 2215535157384893673, guid: 1594430defe1683458a41d5b6073dc6a,
-        type: 3}
-      propertyPath: _quantity
-      value: 192
-      objectReference: {fileID: 0}
     - target: {fileID: 4281377094206783281, guid: 1594430defe1683458a41d5b6073dc6a,
         type: 3}
       propertyPath: m_Name
@@ -1753,17 +1737,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b8912ac50457447964e031df743d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __herbivores: {fileID: 4771182731738740859}
+  __herbivores1: {fileID: 0}
   __herbivores2: {fileID: 0}
   __herbivores3: {fileID: 0}
   __predators1: {fileID: 8740321725063545282}
   __predators2: {fileID: 4296502892151903109}
   __predators3: {fileID: 2671072059899156420}
-  _init: 0
   _animalPrefabs:
   - _prefab: {fileID: 5605127604356286759, guid: 8541351f9edc69340ab869bf22703ba0,
       type: 3}
-    _threatLevel: 0
+    _size: 0
     _isPredator: 0
 --- !u!4 &543450652878884307
 Transform:
