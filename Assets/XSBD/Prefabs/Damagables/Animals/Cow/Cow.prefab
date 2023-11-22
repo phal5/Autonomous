@@ -513,8 +513,7 @@ MonoBehaviour:
   _gimmicks:
   - _behaviour: {fileID: 6657397792684894976}
     _state: 0
-  _finalState: 0
-  _foodTaget: {fileID: 0}
+  _isPredator: 0
 --- !u!95 &8155602638575200440
 Animator:
   serializedVersion: 5
@@ -1169,11 +1168,11 @@ SkinnedMeshRenderer:
   m_Materials:
   - {fileID: 2100000, guid: bfc738d2f93f8834ca54b02c9376e654, type: 2}
   - {fileID: 2100000, guid: bfc738d2f93f8834ca54b02c9376e654, type: 2}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 8a6a581164efe3243a127ede127ec6f6, type: 2}
   - {fileID: 2100000, guid: bfc738d2f93f8834ca54b02c9376e654, type: 2}
   - {fileID: 2100000, guid: bfc738d2f93f8834ca54b02c9376e654, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 8a6a581164efe3243a127ede127ec6f6, type: 2}
+  - {fileID: 2100000, guid: 8a6a581164efe3243a127ede127ec6f6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
