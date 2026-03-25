@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 763795830}
-  m_IndirectSpecularColor: {r: 0.35218972, g: 0.63963115, b: 0.95947635, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -27292,37 +27291,37 @@ PrefabInstance:
     - target: {fileID: 5756278091634066158, guid: 32dc74725b63d1144b17eb9af97326a7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -32.650032
+      value: -32.650063
       objectReference: {fileID: 0}
     - target: {fileID: 5756278091634066158, guid: 32dc74725b63d1144b17eb9af97326a7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -21.286121
+      value: -21.709713
       objectReference: {fileID: 0}
     - target: {fileID: 5756278091634066158, guid: 32dc74725b63d1144b17eb9af97326a7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -94.01998
+      value: -94.01997
       objectReference: {fileID: 0}
     - target: {fileID: 5756278091634066158, guid: 32dc74725b63d1144b17eb9af97326a7,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.4785159
+      value: -0.012759468
       objectReference: {fileID: 0}
     - target: {fileID: 5756278091634066158, guid: 32dc74725b63d1144b17eb9af97326a7,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.015314139
+      value: 0.01888636
       objectReference: {fileID: 0}
     - target: {fileID: 5756278091634066158, guid: 32dc74725b63d1144b17eb9af97326a7,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.8778726
+      value: 0.99973744
       objectReference: {fileID: 0}
     - target: {fileID: 5756278091634066158, guid: 32dc74725b63d1144b17eb9af97326a7,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.011300615
+      value: -0.002352079
       objectReference: {fileID: 0}
     - target: {fileID: 5756278091634066158, guid: 32dc74725b63d1144b17eb9af97326a7,
         type: 3}
@@ -498782,7 +498781,7 @@ PrefabInstance:
     - target: {fileID: 2193403698173497128, guid: 7be3b2b1cfe0b4d49b6dcf50301695fc,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 882.99915
+      value: 883.0001
       objectReference: {fileID: 0}
     - target: {fileID: 2851521268359652182, guid: 7be3b2b1cfe0b4d49b6dcf50301695fc,
         type: 3}
@@ -500237,6 +500236,26 @@ PrefabInstance:
         type: 3}
       propertyPath: far clip plane
       value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5276917068696261613, guid: d542841faacdb4945a200ce2e720f447,
+        type: 3}
+      propertyPath: m_BackGroundColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5276917068696261613, guid: d542841faacdb4945a200ce2e720f447,
+        type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5276917068696261613, guid: d542841faacdb4945a200ce2e720f447,
+        type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5276917068696261613, guid: d542841faacdb4945a200ce2e720f447,
+        type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5276917068696261613, guid: d542841faacdb4945a200ce2e720f447,
         type: 3}
